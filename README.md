@@ -6,6 +6,8 @@ Florist is a simple SPA which implements an online flower shop with usage of Rea
 * Run "git clone https://github.com/DmMhs/florist.git" command in terminal to copy a project.
 * Check if you have Node.js installed on your machine (https://nodejs.org/en/).
 * Run "npm install" to install all project dependencies. 
+* Run "npm start" to run a development server
+* Run "npm run storybook" to open a storybook
 
 ## Tech stack
 Technologies:
