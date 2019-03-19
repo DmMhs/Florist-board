@@ -1,0 +1,25 @@
+.Navigation ul {
+    list-style: none;
+}
+
+.Navigation li {
+    display: inline-block;
+    margin: 5px;
+}
+
+.Navigation a {
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: #333333;
+    transition: 0.3s;
+}
+
+.Navigation a:hover, 
+.Navigation a:active {
+    color: tomato;
+    transition: 0.3s;
+}
+
+.Navigation .active {
+    color: tomato;
+}
