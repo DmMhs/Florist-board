@@ -1,5 +1,5 @@
 # Florist
-Florist is a simple app which implements an online flower shop with usage of React, TypeScript and Firebase.
+Florist is a simple SPA which implements an online flower shop with usage of React, TypeScript and Firebase.
 
 ## Local Setup
 * Make sure you have git installed (https://git-scm.com/downloads).
