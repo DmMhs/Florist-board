@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import constants from '../../../config/constants';
+import labels from '../../../config/labels';
 import './Navigation.less';
 
 const navigation = () => {
@@ -10,17 +10,17 @@ const navigation = () => {
       <ul>
         <li>
           <NavLink to="/" exact>
-            {constants.navigation.home}
+            {labels.navigation.home}
           </NavLink>
         </li>
         <li>
-          <NavLink to="/shop">{constants.navigation.shop}</NavLink>
+          <NavLink to="/shop">{labels.navigation.shop}</NavLink>
         </li>
         <li>
-          <NavLink to="/gallery">{constants.navigation.gallery}</NavLink>
+          <NavLink to="/gallery">{labels.navigation.gallery}</NavLink>
         </li>
         <li>
-          <NavLink to="/contacts">{constants.navigation.contacts}</NavLink>
+          <NavLink to="/contacts">{labels.navigation.contacts}</NavLink>
         </li>
       </ul>
     </div>
