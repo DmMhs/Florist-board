@@ -1,4 +1,4 @@
-const constants = {
+const labels = {
   brand: 'FLORIST.UA',
   adress: 'MARKET SQUARE, LVIV, UA',
   postCode: '346346',
@@ -11,4 +11,4 @@ const constants = {
   }
 };
 
-export default constants;
+export default labels;

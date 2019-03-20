@@ -1,17 +1,17 @@
 import React from 'react';
 
 import Navigation from './Navigation/Navigation';
-import constants from '../../config/constants';
+import labels from '../../config/labels';
 import './Header.less';
 
 const header = () => {
   return (
     <div className="Header">
       <p className="info">
-        <span>{constants.brand}</span>
-        <span>{constants.adress}</span>
-        <span>{constants.postCode}</span>
-        <span>{constants.phone}</span>
+        <span>{labels.brand}</span>
+        <span>{labels.adress}</span>
+        <span>{labels.postCode}</span>
+        <span>{labels.phone}</span>
       </p>
       <Navigation />
     </div>
