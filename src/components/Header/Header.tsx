@@ -1,16 +1,17 @@
 import React from 'react';
 
 import Navigation from './Navigation/Navigation';
+import constants from '../../config/constants';
 import './Header.less';
 
 const header = () => {
   return (
     <div className="Header">
       <p className="info">
-        <span>FLORIST.UA</span>
-        <span>MARKET SQUARE, LVIV, UA</span>
-        <span>23523</span>
-        <span>+123-45-678</span>
+        <span>{constants.brand}</span>
+        <span>{constants.adress}</span>
+        <span>{constants.postCode}</span>
+        <span>{constants.phone}</span>
       </p>
       <Navigation />
     </div>
