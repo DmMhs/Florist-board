@@ -7,45 +7,52 @@ class Slider extends Component {
   state = {
     images: [
       'assets/images/florist-cut.png',
+      'assets/images/Florist-banner-cutted.jpg',
+      'assets/images/florist-cut.png',
       'assets/images/Florist-banner-cutted.jpg'
     ],
-    timer: {
-      speed: 6000
-    },
-    currentImage: 0
+    currentIndex: 0,
+    translateValue: 0,
+    timerInterval: 6000
   };
 
   componentDidMount() {
-    setInterval(this.nextSlide, this.state.timer.speed);
+    setInterval(this.goToNextSlide, this.state.timerInterval);
   }
 
-  nextSlide = () => {
-    if (this.state.currentImage >= this.state.images.length - 1) {
-      this.setState({
-        currentImage: 0
-      });
-    } else {
-      this.setState({
-        currentImage: this.state.currentImage + 1
+  goToNextSlide = () => {
+    if (this.state.currentIndex === this.state.images.length - 1) {
+      return this.setState({
+        currentIndex: 0,
+        translateValue: 0
       });
     }
+
+    this.setState({
+      currentIndex: this.state.currentIndex + 1,
+      translateValue: this.state.translateValue + -this.slideWidth()
+    });
+  };
+
+  slideWidth = () => {
+    return document.querySelector('.Slide')!.clientWidth;
   };
 
   render() {
-    let current = this.state.currentImage;
-
     const slides = this.state.images.map((i: any, index: any) => {
-      return (
-        <Slide
-          key={index}
-          imgSrc={i}
-          visible={index === current ? true : false}
-        />
-      );
+      return <Slide key={index} imgSrc={i} />;
     });
     return (
       <div className="Slider">
-        <div className="slides-wrapper">{slides}</div>
+        <div
+          className="slides-wrapper"
+          style={{
+            transform: `translateX(${this.state.translateValue}px)`,
+            transition: 'transform ease-out 1s'
+          }}
+        >
+          {slides}
+        </div>
       </div>
     );
   }
