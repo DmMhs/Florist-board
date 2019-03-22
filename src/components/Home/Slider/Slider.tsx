@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Slide from './Slide/Slide';
 import './Slider.less';
 
+let interval: any;
 class Slider extends Component {
   state = {
     images: [
@@ -17,7 +18,7 @@ class Slider extends Component {
   };
 
   componentDidMount() {
-    setInterval(this.goToNextSlide, this.state.timerInterval);
+    interval = window.setInterval(this.goToNextSlide, this.state.timerInterval);
   }
 
   goToNextSlide = () => {
@@ -33,9 +34,11 @@ class Slider extends Component {
       translateValue: this.state.translateValue + -this.slideWidth()
     });
   };
-
+  componentWillUnmount() {
+    window.clearInterval(interval);
+  }
   slideWidth = () => {
-    return document.querySelector('.Slide')!.clientWidth;
+    return document.querySelector('.Slide') ? document.querySelector('.Slide')!.clientWidth : 0;
   };
 
   render() {
