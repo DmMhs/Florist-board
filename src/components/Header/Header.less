@@ -1,9 +1,26 @@
 .Header {
+  margin: 0 auto;
   .info {
     cursor: default;
     font-style: italic;
+    flex-wrap: wrap;
     span {
       margin: 7px;
+    }
+  }
+}
+@media screen and (max-width: 478px) {
+  .Header {
+    .info {
+      display: none;
+    }
+  }
+}
+
+@media screen and (min-width: 478.1px) and (max-width: 576px) {
+  .Header {
+    .info {
+      display: none;
     }
   }
 }
