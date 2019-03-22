@@ -19,6 +19,12 @@ class Slider extends Component {
 
   componentDidMount() {
     interval = window.setInterval(this.goToNextSlide, this.state.timerInterval);
+    window.addEventListener('resize', () => {
+        this.setState({
+          currentIndex: 0,
+          translateValue: 0
+        });
+      });
   }
 
   goToNextSlide = () => {

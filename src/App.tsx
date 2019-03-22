@@ -10,7 +10,7 @@ import Home from './components/Home/Home';
 
 class App extends Component {
   state = {
-    showNavigation: false
+    showNavigation: window.innerWidth > 576
   }
   
   componentDidMount() {
