@@ -5,6 +5,8 @@
   "dependencies": {
     "@babel/core": "7.2.2",
     "@svgr/webpack": "4.1.0",
+    "@types/enzyme": "^3.9.1",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "24.0.11",
     "@types/node": "11.11.3",
     "@types/react": "16.8.8",
@@ -66,7 +68,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
+    "test": "jest",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
@@ -80,17 +82,20 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "tslint": "^5.14.0",
-    "tslint-react": "^3.6.0",
-    "tslint-react-hooks": "^2.0.0",
-    "@storybook/react": "^5.0.3",
+    "@babel/core": "^7.3.4",
     "@storybook/addon-actions": "^5.0.3",
     "@storybook/addon-links": "^5.0.3",
     "@storybook/addons": "^5.0.3",
-    "@babel/core": "^7.3.4",
-    "babel-loader": "^8.0.5"
+    "@storybook/react": "^5.0.3",
+    "babel-loader": "^8.0.5",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
+    "tslint": "^5.14.0",
+    "tslint-react": "^3.6.0",
+    "tslint-react-hooks": "^2.0.0"
   },
   "jest": {
+    "setupTestFrameworkScriptFile": "./enzymeconfig.ts",
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/**/*.d.ts"
@@ -131,8 +136,8 @@
       "node"
     ],
     "watchPlugins": [
-      "D:\\florist\\node_modules\\jest-watch-typeahead\\filename.js",
-      "D:\\florist\\node_modules\\jest-watch-typeahead\\testname.js"
+      "jest-watch-typeahead/filename.js",
+      "jest-watch-typeahead/testname.js"
     ]
   },
   "babel": {
