@@ -5,13 +5,16 @@ import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
 import { Button, Welcome } from '@storybook/react/demo';
-import App from '../App';
-import Header from '../components/Header/Header';
+import ProductCard from '../components/ProductCard/ProductCard';
 
-storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
+storiesOf('Welcome', module).add('to Storybook', () => (
+  <Welcome showApp={linkTo('Button')} />
+));
 
 storiesOf('Button', module)
-  .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
+  .add('with text', () => (
+    <Button onClick={action('clicked')}>Hello Button</Button>
+  ))
   .add('with some emoji', () => (
     <Button onClick={action('clicked')}>
       <span role="img" aria-label="so cool">
@@ -20,5 +23,5 @@ storiesOf('Button', module)
     </Button>
   ));
 
-  storiesOf('App', module)
-    .add('default', () => <App />);
+// storiesOf('App', module).add('default', () => <App />);
+storiesOf('ProductCard', module).add('ProdcutCard', () => <ProductCard />);
