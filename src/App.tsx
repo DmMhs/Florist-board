@@ -11,8 +11,8 @@ import Home from './components/Home/Home';
 class App extends Component {
   state = {
     showNavigation: window.innerWidth > 576
-  }
-  
+  };
+
   componentDidMount() {
     window.addEventListener('resize', () => {
       if (window.innerWidth < 576) {
@@ -28,22 +28,29 @@ class App extends Component {
   }
 
   toggleClickedHandler = () => {
+    const toggleEl = document.getElementById('toggle');
+
     this.setState({
       showNavigation: !this.state.showNavigation
     });
-    if (this.state.showNavigation) {
-      document.getElementById('toggle')!.classList.add('active');
+
+    if (!toggleEl!.classList.contains('active')) {
+      toggleEl!.classList.add('active');
     } else {
-      document.getElementById('toggle')!.classList.remove('active');
+      toggleEl!.classList.remove('active');
     }
-  }
-  
+  };
+
   render() {
     return (
       <BrowserRouter>
         <div className="App">
-        <i className="fas fa-ellipsis-h" id="toggle" onClick={this.toggleClickedHandler}></i>
-          { this.state.showNavigation ? <Header /> : null }
+          <i
+            className="fas fa-ellipsis-h"
+            id="toggle"
+            onClick={this.toggleClickedHandler}
+          />
+          {this.state.showNavigation ? <Header /> : null}
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/shop" component={Shop} />
