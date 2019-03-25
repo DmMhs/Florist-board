@@ -59,6 +59,7 @@ class Slider extends Component {
     const slides = this.state.images.map((i: any, index: any) => {
       return <Slide key={index} imgSrc={i} />;
     });
+
     return (
       <div className="Slider">
         <div
