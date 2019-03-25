@@ -1,0 +1,32 @@
+.right-arrow {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform ease-in 0.1s;
+
+  &:hover {
+    transition: transform ease-in 0.1s;
+    transform: scale(1.1);
+  }
+}
+
+.right-arrow {
+  position: absolute;
+  top: calc(50% - 25px);
+  right: 25px;
+  z-index: 999;
+  color: black;
+
+  img {
+    transform: translate(2px, 0);
+
+    &:focus {
+      outline: 0;
+    }
+  }
+}
