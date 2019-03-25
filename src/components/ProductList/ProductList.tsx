@@ -3,11 +3,21 @@ import React, { Component } from 'react';
 import ProductCard from './ProductCard/ProductCard';
 import './ProductList.less';
 
-class ProductList extends Component<{ products: any }, any> {
+interface Product {
+  title: string; 
+  img: string; 
+  price: number; 
+  currency: string;
+}
+interface Products {
+  products: Product[]
+}
+
+class ProductList extends Component<Products, {}> {
   render() {
     const productList = this.props.products.map(
       (
-        p: { title: string; img: string; price: number; currency: string },
+        p: Product,
         index: number
       ) => {
         return (

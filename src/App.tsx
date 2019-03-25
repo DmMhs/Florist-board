@@ -8,10 +8,18 @@ import Gallery from './components/Gallery/Gallery';
 import contacts from './components/Contacts/Contacts';
 import Home from './components/Home/Home';
 
-class App extends Component {
-  state = {
-    showNavigation: window.innerWidth > 576
-  };
+interface AppProps {};
+interface AppState {
+  showNavigation: boolean;
+};
+
+class App extends Component<AppProps, AppState> {
+  constructor(props: AppProps) {
+    super(props);
+    this.state = {
+      showNavigation: window.innerWidth > 576
+    };
+  }
 
   componentDidMount() {
     window.addEventListener('resize', () => {
