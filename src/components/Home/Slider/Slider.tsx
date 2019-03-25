@@ -4,6 +4,8 @@ import Slide from './Slide/Slide';
 import './Slider.less';
 
 let interval: any;
+let resizeListener: EventListener;
+
 class Slider extends Component {
   state = {
     images: [
@@ -19,12 +21,18 @@ class Slider extends Component {
 
   componentDidMount() {
     interval = window.setInterval(this.goToNextSlide, this.state.timerInterval);
-    window.addEventListener('resize', () => {
-        this.setState({
-          currentIndex: 0,
-          translateValue: 0
-        });
+    resizeListener = () => {
+      this.setState({
+        currentIndex: 0,
+        translateValue: 0
       });
+    };
+    window.addEventListener('resize', resizeListener);
+  }
+
+  componentWillUnmount() {
+    window.clearInterval(interval);
+    window.removeEventListener('resize', resizeListener);
   }
 
   goToNextSlide = () => {
@@ -40,11 +48,11 @@ class Slider extends Component {
       translateValue: this.state.translateValue + -this.slideWidth()
     });
   };
-  componentWillUnmount() {
-    window.clearInterval(interval);
-  }
+
   slideWidth = () => {
-    return document.querySelector('.Slide') ? document.querySelector('.Slide')!.clientWidth : 0;
+    return document.querySelector('.Slide')
+      ? document.querySelector('.Slide')!.clientWidth
+      : 0;
   };
 
   render() {
