@@ -4,11 +4,18 @@ import Slider from '../Slider/Slider';
 import './Home.less';
 import ProductList from '../ProductList/ProductList';
 import { productsRef } from '../../firebase';
+import { Product } from '../../models/Product';
 
-class Home extends Component<any, {fetchedProducts: Array<any>}> {
-  constructor(props: null) {
+interface HomeProps {}
+
+interface HomeState {
+  fetchedProducts: Array<Product>;
+}
+
+class Home extends Component<HomeProps, HomeState> {
+  constructor(props: HomeProps) {
     super(props);
-    this.state = {  
+    this.state = {
       fetchedProducts: []
     };
   }
@@ -43,7 +50,7 @@ class Home extends Component<any, {fetchedProducts: Array<any>}> {
           ]}
         />
         <hr />
-        <ProductList products={this.state.fetchedProducts}/>
+        <ProductList products={this.state.fetchedProducts} />
       </div>
     );
   }

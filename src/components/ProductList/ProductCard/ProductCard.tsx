@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 
 import './ProductCard.less';
-
-interface Product {
-  title: string; 
-  imgSrc: string; 
-  price: number; 
-  currency: string;
-}
+import { Product } from '../../../models/Product';
 
 interface ProductCardState {
   image: string | null;
@@ -30,14 +24,14 @@ class ProductCard extends Component<Product, ProductCardState> {
       liked: false
     };
   }
-  addToCartClickedHandler = (event: any) => {
-    if (event.target.classList.contains('active-action')) {
-      event.target.classList.remove('active-action');
+  addToCartClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+    if ((event.target as HTMLDivElement).classList.contains('active-action')) {
+      (event.target as HTMLDivElement).classList.remove('active-action');
       this.setState({
         inCart: false
       });
     } else {
-      event.target.classList.add('active-action');
+      (event.target as HTMLDivElement).classList.add('active-action');
       this.setState({
         inCart: true
       });
@@ -58,7 +52,7 @@ class ProductCard extends Component<Product, ProductCardState> {
   };
   componentDidMount() {
     this.setState({
-      image: this.props.imgSrc,
+      image: this.props.img,
       title: this.props.title,
       price: this.props.price,
       currency: this.props.currency
@@ -69,7 +63,10 @@ class ProductCard extends Component<Product, ProductCardState> {
       <div className="ProductCard">
         <div
           className="image"
-          style={{ background: `url(${this.state.image}) center no-repeat`, backgroundSize: 'cover' }}
+          style={{
+            background: `url(${this.state.image}) center no-repeat`,
+            backgroundSize: 'cover'
+          }}
         />
         <div className="title">{this.state.title}</div>
         <div className="price">
