@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, RefObject } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './App.less';
@@ -8,17 +8,19 @@ import Gallery from './components/Gallery/Gallery';
 import contacts from './components/Contacts/Contacts';
 import Home from './components/Home/Home';
 
-interface AppProps {};
+interface AppProps {}
 interface AppState {
   showNavigation: boolean;
-};
+}
 
 class App extends Component<AppProps, AppState> {
+  private toggleRef: RefObject<HTMLDivElement>;
   constructor(props: AppProps) {
     super(props);
     this.state = {
       showNavigation: window.innerWidth > 576
     };
+    this.toggleRef = React.createRef();
   }
 
   componentDidMount() {
@@ -35,17 +37,15 @@ class App extends Component<AppProps, AppState> {
     });
   }
 
-  toggleClickedHandler = () => {
-    const toggleEl = document.getElementById('toggle');
-
+  toggleClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     this.setState({
       showNavigation: !this.state.showNavigation
     });
 
-    if (!toggleEl!.classList.contains('active')) {
-      toggleEl!.classList.add('active');
+    if (!(event.target as HTMLDivElement).classList.contains('active')) {
+      (event.target as HTMLDivElement).classList.add('active');
     } else {
-      toggleEl!.classList.remove('active');
+      (event.target as HTMLDivElement).classList.remove('active');
     }
   };
 

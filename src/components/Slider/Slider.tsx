@@ -5,17 +5,21 @@ import './Slider.less';
 import LeftArrow from './LeftArrow/LeftArrow';
 import RightArrow from './RightArrow/RightArrow';
 
-export interface SliderProps {
+interface SliderState {
   images: Array<string>;
   currentIndex: number;
   translateValue: number;
   timerInterval: number;
 }
 
+interface SliderProps {
+  images: string[];
+}
+
 let interval: number;
 let resizeListener: EventListener;
 
-class Slider extends Component<{images: string[]}, SliderProps> {
+class Slider extends Component<SliderProps, SliderState> {
   private sliderRef: RefObject<HTMLDivElement>;
   constructor(props: SliderProps) {
     super(props);
@@ -75,17 +79,15 @@ class Slider extends Component<{images: string[]}, SliderProps> {
   };
 
   slideWidth = () => {
-    this.sliderRef.current!.clientWidth
-    return this.sliderRef.current
-      ? this.sliderRef.current!.clientWidth
-      : 0;
+    this.sliderRef.current!.clientWidth;
+    return this.sliderRef.current ? this.sliderRef.current!.clientWidth : 0;
   };
 
   render() {
     const slides = this.state.images.map((i: string, index: number) => {
-      return <Slide key={index} imgSrc={i}/>;
+      return <Slide key={index} imgSrc={i} />;
     });
-   
+
     return (
       <div className="Slider" ref={this.sliderRef}>
         <div
