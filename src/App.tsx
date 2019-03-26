@@ -7,22 +7,27 @@ import Shop from './components/Shop/Shop';
 import Gallery from './components/Gallery/Gallery';
 import contacts from './components/Contacts/Contacts';
 import Home from './components/Home/Home';
+import Toggle from './components/Toggle/Toggle';
 
 interface AppProps {}
 interface AppState {
   showNavigation: boolean;
+  togglePosition: string;
 }
+
+let resizeListener: EventListener;
 
 class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      showNavigation: window.innerWidth > 576
+      showNavigation: window.innerWidth > 576,
+      togglePosition: 'absolute'
     };
   }
 
   componentDidMount() {
-    window.addEventListener('resize', () => {
+    resizeListener = () => {
       if (window.innerWidth < 576) {
         this.setState({
           showNavigation: false
@@ -32,7 +37,12 @@ class App extends Component<AppProps, AppState> {
           showNavigation: true
         });
       }
-    });
+    };
+    window.addEventListener('resize', resizeListener);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', resizeListener);
   }
 
   toggleClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -42,8 +52,14 @@ class App extends Component<AppProps, AppState> {
 
     if (!(event.target as HTMLDivElement).classList.contains('active')) {
       (event.target as HTMLDivElement).classList.add('active');
+      this.setState({
+        togglePosition: 'fixed'
+      });
     } else {
       (event.target as HTMLDivElement).classList.remove('active');
+      this.setState({
+        togglePosition: 'absolute'
+      });
     }
   };
 
@@ -51,10 +67,12 @@ class App extends Component<AppProps, AppState> {
     return (
       <BrowserRouter>
         <div className="App">
-          <i
-            className="fas fa-ellipsis-h"
-            id="toggle"
-            onClick={this.toggleClickedHandler}
+          <Toggle
+            click={this.toggleClickedHandler}
+            style={{
+              position:
+                this.state.togglePosition === 'absolute' ? 'absolute' : 'fixed'
+            }}
           />
           {this.state.showNavigation ? <Header /> : null}
           <Switch>
