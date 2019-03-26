@@ -59,15 +59,12 @@ class ProductCard extends Component<Product, ProductCardState> {
     });
   }
   render() {
+    const imgStyle = {
+      backgroundImage: `url(${this.state.image})`
+    };
     return (
       <div className="ProductCard">
-        <div
-          className="image"
-          style={{
-            background: `url(${this.state.image}) center no-repeat`,
-            backgroundSize: 'cover'
-          }}
-        />
+        <div className="image" style={imgStyle} />
         <div className="title">{this.state.title}</div>
         <div className="price">
           {this.state.price}
