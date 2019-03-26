@@ -79,7 +79,6 @@ class Slider extends Component<SliderProps, SliderState> {
   };
 
   slideWidth = () => {
-    this.sliderRef.current!.clientWidth;
     return this.sliderRef.current ? this.sliderRef.current!.clientWidth : 0;
   };
 
