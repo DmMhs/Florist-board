@@ -37,14 +37,14 @@ class ProductCard extends Component<Product, ProductCardState> {
       });
     }
   };
-  likeClickedHandler = (event: any) => {
-    if (event.target.classList.contains('active-action')) {
-      event.target.classList.remove('active-action');
+  likeClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+    if ((event.target as HTMLDivElement).classList.contains('active-action')) {
+      (event.target as HTMLDivElement).classList.remove('active-action');
       this.setState({
         liked: false
       });
     } else {
-      event.target.classList.add('active-action');
+      (event.target as HTMLDivElement).classList.add('active-action');
       this.setState({
         liked: true
       });
