@@ -14,13 +14,11 @@ interface AppState {
 }
 
 class App extends Component<AppProps, AppState> {
-  private toggleRef: RefObject<HTMLDivElement>;
   constructor(props: AppProps) {
     super(props);
     this.state = {
       showNavigation: window.innerWidth > 576
     };
-    this.toggleRef = React.createRef();
   }
 
   componentDidMount() {
