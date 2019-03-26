@@ -1,5 +1,11 @@
+import React, { SyntheticEvent } from 'react';
+
 export interface NavArrow {
   show: boolean;
-  goToNextSlide?: any;
-  goToPrevSlide?: any;
+  goToNextSlide?:
+    | ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void)
+    | undefined;
+  goToPrevSlide?:
+    | ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void)
+    | undefined;
 }
