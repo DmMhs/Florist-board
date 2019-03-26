@@ -27,7 +27,7 @@
 }
 @media screen and (max-width: 478px) {
   .Navigation {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
@@ -35,7 +35,7 @@
     height: 100%;
     background-color: white;
     z-index: 2;
-    opacity: 0.9;
+    opacity: 0.95;
     ul {
       display: flex;
       flex-direction: column;
@@ -50,14 +50,15 @@
 
 @media screen and (min-width: 478.1px) and (max-width: 576px) {
   .Navigation {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
     height: 100%;
     background-color: white;
     z-index: 2;
-    opacity: 0.9;
+    opacity: 0.95;
     ul {
       display: flex;
       flex-direction: column;
