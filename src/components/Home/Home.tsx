@@ -5,10 +5,10 @@ import './Home.less';
 import ProductList from '../ProductList/ProductList';
 import { productsRef } from '../../firebase';
 
-class Home extends Component<any, { fetchedProducts: any }> {
-  constructor(props: any) {
+class Home extends Component<any, {fetchedProducts: Array<any>}> {
+  constructor(props: null) {
     super(props);
-    this.state = {
+    this.state = {  
       fetchedProducts: []
     };
   }
@@ -25,9 +25,6 @@ class Home extends Component<any, { fetchedProducts: any }> {
             fetchedProducts: [...this.state.fetchedProducts, data[key]]
           });
         }
-        // this.state.fetchedProducts.map(p => {
-        //   productsRef.push(p);
-        // });
       })
       .catch(err => {
         console.log(err);
@@ -46,7 +43,7 @@ class Home extends Component<any, { fetchedProducts: any }> {
           ]}
         />
         <hr />
-        <ProductList products={this.state.fetchedProducts} />
+        <ProductList products={this.state.fetchedProducts}/>
       </div>
     );
   }

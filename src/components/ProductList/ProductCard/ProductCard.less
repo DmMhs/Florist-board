@@ -11,11 +11,9 @@
   flex-basis: calc(20% - 6px);
 
   .image {
-    width: 200px;
-    height: 200px;
-    background-size: cover;
-    background-position: bottom;
-    border-radius: 50%;
+    width: 175px;
+    height: 175px;
+    border-radius: 8px;
     border: 1px solid #eee;
     box-shadow: 1px 1px 5px #ccc;
     margin-top: 15px;
@@ -67,5 +65,21 @@
 @media screen and (min-width: 576.1px) and (max-width: 768px) {
   .ProductCard {
     flex-basis: calc(50% - 6px);
+  }
+}
+
+@media screen and (min-width: 768.1px) and (max-width: 921px) {
+  .ProductCard {
+    flex-basis: calc(33.3% - 6px);
+  }
+}
+
+@media screen and (min-width: 921.1px) and (max-width: 1200px) {
+  .ProductCard {
+    flex-basis: calc(25% - 6px);
+    .image {
+      width: 150px;
+      height: 150px;
+    }
   }
 }

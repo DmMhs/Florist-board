@@ -2,22 +2,30 @@ import React, { Component } from 'react';
 
 import './ProductCard.less';
 
-class ProductCard extends Component<
-  {
-    title: string;
-    imgSrc: string;
-    price: number;
-    currency: string;
-  },
-  any
-> {
-  constructor(props: any) {
+interface Product {
+  title: string; 
+  imgSrc: string; 
+  price: number; 
+  currency: string;
+}
+
+interface ProductCardState {
+  image: string | null;
+  title: string | null;
+  price: number | null;
+  currency: string | null;
+  inCart: boolean;
+  liked: boolean;
+}
+
+class ProductCard extends Component<Product, ProductCardState> {
+  constructor(props: Product) {
     super(props);
     this.state = {
-      image: 'assets/images/chamomile.jpg',
-      title: 'Chamomile',
-      price: 10,
-      currency: 'usd',
+      image: null,
+      title: null,
+      price: null,
+      currency: null,
       inCart: false,
       liked: false
     };
@@ -61,7 +69,7 @@ class ProductCard extends Component<
       <div className="ProductCard">
         <div
           className="image"
-          style={{ background: `url(${this.state.image})` }}
+          style={{ background: `url(${this.state.image}) center no-repeat`, backgroundSize: 'cover' }}
         />
         <div className="title">{this.state.title}</div>
         <div className="price">
