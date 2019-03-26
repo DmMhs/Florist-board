@@ -1,0 +1,24 @@
+.Toggle {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 10px 25px;
+  font-size: 2.5rem;
+  z-index: 10;
+  color: #333333;
+  &:hover,
+  &.active {
+    color: tomato;
+    cursor: pointer;
+  }
+}
+@media screen and (max-width: 576px) {
+  .Toggle {
+    margin: 10px 20px;
+  }
+}
+@media screen and (min-width: 576.1px) {
+  .Toggle {
+    display: none;
+  }
+}
