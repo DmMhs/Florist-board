@@ -1,13 +1,9 @@
 import React from 'react';
 
 import './RightArrow.less';
+import { NavArrow } from '../../../models/NavArrow';
 
-export interface NavArrowProps {
-  show: boolean;
-  goToNextSlide: any;
-}
-
-const RightArrow = (props: NavArrowProps) => {
+const RightArrow = (props: NavArrow) => {
   return (
     <div
       className="right-arrow"

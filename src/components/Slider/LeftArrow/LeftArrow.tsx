@@ -1,8 +1,9 @@
 import React from 'react';
 
 import './LeftArrow.less';
+import { NavArrow } from '../../../models/NavArrow';
 
-const LeftArrow = (props: any) => {
+const LeftArrow = (props: NavArrow) => {
   return (
     <div
       className="left-arrow"
