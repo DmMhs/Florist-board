@@ -7,7 +7,8 @@ import './ProductList.less';
 
 class ProductList extends Component<Products, {}> {
   render() {
-    const productList = this.props.products.map((p: Product, index: number) => {
+    const { products } = this.props;
+    const productList = products.map((p: Product, index: number) => {
       return (
         <ProductCard
           title={p.title}

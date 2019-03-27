@@ -6,10 +6,8 @@ import LeftArrow from './LeftArrow/LeftArrow';
 import RightArrow from './RightArrow/RightArrow';
 
 interface SliderState {
-  images: Array<string>;
   currentIndex: number;
   translateValue: number;
-  autoEnabled: boolean;
   timerInterval: number;
 }
 
@@ -27,9 +25,7 @@ class Slider extends Component<SliderProps, SliderState> {
   constructor(props: SliderProps) {
     super(props);
     this.state = {
-      images: [],
       currentIndex: 0,
-      autoEnabled: false,
       translateValue: 0,
       timerInterval: 6000
     };
@@ -37,10 +33,6 @@ class Slider extends Component<SliderProps, SliderState> {
   }
 
   componentDidMount() {
-    this.setState({
-      images: this.props.images
-    });
-
     if (this.props.auto) {
       interval = window.setInterval(
         this.goToNextSlide,
@@ -79,7 +71,7 @@ class Slider extends Component<SliderProps, SliderState> {
   };
 
   goToNextSlide = () => {
-    if (this.state.currentIndex === this.state.images.length - 1) {
+    if (this.state.currentIndex === this.props.images.length - 1) {
       return this.setState({
         currentIndex: 0,
         translateValue: 0
@@ -97,7 +89,8 @@ class Slider extends Component<SliderProps, SliderState> {
   };
 
   render() {
-    const slides = this.state.images.map((i: string, index: number) => {
+    const { images } = this.props;
+    const slides = images.map((i: string, index: number) => {
       return <Slide key={index} imgSrc={i} />;
     });
 
