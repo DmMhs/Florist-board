@@ -11,9 +11,10 @@ class ProductList extends Component<Products, {}> {
       return (
         <ProductCard
           title={p.title}
-          img={p.img}
+          images={p.images}
           price={p.price}
           currency={p.currency}
+          available={p.available}
           key={index}
         />
       );

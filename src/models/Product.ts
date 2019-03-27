@@ -1,6 +1,7 @@
 export interface Product {
   title: string;
-  img: string;
+  images: string[];
   price: number;
   currency: string;
+  available: boolean;
 }

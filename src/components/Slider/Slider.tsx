@@ -9,11 +9,14 @@ interface SliderState {
   images: Array<string>;
   currentIndex: number;
   translateValue: number;
+  autoEnabled: boolean;
   timerInterval: number;
 }
 
 interface SliderProps {
   images: string[];
+  auto: boolean;
+  showControls: boolean;
 }
 
 let interval: number;
@@ -26,6 +29,7 @@ class Slider extends Component<SliderProps, SliderState> {
     this.state = {
       images: [],
       currentIndex: 0,
+      autoEnabled: false,
       translateValue: 0,
       timerInterval: 6000
     };
@@ -36,7 +40,14 @@ class Slider extends Component<SliderProps, SliderState> {
     this.setState({
       images: this.props.images
     });
-    interval = window.setInterval(this.goToNextSlide, this.state.timerInterval);
+
+    if (this.props.auto) {
+      interval = window.setInterval(
+        this.goToNextSlide,
+        this.state.timerInterval
+      );
+    }
+
     resizeListener = () => {
       this.setState({
         currentIndex: 0,
@@ -47,7 +58,10 @@ class Slider extends Component<SliderProps, SliderState> {
   }
 
   componentWillUnmount() {
-    window.clearInterval(interval);
+    if (this.props.auto) {
+      window.clearInterval(interval);
+    }
+
     window.removeEventListener('resize', resizeListener);
   }
 
@@ -98,8 +112,14 @@ class Slider extends Component<SliderProps, SliderState> {
         >
           {slides}
         </div>
-        <LeftArrow goToPrevSlide={this.goToPrevSlide} show={true} />
-        <RightArrow goToNextSlide={this.goToNextSlide} show={true} />
+        <LeftArrow
+          goToPrevSlide={this.goToPrevSlide}
+          show={this.props.showControls}
+        />
+        <RightArrow
+          goToNextSlide={this.goToNextSlide}
+          show={this.props.showControls}
+        />
       </div>
     );
   }
