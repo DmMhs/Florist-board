@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, RefObject } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './App.less';
@@ -18,12 +18,14 @@ interface AppState {
 let resizeListener: EventListener;
 
 class App extends Component<AppProps, AppState> {
+  private appRef: RefObject<HTMLDivElement>;
   constructor(props: AppProps) {
     super(props);
     this.state = {
       showNavigation: window.innerWidth > 576,
       togglePosition: 'absolute'
     };
+    this.appRef = React.createRef();
   }
 
   componentDidMount() {
@@ -37,6 +39,8 @@ class App extends Component<AppProps, AppState> {
           showNavigation: true
         });
       }
+      console.log('window width - ' + window.innerWidth);
+      console.log('app width - ' + this.appRef.current!.clientWidth);
     };
     window.addEventListener('resize', resizeListener);
   }
@@ -66,7 +70,7 @@ class App extends Component<AppProps, AppState> {
   render() {
     return (
       <BrowserRouter>
-        <div className="App">
+        <div className="App" ref={this.appRef}>
           <Toggle
             click={this.toggleClickedHandler}
             style={{

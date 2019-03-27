@@ -53,14 +53,17 @@ class Home extends Component<HomeProps, HomeState> {
   render() {
     return (
       <div className="Home">
-        <Slider
-          images={[
-            'assets/images/florist-cut.png',
-            'assets/images/Florist-banner-cutted.jpg',
-            'assets/images/florist-cut.png',
-            'assets/images/Florist-banner-cutted.jpg'
-          ]}
-        />
+        <div className="slider-wrapper">
+          <Slider
+            images={[
+              'https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/banner%2Fbanner-1.png?alt=media&token=7ab01b99-0821-42be-a2c6-37ae67de7948',
+              'https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/banner%2Fbanner-2.jpg?alt=media&token=2334cb94-2d0b-4590-8039-6f3bdf80e7ed'
+            ]}
+            auto={true}
+            showControls={true}
+          />
+        </div>
+
         <hr />
         {this.state.fetchInProgress ? <Spinner /> : null}
         <ProductList products={this.state.fetchedProducts} />

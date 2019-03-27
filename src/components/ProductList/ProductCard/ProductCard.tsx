@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 
 import './ProductCard.less';
 import { Product } from '../../../models/Product';
+import Slider from '../../Slider/Slider';
 
 interface ProductCardState {
-  image: string | null;
+  images: string[];
   title: string | null;
   price: number | null;
   currency: string | null;
+  available: boolean | null;
   inCart: boolean;
   liked: boolean;
 }
@@ -16,10 +18,11 @@ class ProductCard extends Component<Product, ProductCardState> {
   constructor(props: Product) {
     super(props);
     this.state = {
-      image: null,
+      images: [],
       title: null,
       price: null,
       currency: null,
+      available: null,
       inCart: false,
       liked: false
     };
@@ -52,24 +55,28 @@ class ProductCard extends Component<Product, ProductCardState> {
   };
   componentDidMount() {
     this.setState({
-      image: this.props.img,
+      images: this.props.images,
       title: this.props.title,
       price: this.props.price,
-      currency: this.props.currency
+      currency: this.props.currency,
+      available: this.props.available
     });
   }
   render() {
-    const imgStyle = {
-      backgroundImage: `url(${this.state.image})`
-    };
     return (
       <div className="ProductCard">
-        <div className="image" style={imgStyle} />
-        <div className="title">{this.state.title}</div>
-        <div className="price">
-          {this.state.price}
-          {this.state.currency}
+        <div className="image">
+          <Slider images={this.props.images} auto={false} showControls={true} />
         </div>
+        <div className="title">{this.state.title}</div>
+        {this.state.available ? (
+          <div className="price">
+            {this.state.price}
+            {this.state.currency}
+          </div>
+        ) : (
+          <div className="price"> not available :(</div>
+        )}
         <div className="action-panel">
           <i
             className="fas fa-cart-arrow-down"
