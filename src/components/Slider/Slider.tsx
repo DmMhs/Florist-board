@@ -21,6 +21,7 @@ let interval: number;
 let resizeListener: EventListener;
 
 class Slider extends Component<SliderProps, SliderState> {
+  _isMounted = false;
   private sliderRef: RefObject<HTMLDivElement>;
   constructor(props: SliderProps) {
     super(props);
@@ -33,6 +34,7 @@ class Slider extends Component<SliderProps, SliderState> {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     if (this.props.auto) {
       interval = window.setInterval(
         this.goToNextSlide,
@@ -41,15 +43,18 @@ class Slider extends Component<SliderProps, SliderState> {
     }
 
     resizeListener = () => {
-      this.setState({
+      if (this._isMounted) {
+        this.setState({
         currentIndex: 0,
         translateValue: 0
       });
+      }
     };
     window.addEventListener('resize', resizeListener);
   }
 
   componentWillUnmount() {
+    this._isMounted = false;
     if (this.props.auto) {
       window.clearInterval(interval);
     }

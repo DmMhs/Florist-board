@@ -19,32 +19,31 @@ class Shop extends Component<
     };
   }
   componentDidMount() {
-    this.setState({
-      fetchInProgress: true
-    });
     productsRef.on('value', snapshot => {
-      snapshot!.forEach(product => {
-        this.setState({
-          products: [...this.state.products, product.val()]
-        });
+      this.setState({
+        fetchInProgress: true
+      });
+      const newProducts: Array<Product> = [];
+      snapshot!.forEach((product: firebase.database.DataSnapshot) => {
+        newProducts.push(product.val());
       });
       this.setState({
-        fetchInProgress: false
-      });
+        products: newProducts,
+          fetchInProgress: false
+        });  
     });
   }
 
   componentWillUnmount() {
-    this.setState({
-      products: []
-    });
+    productsRef.off('value');
   }
 
   render() {
+    const productsEmpty = this.state.products.length === 0;
     return (
       <div className="Shop">
         {this.state.fetchInProgress ? <Spinner /> : null}
-        <ProductList products={this.state.products} />
+        <ProductList products={productsEmpty ? [] : this.state.products} />
       </div>
     );
   }
