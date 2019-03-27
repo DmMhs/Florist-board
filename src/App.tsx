@@ -1,6 +1,8 @@
 import React, { Component, RefObject } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import { homeImagesRef } from './firebase';
+
 import './App.less';
 import Header from './components/Header/Header';
 import Shop from './components/Shop/Shop';
@@ -39,8 +41,6 @@ class App extends Component<AppProps, AppState> {
           showNavigation: true
         });
       }
-      console.log('window width - ' + window.innerWidth);
-      console.log('app width - ' + this.appRef.current!.clientWidth);
     };
     window.addEventListener('resize', resizeListener);
   }
