@@ -22,23 +22,18 @@ class Home extends Component<HomeProps, HomeState> {
     };
   }
   componentDidMount() {
-    const newImages: string[] = [];
     homeImagesRef.on('value', snapshot => {
       this.setState({
         isFetching: true
       });
+      const newImages: string[] = [];
       snapshot!.forEach(imgRef => {
         newImages.push(imgRef.val());
       });
       this.setState({
-        bannerImages: newImages
-      });
-      this.setState({
+        bannerImages: newImages,
         isFetching: false
       });
-    });
-    this.setState({
-      bannerImages: newImages
     });
   }
 
