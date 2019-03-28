@@ -1,8 +1,6 @@
 import React, { Component, RefObject } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import { homeImagesRef } from './firebase';
-
 import './App.less';
 import Header from './components/Header/Header';
 import Shop from './components/Shop/Shop';

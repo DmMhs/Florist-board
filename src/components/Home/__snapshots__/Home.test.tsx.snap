@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home component matches a snapshot 1`] = `
+<div
+  className="Home"
+>
+  <WithStyles(CircularIndeterminate) />
+  <div
+    className="slider-wrapper"
+  >
+    <Slider
+      auto={true}
+      images={Array []}
+      showControls={true}
+    />
+  </div>
+</div>
+`;

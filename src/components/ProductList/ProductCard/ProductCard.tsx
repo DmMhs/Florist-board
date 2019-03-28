@@ -21,7 +21,7 @@ class ProductCard extends Component<Product, ProductCardState> {
             {currency}
           </div>
         ) : (
-          <div className="price"> not available :(</div>
+          <div className="price">not available :(</div>
         )}
         <div className="action-panel" />
       </div>
