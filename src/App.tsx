@@ -20,14 +20,12 @@ interface AppState {
 let resizeListener: EventListener;
 
 class App extends Component<AppProps, AppState> {
-  private appRef: RefObject<HTMLDivElement>;
   constructor(props: AppProps) {
     super(props);
     this.state = {
       showNavigation: window.innerWidth > 576,
       togglePosition: 'absolute'
     };
-    this.appRef = React.createRef();
   }
 
   componentDidMount() {
@@ -70,7 +68,7 @@ class App extends Component<AppProps, AppState> {
   render() {
     return (
       <BrowserRouter>
-        <div className="App" ref={this.appRef}>
+        <div className="App">
           <Toggle
             click={this.toggleClickedHandler}
             style={{

@@ -6,11 +6,11 @@ import Spinner from '../Spinner/Spinner';
 import ProductList from '../ProductList/ProductList';
 
 interface ShopProps {}
-
-class Shop extends Component<
-  ShopProps,
-  { products: Product[]; fetchInProgress: boolean }
-> {
+interface ShopState {
+  products: Product[];
+  fetchInProgress: boolean;
+}
+class Shop extends Component<ShopProps, ShopState> {
   constructor(props: ShopProps) {
     super(props);
     this.state = {
@@ -29,8 +29,8 @@ class Shop extends Component<
       });
       this.setState({
         products: newProducts,
-          fetchInProgress: false
-        });  
+        fetchInProgress: false
+      });
     });
   }
 
@@ -39,11 +39,10 @@ class Shop extends Component<
   }
 
   render() {
-    const productsEmpty = this.state.products.length === 0;
     return (
       <div className="Shop">
         {this.state.fetchInProgress ? <Spinner /> : null}
-        <ProductList products={productsEmpty ? [] : this.state.products} />
+        <ProductList products={this.state.products} />
       </div>
     );
   }
