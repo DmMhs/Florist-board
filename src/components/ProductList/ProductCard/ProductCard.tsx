@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 
 import './ProductCard.less';
-import { Product } from '../../../models/Product';
 import Slider from '../../Slider/Slider';
+import { CartItem } from '../../../models/CartItem';
 
 interface ProductCardState {}
 
-class ProductCard extends Component<any, ProductCardState> {
+class ProductCard extends Component<CartItem, ProductCardState> {
   render() {
     const { images, title, price, currency, available } = this.props;
+    const actionIcon = this.props.inCart ? <i className="far fa-check-circle active"/> : <i
+    className="fas fa-cart-arrow-down"
+    onClick={this.props.addToCart}
+  />;
     return (
       <div className="ProductCard">
         <div className="image">
@@ -24,12 +28,7 @@ class ProductCard extends Component<any, ProductCardState> {
           <div className="price">not available :(</div>
         )}
         <div className="action-panel">
-          {available ? (
-            <i
-              className="fas fa-cart-arrow-down"
-              onClick={this.props.addToCart}
-            />
-          ) : null}
+          {available ? actionIcon : null}
         </div>
       </div>
     );

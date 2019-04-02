@@ -1,4 +1,5 @@
-export interface CartItem {
+import react from 'react';
+export interface CartItem  {
   title: string;
   images: string[];
   price: number;
@@ -6,6 +7,8 @@ export interface CartItem {
   available: boolean;
   key: number;
   id: string;
-  addToCart: void;
+  inCart: boolean;
+  addToCart: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined;
+  remove?: void;
   amount?: number;
 }
