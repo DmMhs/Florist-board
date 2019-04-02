@@ -4,10 +4,11 @@ const labels = {
   postCode: '346346',
   phone: '+123-45-678',
   navigation: {
-    home: 'home',
-    shop: 'shop',
-    gallery: 'gallery',
-    contacts: 'contacts'
+    home: 'HOME',
+    shop: 'SHOP',
+    gallery: 'GALLERY',
+    contacts: 'CONTACTS',
+    cart: 'CART'
   }
 };
 

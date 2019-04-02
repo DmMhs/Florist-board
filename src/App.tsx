@@ -1,11 +1,11 @@
-import React, { Component, RefObject } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './App.less';
 import Header from './components/Header/Header';
 import Shop from './components/Shop/Shop';
 import Gallery from './components/Gallery/Gallery';
-import contacts from './components/Contacts/Contacts';
+import Contacts from './components/Contacts/Contacts';
 import Home from './components/Home/Home';
 import Toggle from './components/Toggle/Toggle';
 
@@ -13,6 +13,7 @@ interface AppProps {}
 interface AppState {
   showNavigation: boolean;
   togglePosition: string;
+  products: any;
 }
 
 let resizeListener: EventListener;
@@ -22,7 +23,8 @@ class App extends Component<AppProps, AppState> {
     super(props);
     this.state = {
       showNavigation: window.innerWidth > 576,
-      togglePosition: 'absolute'
+      togglePosition: 'absolute',
+      products: []
     };
   }
 
@@ -79,7 +81,7 @@ class App extends Component<AppProps, AppState> {
             <Route path="/" exact component={Home} />
             <Route path="/shop" component={Shop} />
             <Route path="/gallery" component={Gallery} />
-            <Route path="/contacts" component={contacts} />
+            <Route path="/contacts" component={Contacts} />
           </Switch>
         </div>
       </BrowserRouter>
