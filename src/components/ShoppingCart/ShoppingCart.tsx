@@ -5,23 +5,18 @@ import './ShoppingCart.less';
 
 interface ShoppingCartProps {
   cartItems: CartItem[];
-  // showCart: boolean;
-  // closeCart:
-  //   | ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void)
-  //   | undefined;
+  showCart: boolean;
+  closeCart:
+    | ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void)
+    | undefined;
+  remove: any;
 }
 interface ShoppingCartState {
   cartProducts: Partial<CartItem> & { amount: number }[];
 }
 
-class ShoppingCart extends Component<any, any> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      cartProducts: []
-    };
-  }
-  static getDerivedStateFromProps(props: any, state: any) {
+class ShoppingCart extends Component<ShoppingCartProps, ShoppingCartState> {
+  static getDerivedStateFromProps(props: ShoppingCartProps, state: ShoppingCartState) {
     let initialSum = 0;
     props.cartItems.map((i: CartItem) => {
       initialSum += +i.price!;
@@ -32,6 +27,13 @@ class ShoppingCart extends Component<any, any> {
       totalSum: initialSum
     };
   }
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      cartProducts: []
+    };
+  }
+  
   reduceAmountClickedHandler = (amount: number, index: number) => {
     if (amount > 1) {
       const newCart = { ...this.state.cartProducts };
@@ -94,12 +96,9 @@ class ShoppingCart extends Component<any, any> {
             </span>
             <span>{(i.price! * i.amount!).toFixed(2)}</span>
             <span>{i.currency}</span>
-            <span>
-              <i
+            <span><i
                 className="fas fa-times"
-                onClick={() => {
-                  this.removeClickedHandler(index);
-                }}
+                onClick={() => this.props.remove(index)}
               />
             </span>
           </li>

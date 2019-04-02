@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import ProductCard from './ProductCard/ProductCard';
 
-import { Products } from '../../models/Products';
-import { Product } from '../../models/Product';
 import { CartItem } from '../../models/CartItem';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
 
 import './ProductList.less';
 
+interface ProductListProps {
+  products: CartItem[];
+}
 interface ProductListState {
   showCart: boolean;
-  cartProducts: Product[];
+  cartProducts: CartItem[];
 }
-
-class ProductList extends Component<any, ProductListState> {
-  constructor(props: Products) {
+class ProductList extends Component<ProductListProps, ProductListState> {
+  constructor(props: ProductListProps) {
     super(props);
     this.state = {
       showCart: false,
@@ -23,39 +23,30 @@ class ProductList extends Component<any, ProductListState> {
   }
 
   addToCartClickedHandler = (
-    productData: {
-      title: string;
-      images: string[];
-      price: number;
-      currency: string;
-      available: boolean;
-      key: number;
-      id: string;
-      addToCart: void;
-    },
-    event: any
+    productData: CartItem,
+    event: React.MouseEvent<HTMLDivElement>
   ) => {
     if (productData.available) {
       const cartProducts = this.state.cartProducts;
-      const index = cartProducts.findIndex(i => {
+      const index = cartProducts.findIndex((i: CartItem) => {
         return i.id === productData.id;
       });
       const isInCart = index !== -1 ? true : false;
       if (!isInCart) {
+        productData.inCart = true;
         this.setState({
           cartProducts: [...cartProducts, productData]
         });
-        event.target.classList.add('active');
       }
     }
   };
-  toggleCartClickedHandler = (event: any) => {
+  toggleCartClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     this.setState({
       showCart: !this.state.showCart
     });
     this.state.showCart
-      ? event.target!.classList.add('active')
-      : event.target!.classList.remove('active');
+      ? (event.target as HTMLDivElement)!.classList.add('active')
+      : (event.target as HTMLDivElement)!.classList.remove('active');
   };
   closeCartClickedHandler = () => {
     this.setState({
@@ -63,9 +54,17 @@ class ProductList extends Component<any, ProductListState> {
       cartProducts: []
     });
   };
+  handleRemoveCartItem = (index: number) => {
+    this.state.cartProducts[index].inCart = false;
+    const newProducts = [...this.state.cartProducts];
+    newProducts.splice(index, 1);
+    this.setState({
+      cartProducts: newProducts 
+    });
+  };
   render() {
     const { products } = this.props;
-    const productList = products.map((p: Product, index: number) => {
+    const productList = products.map((p: CartItem, index: number) => {
       return (
         <ProductCard
           title={p.title}
@@ -75,7 +74,8 @@ class ProductList extends Component<any, ProductListState> {
           available={p.available}
           key={index}
           id={p.id}
-          addToCart={() => this.addToCartClickedHandler(p as any, event as any)}
+          inCart={p.inCart}
+          addToCart={() => this.addToCartClickedHandler(p as CartItem, event as any)}
         />
       );
     });
@@ -89,6 +89,7 @@ class ProductList extends Component<any, ProductListState> {
           cartItems={this.state.cartProducts}
           showCart={this.state.showCart}
           closeCart={this.closeCartClickedHandler}
+          remove={this.handleRemoveCartItem}
         />
         <div className="ProductList">{productList}</div>
       </div>
