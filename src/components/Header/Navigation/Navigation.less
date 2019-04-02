@@ -9,24 +9,28 @@
       a {
         font-size: 1.3rem;
         text-decoration: none;
+        border-radius: 5px;
+        padding: 6px;
+        background-color: #eee;
         color: #333333;
-        transition: 0.3s;
-      }
-
-      a:hover,
-      a:active {
-        color: tomato;
-        transition: 0.3s;
-      }
-
-      .active {
-        color: tomato;
+        &:hover,
+        &:active,
+        &.active {
+          background-color: tomato;
+          color: white;
+          transition: 0.3s;
+        }
       }
     }
   }
 }
 @media screen and (max-width: 478px) {
   .Navigation {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
     position: fixed;
     top: 0;
     left: 0;
@@ -37,12 +41,23 @@
     z-index: 2;
     opacity: 0.95;
     ul {
+      margin-top: 4rem;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
+      justify-content: center;
+      align-items: center;
       li {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        a {
+          display: inline-block;
+          margin: 0 auto;
+          width: 75%;
+        }
       }
     }
   }
