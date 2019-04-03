@@ -4,6 +4,7 @@ export interface Product {
   price: number;
   currency: string;
   available: boolean;
+  description?: string;
   inCart?: boolean;
   id?: string;
   key?: number;
