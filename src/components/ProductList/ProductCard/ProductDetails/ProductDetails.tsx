@@ -1,58 +1,88 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import Spinner from '../../../Spinner/Spinner';
+import { Product } from '../../../../models/Product';
+import { productsRef } from '../../../../firebase';
 import './ProductDetails.less';
 
-class ProductDetails extends Component {
+interface ProductDetailsProps {}
+interface ProductDetailsState {
+  productData: Product;
+  fetchInProgress: boolean;
+}
+
+class ProductDetails extends Component<
+  ProductDetailsProps,
+  ProductDetailsState
+> {
+  constructor(props: ProductDetailsProps) {
+    super(props);
+    this.state = {
+      productData: {
+        title: '',
+        images: [],
+        price: 0,
+        currency: '',
+        available: false,
+        description: ''
+      },
+      fetchInProgress: false
+    };
+  }
+  componentDidMount() {
+    this.setState({
+      fetchInProgress: true
+    });
+    productsRef
+      .child((this.props as any).match.params.id)
+      .once('value')
+      .then(snapshot => {
+        this.setState({
+          productData: snapshot.val(),
+          fetchInProgress: false
+        });
+      })
+      .catch(error => console.log(error));
+  }
   render() {
-    const params = JSON.parse(
-      decodeURIComponent((this.props as any).match.params.data)
-    );
-    const { title, price, images, currency } = params;
-
-    let newUrl = '';
-    const firstPart = images[0].slice(0, 72);
-    let secondPart = images[0].slice(72, images[0].length);
-    secondPart = secondPart.replace(/\//gi, '%2F');
-    newUrl = firstPart + secondPart;
-
     const imgStyle = {
-      background: `url(${newUrl})`,
+      background: `url(${this.state.productData.images[0]})`,
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat'
     };
     return (
       <div className="ProductDetails">
-        <h1>{title.toUpperCase()}</h1>
-        <div className="product-info-wrapper">
-          <div className="image-wrapper">
-            <div className="image" style={imgStyle} />
-            <h3 className="price">
-              only <span className="accent">{price}$</span>
-            </h3>
-            <button className="shopping-btn" type="button">
-              <NavLink to="/shop">GO SHOPPING</NavLink>
-            </button>
-          </div>
+        {this.state.fetchInProgress === false ? (
+          <div>
+            <h1>{this.state.productData.title.toUpperCase()}</h1>
+            <div className="product-info-wrapper">
+              <div className="image-wrapper">
+                <div className="image" style={imgStyle} />
+                <h3 className="price">
+                  only{' '}
+                  <span className="accent">
+                    {this.state.productData.price}$
+                  </span>
+                </h3>
+                <button className="shopping-btn" type="button">
+                  <NavLink to="/shop">
+                    GO SHOPPING <i className="fas fa-shopping-cart" />
+                  </NavLink>
+                </button>
+              </div>
 
-          <div className="info">
-            <h2>Description</h2>
-            <hr />
-            <p>
-              Let's make some happy little clouds in our world. Here's something
-              that's fun. See there, told you that would be easy. Maybe he has a
-              little friend that lives right over here. Those great big fluffy
-              clouds. Every day I learn. Isn't that fantastic? You can just push
-              a little tree out of your brush like that. You don't want to kill
-              all your dark areas they are very important. Imagination is the
-              key to painting. This is the time to get out all your
-              flustrations, much better than kicking the dog around the house or
-              taking it out on your spouse. We can always carry this a step
-              further. There's really no end to this.
-            </p>
+              <div className="info">
+                <h2>Description</h2>
+                <hr />
+                <p>{this.state.productData.description}</p>
+              </div>
+            </div>
           </div>
-        </div>
+        ) : (
+          <Spinner />
+        )}
       </div>
     );
   }

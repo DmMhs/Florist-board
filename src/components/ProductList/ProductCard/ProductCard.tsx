@@ -9,8 +9,7 @@ interface ProductCardState {}
 
 class ProductCard extends Component<CartItem, ProductCardState> {
   render() {
-    const { images, title, price, currency, available } = this.props;
-    console.log(images[0]);
+    const { id, images, title, price, currency, available } = this.props;
     const actionIcon = this.props.inCart ? (
       <div>
         <div className="action">
@@ -29,11 +28,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
     );
     return (
       <div className="ProductCard">
-        <NavLink
-          to={`/product-details/${title}/${encodeURIComponent(
-            JSON.stringify(this.props)
-          )}`}
-        >
+        <NavLink to={`/product-details/${id}`}>
           <i className="fas fa-info-circle info" />
         </NavLink>
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import { CartItem } from '../../models/CartItem';
 import './ShoppingCart.less';
@@ -83,15 +84,20 @@ class ShoppingCart extends Component<ShoppingCartProps, ShoppingCartState> {
                 backgroundPosition: 'center'
               }}
             />
-            <span>{i.title}</span>
+            <span className="product-name">
+              {i.title}
+              <NavLink to={`/product-details/${i.id}`}>
+                <i className="fas fa-info-circle info" />
+              </NavLink>
+            </span>
             <span className="amount">
               <i
-                className="far fa-minus-square"
+                className="far fa-minus-square minus"
                 onClick={() => this.reduceAmountClickedHandler(i.amount, index)}
               />
               {i.amount}
               <i
-                className="far fa-plus-square"
+                className="far fa-plus-square plus"
                 onClick={() =>
                   this.increaseAmountClickedHandler(i.amount, index)
                 }

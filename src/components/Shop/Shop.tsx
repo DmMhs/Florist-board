@@ -26,7 +26,12 @@ class Shop extends Component<ShopProps, ShopState> {
       });
       const newProducts: Array<Product> = [];
       snapshot!.forEach((product: firebase.database.DataSnapshot) => {
-        newProducts.push({ ...product.val(), id: product.key, inCart: false,  amount: 1 });
+        newProducts.push({
+          ...product.val(),
+          id: product.key,
+          inCart: false,
+          amount: 1
+        });
       });
       this.setState({
         products: newProducts,

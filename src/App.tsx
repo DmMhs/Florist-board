@@ -83,10 +83,7 @@ class App extends Component<AppProps, AppState> {
             <Route path="/shop" component={Shop} />
             <Route path="/gallery" component={Gallery} />
             <Route path="/contacts" component={Contacts} />
-            <Route
-              path="/product-details/:name/:data"
-              component={ProductDetails}
-            />
+            <Route path="/product-details/:id" component={ProductDetails} />
           </Switch>
         </div>
       </BrowserRouter>
