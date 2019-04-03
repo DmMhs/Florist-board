@@ -1,4 +1,5 @@
 .ProductCard {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -8,7 +9,17 @@
   margin: 4px 2px;
   font-weight: lighter;
   flex-basis: calc(20% - 6px);
-
+  .info {
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: #333333;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    &:hover {
+      color: rgb(0, 183, 255);
+    }
+  }
   .image {
     width: 175px;
     height: 175px;
@@ -37,12 +48,21 @@
   }
   .action-panel {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     background-color: whitesmoke;
     width: 100%;
-    height: 2.5rem;
+    height: 3rem;
+    .action {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 2rem;
+      padding: 5px;
+    }
 
     i {
       cursor: pointer;

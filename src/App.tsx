@@ -8,6 +8,7 @@ import Gallery from './components/Gallery/Gallery';
 import Contacts from './components/Contacts/Contacts';
 import Home from './components/Home/Home';
 import Toggle from './components/Toggle/Toggle';
+import ProductDetails from './components/ProductList/ProductCard/ProductDetails/ProductDetails';
 
 interface AppProps {}
 interface AppState {
@@ -82,6 +83,10 @@ class App extends Component<AppProps, AppState> {
             <Route path="/shop" component={Shop} />
             <Route path="/gallery" component={Gallery} />
             <Route path="/contacts" component={Contacts} />
+            <Route
+              path="/product-details/:name/:data"
+              component={ProductDetails}
+            />
           </Switch>
         </div>
       </BrowserRouter>
