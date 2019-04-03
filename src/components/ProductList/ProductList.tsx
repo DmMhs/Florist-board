@@ -50,16 +50,16 @@ class ProductList extends Component<ProductListProps, ProductListState> {
   };
   closeCartClickedHandler = () => {
     this.setState({
-      showCart: false,
-      cartProducts: []
+      showCart: false
     });
   };
   handleRemoveCartItem = (index: number) => {
     this.state.cartProducts[index].inCart = false;
+    this.state.cartProducts[index].amount = 1;
     const newProducts = [...this.state.cartProducts];
     newProducts.splice(index, 1);
     this.setState({
-      cartProducts: newProducts 
+      cartProducts: newProducts
     });
   };
   render() {
@@ -75,7 +75,9 @@ class ProductList extends Component<ProductListProps, ProductListState> {
           key={index}
           id={p.id}
           inCart={p.inCart}
-          addToCart={() => this.addToCartClickedHandler(p as CartItem, event as any)}
+          addToCart={() =>
+            this.addToCartClickedHandler(p as CartItem, event as any)
+          }
         />
       );
     });

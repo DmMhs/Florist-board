@@ -16,7 +16,10 @@ interface ShoppingCartState {
 }
 
 class ShoppingCart extends Component<ShoppingCartProps, ShoppingCartState> {
-  static getDerivedStateFromProps(props: ShoppingCartProps, state: ShoppingCartState) {
+  static getDerivedStateFromProps(
+    props: ShoppingCartProps,
+    state: ShoppingCartState
+  ) {
     let initialSum = 0;
     props.cartItems.map((i: CartItem) => {
       initialSum += +i.price!;
@@ -33,7 +36,7 @@ class ShoppingCart extends Component<ShoppingCartProps, ShoppingCartState> {
       cartProducts: []
     };
   }
-  
+
   reduceAmountClickedHandler = (amount: number, index: number) => {
     if (amount > 1) {
       const newCart = { ...this.state.cartProducts };
@@ -71,7 +74,7 @@ class ShoppingCart extends Component<ShoppingCartProps, ShoppingCartState> {
               className="cart-item-img"
               style={{
                 display: 'flex',
-                flexBasis: '16.6%',
+                flexBasis: '20%',
                 background: `url(${i.images![0]})`,
                 width: '120px',
                 height: '120px',
@@ -94,9 +97,12 @@ class ShoppingCart extends Component<ShoppingCartProps, ShoppingCartState> {
                 }
               />
             </span>
-            <span>{(i.price! * i.amount!).toFixed(2)}</span>
-            <span>{i.currency}</span>
-            <span><i
+            <span>
+              {(i.price! * i.amount!).toFixed(2)}
+              {i.currency}
+            </span>
+            <span>
+              <i
                 className="fas fa-times"
                 onClick={() => this.props.remove(index)}
               />
@@ -115,14 +121,13 @@ class ShoppingCart extends Component<ShoppingCartProps, ShoppingCartState> {
               <span />
               <span>AMOUNT</span>
               <span>PRICE</span>
-              <span>CURRENCY</span>
               <span />
             </li>
             <hr />
             {cartItemsList}
           </ul>
           <div className="order">
-            <p>Total Sum: {totalPrice.toFixed(2)}</p>
+            <p>Total Sum: {totalPrice.toFixed(2)}$</p>
             <button type="button" className="order-btn">
               ORDER
             </button>
