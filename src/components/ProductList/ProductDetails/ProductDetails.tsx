@@ -1,22 +1,37 @@
 import React, { Component } from 'react';
-import { NavLink, BrowserRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import Spinner from '../../Spinner/Spinner';
 import { Product } from '../../../models/Product';
 import { productsRef } from '../../../firebase';
 import './ProductDetails.less';
 
-interface ProductDetailsProps {}
+interface MatchParams {
+  id: string;
+}
+
+interface Props extends RouteComponentProps<MatchParams> {}
+
+export interface RouteComponentProps<P> {
+match: match<P>;
+}
+
+export interface match<P> {
+params: P;
+isExact: boolean;
+path: string;
+url: string;
+}
 interface ProductDetailsState {
   productData: Product;
   fetchInProgress: boolean;
 }
 
 class ProductDetails extends Component<
-  ProductDetailsProps,
+RouteComponentProps<MatchParams>,
   ProductDetailsState
 > {
-  constructor(props: ProductDetailsProps) {
+  constructor(props: RouteComponentProps<MatchParams>) {
     super(props);
     this.state = {
       productData: {
@@ -35,7 +50,7 @@ class ProductDetails extends Component<
       fetchInProgress: true
     });
     productsRef
-      .child((this.props as any).match.params.id)
+      .child(this.props.match.params.id)
       .once('value')
       .then(snapshot => {
         this.setState({
@@ -64,11 +79,9 @@ class ProductDetails extends Component<
                   </span>
                 </h3>
                 <button className="shopping-btn" type="button">
-                  <BrowserRouter>
                     <NavLink to="/shop">
                       GO SHOPPING <i className="fas fa-shopping-cart" />
                     </NavLink>
-                  </BrowserRouter>
                 </button>
               </div>
 
