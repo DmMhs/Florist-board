@@ -105,7 +105,7 @@
     ],
     "setupTestFrameworkScriptFile": "./enzymeconfig.ts",
     "coveragePathIgnorePatterns": [
-      "<rootDir>/src/stories/index.stories.js",
+      "<rootDir>/src/stories/index.js",
       "<rootDir>/src/index.tsx",
       "<rootDir>/src/serviceWorker.ts"
     ],

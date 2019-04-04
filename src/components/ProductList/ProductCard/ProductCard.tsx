@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, BrowserRouter } from 'react-router-dom';
 
 import './ProductCard.less';
 import Slider from '../../Slider/Slider';
@@ -28,9 +28,11 @@ class ProductCard extends Component<CartItem, ProductCardState> {
     );
     return (
       <div className="ProductCard">
-        <NavLink to={`/product-details/${id}`}>
-          <i className="fas fa-info-circle info" />
-        </NavLink>
+        <BrowserRouter>
+          <NavLink to={`/product-details/${id}`}>
+            <i className="fas fa-info-circle info" />
+          </NavLink>
+        </BrowserRouter>
 
         <div className="image">
           <Slider images={images} auto={false} showControls={true} />

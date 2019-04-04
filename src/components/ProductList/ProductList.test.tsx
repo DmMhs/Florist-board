@@ -1,12 +1,19 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import ReactDOM from 'react-dom';
 
 import ProductList from './ProductList';
 import { Product } from '../../models/Product';
 import ProductCard from './ProductCard/ProductCard';
+import { CartItem } from '../../models/CartItem';
 
-it('Home page matches a snapshot', () => {
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<ProductList products={[]} />, div);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+it('matches a snapshot', () => {
   const wrapper = shallow(<ProductList products={[]} />);
   expect(wrapper).toMatchSnapshot();
 });
@@ -24,4 +31,59 @@ it('products list is not empty', () => {
   expect((wrapper as any).find('.ProductList').text().length).toBeGreaterThan(
     0
   );
+});
+
+it('Removes cart items', () => {
+  const prod: CartItem = {
+    title: 'title',
+    images: ['pathtoimage'],
+    price: 10,
+    currency: 'usd',
+    available: true,
+    key: 0,
+    id: 'safasf',
+    inCart: false,
+    amount: 1
+  };
+  const wrapper = shallow(<ProductList products={[]} />);
+  const instance = wrapper.instance();
+  (instance as any).state = {
+    showCart: false,
+    cartProducts: [prod, prod, prod]
+  };
+  (instance as any).handleRemoveCartItem(2);
+  expect((instance.state as any).cartProducts.length).toEqual(2);
+});
+
+it('Add to cart works', () => {
+  const prod: CartItem = {
+    title: 'title',
+    images: ['pathtoimage'],
+    price: 10,
+    currency: 'usd',
+    available: true,
+    key: 0,
+    id: 'safasf',
+    inCart: false,
+    amount: 1
+  };
+  const wrapper = shallow(<ProductList products={[]} />);
+  const instance = wrapper.instance();
+  (instance as any).state = {
+    showCart: false,
+    cartProducts: []
+  };
+  (instance as any).addToCartClickedHandler(prod);
+  expect((instance.state as any).cartProducts.length).toEqual(1);
+});
+
+it('toggleCart works', () => {
+  const wrapper = mount(<ProductList products={[]} />);
+  const instance = wrapper.instance();
+  (instance as any).state = {
+    showCart: false,
+    cartProducts: []
+  };
+  wrapper.find('.cart-toggle').simulate('click');
+  expect((instance as any).state.showCart).toEqual(true);
 });

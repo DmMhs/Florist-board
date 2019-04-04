@@ -9,7 +9,7 @@ export interface CartItem {
   id: string;
   inCart: boolean;
   description?: string;
-  addToCart:
+  addToCart?:
     | ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void)
     | undefined;
   remove?: void;

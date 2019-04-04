@@ -13,6 +13,9 @@ it('renders without crashing', () => {
       price={10.5}
       currency="usd"
       available={false}
+      key={0}
+      id={'asfasf'}
+      inCart={false}
     />,
     div
   );
@@ -20,6 +23,17 @@ it('renders without crashing', () => {
 });
 
 it('Property "available" has impact on price displaying', () => {
+  const p = {
+    title: 'some',
+    images: ['test', 'product'],
+    price: 10.5,
+    currency: 'usd',
+    available: false,
+    key: 0,
+    id: 'asfasf',
+    inCart: false,
+    addToCart: () => {}
+  };
   let wrapper = shallow(
     <ProductCard
       title="some"
@@ -27,6 +41,12 @@ it('Property "available" has impact on price displaying', () => {
       price={10.5}
       currency="usd"
       available={false}
+      key={0}
+      id={'asfasf'}
+      inCart={false}
+      addToCart={() =>
+        (wrapper.instance() as any).addToCartClickedHandler(p, event as any)
+      }
     />
   );
   expect(wrapper.find('.price').text()).toEqual('not available :(');
@@ -37,6 +57,12 @@ it('Property "available" has impact on price displaying', () => {
       price={10.5}
       currency="usd"
       available={true}
+      key={0}
+      id={'asfasf'}
+      inCart={false}
+      addToCart={() =>
+        (wrapper.instance() as any).addToCartClickedHandler(p, event as any)
+      }
     />
   );
   expect(wrapper.find('.price').text()).toEqual('10.5usd');

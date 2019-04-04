@@ -1,7 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home page matches a snapshot 1`] = `
-<div
-  className="ProductList"
-/>
+exports[`matches a snapshot 1`] = `
+<div>
+  <div
+    className="cart-toggle"
+    onClick={[Function]}
+  >
+    <i
+      className="fas fa-shopping-basket"
+    />
+    <span>
+      0
+    </span>
+  </div>
+  <ShoppingCart
+    cartItems={Array []}
+    closeCart={[Function]}
+    remove={[Function]}
+    showCart={false}
+  />
+  <div
+    className="ProductList"
+  />
+</div>
 `;
