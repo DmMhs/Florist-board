@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<ProductCard
+  available={false}
+  currency="usd"
+  id="asfasf"
+  images={
+    Array [
+      "test",
+      "product",
+    ]
+  }
+  inCart={false}
+  key="0"
+  price={10.5}
+  title="some"
+/>
+`;
