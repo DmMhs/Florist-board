@@ -44,9 +44,6 @@ class ProductList extends Component<ProductListProps, ProductListState> {
     this.setState({
       showCart: !this.state.showCart
     });
-    this.state.showCart
-      ? (event.target as HTMLDivElement)!.classList.add('active')
-      : (event.target as HTMLDivElement)!.classList.remove('active');
   };
   closeCartClickedHandler = () => {
     this.setState({

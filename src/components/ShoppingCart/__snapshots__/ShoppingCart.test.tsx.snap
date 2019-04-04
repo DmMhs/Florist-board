@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ShoppingCartItem matches a snapshot 1`] = `
+<div
+  className="ShoppingCart"
+  style={
+    Object {
+      "display": "flex",
+    }
+  }
+>
+  <div
+    className="cart-content"
+  >
+    <i
+      className="fas fa-times close-cart"
+      onClick={[Function]}
+    />
+    <ShoppingCartContent
+      cartItemsList={
+        Array [
+          <ShoppingCartItem
+            cartItemPrice={NaN}
+            currency="usd"
+            id="asgtqwr"
+            images={
+              Array [
+                "asd",
+                "qwr",
+              ]
+            }
+            increaseAmount={[Function]}
+            reduceAmount={[Function]}
+            remove={[Function]}
+            title="qwerty"
+          />,
+          <ShoppingCartItem
+            cartItemPrice={NaN}
+            currency="usd"
+            id="asgtqwr"
+            images={
+              Array [
+                "asd",
+                "qwr",
+              ]
+            }
+            increaseAmount={[Function]}
+            reduceAmount={[Function]}
+            remove={[Function]}
+            title="qwerty"
+          />,
+        ]
+      }
+      totalPrice={NaN}
+    />
+  </div>
+</div>
+`;

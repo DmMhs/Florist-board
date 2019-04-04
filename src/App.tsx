@@ -8,7 +8,7 @@ import Gallery from './components/Gallery/Gallery';
 import Contacts from './components/Contacts/Contacts';
 import Home from './components/Home/Home';
 import Toggle from './components/Toggle/Toggle';
-import ProductDetails from './components/ProductList/ProductCard/ProductDetails/ProductDetails';
+import ProductDetails from './components/ProductList/ProductDetails/ProductDetails';
 
 interface AppProps {}
 interface AppState {

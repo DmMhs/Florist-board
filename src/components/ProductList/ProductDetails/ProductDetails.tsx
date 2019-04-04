@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, BrowserRouter } from 'react-router-dom';
 
-import Spinner from '../../../Spinner/Spinner';
-import { Product } from '../../../../models/Product';
-import { productsRef } from '../../../../firebase';
+import Spinner from '../../Spinner/Spinner';
+import { Product } from '../../../models/Product';
+import { productsRef } from '../../../firebase';
 import './ProductDetails.less';
 
 interface ProductDetailsProps {}
@@ -47,10 +47,7 @@ class ProductDetails extends Component<
   }
   render() {
     const imgStyle = {
-      background: `url(${this.state.productData.images[0]})`,
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat'
+      backgroundImage: `url(${this.state.productData.images[0]})`
     };
     return (
       <div className="ProductDetails">
@@ -67,9 +64,11 @@ class ProductDetails extends Component<
                   </span>
                 </h3>
                 <button className="shopping-btn" type="button">
-                  <NavLink to="/shop">
-                    GO SHOPPING <i className="fas fa-shopping-cart" />
-                  </NavLink>
+                  <BrowserRouter>
+                    <NavLink to="/shop">
+                      GO SHOPPING <i className="fas fa-shopping-cart" />
+                    </NavLink>
+                  </BrowserRouter>
                 </button>
               </div>
 

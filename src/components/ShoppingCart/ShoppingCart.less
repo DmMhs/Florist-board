@@ -20,6 +20,7 @@
     border-radius: 7px;
     height: auto;
     background-color: white;
+    z-index: 4;
     .order {
       height: auto;
       display: flex;
@@ -41,6 +42,7 @@
       right: 25px;
       font-size: 1.3rem;
       color: #333333;
+      z-index: 4;
       cursor: pointer;
       &:hover {
         color: tomato;
@@ -58,13 +60,14 @@
       }
       li {
         display: flex;
-        width: 800px;
         padding: 7px;
         font-size: 1.3rem;
+        width: 800px;
         font-weight: 300;
         &:first-child {
           border: none;
         }
+
         span {
           padding: 9px;
           display: flex;
@@ -112,7 +115,6 @@
       list-style: none;
       border: 1px solid #ccc;
       box-sizing: border-box;
-      width: 100%;
       margin: 5px 0;
     }
   }

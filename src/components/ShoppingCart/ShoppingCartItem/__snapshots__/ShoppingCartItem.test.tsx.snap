@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home page matches a snapshot 1`] = `
+<li
+  className="cart-item"
+>
+  <div
+    className="cart-item-img"
+    style={
+      Object {
+        "backgroundImage": "url()",
+      }
+    }
+  />
+  <span
+    className="product-name"
+  >
+    Sunflower
+    <NavLink
+      to="/product-details/qwerty"
+    >
+      <i
+        className="fas fa-info-circle info"
+      />
+    </NavLink>
+  </span>
+  <span
+    className="amount"
+  >
+    <i
+      className="far fa-minus-square minus"
+      onClick={[Function]}
+    />
+    10
+    <i
+      className="far fa-plus-square plus"
+      onClick={[Function]}
+    />
+  </span>
+  <span>
+    150
+    usd
+  </span>
+  <span>
+    <i
+      className="fas fa-times"
+      onClick={[Function]}
+    />
+  </span>
+</li>
+`;
