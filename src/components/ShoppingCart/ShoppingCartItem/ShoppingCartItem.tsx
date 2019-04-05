@@ -2,26 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import './ShoppingCartItem.less';
+import { CartItem } from '../../../models/CartItem';
 
-export interface ShoppingCartItemProps {
-  remove:
-    | ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void)
-    | undefined;
-  increaseAmount:
-    | ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void)
-    | undefined;
-  reduceAmount:
-    | ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void)
-    | undefined;
-  images: string[];
-  title: string;
-  id: string;
-  amount: number;
-  cartItemPrice: number;
-  currency: string;
-}
-
-const ShoppingCartItem = (props: ShoppingCartItemProps) => {
+const ShoppingCartItem = (
+  props: Partial<CartItem> & { cartItemPrice: number }
+) => {
   const {
     remove,
     increaseAmount,

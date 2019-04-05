@@ -1,4 +1,4 @@
-import react from 'react';
+import React from 'react';
 export interface CartItem {
   title: string;
   images: string[];
@@ -12,6 +12,14 @@ export interface CartItem {
   addToCart?:
     | ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void)
     | undefined;
-  remove?: void;
+  remove?:
+    | ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void)
+    | undefined;
+  increaseAmount?:
+    | ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void)
+    | undefined;
+  reduceAmount?:
+    | ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void)
+    | undefined;
   amount?: number;
 }

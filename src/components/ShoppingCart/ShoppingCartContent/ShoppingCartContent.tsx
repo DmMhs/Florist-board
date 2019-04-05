@@ -1,10 +1,8 @@
 import React from 'react';
 
-import { ShoppingCartItemProps } from '../ShoppingCartItem/ShoppingCartItem';
-
 interface ShoppingCartContentProps {
   totalPrice: number;
-  cartItemsList: ShoppingCartItemProps[];
+  cartItemsList: JSX.Element[];
 }
 
 const ShoppingCartContent = (props: ShoppingCartContentProps) => {
