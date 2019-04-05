@@ -9,8 +9,16 @@ interface ProductCardState {}
 
 class ProductCard extends Component<CartItem, ProductCardState> {
   render() {
-    const { id, images, title, price, currency, available } = this.props;
-    const actionIcon = this.props.inCart ? (
+    const {
+      id,
+      images,
+      title,
+      price,
+      currency,
+      available,
+      inCart
+    } = this.props;
+    const actionIcon = inCart ? (
       <div>
         <div className="action">
           <i className="far fa-check-circle active" />
@@ -28,9 +36,9 @@ class ProductCard extends Component<CartItem, ProductCardState> {
     );
     return (
       <div className="ProductCard">
-          <NavLink to={`/product-details/${id}`}>
-            <i className="fas fa-info-circle info" />
-          </NavLink>
+        <NavLink to={`/product-details/${id}`}>
+          <i className="fas fa-info-circle info" />
+        </NavLink>
 
         <div className="image">
           <Slider images={images} auto={false} showControls={true} />
