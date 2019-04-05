@@ -9,5 +9,5 @@ it('renders without crashing', () => {
       match={{ params: { id: 1 }, isExact: true, path: '', url: '' }}
     />
   );
-  expect((wrapper.instance() as any).state.title).not.toEqual('');
+  expect(wrapper.instance().state.title).not.toEqual('');
 });
