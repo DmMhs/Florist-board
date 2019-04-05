@@ -22,10 +22,7 @@ class ProductList extends Component<ProductListProps, ProductListState> {
     };
   }
 
-  addToCartClickedHandler = (
-    productData: CartItem,
-    event: React.MouseEvent<HTMLDivElement>
-  ) => {
+  addToCartClickedHandler = (productData: CartItem) => {
     if (productData.available) {
       const cartProducts = this.state.cartProducts;
       const index = cartProducts.findIndex((i: CartItem) => {
@@ -72,9 +69,7 @@ class ProductList extends Component<ProductListProps, ProductListState> {
           key={index}
           id={p.id}
           inCart={p.inCart}
-          addToCart={() =>
-            this.addToCartClickedHandler(p as CartItem, event as any)
-          }
+          addToCart={() => this.addToCartClickedHandler(p as CartItem)}
         />
       );
     });
