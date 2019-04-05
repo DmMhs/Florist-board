@@ -28,9 +28,7 @@ it('products list is not empty', () => {
   };
   const wrapper = shallow(<ProductList products={[prod, prod, prod]} />);
   expect(wrapper.find('.ProductList').exists()).toEqual(true);
-  expect((wrapper as any).find('.ProductList').text().length).toBeGreaterThan(
-    0
-  );
+  expect(wrapper.find('.ProductList').text().length).toBeGreaterThan(0);
 });
 
 it('Removes cart items', () => {
@@ -47,12 +45,12 @@ it('Removes cart items', () => {
   };
   const wrapper = shallow(<ProductList products={[]} />);
   const instance = wrapper.instance();
-  (instance as any).state = {
+  instance.state = {
     showCart: false,
     cartProducts: [prod, prod, prod]
   };
-  (instance as any).handleRemoveCartItem(2);
-  expect((instance.state as any).cartProducts.length).toEqual(2);
+  instance.handleRemoveCartItem(2);
+  expect(instance.state.cartProducts.length).toEqual(2);
 });
 
 it('Add to cart works', () => {
@@ -69,21 +67,21 @@ it('Add to cart works', () => {
   };
   const wrapper = shallow(<ProductList products={[]} />);
   const instance = wrapper.instance();
-  (instance as any).state = {
+  instance.state = {
     showCart: false,
     cartProducts: []
   };
-  (instance as any).addToCartClickedHandler(prod);
-  expect((instance.state as any).cartProducts.length).toEqual(1);
+  instance.addToCartClickedHandler(prod);
+  expect(instance.state.cartProducts.length).toEqual(1);
 });
 
 it('toggleCart works', () => {
   const wrapper = mount(<ProductList products={[]} />);
   const instance = wrapper.instance();
-  (instance as any).state = {
+  instance.state = {
     showCart: false,
     cartProducts: []
   };
   wrapper.find('.cart-toggle').simulate('click');
-  expect((instance as any).state.showCart).toEqual(true);
+  expect(instance.state.showCart).toEqual(true);
 });

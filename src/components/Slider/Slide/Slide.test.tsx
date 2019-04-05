@@ -13,5 +13,5 @@ it('renders without crashing', () => {
 it('has imgSrc in props', () => {
   const wrapper = shallow(<Slide imgSrc={'some/test/image/src'} />);
   const instance = wrapper.instance();
-  expect((wrapper.props as any)!.imgSrc).toBeDefined;
+  expect(wrapper.props!.imgSrc).toBeDefined;
 });

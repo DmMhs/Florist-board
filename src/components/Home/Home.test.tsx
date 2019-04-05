@@ -18,7 +18,7 @@ it('has a valid state value', () => {
     bannerImages: ['zero', 'one', 'two']
   });
 
-  expect((instance.state as any).bannerImages.length).toEqual(3);
+  expect(instance.state.bannerImages.length).toEqual(3);
 });
 
 it('banner images do fetch', async () => {
