@@ -96,12 +96,13 @@ class ShoppingCart extends Component<ShoppingCartProps, ShoppingCartState> {
         );
       }
     );
+
     return (
       <div className="ShoppingCart" style={style}>
         <div className="cart-content">
           <i className="fas fa-times close-cart" onClick={closeCart} />
           <ShoppingCartContent
-            cartItemsList={cartItemsList as any}
+            cartItemsList={cartItemsList as JSX.Element[]}
             totalPrice={totalPrice}
           />
         </div>
