@@ -72,7 +72,7 @@ const ShoppingCartItem = (props: ShoppingCartItemProps) => {
       </span>
       <span>
         <i
-          className="fas fa-times"
+          className="far fa-trash-alt remove"
           onClick={
             remove as
               | ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void)
