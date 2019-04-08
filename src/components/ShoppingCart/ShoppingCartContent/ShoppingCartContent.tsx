@@ -1,8 +1,11 @@
 import React from 'react';
 
+import './ShoppingCartContent.less';
+
 interface ShoppingCartContentProps {
   totalPrice: number;
   cartItemsList: JSX.Element[];
+  fixEmptyCart: any;
 }
 
 const ShoppingCartContent = (props: ShoppingCartContentProps) => {
@@ -29,9 +32,12 @@ const ShoppingCartContent = (props: ShoppingCartContentProps) => {
       </div>
     </div>
   ) : (
-    <h4>
-      cart is empty <i className="far fa-frown-open" />
-    </h4>
+    <div>
+      <h4>cart is empty</h4>
+      <button type="button" className="fix" onClick={props.fixEmptyCart}>
+        <span>FIX IT</span> <i className="far fa-smile-wink" />
+      </button>
+    </div>
   );
 };
 

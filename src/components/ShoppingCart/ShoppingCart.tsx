@@ -104,6 +104,7 @@ class ShoppingCart extends Component<ShoppingCartProps, ShoppingCartState> {
           <ShoppingCartContent
             cartItemsList={cartItemsList as JSX.Element[]}
             totalPrice={totalPrice}
+            fixEmptyCart={closeCart}
           />
         </div>
       </div>

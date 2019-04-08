@@ -13,14 +13,14 @@ interface MatchParams {
 interface Props extends RouteComponentProps<MatchParams> {}
 
 export interface RouteComponentProps<P> {
-match: match<P>;
+  match: match<P>;
 }
 
 export interface match<P> {
-params: P;
-isExact: boolean;
-path: string;
-url: string;
+  params: P;
+  isExact: boolean;
+  path: string;
+  url: string;
 }
 interface ProductDetailsState {
   productData: Product;
@@ -28,7 +28,7 @@ interface ProductDetailsState {
 }
 
 class ProductDetails extends Component<
-RouteComponentProps<MatchParams>,
+  RouteComponentProps<MatchParams>,
   ProductDetailsState
 > {
   constructor(props: RouteComponentProps<MatchParams>) {
@@ -73,15 +73,23 @@ RouteComponentProps<MatchParams>,
               <div className="image-wrapper">
                 <div className="image" style={imgStyle} />
                 <h3 className="price">
-                  only{' '}
-                  <span className="accent">
-                    {this.state.productData.price}$
-                  </span>
+                  {this.state.productData.available === false ? (
+                    <span>
+                      not in stock <i className="far fa-frown" />
+                    </span>
+                  ) : (
+                    <div>
+                      only{' '}
+                      <span className="accent">
+                        {this.state.productData.price}$
+                      </span>
+                    </div>
+                  )}
                 </h3>
                 <button className="shopping-btn" type="button">
-                    <NavLink to="/shop">
-                      GO SHOPPING <i className="fas fa-shopping-cart" />
-                    </NavLink>
+                  <NavLink to="/shop">
+                    GO SHOPPING <i className="fas fa-shopping-cart" />
+                  </NavLink>
                 </button>
               </div>
 
