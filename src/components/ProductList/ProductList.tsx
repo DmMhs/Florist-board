@@ -20,8 +20,13 @@ interface ProductListState {
   };
   sortBy: string;
   sortOrder: string;
+  showFilters: boolean;
 }
 class ProductList extends Component<ProductListProps, ProductListState> {
+  private orderByOptionsRef: React.RefObject<HTMLDivElement>;
+  private filtersSidebarRef: React.RefObject<HTMLDivElement>;
+  private productListRef: React.RefObject<HTMLDivElement>;
+  private filterToggleRef: React.RefObject<HTMLDivElement>;
   constructor(props: ProductListProps) {
     super(props);
     this.state = {
@@ -31,8 +36,13 @@ class ProductList extends Component<ProductListProps, ProductListState> {
       checkForPrice: false,
       filterByPrice: { from: 0, to: Infinity },
       sortBy: 'name',
-      sortOrder: 'default'
+      sortOrder: 'default',
+      showFilters: false
     };
+    this.orderByOptionsRef = React.createRef();
+    this.filtersSidebarRef = React.createRef();
+    this.productListRef = React.createRef();
+    this.filterToggleRef = React.createRef();
   }
 
   addToCartClickedHandler = (productData: CartItem) => {
@@ -96,10 +106,32 @@ class ProductList extends Component<ProductListProps, ProductListState> {
       sortOrder: this.state.sortOrder === 'inverse' ? 'default' : 'inverse'
     });
   };
-  orderByChangedHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  orderByChangedHandler = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
     this.setState({
-      sortBy: this.state.sortBy === 'name' ? 'price' : 'name'
+      sortBy:
+        (event.target as HTMLAnchorElement).innerText === 'name'
+          ? 'name'
+          : 'price'
     });
+  };
+  orderByClickedHandler = () => {
+    this.orderByOptionsRef.current!.classList.toggle('show');
+  };
+  filterToggleClickedHandler = () => {
+    if (this.state.showFilters === false) {
+      this.filterToggleRef.current!.classList.remove('fa-angle-double-right');
+      this.filterToggleRef.current!.classList.add('fa-angle-double-left');
+    } else {
+      this.filterToggleRef.current!.classList.remove('fa-angle-double-left');
+      this.filterToggleRef.current!.classList.add('fa-angle-double-right');
+    }
+    this.setState({
+      showFilters: !this.state.showFilters
+    });
+    this.filtersSidebarRef.current!.classList.toggle('hide');
+    this.productListRef.current!.classList.toggle('full-width');
   };
   render() {
     const { products } = this.props;
@@ -180,7 +212,12 @@ class ProductList extends Component<ProductListProps, ProductListState> {
           closeCart={this.closeCartClickedHandler}
           remove={this.handleRemoveCartItem}
         />
-        <div className="filter-wrapper">
+        <div className="filter-wrapper hide" ref={this.filtersSidebarRef}>
+          <i
+            className="fas fa-angle-double-right toggle"
+            onClick={this.filterToggleClickedHandler}
+            ref={this.filterToggleRef}
+          />
           <h2>
             Filters <i className="fas fa-filter" />
           </h2>
@@ -209,13 +246,23 @@ class ProductList extends Component<ProductListProps, ProductListState> {
             </div>
           </form>
         </div>
-        <div className="ProductList">
+        <div className="ProductList full-width" ref={this.productListRef}>
           <div className="sort-order">
             sort by{' '}
-            <select onChange={this.orderByChangedHandler}>
-              <option value="name">name</option>
-              <option value="price">price</option>
-            </select>
+            <div className="dropdown">
+              <button onClick={this.orderByClickedHandler} className="dropbtn">
+                {this.state.sortBy.toUpperCase()}{' '}
+                <i className="fas fa-angle-down" />
+              </button>
+              <div ref={this.orderByOptionsRef} className="dropdown-content">
+                <a href="#" onClick={this.orderByChangedHandler}>
+                  name
+                </a>
+                <a href="#" onClick={this.orderByChangedHandler}>
+                  price
+                </a>
+              </div>
+            </div>
             {this.state.sortBy === 'name'
               ? sortByNameOrderIcon
               : sortByPriceOrderIcon}
