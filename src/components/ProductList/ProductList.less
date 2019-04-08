@@ -91,6 +91,28 @@
   display: flex;
   flex-wrap: wrap;
   flex-basis: 85%;
+  .sort-order {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    font-size: 1.4rem;
+    color: #333333;
+    select {
+      display: inline-block;
+      font-size: 1.3rem;
+      margin: 0 10px;
+      border: none;
+      color: #333333;
+      option {
+        font-size: 1.3rem;
+      }
+      i {
+        color: red;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 478px) {

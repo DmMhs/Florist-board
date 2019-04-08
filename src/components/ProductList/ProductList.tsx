@@ -18,6 +18,8 @@ interface ProductListState {
     from: number | string;
     to: number | string;
   };
+  sortBy: string;
+  sortOrder: string;
 }
 class ProductList extends Component<ProductListProps, ProductListState> {
   constructor(props: ProductListProps) {
@@ -27,7 +29,9 @@ class ProductList extends Component<ProductListProps, ProductListState> {
       cartProducts: [],
       checkForAvailable: false,
       checkForPrice: false,
-      filterByPrice: { from: 0, to: Infinity }
+      filterByPrice: { from: 0, to: Infinity },
+      sortBy: 'name',
+      sortOrder: 'default'
     };
   }
 
@@ -87,6 +91,16 @@ class ProductList extends Component<ProductListProps, ProductListState> {
       checkForPrice: true
     });
   };
+  sortOrderClicked = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    this.setState({
+      sortOrder: this.state.sortOrder === 'inverse' ? 'default' : 'inverse'
+    });
+  };
+  orderByChangedHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    this.setState({
+      sortBy: this.state.sortBy === 'name' ? 'price' : 'name'
+    });
+  };
   render() {
     const { products } = this.props;
     let productList = products.map((p: CartItem, index: number) => {
@@ -117,6 +131,43 @@ class ProductList extends Component<ProductListProps, ProductListState> {
         );
       });
     }
+    if (this.state.sortBy === 'name') {
+      productList = productList.sort((a: JSX.Element, b: JSX.Element) => {
+        if (a.props.title > b.props.title) {
+          return 1;
+        }
+        if (a.props.title < b.props.title) {
+          return -1;
+        }
+        return 0;
+      });
+      if (this.state.sortOrder === 'inverse') {
+        productList.reverse();
+      }
+    }
+    if (this.state.sortBy === 'price') {
+      productList = productList.sort((a: JSX.Element, b: JSX.Element) => {
+        return a.props.price - b.props.price;
+      });
+      if (this.state.sortOrder === 'inverse') {
+        productList.reverse();
+      }
+    }
+    const sortByNameOrderIcon =
+      this.state.sortOrder === 'default' ? (
+        <i className="fas fa-sort-alpha-down" onClick={this.sortOrderClicked} />
+      ) : (
+        <i className="fas fa-sort-alpha-up" onClick={this.sortOrderClicked} />
+      );
+    const sortByPriceOrderIcon =
+      this.state.sortOrder === 'default' ? (
+        <i
+          className="fas fa-sort-numeric-down"
+          onClick={this.sortOrderClicked}
+        />
+      ) : (
+        <i className="fas fa-sort-numeric-up" onClick={this.sortOrderClicked} />
+      );
     return (
       <div className="main-wrapper">
         <div className="cart-toggle" onClick={this.toggleCartClickedHandler}>
@@ -158,7 +209,19 @@ class ProductList extends Component<ProductListProps, ProductListState> {
             </div>
           </form>
         </div>
-        <div className="ProductList">{productList}</div>
+        <div className="ProductList">
+          <div className="sort-order">
+            sort by{' '}
+            <select onChange={this.orderByChangedHandler}>
+              <option value="name">name</option>
+              <option value="price">price</option>
+            </select>
+            {this.state.sortBy === 'name'
+              ? sortByNameOrderIcon
+              : sortByPriceOrderIcon}
+          </div>
+          {productList}
+        </div>
       </div>
     );
   }
