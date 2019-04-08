@@ -35,7 +35,7 @@ const ShoppingCartContent = (props: ShoppingCartContentProps) => {
     <div>
       <h4>cart is empty</h4>
       <button type="button" className="fix" onClick={props.fixEmptyCart}>
-        <span>FIX IT</span> <i className="far fa-smile-wink" />
+        <span>LET'S FIX IT</span> <i className="far fa-smile-wink" />
       </button>
     </div>
   );
