@@ -5,7 +5,9 @@ import './ShoppingCartContent.less';
 interface ShoppingCartContentProps {
   totalPrice: number;
   cartItemsList: JSX.Element[];
-  fixEmptyCart: any;
+  fixEmptyCart:
+    | ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
+    | undefined;
 }
 
 const ShoppingCartContent = (props: ShoppingCartContentProps) => {

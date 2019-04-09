@@ -5,6 +5,8 @@ import { CartItem } from '../../models/CartItem';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
 
 import './ProductList.less';
+import ProductsFilter from './ProductsFilter/ProductsFilter';
+import ProductsSort from './ProductsSort/ProductsSort';
 
 interface ProductListProps {
   products: CartItem[];
@@ -101,7 +103,9 @@ class ProductList extends Component<ProductListProps, ProductListState> {
       checkForPrice: true
     });
   };
-  sortOrderClicked = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  sortOrderClickedHandler = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
     this.setState({
       sortOrder: this.state.sortOrder === 'inverse' ? 'default' : 'inverse'
     });
@@ -185,21 +189,6 @@ class ProductList extends Component<ProductListProps, ProductListState> {
         productList.reverse();
       }
     }
-    const sortByNameOrderIcon =
-      this.state.sortOrder === 'default' ? (
-        <i className="fas fa-sort-alpha-down" onClick={this.sortOrderClicked} />
-      ) : (
-        <i className="fas fa-sort-alpha-up" onClick={this.sortOrderClicked} />
-      );
-    const sortByPriceOrderIcon =
-      this.state.sortOrder === 'default' ? (
-        <i
-          className="fas fa-sort-numeric-down"
-          onClick={this.sortOrderClicked}
-        />
-      ) : (
-        <i className="fas fa-sort-numeric-up" onClick={this.sortOrderClicked} />
-      );
     return (
       <div className="main-wrapper">
         <div className="cart-toggle" onClick={this.toggleCartClickedHandler}>
@@ -212,61 +201,23 @@ class ProductList extends Component<ProductListProps, ProductListState> {
           closeCart={this.closeCartClickedHandler}
           remove={this.handleRemoveCartItem}
         />
-        <div className="filter-wrapper hide" ref={this.filtersSidebarRef}>
-          <i
-            className="fas fa-angle-double-right toggle"
-            onClick={this.filterToggleClickedHandler}
-            ref={this.filterToggleRef}
-          />
-          <h2>
-            Filters <i className="fas fa-filter" />
-          </h2>
-          <form className="filter-form">
-            <div className="filter-option available">
-              <label>IN STOCK</label>
-              <input type="checkbox" onChange={this.inStockChangedHandler} />
-            </div>
-            <div className="filter-option price-range">
-              <label>PRICE RANGE</label>
-              <div>
-                <input
-                  type="number"
-                  onChange={this.priceFromChangedHandler}
-                  placeholder="from"
-                  min="0"
-                />
-                -
-                <input
-                  type="number"
-                  onChange={this.priceToChangedHandler}
-                  placeholder="to"
-                  min="0"
-                />
-              </div>
-            </div>
-          </form>
-        </div>
+        <ProductsFilter
+          filterToggle={this.filterToggleClickedHandler}
+          filtersSidebarRef={this.filtersSidebarRef}
+          filterToggleRef={this.filterToggleRef}
+          inStockChanged={this.inStockChangedHandler}
+          priceFromChanged={this.priceFromChangedHandler}
+          priceToChanged={this.priceToChangedHandler}
+        />
         <div className="ProductList full-width" ref={this.productListRef}>
-          <div className="sort-order">
-            sort by{' '}
-            <div className="dropdown">
-              <button onClick={this.orderByClickedHandler} className="dropbtn">
-                {this.state.sortBy.toUpperCase()}{' '}
-                <i className="fas fa-angle-down" />
-              </button>
-              <div ref={this.orderByOptionsRef} className="dropdown-content">
-                <a href="#" onClick={this.orderByChangedHandler}>
-                  name
-                </a>
-                <a href="#" onClick={this.orderByChangedHandler}>
-                  price
-                </a>
-              </div>
-            </div>
-            {this.state.sortBy === 'name'
-              ? sortByNameOrderIcon
-              : sortByPriceOrderIcon}
-          </div>
+          <ProductsSort
+            sortOrder={this.state.sortOrder}
+            sortOrderClicked={this.sortOrderClickedHandler}
+            orderByClicked={this.orderByClickedHandler}
+            sortBy={this.state.sortBy}
+            orderByOptionsRef={this.orderByOptionsRef}
+            orderByChanged={this.orderByChangedHandler}
+          />
           {productList}
         </div>
       </div>
