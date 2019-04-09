@@ -20,7 +20,8 @@ exports[`ShoppingCartItem matches a snapshot 1`] = `
       cartItemsList={
         Array [
           <ShoppingCartItem
-            cartItemPrice={NaN}
+            amount={1}
+            cartItemPrice={100}
             currency="usd"
             id="asgtqwr"
             images={
@@ -35,7 +36,8 @@ exports[`ShoppingCartItem matches a snapshot 1`] = `
             title="qwerty"
           />,
           <ShoppingCartItem
-            cartItemPrice={NaN}
+            amount={1}
+            cartItemPrice={100}
             currency="usd"
             id="asgtqwr"
             images={
@@ -51,7 +53,8 @@ exports[`ShoppingCartItem matches a snapshot 1`] = `
           />,
         ]
       }
-      totalPrice={NaN}
+      fixEmptyCart={[Function]}
+      totalPrice={200}
     />
   </div>
 </div>

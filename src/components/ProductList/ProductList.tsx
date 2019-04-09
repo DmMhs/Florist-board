@@ -1,4 +1,4 @@
-import React, { Component, ChangeEvent } from 'react';
+import React, { Component } from 'react';
 import ProductCard from './ProductCard/ProductCard';
 
 import { CartItem } from '../../models/CartItem';
@@ -120,7 +120,7 @@ class ProductList extends Component<ProductListProps, ProductListState> {
     });
   };
   priceFromChangedHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let priceFilter = { ...this.state.filterByPrice };
+    const priceFilter = { ...this.state.filterByPrice };
     priceFilter.from = event.target.value === '' ? 0 : +event.target.value;
     this.setState({
       filterByPrice: priceFilter,
@@ -129,7 +129,7 @@ class ProductList extends Component<ProductListProps, ProductListState> {
   };
 
   priceToChangedHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let priceFilter = { ...this.state.filterByPrice };
+    const priceFilter = { ...this.state.filterByPrice };
     priceFilter.to = event.target.value === '' ? Infinity : +event.target.value;
     this.setState({
       filterByPrice: priceFilter,
@@ -192,7 +192,7 @@ class ProductList extends Component<ProductListProps, ProductListState> {
           key={index}
           id={p.id}
           inCart={p.inCart}
-          addToCart={() => this.addToCartClickedHandler(p as CartItem)}
+          addToCart={this.addToCartClickedHandler.bind(this, p as CartItem)}
         />
       );
     });

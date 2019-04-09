@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches a snapshot 1`] = `
-<div>
+<div
+  className="main-wrapper"
+>
   <div
     className="cart-toggle"
     onClick={[Function]}
@@ -19,8 +21,40 @@ exports[`matches a snapshot 1`] = `
     remove={[Function]}
     showCart={false}
   />
-  <div
-    className="ProductList"
+  <productsFilter
+    filterToggle={[Function]}
+    filterToggleRef={
+      Object {
+        "current": null,
+      }
+    }
+    filtersSidebarRef={
+      Object {
+        "current": null,
+      }
+    }
+    inStockChanged={[Function]}
+    mobileMode={false}
+    priceFromChanged={[Function]}
+    priceToChanged={[Function]}
   />
+  <div
+    className="ProductList full-width"
+  >
+    <productsSort
+      filterToggle={[Function]}
+      mobileMode={false}
+      orderByChanged={[Function]}
+      orderByClicked={[Function]}
+      orderByOptionsRef={
+        Object {
+          "current": null,
+        }
+      }
+      sortBy="name"
+      sortOrder="default"
+      sortOrderClicked={[Function]}
+    />
+  </div>
 </div>
 `;
