@@ -1,6 +1,7 @@
 .main-wrapper {
   display: flex;
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .cart-toggle {
@@ -28,8 +29,8 @@
   }
 }
 .ProductList {
+  margin-left: 2rem;
   padding: 2rem;
-  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   width: 80%;
@@ -95,6 +96,7 @@
     box-sizing: border-box;
   }
   .ProductList {
+    margin-left: 0;
     width: 0%;
     display: none;
     transition: 0.5s;
@@ -105,13 +107,7 @@
       width: 100%;
       display: flex;
       transform: none;
-      margin: 0 auto;
       transition: 0;
     }
-  }
-}
-@media screen and (min-width: 768.1px) and (max-width: 1200px) {
-  .ProductList {
-    width: 75%;
   }
 }

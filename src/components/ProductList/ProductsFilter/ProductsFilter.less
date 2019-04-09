@@ -12,7 +12,7 @@
     font-size: 2rem;
     position: absolute;
     top: calc(50% - 1rem);
-    right: -2rem;
+    right: -3rem;
     cursor: pointer;
     &:hover {
       color: #333333;
@@ -24,7 +24,7 @@
     transition: 0.5s;
   }
   h2 {
-    font-weight: lighter;
+    font-weight: normal;
     background-color: #eee;
     padding: 1rem;
     color: #333333;
@@ -53,8 +53,8 @@
     label {
       display: inline-block;
       text-align: left;
-      font-weight: lighter;
-      font-size: 1.2rem;
+      font-size: 1rem;
+      white-space: nowrap;
     }
     &.price-range {
       display: flex;
@@ -69,13 +69,12 @@
         justify-content: space-around;
         align-items: center;
         flex-wrap: nowrap;
-        font-size: 1.5rem;
+        font-size: 1rem;
         color: #333333;
         input {
           width: 43%;
-          font-size: 1.5rem;
+          font-size: 1rem;
           color: #333333;
-          font-weight: lighter;
           text-align: center;
           border-radius: 5px;
           border: 1px solid #eee;
@@ -115,10 +114,5 @@
         }
       }
     }
-  }
-}
-@media screen and (min-width: 768.1px) and (max-width: 1200px) {
-  .filter-wrapper {
-    width: 25%;
   }
 }
