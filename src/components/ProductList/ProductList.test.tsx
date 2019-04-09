@@ -85,3 +85,72 @@ it('toggleCart works', () => {
   wrapper.find('.cart-toggle').simulate('click');
   expect(instance.state.showCart).toEqual(true);
 });
+
+it('state changes on filters toggle click', () => {
+  const wrapper = mount(<ProductList products={[]} />);
+  const instance = wrapper.instance();
+  instance.state = {
+    showFilters: true
+  };
+  instance.filterToggleClickedHandler();
+  expect(instance.state.showFilters).toBeFalsy();
+});
+
+it('Filter by price works', () => {
+  const wrapper = mount(<ProductList products={[]} />);
+  const instance = wrapper.instance();
+  instance.state = {
+    showFilters: true,
+    checkForPrice: false
+  };
+  expect(instance.state.checkForPrice).toBeFalsy();
+  wrapper.find('.priceFrom').simulate('change');
+  expect(instance.state.checkForPrice).toBeTruthy();
+  instance.setState({
+    showFilters: true,
+    checkForPrice: false
+  });
+  wrapper.find('.priceTo').simulate('change');
+  expect(instance.state.checkForPrice).toBeTruthy();
+});
+
+it('Click on sort button changes the state', () => {
+  const wrapper = mount(<ProductList products={[]} />);
+  const instance = wrapper.instance();
+  instance.state = {
+    sortBy: 'name'
+  };
+  wrapper.find('.sort-by-price-btn').simulate('click');
+  expect(instance.state.sortBy).toEqual('price');
+});
+
+it('sort order button changes the state', () => {
+  const wrapper = mount(<ProductList products={[]} />);
+  const instance = wrapper.instance();
+  instance.state = {
+    sortBy: 'name',
+    sortOrder: 'default'
+  };
+  wrapper.find('.fa-sort-alpha-down').simulate('click');
+  expect(instance.state.sortOrder).toEqual('inverse');
+});
+
+it('In stock filter changes the state', () => {
+  const wrapper = mount(<ProductList products={[]} />);
+  const instance = wrapper.instance();
+  instance.state = {
+    checkForAvailable: false
+  };
+  instance.inStockChangedHandler();
+  expect(instance.state.checkForAvailable).toBeTruthy();
+});
+
+it('Close cart button changes the state', () => {
+  const wrapper = mount(<ProductList products={[]} />);
+  const instance = wrapper.instance();
+  instance.state = {
+    showCart: true
+  };
+  instance.closeCartClickedHandler();
+  expect(instance.state.showCart).toBeFalsy();
+});

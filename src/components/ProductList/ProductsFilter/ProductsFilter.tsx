@@ -51,6 +51,7 @@ const productsFilter = (props: ProductsFilterProps) => {
             <input
               type="number"
               onChange={props.priceFromChanged}
+              className="priceFrom"
               placeholder="from"
               min="0"
             />
@@ -58,6 +59,7 @@ const productsFilter = (props: ProductsFilterProps) => {
             <input
               type="number"
               onChange={props.priceToChanged}
+              className="priceTo"
               placeholder="to"
               min="0"
             />

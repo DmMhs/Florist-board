@@ -50,10 +50,18 @@ const productsSort = (props: ProductsSortProps) => {
           {props.sortBy.toUpperCase()} <i className="fas fa-angle-down" />
         </button>
         <div ref={props.orderByOptionsRef} className="dropdown-content">
-          <a href="#" onClick={props.orderByChanged}>
+          <a
+            href="#"
+            onClick={props.orderByChanged}
+            className="sort-by-name-btn"
+          >
             name
           </a>
-          <a href="#" onClick={props.orderByChanged}>
+          <a
+            href="#"
+            onClick={props.orderByChanged}
+            className="sort-by-price-btn"
+          >
             price
           </a>
         </div>
