@@ -3,7 +3,9 @@ import React from 'react';
 import './ProductsFilter.less';
 
 interface ProductsFilterProps {
-  filterToggle: () => void;
+  filterToggle:
+    | ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void)
+    | undefined;
   filtersSidebarRef: React.RefObject<HTMLDivElement>;
   filterToggleRef: React.RefObject<HTMLDivElement>;
   inStockChanged:
@@ -15,18 +17,28 @@ interface ProductsFilterProps {
   priceToChanged:
     | ((event: React.ChangeEvent<HTMLInputElement>) => void)
     | undefined;
+  mobileMode?: boolean;
 }
 
 const productsFilter = (props: ProductsFilterProps) => {
+  const closeFiltersIcon =
+    props.mobileMode === true ? (
+      <i className="fas fa-times close" onClick={props.filterToggle} />
+    ) : null;
   return (
     <div className="filter-wrapper hide" ref={props.filtersSidebarRef}>
-      <i
-        className="fas fa-angle-double-right toggle"
-        onClick={props.filterToggle}
-        ref={props.filterToggleRef}
-      />
+      {props.mobileMode === false ? (
+        <i
+          className="fas fa-angle-double-right toggle"
+          onClick={props.filterToggle}
+          ref={props.filterToggleRef}
+        />
+      ) : null}
       <h2>
-        Filters <i className="fas fa-filter" />
+        <span>
+          Filters <i className="fas fa-filter" />
+        </span>{' '}
+        {closeFiltersIcon}
       </h2>
       <form className="filter-form">
         <div className="filter-option available">

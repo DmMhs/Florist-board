@@ -3,15 +3,16 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 15%;
+  width: 20%;
   border-right: 0.5px solid #eee;
   transition: 0.5s;
+  z-index: 3;
   .toggle {
     color: #4d4c4c;
     font-size: 2rem;
     position: absolute;
     top: calc(50% - 1rem);
-    right: -2rem;
+    right: -3rem;
     cursor: pointer;
     &:hover {
       color: #333333;
@@ -23,12 +24,22 @@
     transition: 0.5s;
   }
   h2 {
-    font-weight: lighter;
+    font-weight: normal;
     background-color: #eee;
     padding: 1rem;
     color: #333333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      margin-left: 1rem;
+    }
     i {
       font-size: 1rem;
+      &.close {
+        margin-right: 1rem;
+        cursor: pointer;
+      }
     }
   }
   .filter-option {
@@ -42,8 +53,8 @@
     label {
       display: inline-block;
       text-align: left;
-      font-weight: lighter;
-      font-size: 1.2rem;
+      font-size: 1rem;
+      white-space: nowrap;
     }
     &.price-range {
       display: flex;
@@ -58,13 +69,12 @@
         justify-content: space-around;
         align-items: center;
         flex-wrap: nowrap;
-        font-size: 1.5rem;
+        font-size: 1rem;
         color: #333333;
         input {
           width: 43%;
-          font-size: 1.5rem;
+          font-size: 1rem;
           color: #333333;
-          font-weight: lighter;
           text-align: center;
           border-radius: 5px;
           border: 1px solid #eee;
@@ -73,6 +83,36 @@
     }
     input[type='checkbox'] {
       width: 50%;
+    }
+  }
+}
+@media screen and (max-width: 920px) {
+  .filter-wrapper {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    top: 2.5rem;
+    bottom: 0;
+    transition: 0;
+    border-right: none;
+    background-color: white;
+    &.hide {
+      transform: translateX(0);
+      width: 0;
+      transform: none;
+      transition: 0;
+      border: none;
+      display: none;
+    }
+    .filter-option {
+      &.price-range {
+        div {
+          font-size: 1.2rem;
+          input {
+            font-size: 1.2rem;
+          }
+        }
+      }
     }
   }
 }
