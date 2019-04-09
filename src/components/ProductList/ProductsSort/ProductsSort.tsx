@@ -15,6 +15,10 @@ interface ProductsSortProps {
   orderByChanged:
     | ((event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void)
     | undefined;
+  mobileMode?: boolean;
+  filterToggle?:
+    | ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void)
+    | undefined;
 }
 
 const productsSort = (props: ProductsSortProps) => {
@@ -33,9 +37,14 @@ const productsSort = (props: ProductsSortProps) => {
     ) : (
       <i className="fas fa-sort-numeric-up" onClick={props.sortOrderClicked} />
     );
+  const filterToggleIcon =
+    props.mobileMode === true ? (
+      <i className="fas fa-filter filter-toggle" onClick={props.filterToggle} />
+    ) : null;
   return (
     <div className="sort-order">
-      sort by{' '}
+      {filterToggleIcon}
+      <span>sort by</span>
       <div className="dropdown">
         <button onClick={props.orderByClicked} className="dropbtn">
           {props.sortBy.toUpperCase()} <i className="fas fa-angle-down" />

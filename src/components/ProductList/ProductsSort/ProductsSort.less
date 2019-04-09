@@ -6,10 +6,13 @@
   width: 100%;
   font-size: 1.4rem;
   color: #333333;
-
   i {
     color: #333333;
     cursor: pointer;
+    &.filter-toggle {
+      cursor: pointer;
+      margin-right: 2rem;
+    }
     &:hover {
       color: tomato;
     }
@@ -60,5 +63,27 @@
   .show {
     display: block;
     z-index: 2;
+  }
+}
+@media screen and (max-width: 920px) {
+  .sort-order {
+    margin-top: 1rem;
+    i {
+      font-size: 1rem;
+      &.filter-toggle {
+        margin-right: 1rem;
+      }
+    }
+    span {
+      font-size: 1.2rem;
+    }
+    .dropbtn {
+      padding: 8px;
+    }
+    .dropdown-content {
+      a {
+        font-size: 1.2rem;
+      }
+    }
   }
 }

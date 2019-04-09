@@ -23,7 +23,11 @@ interface ProductListState {
   sortBy: string;
   sortOrder: string;
   showFilters: boolean;
+  mobileFiltersMode: boolean;
 }
+
+let resizeListener: EventListener;
+
 class ProductList extends Component<ProductListProps, ProductListState> {
   private orderByOptionsRef: React.RefObject<HTMLDivElement>;
   private filtersSidebarRef: React.RefObject<HTMLDivElement>;
@@ -39,12 +43,41 @@ class ProductList extends Component<ProductListProps, ProductListState> {
       filterByPrice: { from: 0, to: Infinity },
       sortBy: 'name',
       sortOrder: 'default',
-      showFilters: false
+      showFilters: false,
+      mobileFiltersMode: false
     };
     this.orderByOptionsRef = React.createRef();
     this.filtersSidebarRef = React.createRef();
     this.productListRef = React.createRef();
     this.filterToggleRef = React.createRef();
+  }
+
+  componentDidMount() {
+    if (window.innerWidth <= 920) {
+      this.setState({
+        mobileFiltersMode: true
+      });
+    } else {
+      this.setState({
+        mobileFiltersMode: false
+      });
+    }
+    resizeListener = () => {
+      if (window.innerWidth <= 920) {
+        this.setState({
+          mobileFiltersMode: true
+        });
+      } else {
+        this.setState({
+          mobileFiltersMode: false
+        });
+      }
+    };
+    window.addEventListener('resize', resizeListener);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', resizeListener);
   }
 
   addToCartClickedHandler = (productData: CartItem) => {
@@ -124,19 +157,28 @@ class ProductList extends Component<ProductListProps, ProductListState> {
     this.orderByOptionsRef.current!.classList.toggle('show');
   };
   filterToggleClickedHandler = () => {
-    if (this.state.showFilters === false) {
-      this.filterToggleRef.current!.classList.remove('fa-angle-double-right');
-      this.filterToggleRef.current!.classList.add('fa-angle-double-left');
+    if (this.filterToggleRef.current === null) {
+      this.setState({
+        showFilters: !this.state.showFilters
+      });
+      this.filtersSidebarRef.current!.classList.toggle('hide');
+      this.productListRef.current!.classList.toggle('full-width');
     } else {
-      this.filterToggleRef.current!.classList.remove('fa-angle-double-left');
-      this.filterToggleRef.current!.classList.add('fa-angle-double-right');
+      if (this.state.showFilters === false) {
+        this.filterToggleRef.current!.classList.remove('fa-angle-double-right');
+        this.filterToggleRef.current!.classList.add('fa-angle-double-left');
+      } else {
+        this.filterToggleRef.current!.classList.remove('fa-angle-double-left');
+        this.filterToggleRef.current!.classList.add('fa-angle-double-right');
+      }
+      this.setState({
+        showFilters: !this.state.showFilters
+      });
+      this.filtersSidebarRef.current!.classList.toggle('hide');
+      this.productListRef.current!.classList.toggle('full-width');
     }
-    this.setState({
-      showFilters: !this.state.showFilters
-    });
-    this.filtersSidebarRef.current!.classList.toggle('hide');
-    this.productListRef.current!.classList.toggle('full-width');
   };
+
   render() {
     const { products } = this.props;
     let productList = products.map((p: CartItem, index: number) => {
@@ -208,6 +250,7 @@ class ProductList extends Component<ProductListProps, ProductListState> {
           inStockChanged={this.inStockChangedHandler}
           priceFromChanged={this.priceFromChangedHandler}
           priceToChanged={this.priceToChangedHandler}
+          mobileMode={this.state.mobileFiltersMode}
         />
         <div className="ProductList full-width" ref={this.productListRef}>
           <ProductsSort
@@ -217,6 +260,8 @@ class ProductList extends Component<ProductListProps, ProductListState> {
             sortBy={this.state.sortBy}
             orderByOptionsRef={this.orderByOptionsRef}
             orderByChanged={this.orderByChangedHandler}
+            mobileMode={this.state.mobileFiltersMode}
+            filterToggle={this.filterToggleClickedHandler}
           />
           {productList}
         </div>

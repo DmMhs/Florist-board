@@ -32,10 +32,10 @@
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  width: 85%;
+  width: 80%;
   transition: 0.5s;
   &.full-width {
-    transform: translateX(-7.5%);
+    transform: translateX(-15%);
     transition: 0.5s;
   }
 }
@@ -80,9 +80,6 @@
 }
 
 @media screen and (max-width: 920px) {
-  .ProductList {
-    margin-top: 3rem;
-  }
   .cart-toggle {
     position: fixed;
     top: auto;
@@ -91,5 +88,30 @@
     box-shadow: 2px 2px 5px #ccc;
     font-size: 1.5rem;
     padding: 9px;
+  }
+  .main-wrapper {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .ProductList {
+    width: 0%;
+    display: none;
+    transition: 0.5s;
+    box-sizing: border-box;
+    transform: none;
+    transition: 0;
+    &.full-width {
+      width: 100%;
+      display: flex;
+      transform: none;
+      margin: 0 auto;
+      transition: 0;
+    }
+  }
+}
+@media screen and (min-width: 768.1px) and (max-width: 1200px) {
+  .ProductList {
+    width: 75%;
   }
 }
