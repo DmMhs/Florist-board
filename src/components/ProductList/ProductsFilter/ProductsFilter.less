@@ -1,0 +1,78 @@
+.filter-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 15%;
+  border-right: 0.5px solid #eee;
+  transition: 0.5s;
+  .toggle {
+    color: #4d4c4c;
+    font-size: 2rem;
+    position: absolute;
+    top: calc(50% - 1rem);
+    right: -2rem;
+    cursor: pointer;
+    &:hover {
+      color: #333333;
+    }
+  }
+  &.hide {
+    position: relative;
+    transform: translateX(-100%);
+    transition: 0.5s;
+  }
+  h2 {
+    font-weight: lighter;
+    background-color: #eee;
+    padding: 1rem;
+    color: #333333;
+    i {
+      font-size: 1rem;
+    }
+  }
+  .filter-option {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 0.5px solid #eee;
+    padding: 2rem;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    label {
+      display: inline-block;
+      text-align: left;
+      font-weight: lighter;
+      font-size: 1.2rem;
+    }
+    &.price-range {
+      display: flex;
+      flex-direction: column;
+      label {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+      div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: nowrap;
+        font-size: 1.5rem;
+        color: #333333;
+        input {
+          width: 43%;
+          font-size: 1.5rem;
+          color: #333333;
+          font-weight: lighter;
+          text-align: center;
+          border-radius: 5px;
+          border: 1px solid #eee;
+        }
+      }
+    }
+    input[type='checkbox'] {
+      width: 50%;
+    }
+  }
+}
