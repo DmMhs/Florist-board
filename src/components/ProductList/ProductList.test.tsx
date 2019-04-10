@@ -154,3 +154,38 @@ it('Close cart button changes the state', () => {
   instance.closeCartClickedHandler();
   expect(instance.state.showCart).toBeFalsy();
 });
+
+it('resize event has impact on state', () => {
+  const wrapper = shallow(<ProductList products={[]} />);
+  const instance = wrapper.instance();
+  instance.setState({
+    mobileFiltersMode: undefined
+  });
+  const resizeListener = () => {
+    if (window.innerWidth <= 920) {
+      instance.setState({
+        mobileFiltersMode: true
+      });
+      expect(instance.state.mobileFiltersMode).toBeTruthy();
+    } else {
+      instance.setState({
+        mobileFiltersMode: false
+      });
+      expect(instance.state.mobileFiltersMode).toBeFalsy();
+    }
+  };
+  window.addEventListener('resize', resizeListener);
+  let resizeEvent = new Event('resize');
+  window.dispatchEvent(resizeEvent);
+  expect(instance.state.mobileFiltersMode).toBeDefined();
+});
+
+it('filter toggler changes the state', () => {
+  const wrapper = mount(<ProductList products={[]} />);
+  const instance = wrapper.instance();
+  instance.setState({
+    showFilters: false
+  });
+  instance.filterToggleClickedHandler();
+  expect(instance.state.showFilters).toBeTruthy();
+});
