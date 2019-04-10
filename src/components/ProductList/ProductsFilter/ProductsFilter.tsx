@@ -29,7 +29,7 @@ const productsFilter = (props: ProductsFilterProps) => {
     <div className="filter-wrapper hide" ref={props.filtersSidebarRef}>
       {props.mobileMode === false ? (
         <i
-          className="fas fa-angle-double-right toggle"
+          className="fas fa-filter toggle"
           onClick={props.filterToggle}
           ref={props.filterToggleRef}
         />
