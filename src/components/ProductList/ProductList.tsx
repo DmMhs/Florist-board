@@ -7,6 +7,8 @@ import ShoppingCart from '../ShoppingCart/ShoppingCart';
 import './ProductList.less';
 import ProductsFilter from './ProductsFilter/ProductsFilter';
 import ProductsSort from './ProductsSort/ProductsSort';
+import sortByName from '../../services/sortByName';
+import sortByPrice from '../../services/sortByPrice';
 
 interface ProductListProps {
   products: CartItem[];
@@ -167,13 +169,6 @@ class ProductList extends Component<ProductListProps, ProductListState> {
       this.filtersSidebarRef.current!.classList.toggle('hide');
       this.productListRef.current!.classList.toggle('full-width');
     } else {
-      if (this.state.showFilters === false) {
-        this.filterToggleRef.current!.classList.remove('fa-angle-double-right');
-        this.filterToggleRef.current!.classList.add('fa-angle-double-left');
-      } else {
-        this.filterToggleRef.current!.classList.remove('fa-angle-double-left');
-        this.filterToggleRef.current!.classList.add('fa-angle-double-right');
-      }
       this.setState({
         showFilters: !this.state.showFilters
       });
@@ -213,23 +208,13 @@ class ProductList extends Component<ProductListProps, ProductListState> {
       });
     }
     if (this.state.sortBy === 'name') {
-      productList = productList.sort((a: JSX.Element, b: JSX.Element) => {
-        if (a.props.title > b.props.title) {
-          return 1;
-        }
-        if (a.props.title < b.props.title) {
-          return -1;
-        }
-        return 0;
-      });
+      productList = productList.sort(sortByName);
       if (this.state.sortOrder === 'inverse') {
         productList.reverse();
       }
     }
     if (this.state.sortBy === 'price') {
-      productList = productList.sort((a: JSX.Element, b: JSX.Element) => {
-        return a.props.price - b.props.price;
-      });
+      productList = productList.sort(sortByPrice);
       if (this.state.sortOrder === 'inverse') {
         productList.reverse();
       }
