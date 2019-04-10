@@ -55,6 +55,7 @@ class ShoppingCart extends Component<ShoppingCartProps, ShoppingCartState> {
     });
   };
   removeClickedHandler = (index: number) => {
+    console.log(index);
     const newCartProducts = this.state.cartProducts.splice(index, 1);
     this.setState({
       cartProducts: newCartProducts

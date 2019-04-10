@@ -180,7 +180,7 @@ it('resize event has impact on state', () => {
   expect(instance.state.mobileFiltersMode).toBeDefined();
 });
 
-it('filter toggler changes the state', () => {
+fit('filter toggler changes the state', () => {
   const wrapper = mount(<ProductList products={[]} />);
   const instance = wrapper.instance();
   instance.setState({

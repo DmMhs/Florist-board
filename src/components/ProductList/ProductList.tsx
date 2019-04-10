@@ -106,13 +106,16 @@ class ProductList extends Component<ProductListProps, ProductListState> {
     });
   };
   handleRemoveCartItem = (index: number) => {
-    this.state.cartProducts[index].inCart = false;
-    this.state.cartProducts[index].amount = 1;
-    const newProducts = [...this.state.cartProducts];
-    newProducts.splice(index, 1);
-    this.setState({
-      cartProducts: newProducts
-    });
+    const confirm = window.confirm('Are you sure?');
+    if (confirm) {
+      this.state.cartProducts[index].inCart = false;
+      this.state.cartProducts[index].amount = 1;
+      const newProducts = [...this.state.cartProducts];
+      newProducts.splice(index, 1);
+      this.setState({
+        cartProducts: newProducts
+      });
+    }
   };
   inStockChangedHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
