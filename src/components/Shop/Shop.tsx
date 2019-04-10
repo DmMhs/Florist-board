@@ -20,10 +20,10 @@ class Shop extends Component<ShopProps, ShopState> {
     };
   }
   componentDidMount() {
+    this.setState({
+      fetchInProgress: true
+    });
     productsRef.on('value', snapshot => {
-      this.setState({
-        fetchInProgress: true
-      });
       const newProducts: Array<Product> = [];
       snapshot!.forEach((product: firebase.database.DataSnapshot) => {
         newProducts.push({
@@ -45,12 +45,12 @@ class Shop extends Component<ShopProps, ShopState> {
   }
 
   render() {
-    return (
-      <div className="Shop">
-        {this.state.fetchInProgress ? <Spinner /> : null}
-        <ProductList products={this.state.products as CartItem[]} />
-      </div>
+    const shopContent = this.state.fetchInProgress ? (
+      <Spinner />
+    ) : (
+      <ProductList products={this.state.products as CartItem[]} />
     );
+    return <div className="Shop">{shopContent}</div>;
   }
 }
 

@@ -32,7 +32,7 @@ class ProductList extends Component<ProductListProps, ProductListState> {
   private orderByOptionsRef: React.RefObject<HTMLDivElement>;
   private filtersSidebarRef: React.RefObject<HTMLDivElement>;
   private productListRef: React.RefObject<HTMLDivElement>;
-  private filterToggleRef: React.RefObject<HTMLDivElement>;
+  public filterToggleRef: React.RefObject<HTMLDivElement>;
   constructor(props: ProductListProps) {
     super(props);
     this.state = {
