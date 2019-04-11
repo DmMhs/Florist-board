@@ -14,6 +14,7 @@ import Spinner from '../components/Spinner/Spinner';
 import Slider from '../components/Slider/Slider';
 import ProductList from '../components/ProductList/ProductList';
 import ProductCard from '../components/ProductList/ProductCard/ProductCard';
+import Popup from '../components/Popup/Popup';
 
 const productMock = {
   title: 'super cactus',
@@ -61,4 +62,5 @@ storiesOf('Florist', module)
   .add('ProductList', () => (
     <ProductList products={[productMock, productMock, productMock]} />
   ))
-  .add('ProductCard', () => <ProductCard {...productMock} />);
+  .add('ProductCard', () => <ProductCard {...productMock} />)
+  .add('Popup', () => <Popup message="added to cart" type="success" />);

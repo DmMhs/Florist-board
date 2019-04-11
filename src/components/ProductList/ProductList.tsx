@@ -9,6 +9,7 @@ import ProductsFilter from './ProductsFilter/ProductsFilter';
 import ProductsSort from './ProductsSort/ProductsSort';
 import sortByName from '../../services/sortByName';
 import sortByPrice from '../../services/sortByPrice';
+import Popup from '../Popup/Popup';
 
 interface ProductListProps {
   products: CartItem[];
@@ -26,6 +27,7 @@ interface ProductListState {
   sortOrder: string;
   showFilters: boolean;
   mobileFiltersMode: boolean;
+  popupMessages: { id: string; el: JSX.Element }[];
 }
 
 let resizeListener: EventListener;
@@ -46,7 +48,8 @@ class ProductList extends Component<ProductListProps, ProductListState> {
       sortBy: 'name',
       sortOrder: 'default',
       showFilters: false,
-      mobileFiltersMode: false
+      mobileFiltersMode: false,
+      popupMessages: []
     };
     this.orderByOptionsRef = React.createRef();
     this.filtersSidebarRef = React.createRef();
@@ -95,6 +98,39 @@ class ProductList extends Component<ProductListProps, ProductListState> {
           cartProducts: [...cartProducts, productData]
         });
       }
+      this.setState(
+        {
+          popupMessages: [
+            ...this.state.popupMessages,
+            {
+              id: productData.id,
+              el: (
+                <Popup
+                  type="success"
+                  message={`Product "${
+                    productData.title
+                  }" was added to the cart`}
+                  key={productData.id}
+                />
+              )
+            }
+          ]
+        },
+        () => {
+          const timer = setTimeout(() => {
+            const newPopupMessages = [...this.state.popupMessages];
+            const index = newPopupMessages.findIndex(
+              (i: { id: string; el: JSX.Element }) => {
+                return i.id === productData.id;
+              }
+            );
+            newPopupMessages.splice(index, 1);
+            this.setState({
+              popupMessages: newPopupMessages
+            });
+          }, 3000);
+        }
+      );
     }
   };
   toggleCartClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -194,6 +230,11 @@ class ProductList extends Component<ProductListProps, ProductListState> {
         />
       );
     });
+    const popups = this.state.popupMessages.map(
+      (p: { id: string; el: JSX.Element }) => {
+        return p.el;
+      }
+    );
     if (this.state.checkForAvailable === true) {
       productList = productList.filter(item => {
         return item.props.available === true;
@@ -208,16 +249,16 @@ class ProductList extends Component<ProductListProps, ProductListState> {
       });
     }
     if (this.state.sortBy === 'name') {
-      productList = productList.sort(sortByName);
-      if (this.state.sortOrder === 'inverse') {
-        productList.reverse();
-      }
+      productList =
+        this.state.sortOrder === 'inverse'
+          ? productList.reverse()
+          : productList.sort(sortByName);
     }
     if (this.state.sortBy === 'price') {
-      productList = productList.sort(sortByPrice);
-      if (this.state.sortOrder === 'inverse') {
-        productList.reverse();
-      }
+      productList =
+        this.state.sortOrder === 'inverse'
+          ? productList.reverse()
+          : productList.sort(sortByPrice);
     }
     return (
       <div className="main-wrapper">
@@ -253,6 +294,7 @@ class ProductList extends Component<ProductListProps, ProductListState> {
           />
           {productList}
         </div>
+        <div className="popups-wrapper">{popups}</div>
       </div>
     );
   }
