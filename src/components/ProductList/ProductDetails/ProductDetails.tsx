@@ -12,11 +12,11 @@ interface MatchParams {
 
 interface Props extends RouteComponentProps<MatchParams> {}
 
-export interface RouteComponentProps<P> {
+interface RouteComponentProps<P> {
   match: match<P>;
 }
 
-export interface match<P> {
+interface match<P> {
   params: P;
   isExact: boolean;
   path: string;

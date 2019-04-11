@@ -7,7 +7,7 @@ type PopupTypes = 'success' | 'failure' | 'info';
 interface PopupProps {
   type: PopupTypes;
   message: string;
-  key: string;
+  key?: string;
 }
 
 const popup = (props: PopupProps) => {

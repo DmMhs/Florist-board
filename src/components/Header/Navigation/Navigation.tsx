@@ -28,6 +28,13 @@ const navigation = () => {
             {labels.navigation.contacts} <i className="fas fa-map-marker-alt" />
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/auth/">
+            {labels.navigation.account.main}{' '}
+            <i className="fas fa-user-circle" />{' '}
+            <i className="fas fa-caret-down" />
+          </NavLink>
+        </li>
       </ul>
     </div>
   );

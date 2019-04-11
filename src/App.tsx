@@ -9,6 +9,7 @@ import Contacts from './components/Contacts/Contacts';
 import Home from './components/Home/Home';
 import Toggle from './components/Toggle/Toggle';
 import ProductDetails from './components/ProductList/ProductDetails/ProductDetails';
+import Auth from './components/Auth/Auth';
 
 interface AppProps {}
 interface AppState {
@@ -84,6 +85,7 @@ class App extends Component<AppProps, AppState> {
             <Route path="/gallery" component={Gallery} />
             <Route path="/contacts" component={Contacts} />
             <Route path="/product-details/:id" component={ProductDetails} />
+            <Route path="/auth" component={Auth} />
           </Switch>
         </div>
       </BrowserRouter>
