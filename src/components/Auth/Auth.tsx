@@ -1,30 +1,52 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import './Auth.less';
 import Popup from '../Popup/Popup';
-import * as authService from '../../services/auth';
+import { NavLink } from 'react-router-dom';
 
-type authModes = 'signup' | 'signin';
-interface AuthProps {}
+interface MatchParams {
+  mode: string;
+}
+
+interface Props extends RouteComponentProps<MatchParams> {}
+
+interface RouteComponentProps<P> {
+  match: match<P>;
+}
+
+interface match<P> {
+  params: P;
+  isExact: boolean;
+  path: string;
+  url: string;
+}
+
 interface AuthState {
   formData: {
     email: string;
     password: string;
   };
-  mode: authModes;
+  mode: string;
 }
 
-class Auth extends Component<AuthProps, AuthState> {
-  constructor(props: AuthProps) {
+class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
+  static getDerivedStateFromProps(props: any, state: AuthState) {
+    return {
+      mode: props.match.params.mode
+    };
+  }
+  constructor(props: RouteComponentProps<MatchParams>) {
     super(props);
     this.state = {
       formData: {
         email: '',
         password: ''
       },
-      mode: 'signup'
+      mode: this.props.match.params.mode
     };
   }
+
   emailInputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const updatedFormData = { ...this.state.formData };
     updatedFormData.email = event.target.value;
@@ -43,20 +65,46 @@ class Auth extends Component<AuthProps, AuthState> {
     event: React.MouseEvent<HTMLFormElement, MouseEvent>
   ) => {
     event.preventDefault();
+    const initialFormData = {
+      email: '',
+      password: ''
+    };
+    const authData = {
+      email: this.state.formData.email,
+      password: this.state.formData.password,
+      returnSecureToken: true
+    };
     if (this.state.mode === 'signup') {
-      authService.signUp(
-        this.state.formData.email,
-        this.state.formData.password
-      );
+      axios
+        .post(
+          'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyB7esiw1XYzS2_hllELqqYzqN5wIQav0Oc',
+          authData
+        )
+        .then(response => {
+          console.log(response.data);
+          this.setState({
+            formData: initialFormData
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        });
     } else {
-      authService.signIn(
-        this.state.formData.email,
-        this.state.formData.password
-      );
+      axios
+        .post(
+          'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyB7esiw1XYzS2_hllELqqYzqN5wIQav0Oc',
+          authData
+        )
+        .then(response => {
+          console.log(response.data);
+          this.setState({
+            formData: initialFormData
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
-  };
-  switchAuthModeClickedHandler = () => {
-    this.setState({ mode: this.state.mode === 'signup' ? 'signin' : 'signup' });
   };
   render() {
     return (
@@ -67,6 +115,7 @@ class Auth extends Component<AuthProps, AuthState> {
             <input
               type="email"
               onChange={this.emailInputChangeHandler}
+              value={this.state.formData.email}
               required
             />
           </div>
@@ -76,6 +125,7 @@ class Auth extends Component<AuthProps, AuthState> {
               type="password"
               minLength={6}
               onChange={this.passwordInputChangeHandler}
+              value={this.state.formData.password}
               required
             />
           </div>
@@ -119,12 +169,14 @@ class Auth extends Component<AuthProps, AuthState> {
                 ? 'Already have an account ?'
                 : 'Have no account ?'}
             </p>
-            <button
-              type="button"
-              className="switch-btn"
-              onClick={this.switchAuthModeClickedHandler}
-            >
-              {this.state.mode === 'signup' ? 'Sign In' : 'Sign Up'}
+            <button type="button" className="switch-btn">
+              <NavLink
+                to={`/auth/${
+                  this.state.mode === 'signup' ? 'signin' : 'signup'
+                }`}
+              >
+                {this.state.mode === 'signup' ? 'SIGN IN' : 'SIGN UP'}
+              </NavLink>
             </button>
           </div>
         </form>

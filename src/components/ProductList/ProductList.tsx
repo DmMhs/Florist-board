@@ -251,13 +251,13 @@ class ProductList extends Component<ProductListProps, ProductListState> {
     if (this.state.sortBy === 'name') {
       productList =
         this.state.sortOrder === 'inverse'
-          ? productList.reverse()
+          ? productList.sort(sortByName).reverse()
           : productList.sort(sortByName);
     }
     if (this.state.sortBy === 'price') {
       productList =
         this.state.sortOrder === 'inverse'
-          ? productList.reverse()
+          ? productList.sort(sortByPrice).reverse()
           : productList.sort(sortByPrice);
     }
     return (

@@ -5,7 +5,16 @@
     li {
       display: inline-block;
       margin: 5px;
-
+      &.accountLink {
+        box-sizing: border-box;
+        position: relative;
+        a {
+          &.active {
+            background-color: rgba(255, 255, 255, 0.644);
+            color: tomato;
+          }
+        }
+      }
       a {
         font-size: 1.3rem;
         text-decoration: none;
@@ -23,7 +32,46 @@
       }
     }
   }
+  .dropbtn {
+    background-color: white;
+    color: #333333;
+    font-size: 1.3rem;
+    border-radius: 0;
+    cursor: pointer;
+    &:hover,
+    &:focus {
+      background-color: rgb(255, 255, 255);
+      color: tomato;
+    }
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    width: 100%;
+    overflow: auto;
+    z-index: 1;
+    box-sizing: border-box;
+    a {
+      background-color: rgba(255, 255, 255, 0.712);
+      border-radius: 0;
+      color: #333333;
+      padding: 6px;
+      text-decoration: none;
+      display: block;
+      &:hover,
+      &.active {
+        background-color: rgba(255, 255, 255, 0.712);
+        color: tomato;
+      }
+    }
+  }
+  .show {
+    display: block;
+    z-index: 1;
+  }
 }
+
 @media screen and (max-width: 478px) {
   .Navigation {
     display: flex;

@@ -85,7 +85,7 @@ class App extends Component<AppProps, AppState> {
             <Route path="/gallery" component={Gallery} />
             <Route path="/contacts" component={Contacts} />
             <Route path="/product-details/:id" component={ProductDetails} />
-            <Route path="/auth" component={Auth} />
+            <Route path="/auth/:mode" component={Auth} />
           </Switch>
         </div>
       </BrowserRouter>
