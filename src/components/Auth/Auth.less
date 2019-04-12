@@ -1,0 +1,99 @@
+.Auth {
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+    .form-field {
+      width: calc(100% - 2rem);
+      margin: 0 1rem;
+      font-size: 1.3rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 0.7rem;
+      label {
+        width: 100%;
+        text-align: left;
+        font-weight: 2rem;
+      }
+      input {
+        width: 50%;
+        font-size: 1.2rem;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+    }
+    button {
+      border: none;
+      border-radius: 5px;
+      padding: 7px;
+      background-color: rgb(98, 182, 103);
+      font-size: 1.3rem;
+      font-weight: lighter;
+      color: white;
+      cursor: pointer;
+      &:hover {
+        background-color: rgb(78, 145, 83);
+      }
+      &[disabled] {
+        background-color: rgb(185, 212, 185);
+        pointer-events: none;
+      }
+    }
+    .Popup {
+      margin: 0 8px;
+      padding: 5px;
+      i {
+        margin: 0;
+        margin-right: 5px;
+      }
+      i,
+      span {
+        font-size: 1.1rem;
+      }
+    }
+    hr {
+      border: 0.5px solid #eee;
+      width: 90%;
+    }
+    h3 {
+      font-weight: normal;
+      color: #333333;
+    }
+    p {
+      width: 100%;
+      text-align: left;
+    }
+    .switch-btn {
+      background-color: skyblue;
+      &:hover {
+        background-color: rgb(105, 163, 185);
+      }
+      a {
+        text-decoration: none;
+        color: white;
+      }
+    }
+    .google-pic {
+      max-width: 2rem;
+      margin: 0 10px;
+      cursor: pointer;
+      transition: 1s;
+      &:hover {
+        position: relative;
+        bottom: 1px;
+        left: 1px;
+        transition: 1s;
+      }
+    }
+  }
+}

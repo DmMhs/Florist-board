@@ -13,6 +13,7 @@
         padding: 6px;
         background-color: #eee;
         color: #333333;
+        cursor: pointer;
         &:hover,
         &:active,
         &.active {
@@ -21,9 +22,66 @@
           transition: 0.3s;
         }
       }
+      &.accountLink {
+        box-sizing: border-box;
+        position: relative;
+        background-color: #eee;
+        a {
+          &.active,
+          &:hover,
+          &:active {
+            background-color: #eee;
+            color: #333333;
+          }
+          &.signup-link:hover,
+          &.signup-link:active,
+          &.signup-link:active,
+          &.signin-link:hover,
+          &.signin-link:active,
+          &.signin-link:active,
+          &.log-out:hover,
+          &.log-out:active,
+          &.log-out:active {
+            background-color: rgb(199, 196, 196);
+          }
+        }
+      }
     }
   }
+  .dropbtn {
+    background-color: #eee;
+    color: #333333;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    width: 100%;
+    overflow: auto;
+    z-index: 1;
+    box-sizing: border-box;
+    a {
+      background-color: #eee;
+      border-radius: 0;
+      color: #333333;
+      padding: 6px;
+      text-decoration: none;
+      display: block;
+      &:last-child {
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+    }
+  }
+  .show {
+    display: block;
+    z-index: 1;
+  }
 }
+
 @media screen and (max-width: 478px) {
   .Navigation {
     display: flex;

@@ -8,7 +8,14 @@ const labels = {
     shop: 'SHOP',
     gallery: 'GALLERY',
     contacts: 'CONTACTS',
-    cart: 'CART'
+    cart: 'CART',
+    account: {
+      main: 'MY ACCOUNT',
+      menu: {
+        signIn: 'SIGN IN',
+        signUp: 'SIGN UP'
+      }
+    }
   }
 };
 

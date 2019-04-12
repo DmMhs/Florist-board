@@ -2,6 +2,12 @@
   display: flex;
   margin-bottom: 2rem;
   width: 100%;
+  .popups-wrapper {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 6;
+  }
 }
 
 .cart-toggle {
@@ -94,6 +100,11 @@
     display: block;
     width: 100%;
     box-sizing: border-box;
+    .popups-wrapper {
+      right: 1rem;
+      left: 1rem;
+      bottom: 1rem;
+    }
   }
   .ProductList {
     margin-left: 0;

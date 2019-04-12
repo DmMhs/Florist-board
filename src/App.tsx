@@ -9,6 +9,7 @@ import Contacts from './components/Contacts/Contacts';
 import Home from './components/Home/Home';
 import Toggle from './components/Toggle/Toggle';
 import ProductDetails from './components/ProductList/ProductDetails/ProductDetails';
+import Auth from './components/Auth/Auth';
 
 interface AppProps {}
 interface AppState {
@@ -30,6 +31,14 @@ class App extends Component<AppProps, AppState> {
   }
 
   componentDidMount() {
+    if (localStorage.floristAuthEmail === undefined) {
+      console.log('No email founded');
+      localStorage.setItem('floristAuthEmail', '');
+    }
+    if (localStorage.floristAuthToken === undefined) {
+      console.log('No password founded');
+      localStorage.setItem('floristAuthToken', '');
+    }
     resizeListener = () => {
       if (window.innerWidth < 576) {
         this.setState({
@@ -78,12 +87,16 @@ class App extends Component<AppProps, AppState> {
             }}
           />
           {this.state.showNavigation ? <Header /> : null}
+          {localStorage.floristAuth !== undefined
+            ? JSON.parse(localStorage.floristAuth).email
+            : null}
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/shop" component={Shop} />
             <Route path="/gallery" component={Gallery} />
             <Route path="/contacts" component={Contacts} />
             <Route path="/product-details/:id" component={ProductDetails} />
+            <Route path="/auth/:mode" component={Auth} />
           </Switch>
         </div>
       </BrowserRouter>

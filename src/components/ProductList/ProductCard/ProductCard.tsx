@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import './ProductCard.less';
 import Slider from '../../Slider/Slider';
 import { CartItem } from '../../../models/CartItem';
-import Popup from '../../Popup/Popup';
 
 interface ProductCardState {}
 
@@ -27,7 +26,6 @@ class ProductCard extends Component<CartItem, ProductCardState> {
       </div>
     ) : (
       <div>
-        <Popup message="Added successfully" />
         <div className="action">
           <i
             className="fas fa-cart-arrow-down"
@@ -54,7 +52,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
         ) : (
           <div className="price">not available :(</div>
         )}
-        <div className="action-panel">{available ? actionIcon : null}</div>
+        <div className="action-panel">{available ? actionIcon : null} </div>
       </div>
     );
   }
