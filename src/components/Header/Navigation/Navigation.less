@@ -5,16 +5,7 @@
     li {
       display: inline-block;
       margin: 5px;
-      &.accountLink {
-        box-sizing: border-box;
-        position: relative;
-        a {
-          &.active {
-            background-color: rgba(255, 255, 255, 0.644);
-            color: tomato;
-          }
-        }
-      }
+
       a {
         font-size: 1.3rem;
         text-decoration: none;
@@ -22,6 +13,7 @@
         padding: 6px;
         background-color: #eee;
         color: #333333;
+        cursor: pointer;
         &:hover,
         &:active,
         &.active {
@@ -30,19 +22,38 @@
           transition: 0.3s;
         }
       }
+      &.accountLink {
+        box-sizing: border-box;
+        position: relative;
+        background-color: #eee;
+        a {
+          &.active,
+          &:hover,
+          &:active {
+            background-color: #eee;
+            color: #333333;
+          }
+          &.signup-link:hover,
+          &.signup-link:active,
+          &.signup-link:active,
+          &.signin-link:hover,
+          &.signin-link:active,
+          &.signin-link:active,
+          &.log-out:hover,
+          &.log-out:active,
+          &.log-out:active {
+            background-color: rgb(199, 196, 196);
+          }
+        }
+      }
     }
   }
   .dropbtn {
-    background-color: white;
+    background-color: #eee;
     color: #333333;
     font-size: 1.3rem;
-    border-radius: 0;
+    border-radius: 5px;
     cursor: pointer;
-    &:hover,
-    &:focus {
-      background-color: rgb(255, 255, 255);
-      color: tomato;
-    }
   }
 
   .dropdown-content {
@@ -53,16 +64,15 @@
     z-index: 1;
     box-sizing: border-box;
     a {
-      background-color: rgba(255, 255, 255, 0.712);
+      background-color: #eee;
       border-radius: 0;
       color: #333333;
       padding: 6px;
       text-decoration: none;
       display: block;
-      &:hover,
-      &.active {
-        background-color: rgba(255, 255, 255, 0.712);
-        color: tomato;
+      &:last-child {
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
       }
     }
   }

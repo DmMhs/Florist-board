@@ -13,7 +13,12 @@ const header = () => {
         <span>{labels.postCode}</span>
         <span>{labels.phone}</span>
       </p>
-      <Navigation />
+      <Navigation
+        userAuthenticated={
+          localStorage.floristAuthToken !== undefined &&
+          localStorage.floristAuthToken.length > 0
+        }
+      />
     </div>
   );
 };

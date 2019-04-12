@@ -1,17 +1,33 @@
 import React, { Component, RefObject } from 'react';
 import { NavLink } from 'react-router-dom';
+import firebase from 'firebase';
 
 import labels from '../../../config/labels';
 import './Navigation.less';
 
-interface NavigationProps {}
-interface NavigationState {}
+interface NavigationProps {
+  userAuthenticated: boolean;
+}
+interface NavigationState {
+  userAuthenticated: boolean;
+}
 
 class Navigation extends Component<NavigationProps, NavigationState> {
   private authOptionsToggleRef: RefObject<HTMLAnchorElement>;
   private authOptionsRef: RefObject<HTMLDivElement>;
+  static getDerivedStateFromProps(
+    props: NavigationProps,
+    state: NavigationState
+  ) {
+    return {
+      userAuthenticated: props.userAuthenticated
+    };
+  }
   constructor(props: NavigationProps) {
     super(props);
+    this.state = {
+      userAuthenticated: false
+    };
     this.authOptionsRef = React.createRef();
     this.authOptionsToggleRef = React.createRef();
   }
@@ -19,7 +35,20 @@ class Navigation extends Component<NavigationProps, NavigationState> {
     this.authOptionsToggleRef.current!.classList.toggle('active');
     this.authOptionsRef.current!.classList.toggle('show');
   };
+  logoutClickedHandler = () => {
+    firebase.auth().signOut();
+    this.setState(
+      {
+        userAuthenticated: false
+      },
+      () => {
+        localStorage.floristAuthToken = '';
+        localStorage.floristAuthEmail = '';
+      }
+    );
+  };
   render() {
+    console.log(this.props.userAuthenticated);
     return (
       <div className="Navigation">
         <ul>
@@ -55,12 +84,20 @@ class Navigation extends Component<NavigationProps, NavigationState> {
               <i className="fas fa-caret-down" />
             </a>
             <div className="dropdown-content" ref={this.authOptionsRef}>
-              <NavLink to="/auth/signup">
-                Sign Up <i className="fas fa-user-plus" />
-              </NavLink>
-              <NavLink to="/auth/signin">
-                Sign In <i className="fas fa-sign-in-alt" />
-              </NavLink>
+              {this.state.userAuthenticated === false ? (
+                <div>
+                  <NavLink to="/auth/signup" className="signup-link">
+                    Sign Up <i className="fas fa-user-plus" />
+                  </NavLink>
+                  <NavLink to="/auth/signin" className="signin-link">
+                    Sign In <i className="fas fa-sign-in-alt" />
+                  </NavLink>
+                </div>
+              ) : (
+                <a onClick={this.logoutClickedHandler} className="log-out">
+                  Log Out
+                </a>
+              )}
             </div>
           </li>
         </ul>

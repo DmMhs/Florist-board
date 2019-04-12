@@ -52,7 +52,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
         ) : (
           <div className="price">not available :(</div>
         )}
-        <div className="action-panel">{available ? actionIcon : null}</div>
+        <div className="action-panel">{available ? actionIcon : null} </div>
       </div>
     );
   }

@@ -31,6 +31,14 @@ class App extends Component<AppProps, AppState> {
   }
 
   componentDidMount() {
+    if (localStorage.floristAuthEmail === undefined) {
+      console.log('No email founded');
+      localStorage.setItem('floristAuthEmail', '');
+    }
+    if (localStorage.floristAuthToken === undefined) {
+      console.log('No password founded');
+      localStorage.setItem('floristAuthToken', '');
+    }
     resizeListener = () => {
       if (window.innerWidth < 576) {
         this.setState({
@@ -79,6 +87,9 @@ class App extends Component<AppProps, AppState> {
             }}
           />
           {this.state.showNavigation ? <Header /> : null}
+          {localStorage.floristAuth !== undefined
+            ? JSON.parse(localStorage.floristAuth).email
+            : null}
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/shop" component={Shop} />

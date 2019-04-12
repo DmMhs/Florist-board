@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import firebase from 'firebase';
 
 import './Auth.less';
 import Popup from '../Popup/Popup';
@@ -27,6 +27,9 @@ interface AuthState {
     email: string;
     password: string;
   };
+  userEmail: string | null;
+  userToken: string | null;
+  userAuthenticated: boolean;
   mode: string;
 }
 
@@ -43,10 +46,15 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
         email: '',
         password: ''
       },
+      userEmail: '',
+      userToken: '',
+      userAuthenticated: false,
       mode: this.props.match.params.mode
     };
   }
-
+  componentDidMount() {
+    console.log('mount');
+  }
   emailInputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const updatedFormData = { ...this.state.formData };
     updatedFormData.email = event.target.value;
@@ -75,36 +83,52 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
       returnSecureToken: true
     };
     if (this.state.mode === 'signup') {
-      axios
-        .post(
-          'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyB7esiw1XYzS2_hllELqqYzqN5wIQav0Oc',
-          authData
-        )
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(authData.email, authData.password)
         .then(response => {
-          console.log(response.data);
-          this.setState({
-            formData: initialFormData
-          });
+          if (response !== undefined) {
+            this.setState({
+              userEmail: response.user!.email,
+              formData: initialFormData,
+              userAuthenticated: true
+            });
+          }
         })
-        .catch(err => {
-          console.log(err);
+        .catch(error => {
+          console.log(error);
         });
     } else {
-      axios
-        .post(
-          'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyB7esiw1XYzS2_hllELqqYzqN5wIQav0Oc',
-          authData
-        )
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(authData.email, authData.password)
         .then(response => {
-          console.log(response.data);
-          this.setState({
-            formData: initialFormData
-          });
+          console.log(response);
         })
-        .catch(err => {
-          console.log(err);
-        });
+        .catch(error => console.log(error));
     }
+  };
+
+  authWithGoogleHandler = () => {
+    firebase
+      .auth()
+      .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      .then(response => {
+        if (response !== undefined) {
+          const newAuthData = {
+            token: (response.credential as any).idToken,
+            email: response.user!.email
+          };
+          this.setState({
+            userEmail: newAuthData.email,
+            userToken: newAuthData.token,
+            userAuthenticated: true
+          });
+          localStorage.floristAuthEmail = newAuthData.email;
+          localStorage.floristAuthToken = newAuthData.token;
+        }
+      })
+      .catch(error => console.log(error));
   };
   render() {
     return (
@@ -154,7 +178,7 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
               Google:
             </p>{' '}
             <br />
-            <a href="#">
+            <a onClick={this.authWithGoogleHandler}>
               <img
                 src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Fgoogle.png?alt=media&token=3210d61d-cad2-45bc-a343-0ed08c097bb6"
                 alt="google-pic"
