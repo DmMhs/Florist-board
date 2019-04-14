@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
+import { withRouter } from 'react-router-dom';
 
 import './Auth.less';
 import Popup from '../Popup/Popup';
 import { NavLink } from 'react-router-dom';
-
+import { AuthContext } from './AuthContext';
 interface MatchParams {
   mode: string;
 }
@@ -34,7 +35,10 @@ interface AuthState {
 }
 
 class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
-  static getDerivedStateFromProps(props: any, state: AuthState) {
+  static getDerivedStateFromProps(
+    props: RouteComponentProps<MatchParams>,
+    state: AuthState
+  ) {
     return {
       mode: props.match.params.mode
     };
@@ -52,9 +56,8 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
       mode: this.props.match.params.mode
     };
   }
-  componentDidMount() {
-    console.log('mount');
-  }
+  componentDidMount() {}
+
   emailInputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const updatedFormData = { ...this.state.formData };
     updatedFormData.email = event.target.value;
@@ -73,6 +76,7 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
     event: React.MouseEvent<HTMLFormElement, MouseEvent>
   ) => {
     event.preventDefault();
+    const value = this.context;
     const initialFormData = {
       email: '',
       password: ''
@@ -87,12 +91,12 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
         .auth()
         .createUserWithEmailAndPassword(authData.email, authData.password)
         .then(response => {
+          console.log(response);
           if (response !== undefined) {
             this.setState({
-              userEmail: response.user!.email,
-              formData: initialFormData,
-              userAuthenticated: true
+              formData: initialFormData
             });
+            (this.props as any).history.push('/auth/signin');
           }
         })
         .catch(error => {
@@ -104,28 +108,25 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
         .signInWithEmailAndPassword(authData.email, authData.password)
         .then(response => {
           console.log(response);
+          this.setState({
+            formData: initialFormData
+          });
+          value.setUserCredentials(response.user!.email);
+          (this.props as any).history.push('/');
         })
         .catch(error => console.log(error));
     }
   };
 
   authWithGoogleHandler = () => {
+    const value = this.context;
     firebase
       .auth()
       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(response => {
         if (response !== undefined) {
-          const newAuthData = {
-            token: (response.credential as any).idToken,
-            email: response.user!.email
-          };
-          this.setState({
-            userEmail: newAuthData.email,
-            userToken: newAuthData.token,
-            userAuthenticated: true
-          });
-          localStorage.floristAuthEmail = newAuthData.email;
-          localStorage.floristAuthToken = newAuthData.token;
+          value.setUserCredentials(response.user!.email);
+          (this.props as any).history.push('/');
         }
       })
       .catch(error => console.log(error));
@@ -133,80 +134,90 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
   render() {
     return (
       <div className="Auth">
-        <form onSubmit={this.formSubmitHandler}>
-          <div className="form-field">
-            <label>Email:</label>
-            <input
-              type="email"
-              onChange={this.emailInputChangeHandler}
-              value={this.state.formData.email}
-              required
-            />
-          </div>
-          <div className="form-field">
-            <label>Password:</label>
-            <input
-              type="password"
-              minLength={6}
-              onChange={this.passwordInputChangeHandler}
-              value={this.state.formData.password}
-              required
-            />
-          </div>
-          <div className="form-field">
-            <button
-              type="submit"
-              disabled={
-                this.state.formData.password === '' ||
-                this.state.formData.email === ''
-                  ? true
-                  : false
-              }
-            >
-              SUBMIT
-            </button>
-            {this.state.formData.password === '' ||
-            this.state.formData.email === '' ? (
-              <Popup type="info" message="Please, provide a required data" />
-            ) : null}
-          </div>
-          <hr />
-          <h3>OR</h3>
-          <div className="form-field">
-            <p>
-              {this.state.mode === 'signup' ? 'Sign Up' : 'Sign In'} with a
-              Google:
-            </p>{' '}
-            <br />
-            <a onClick={this.authWithGoogleHandler}>
-              <img
-                src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Fgoogle.png?alt=media&token=3210d61d-cad2-45bc-a343-0ed08c097bb6"
-                alt="google-pic"
-                className="google-pic"
-              />
-            </a>
-          </div>
-          <hr />
-          <div className="form-field">
-            <p>
-              {this.state.mode === 'signup'
-                ? 'Already have an account ?'
-                : 'Have no account ?'}
-            </p>
-            <button type="button" className="switch-btn">
-              <NavLink
-                to={`/auth/${
-                  this.state.mode === 'signup' ? 'signin' : 'signup'
-                }`}
-              >
-                {this.state.mode === 'signup' ? 'SIGN IN' : 'SIGN UP'}
-              </NavLink>
-            </button>
-          </div>
-        </form>
+        <AuthContext.Consumer>
+          {value =>
+            value && (
+              <form onSubmit={this.formSubmitHandler as any}>
+                <div className="form-field">
+                  <label>Email:</label>
+                  <input
+                    type="email"
+                    onChange={this.emailInputChangeHandler}
+                    value={this.state.formData.email}
+                    required
+                  />
+                </div>
+                <div className="form-field">
+                  <label>Password:</label>
+                  <input
+                    type="password"
+                    minLength={6}
+                    onChange={this.passwordInputChangeHandler}
+                    value={this.state.formData.password}
+                    required
+                  />
+                </div>
+                <div className="form-field">
+                  <button
+                    type="submit"
+                    disabled={
+                      this.state.formData.password === '' ||
+                      this.state.formData.email === ''
+                        ? true
+                        : false
+                    }
+                  >
+                    SUBMIT
+                  </button>
+                  {this.state.formData.password === '' ||
+                  this.state.formData.email === '' ? (
+                    <Popup
+                      type="info"
+                      message="Please, provide a required data"
+                    />
+                  ) : null}
+                </div>
+                <hr />
+                <h3>OR</h3>
+                <div className="form-field">
+                  <p>
+                    {this.state.mode === 'signup' ? 'Sign Up' : 'Sign In'} with
+                    a Google:
+                  </p>{' '}
+                  <br />
+                  <a onClick={this.authWithGoogleHandler}>
+                    <img
+                      src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Fgoogle.png?alt=media&token=3210d61d-cad2-45bc-a343-0ed08c097bb6"
+                      alt="google-pic"
+                      className="google-pic"
+                    />
+                  </a>
+                </div>
+                <hr />
+                <div className="form-field">
+                  <p>
+                    {this.state.mode === 'signup'
+                      ? 'Already have an account ?'
+                      : 'Have no account ?'}
+                  </p>
+                  <button type="button" className="switch-btn">
+                    <NavLink
+                      to={`/auth/${
+                        this.state.mode === 'signup' ? 'signin' : 'signup'
+                      }`}
+                    >
+                      {this.state.mode === 'signup' ? 'SIGN IN' : 'SIGN UP'}
+                    </NavLink>
+                  </button>
+                </div>
+              </form>
+            )
+          }
+        </AuthContext.Consumer>
       </div>
     );
   }
 }
 
-export default Auth;
+Auth.contextType = AuthContext;
+export default withRouter(Auth as any);
