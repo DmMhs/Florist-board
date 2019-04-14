@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import './ProductCard.less';
 import Slider from '../../Slider/Slider';
 import { CartItem } from '../../../models/CartItem';
+import { AuthContext } from '../../Auth/AuthContext';
 
 interface ProductCardState {}
 
