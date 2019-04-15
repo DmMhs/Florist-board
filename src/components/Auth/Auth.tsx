@@ -29,9 +29,6 @@ interface AuthState {
     email: string;
     password: string;
   };
-  userEmail: string | null;
-  userToken: string | null;
-  userAuthenticated: boolean;
   mode: string;
 }
 
@@ -54,9 +51,6 @@ class Auth extends Component<
         email: '',
         password: ''
       },
-      userEmail: '',
-      userToken: '',
-      userAuthenticated: false,
       mode: this.props.match.params.mode
     };
   }
@@ -228,6 +222,7 @@ class Auth extends Component<
                         ? true
                         : false
                     }
+                    className="submit-btn test"
                   >
                     SUBMIT
                   </button>

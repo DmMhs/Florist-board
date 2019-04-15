@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Popup component matches a snapshot 1`] = `
+<div
+  className="Popup"
+  style={
+    Object {
+      "backgroundColor": "rgb(134, 218, 134)",
+    }
+  }
+>
+  <span
+    className="popup-message"
+  >
+    <i
+      className="far fa-check-square"
+    />
+    Product CORN was added to the cart
+  </span>
+</div>
+`;

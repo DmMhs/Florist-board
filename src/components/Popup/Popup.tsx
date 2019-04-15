@@ -5,7 +5,7 @@ import './Popup.less';
 type PopupTypes = 'success' | 'failure' | 'info';
 
 interface PopupProps {
-  type: PopupTypes;
+  type: PopupTypes | null;
   message: string;
   key?: string;
 }
