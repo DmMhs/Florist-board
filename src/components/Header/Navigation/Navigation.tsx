@@ -67,8 +67,8 @@ class Navigation extends Component<NavigationProps, NavigationState> {
                     <i className="fas fa-caret-down" />
                   </a>
                   <div className="dropdown-content" ref={this.authOptionsRef}>
-                    {value.state.userEmail!.length > 0 ? (
-                      <p className="user-email">{value.state.userEmail}</p>
+                    {value.state.userLogin!.length > 0 ? (
+                      <p className="user-login">{value.state.userLogin}</p>
                     ) : null}
                     {value.state.userAuthenticated === false ? (
                       <div>
