@@ -13,7 +13,7 @@ interface PopupProps {
 const popup = (props: PopupProps) => {
   const { type, message } = props;
   let color: string;
-  let icon: any;
+  let icon;
 
   switch (type) {
     case 'success':

@@ -1,19 +1,18 @@
 import React, { Component, RefObject } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink, withRouter, RouteComponentProps } from 'react-router-dom';
 import firebase from 'firebase';
 
 import { AuthContext } from '../../Auth/AuthContext';
 import labels from '../../../config/labels';
 import './Navigation.less';
 
-interface NavigationProps {}
 interface NavigationState {}
 
-class Navigation extends Component<NavigationProps, NavigationState> {
+class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
   private authOptionsToggleRef: RefObject<HTMLAnchorElement>;
   private authOptionsRef: RefObject<HTMLDivElement>;
 
-  constructor(props: NavigationProps) {
+  constructor(props: RouteComponentProps<{}>) {
     super(props);
     this.authOptionsRef = React.createRef();
     this.authOptionsToggleRef = React.createRef();
@@ -26,7 +25,7 @@ class Navigation extends Component<NavigationProps, NavigationState> {
     const value = this.context;
     firebase.auth().signOut();
     value.logout();
-    (this.props as any).history.push('/');
+    (this.props as RouteComponentProps<{}>).history.push('/');
   };
   render() {
     return (
@@ -96,4 +95,4 @@ class Navigation extends Component<NavigationProps, NavigationState> {
 }
 
 Navigation.contextType = AuthContext;
-export default withRouter(Navigation as any);
+export default withRouter<RouteComponentProps<{}>>(Navigation);

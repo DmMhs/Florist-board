@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 interface AuthContextState {
   userLogin: string | null | undefined;
@@ -11,13 +11,17 @@ interface AuthContextState {
 export const AuthContext = React.createContext({
   state: {} as AuthContextState,
   setUserCredentials: (
-    userLogin?: string | null,
-    userId?: string | null,
-    event?: any
+    userLogin: string | null,
+    userId: string | null,
+    userToken: string | null,
+    event?: Event
   ) => {},
   logout: () => {}
 });
-class AuthContextProvider extends Component<any, AuthContextState> {
+class AuthContextProvider extends Component<
+  RouteComponentProps<{}>,
+  AuthContextState
+> {
   public state = {
     userLogin: '',
     userId: '',
@@ -52,7 +56,8 @@ class AuthContextProvider extends Component<any, AuthContextState> {
           setUserCredentials: (
             userLogin: string | null | undefined,
             userId: string | null | undefined,
-            userToken: string | null | undefined
+            userToken: string | null | undefined,
+            event?: Event
           ) => {
             this.setState({
               userAuthenticated: true,
@@ -83,4 +88,4 @@ class AuthContextProvider extends Component<any, AuthContextState> {
   }
 }
 
-export default withRouter(AuthContextProvider);
+export default withRouter<RouteComponentProps<{}>>(AuthContextProvider);

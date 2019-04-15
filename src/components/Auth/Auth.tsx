@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RouteComponentProps as RCProps } from 'react-router-dom';
 
 import './Auth.less';
 import Popup from '../Popup/Popup';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
+
 interface MatchParams {
   mode: string;
 }
@@ -34,16 +35,19 @@ interface AuthState {
   mode: string;
 }
 
-class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
+class Auth extends Component<
+  RouteComponentProps<MatchParams> & RCProps<{}>,
+  AuthState
+> {
   static getDerivedStateFromProps(
-    props: RouteComponentProps<MatchParams>,
+    props: RouteComponentProps<MatchParams> & RCProps<{}>,
     state: AuthState
   ) {
     return {
       mode: props.match.params.mode
     };
   }
-  constructor(props: RouteComponentProps<MatchParams>) {
+  constructor(props: RouteComponentProps<MatchParams> & RCProps<{}>) {
     super(props);
     this.state = {
       formData: {
@@ -95,7 +99,8 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
             this.setState({
               formData: initialFormData
             });
-            (this.props as any).history.push('/auth/signin');
+            (this.props as RouteComponentProps<MatchParams> &
+              RCProps<{}>).history.push('/auth/signin');
           }
         })
         .catch(error => {
@@ -118,7 +123,8 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
                 response.user!.uid,
                 idToken
               );
-              (this.props as any).history.push('/');
+              (this.props as RouteComponentProps<MatchParams> &
+                RCProps<{}>).history.push('/');
             })
             .catch(error => {
               console.log(error);
@@ -144,7 +150,8 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
                 response.user!.uid,
                 idToken
               );
-              (this.props as any).history.push('/');
+              (this.props as RouteComponentProps<MatchParams> &
+                RCProps<{}>).history.push('/');
             })
             .catch(error => {
               console.log(error);
@@ -170,7 +177,8 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
                 response.user!.uid,
                 idToken
               );
-              (this.props as any).history.push('/');
+              (this.props as RouteComponentProps<MatchParams> &
+                RCProps<{}>).history.push('/');
             })
             .catch(error => {
               console.log(error);
@@ -185,7 +193,13 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
         <AuthContext.Consumer>
           {value =>
             value && (
-              <form onSubmit={this.formSubmitHandler as any}>
+              <form
+                onSubmit={
+                  this.formSubmitHandler as
+                    | ((event: React.FormEvent<HTMLFormElement>) => void)
+                    | undefined
+                }
+              >
                 <div className="form-field">
                   <label>Email:</label>
                   <input
@@ -282,4 +296,4 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
 }
 
 Auth.contextType = AuthContext;
-export default withRouter(Auth as any);
+export default withRouter<RouteComponentProps<MatchParams> & RCProps<{}>>(Auth);
