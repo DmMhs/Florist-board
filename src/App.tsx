@@ -32,13 +32,17 @@ class App extends Component<AppProps, AppState> {
   }
 
   componentDidMount() {
-    if (localStorage.floristAuthEmail === undefined) {
-      console.log('No email founded');
-      localStorage.setItem('floristAuthEmail', '');
+    if (localStorage.floristAuthLogin === undefined) {
+      console.log('No login founded');
+      localStorage.setItem('floristAuthLogin', '');
     }
     if (localStorage.floristAuthToken === undefined) {
-      console.log('No password founded');
+      console.log('No token founded');
       localStorage.setItem('floristAuthToken', '');
+    }
+    if (localStorage.floristAuthUserId === undefined) {
+      console.log('No user id founded');
+      localStorage.setItem('floristAuthUserId', '');
     }
     resizeListener = () => {
       if (window.innerWidth < 576) {

@@ -91,7 +91,6 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
         .auth()
         .createUserWithEmailAndPassword(authData.email, authData.password)
         .then(response => {
-          console.log(response);
           if (response !== undefined) {
             this.setState({
               formData: initialFormData
@@ -107,12 +106,23 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
         .auth()
         .signInWithEmailAndPassword(authData.email, authData.password)
         .then(response => {
-          console.log(response);
           this.setState({
             formData: initialFormData
           });
-          value.setUserCredentials(response.user!.email);
-          (this.props as any).history.push('/');
+          firebase
+            .auth()
+            .currentUser!.getIdToken(true)
+            .then(idToken => {
+              value.setUserCredentials(
+                response.user!.email,
+                response.user!.uid,
+                idToken
+              );
+              (this.props as any).history.push('/');
+            })
+            .catch(error => {
+              console.log(error);
+            });
         })
         .catch(error => console.log(error));
     }
@@ -125,22 +135,46 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(response => {
         if (response !== undefined) {
-          value.setUserCredentials(response.user!.email);
-          (this.props as any).history.push('/');
+          firebase
+            .auth()
+            .currentUser!.getIdToken(true)
+            .then(idToken => {
+              value.setUserCredentials(
+                response.user!.email,
+                response.user!.uid,
+                idToken
+              );
+              (this.props as any).history.push('/');
+            })
+            .catch(error => {
+              console.log(error);
+            });
         }
       })
       .catch(error => console.log(error));
   };
+
   authWithFacebookHandler = () => {
     const value = this.context;
-
     firebase
       .auth()
       .signInWithPopup(new firebase.auth.FacebookAuthProvider())
       .then(response => {
         if (response !== undefined) {
-          value.setUserCredentials(response.user!.displayName);
-          (this.props as any).history.push('/');
+          firebase
+            .auth()
+            .currentUser!.getIdToken(true)
+            .then(idToken => {
+              value.setUserCredentials(
+                response.user!.displayName,
+                response.user!.uid,
+                idToken
+              );
+              (this.props as any).history.push('/');
+            })
+            .catch(error => {
+              console.log(error);
+            });
         }
       })
       .catch(error => console.log(error));
