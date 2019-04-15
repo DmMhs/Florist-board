@@ -48,38 +48,40 @@ class AuthContextProvider extends Component<
       });
     }
   }
+  setUserCredentialsHandler = (
+    userLogin: string | null | undefined,
+    userId: string | null | undefined,
+    userToken: string | null | undefined,
+    event?: Event
+  ) => {
+    this.setState({
+      userAuthenticated: true,
+      userLogin,
+      userId,
+      userToken
+    });
+    localStorage.floristAuthLogin = userLogin;
+    localStorage.floristAuthToken = userToken;
+    localStorage.floristAuthUserId = userId;
+  };
+  logoutHandler = () => {
+    this.setState({
+      userAuthenticated: false,
+      userLogin: '',
+      userId: '',
+      userToken: ''
+    });
+    localStorage.floristAuthLogin = '';
+    localStorage.floristAuthToken = '';
+    localStorage.floristAuthUserId = '';
+  };
   render() {
     return (
       <AuthContext.Provider
         value={{
           state: this.state,
-          setUserCredentials: (
-            userLogin: string | null | undefined,
-            userId: string | null | undefined,
-            userToken: string | null | undefined,
-            event?: Event
-          ) => {
-            this.setState({
-              userAuthenticated: true,
-              userLogin,
-              userId,
-              userToken
-            });
-            localStorage.floristAuthLogin = userLogin;
-            localStorage.floristAuthToken = userToken;
-            localStorage.floristAuthUserId = userId;
-          },
-          logout: () => {
-            this.setState({
-              userAuthenticated: false,
-              userLogin: '',
-              userId: '',
-              userToken: ''
-            });
-            localStorage.floristAuthLogin = '';
-            localStorage.floristAuthToken = '';
-            localStorage.floristAuthUserId = '';
-          }
+          setUserCredentials: this.setUserCredentialsHandler,
+          logout: this.logoutHandler
         }}
       >
         {this.props.children}

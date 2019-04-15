@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Auth component matches a snapshot 1`] = `
+<Route>
+  <Component />
+</Route>
+`;
+
+exports[`AuthContext component matches a snapshot 1`] = `
+<Route>
+  <Component />
+</Route>
+`;

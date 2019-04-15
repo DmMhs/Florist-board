@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
-import { waitForState } from 'enzyme-async-helpers';
 
 import { homeImagesRef } from '../../firebase';
 import Home from './Home';

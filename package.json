@@ -97,6 +97,7 @@
     "enzyme-adapter-react-16": "^1.11.2",
     "enzyme-async-helpers": "^0.9.1",
     "enzyme-to-json": "^3.3.5",
+    "react-router-enzyme-context": "^1.2.0",
     "tslint": "^5.14.0",
     "tslint-react": "^3.6.0",
     "tslint-react-hooks": "^2.0.0"
@@ -109,7 +110,8 @@
     "coveragePathIgnorePatterns": [
       "<rootDir>/src/stories/index.js",
       "<rootDir>/src/index.tsx",
-      "<rootDir>/src/serviceWorker.ts"
+      "<rootDir>/src/serviceWorker.ts",
+      "<rootDir>/src/services"
     ],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
