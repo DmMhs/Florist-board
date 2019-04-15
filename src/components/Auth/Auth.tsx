@@ -131,6 +131,20 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
       })
       .catch(error => console.log(error));
   };
+  authWithFacebookHandler = () => {
+    const value = this.context;
+
+    firebase
+      .auth()
+      .signInWithPopup(new firebase.auth.FacebookAuthProvider())
+      .then(response => {
+        if (response !== undefined) {
+          value.setUserCredentials(response.user!.displayName);
+          (this.props as any).history.push('/');
+        }
+      })
+      .catch(error => console.log(error));
+  };
   render() {
     return (
       <div className="Auth">
@@ -190,6 +204,20 @@ class Auth extends Component<RouteComponentProps<MatchParams>, AuthState> {
                       src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Fgoogle.png?alt=media&token=3210d61d-cad2-45bc-a343-0ed08c097bb6"
                       alt="google-pic"
                       className="google-pic"
+                    />
+                  </a>
+                </div>
+                <div className="form-field">
+                  <p>
+                    {this.state.mode === 'signup' ? 'Sign Up' : 'Sign In'} with
+                    a Facebook:
+                  </p>{' '}
+                  <br />
+                  <a onClick={this.authWithFacebookHandler}>
+                    <img
+                      src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Ffacebook.png?alt=media&token=32a65be5-5336-45fd-8a50-44f8880ddbd0"
+                      alt="facebook-pic"
+                      className="facebook-pic"
                     />
                   </a>
                 </div>
