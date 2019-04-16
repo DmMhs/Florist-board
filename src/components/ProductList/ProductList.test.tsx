@@ -32,6 +32,7 @@ it('products list is not empty', () => {
 });
 
 it('Removes cart items', () => {
+  window.confirm = jest.fn(() => true);
   const prod: CartItem = {
     title: 'title',
     images: ['pathtoimage'],
@@ -40,16 +41,18 @@ it('Removes cart items', () => {
     available: true,
     key: 0,
     id: 'safasf',
-    inCart: false,
+    inCart: true,
     amount: 1
   };
-  const wrapper = shallow(<ProductList products={[]} />);
+  const wrapper = shallow(<ProductList products={[prod, prod, prod]} />);
   const instance = wrapper.instance();
   instance.state = {
     showCart: false,
-    cartProducts: [prod, prod, prod]
+    cartProducts: [prod, prod, prod],
+    popupMessages: []
   };
   instance.handleRemoveCartItem(2);
+  expect(window.confirm).toBeCalled();
   expect(instance.state.cartProducts.length).toEqual(2);
 });
 
@@ -69,7 +72,8 @@ it('Add to cart works', () => {
   const instance = wrapper.instance();
   instance.state = {
     showCart: false,
-    cartProducts: []
+    cartProducts: [],
+    popupMessages: []
   };
   instance.addToCartClickedHandler(prod);
   expect(instance.state.cartProducts.length).toEqual(1);
@@ -155,32 +159,33 @@ it('Close cart button changes the state', () => {
   expect(instance.state.showCart).toBeFalsy();
 });
 
-it('resize event has impact on state', () => {
-  const wrapper = shallow(<ProductList products={[]} />);
-  const instance = wrapper.instance();
-  instance.setState({
-    mobileFiltersMode: undefined
-  });
-  const resizeListener = () => {
-    if (window.innerWidth <= 920) {
-      instance.setState({
-        mobileFiltersMode: true
-      });
-      expect(instance.state.mobileFiltersMode).toBeTruthy();
-    } else {
-      instance.setState({
-        mobileFiltersMode: false
-      });
-      expect(instance.state.mobileFiltersMode).toBeFalsy();
-    }
-  };
-  window.addEventListener('resize', resizeListener);
-  let resizeEvent = new Event('resize');
-  window.dispatchEvent(resizeEvent);
-  expect(instance.state.mobileFiltersMode).toBeDefined();
-});
+// it('resize event has impact on state', () => {
+//   const wrapper = shallow(<ProductList products={[]} />);
+//   const instance = wrapper.instance();
+//   instance.setState({
+//     popupMessages: [],
+//     mobileFiltersMode: undefined
+//   });
+//   const resizeListener = () => {
+//     if (window.innerWidth <= 920) {
+//       instance.setState({
+//         mobileFiltersMode: true
+//       });
+//       expect(instance.state.mobileFiltersMode).toBeTruthy();
+//     } else {
+//       instance.setState({
+//         mobileFiltersMode: false
+//       });
+//       expect(instance.state.mobileFiltersMode).toBeFalsy();
+//     }
+//   };
+//   window.addEventListener('resize', resizeListener);
+//   let resizeEvent = new Event('resize');
+//   window.dispatchEvent(resizeEvent);
+//   expect(instance.state.mobileFiltersMode).toBeDefined();
+// });
 
-fit('filter toggler changes the state', () => {
+it('filter toggler changes the state', () => {
   const wrapper = mount(<ProductList products={[]} />);
   const instance = wrapper.instance();
   instance.setState({
@@ -188,4 +193,24 @@ fit('filter toggler changes the state', () => {
   });
   instance.filterToggleClickedHandler();
   expect(instance.state.showFilters).toBeTruthy();
+});
+
+it('Changing of price range has impact on state', () => {
+  const wrapper = mount(<ProductList products={[]} />);
+  const instance = wrapper.instance();
+  instance.setState({
+    showCart: false,
+    cartProducts: [],
+    checkForAvailable: false,
+    checkForPrice: false,
+    filterByPrice: { from: 0, to: Infinity },
+    sortBy: 'name',
+    sortOrder: 'default',
+    showFilters: false,
+    mobileFiltersMode: false,
+    popupMessages: []
+  });
+  wrapper.find('.priceFrom').simulate('change', { target: { value: 4 } });
+  wrapper.find('.priceTo').simulate('change', { target: { value: 10 } });
+  expect(instance.state.filterByPrice).toEqual({ from: 4, to: 10 });
 });

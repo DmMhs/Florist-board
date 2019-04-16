@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component matches a snapshot 1`] = `
+<div
+  className="Header"
+>
+  <p
+    className="info"
+  >
+    <span>
+      FLORIST.UA
+    </span>
+    <span>
+      MARKET SQUARE, LVIV, UA
+    </span>
+    <span>
+      346346
+    </span>
+    <span>
+      +123-45-678
+    </span>
+  </p>
+  <withRouter(Navigation) />
+</div>
+`;

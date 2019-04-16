@@ -1,6 +1,6 @@
 import * as firebase from 'firebase';
 
-const config = {
+export const config = {
   apiKey: 'AIzaSyB7esiw1XYzS2_hllELqqYzqN5wIQav0Oc',
   authDomain: 'florist-cb933.firebaseapp.com',
   databaseURL: 'https://florist-cb933.firebaseio.com',

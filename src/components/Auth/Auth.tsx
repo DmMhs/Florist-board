@@ -6,6 +6,7 @@ import './Auth.less';
 import Popup from '../Popup/Popup';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
+import { userInfo } from 'os';
 
 interface MatchParams {
   mode: string;
@@ -44,6 +45,7 @@ class Auth extends Component<
       mode: props.match.params.mode
     };
   }
+
   constructor(props: RouteComponentProps<MatchParams> & RCProps<{}>) {
     super(props);
     this.state = {
@@ -54,7 +56,6 @@ class Auth extends Component<
       mode: this.props.match.params.mode
     };
   }
-  componentDidMount() {}
 
   emailInputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const updatedFormData = { ...this.state.formData };
@@ -63,6 +64,7 @@ class Auth extends Component<
       formData: updatedFormData
     });
   };
+
   passwordInputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const updatedFormData = { ...this.state.formData };
     updatedFormData.password = event.target.value;
@@ -70,6 +72,20 @@ class Auth extends Component<
       formData: updatedFormData
     });
   };
+
+  getIdToken = () => {
+    return firebase
+      .auth()
+      .currentUser!.getIdToken(true)
+      .then(idToken => {
+        console.log(idToken);
+        return idToken;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   formSubmitHandler = (
     event: React.MouseEvent<HTMLFormElement, MouseEvent>
   ) => {
@@ -84,45 +100,37 @@ class Auth extends Component<
       password: this.state.formData.password,
       returnSecureToken: true
     };
+
     if (this.state.mode === 'signup') {
+      this.setState({
+        formData: initialFormData
+      });
       firebase
         .auth()
         .createUserWithEmailAndPassword(authData.email, authData.password)
         .then(response => {
-          if (response !== undefined) {
-            this.setState({
-              formData: initialFormData
-            });
-            (this.props as RouteComponentProps<MatchParams> &
-              RCProps<{}>).history.push('/auth/signin');
-          }
+          (this.props as RouteComponentProps<MatchParams> &
+            RCProps<{}>).history.push('/auth/signin');
         })
         .catch(error => {
           console.log(error);
         });
     } else {
+      this.setState({
+        formData: initialFormData
+      });
       firebase
         .auth()
         .signInWithEmailAndPassword(authData.email, authData.password)
-        .then(response => {
-          this.setState({
-            formData: initialFormData
-          });
-          firebase
-            .auth()
-            .currentUser!.getIdToken(true)
-            .then(idToken => {
-              value.setUserCredentials(
-                response.user!.email,
-                response.user!.uid,
-                idToken
-              );
-              (this.props as RouteComponentProps<MatchParams> &
-                RCProps<{}>).history.push('/');
-            })
-            .catch(error => {
-              console.log(error);
-            });
+        .then(async response => {
+          const idToken = await this.getIdToken();
+          value.setUserCredentials(
+            response.user!.email,
+            response.user!.uid,
+            idToken
+          );
+          (this.props as RouteComponentProps<MatchParams> &
+            RCProps<{}>).history.push('/');
         })
         .catch(error => console.log(error));
     }
@@ -133,24 +141,15 @@ class Auth extends Component<
     firebase
       .auth()
       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-      .then(response => {
-        if (response !== undefined) {
-          firebase
-            .auth()
-            .currentUser!.getIdToken(true)
-            .then(idToken => {
-              value.setUserCredentials(
-                response.user!.email,
-                response.user!.uid,
-                idToken
-              );
-              (this.props as RouteComponentProps<MatchParams> &
-                RCProps<{}>).history.push('/');
-            })
-            .catch(error => {
-              console.log(error);
-            });
-        }
+      .then(async response => {
+        const idToken = await this.getIdToken();
+        value.setUserCredentials(
+          response.user!.email,
+          response.user!.uid,
+          idToken
+        );
+        (this.props as RouteComponentProps<MatchParams> &
+          RCProps<{}>).history.push('/');
       })
       .catch(error => console.log(error));
   };
@@ -160,24 +159,15 @@ class Auth extends Component<
     firebase
       .auth()
       .signInWithPopup(new firebase.auth.FacebookAuthProvider())
-      .then(response => {
-        if (response !== undefined) {
-          firebase
-            .auth()
-            .currentUser!.getIdToken(true)
-            .then(idToken => {
-              value.setUserCredentials(
-                response.user!.displayName,
-                response.user!.uid,
-                idToken
-              );
-              (this.props as RouteComponentProps<MatchParams> &
-                RCProps<{}>).history.push('/');
-            })
-            .catch(error => {
-              console.log(error);
-            });
-        }
+      .then(async response => {
+        const idToken = await this.getIdToken();
+        value.setUserCredentials(
+          response.user!.displayName,
+          response.user!.uid,
+          idToken
+        );
+        (this.props as RouteComponentProps<MatchParams> &
+          RCProps<{}>).history.push('/');
       })
       .catch(error => console.log(error));
   };
@@ -198,6 +188,7 @@ class Auth extends Component<
                   <label>Email:</label>
                   <input
                     type="email"
+                    className="email-input"
                     onChange={this.emailInputChangeHandler}
                     value={this.state.formData.email}
                     required
@@ -207,6 +198,7 @@ class Auth extends Component<
                   <label>Password:</label>
                   <input
                     type="password"
+                    className="password-input"
                     minLength={6}
                     onChange={this.passwordInputChangeHandler}
                     value={this.state.formData.password}
@@ -242,7 +234,10 @@ class Auth extends Component<
                     a Google:
                   </p>{' '}
                   <br />
-                  <a onClick={this.authWithGoogleHandler}>
+                  <a
+                    onClick={this.authWithGoogleHandler}
+                    className="google-auth"
+                  >
                     <img
                       src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Fgoogle.png?alt=media&token=3210d61d-cad2-45bc-a343-0ed08c097bb6"
                       alt="google-pic"
@@ -256,7 +251,10 @@ class Auth extends Component<
                     a Facebook:
                   </p>{' '}
                   <br />
-                  <a onClick={this.authWithFacebookHandler}>
+                  <a
+                    onClick={this.authWithFacebookHandler}
+                    className="facebook-auth"
+                  >
                     <img
                       src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Ffacebook.png?alt=media&token=32a65be5-5336-45fd-8a50-44f8880ddbd0"
                       alt="facebook-pic"
