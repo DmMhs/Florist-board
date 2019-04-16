@@ -56,5 +56,8 @@ exports[`matches a snapshot 1`] = `
       sortOrderClicked={[Function]}
     />
   </div>
+  <div
+    className="popups-wrapper"
+  />
 </div>
 `;

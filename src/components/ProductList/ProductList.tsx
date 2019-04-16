@@ -86,6 +86,7 @@ class ProductList extends Component<ProductListProps, ProductListState> {
   }
 
   addToCartClickedHandler = (productData: CartItem) => {
+    console.log('add to cart');
     if (productData.available) {
       const cartProducts = this.state.cartProducts;
       const index = cartProducts.findIndex((i: CartItem) => {

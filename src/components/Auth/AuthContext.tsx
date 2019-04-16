@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-interface AuthContextState {
+export interface AuthContextState {
   userLogin: string | null | undefined;
   userId: string | null | undefined;
   userToken: string | null | undefined;
@@ -22,12 +22,15 @@ class AuthContextProvider extends Component<
   RouteComponentProps<{}>,
   AuthContextState
 > {
-  public state = {
-    userLogin: '',
-    userId: '',
-    userToken: '',
-    userAuthenticated: false
-  };
+  constructor(props: RouteComponentProps<{}>) {
+    super(props);
+    this.state = {
+      userLogin: '',
+      userId: '',
+      userToken: '',
+      userAuthenticated: false
+    };
+  }
   componentDidMount() {
     if (
       localStorage.floristAuthToken === '' ||
@@ -54,6 +57,8 @@ class AuthContextProvider extends Component<
     userToken: string | null | undefined,
     event?: Event
   ) => {
+    console.log('SET CREDENTIALS');
+    console.log('Login: ' + userLogin);
     this.setState({
       userAuthenticated: true,
       userLogin,
