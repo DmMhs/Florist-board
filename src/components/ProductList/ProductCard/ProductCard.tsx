@@ -75,7 +75,8 @@ class ProductCard extends Component<CartItem, ProductCardState> {
       currency,
       available,
       inCart,
-      likedBy
+      likedBy,
+      description
     } = this.props;
 
     const actionIcon = inCart ? (
@@ -108,6 +109,9 @@ class ProductCard extends Component<CartItem, ProductCardState> {
                   onClick={this.likeClickedHandler}
                   ref={this.likeButtonRef}
                 />
+              ) : null}
+              {value.state.authenticationMethod === 'facebook' ? (
+                <i className="fas fa-share facebook-share" />
               ) : null}
               <div className="image">
                 <Slider images={images} auto={false} showControls={true} />

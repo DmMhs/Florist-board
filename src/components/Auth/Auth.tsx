@@ -163,7 +163,8 @@ class Auth extends Component<
         value.setUserCredentials(
           response.user!.displayName,
           response.user!.uid,
-          idToken
+          idToken,
+          'facebook'
         );
         (this.props as RouteComponentProps<MatchParams> &
           RCProps<{}>).history.push('/');
