@@ -78,7 +78,6 @@ class Auth extends Component<
       .auth()
       .currentUser!.getIdToken(true)
       .then(idToken => {
-        console.log(idToken);
         return idToken;
       })
       .catch(error => {
@@ -214,7 +213,7 @@ class Auth extends Component<
                         ? true
                         : false
                     }
-                    className="submit-btn test"
+                    className="submit-btn"
                   >
                     SUBMIT
                   </button>

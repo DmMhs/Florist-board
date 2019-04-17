@@ -8,4 +8,5 @@ export interface Product {
   inCart?: boolean;
   id?: string;
   key?: number;
+  isLiked?: boolean;
 }
