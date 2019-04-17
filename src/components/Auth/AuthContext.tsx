@@ -57,8 +57,6 @@ class AuthContextProvider extends Component<
     userToken: string | null | undefined,
     event?: Event
   ) => {
-    console.log('SET CREDENTIALS');
-    console.log('Login: ' + userLogin);
     this.setState({
       userAuthenticated: true,
       userLogin,

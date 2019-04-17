@@ -25,7 +25,9 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
     const value = this.context;
     firebase.auth().signOut();
     value.logout();
-    (this.props as RouteComponentProps<{}>).history.push('/');
+    if ((this.props as RouteComponentProps<{}>).history !== undefined) {
+      (this.props as RouteComponentProps<{}>).history.push('/');
+    }
   };
   render() {
     return (
@@ -79,7 +81,7 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                         </NavLink>
                       </div>
                     ) : (
-                      <a onClick={this.logout} className="log-out">
+                      <a onClick={this.logout} className="log-out test">
                         Log Out
                       </a>
                     )}
