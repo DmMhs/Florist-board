@@ -9,6 +9,7 @@ export interface CartItem {
   id: string;
   inCart: boolean;
   description?: string;
+  likedBy?: boolean;
   addToCart?:
     | ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void)
     | undefined;

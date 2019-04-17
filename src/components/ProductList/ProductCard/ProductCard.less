@@ -22,6 +22,30 @@
       color: rgb(0, 183, 255);
     }
   }
+  .like {
+    position: absolute;
+    top: calc(1.4rem + 10px);
+    font-size: 1.4rem;
+    right: 5px;
+    color: rgb(230, 173, 173);
+    cursor: pointer;
+    &:hover,
+    &.active {
+      color: rgb(235, 70, 70);
+    }
+  }
+  .facebook-share {
+    position: absolute;
+    color: #8b9dc3;
+    top: calc(2.8rem + 10px);
+    font-size: 1.4rem;
+    right: 5px;
+    cursor: pointer;
+    &:hover,
+    &.active {
+      color: #3b5998;
+    }
+  }
   .image {
     width: 165px;
     height: 165px;
@@ -30,7 +54,7 @@
     box-shadow: 1px 1px 5px #ccc;
     background-size: cover;
     background-position: center;
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     margin-bottom: 1rem;
     .Slider {
       width: 100%;

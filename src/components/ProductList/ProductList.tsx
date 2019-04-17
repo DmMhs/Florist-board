@@ -10,6 +10,8 @@ import ProductsSort from './ProductsSort/ProductsSort';
 import sortByName from '../../services/sortByName';
 import sortByPrice from '../../services/sortByPrice';
 import Popup from '../Popup/Popup';
+import { AuthContext } from '../Auth/AuthContext';
+import { productsRef } from '../../firebase';
 
 interface ProductListProps {
   products: CartItem[];
@@ -227,6 +229,11 @@ class ProductList extends Component<ProductListProps, ProductListState> {
           key={index}
           id={p.id}
           inCart={p.inCart}
+          likedBy={
+            p.likedBy === undefined
+              ? false
+              : (p.likedBy as any).includes(this.context.state.userId)
+          }
           addToCart={this.addToCartClickedHandler.bind(this, p as CartItem)}
         />
       );
@@ -262,43 +269,53 @@ class ProductList extends Component<ProductListProps, ProductListState> {
           : productList.sort(sortByPrice);
     }
     return (
-      <div className="main-wrapper">
-        <div className="cart-toggle" onClick={this.toggleCartClickedHandler}>
-          <i className="fas fa-shopping-basket" />
-          <span>{this.state.cartProducts.length}</span>
-        </div>
-        <ShoppingCart
-          cartItems={this.state.cartProducts}
-          showCart={this.state.showCart}
-          closeCart={this.closeCartClickedHandler}
-          remove={this.handleRemoveCartItem}
-        />
-        <ProductsFilter
-          filterToggle={this.filterToggleClickedHandler}
-          filtersSidebarRef={this.filtersSidebarRef}
-          filterToggleRef={this.filterToggleRef}
-          inStockChanged={this.inStockChangedHandler}
-          priceFromChanged={this.priceFromChangedHandler}
-          priceToChanged={this.priceToChangedHandler}
-          mobileMode={this.state.mobileFiltersMode}
-        />
-        <div className="ProductList full-width" ref={this.productListRef}>
-          <ProductsSort
-            sortOrder={this.state.sortOrder}
-            sortOrderClicked={this.sortOrderClickedHandler}
-            orderByClicked={this.orderByClickedHandler}
-            sortBy={this.state.sortBy}
-            orderByOptionsRef={this.orderByOptionsRef}
-            orderByChanged={this.orderByChangedHandler}
-            mobileMode={this.state.mobileFiltersMode}
-            filterToggle={this.filterToggleClickedHandler}
-          />
-          {productList}
-        </div>
-        <div className="popups-wrapper">{popups}</div>
-      </div>
+      <AuthContext.Consumer>
+        {value =>
+          value && (
+            <div className="main-wrapper">
+              <div
+                className="cart-toggle"
+                onClick={this.toggleCartClickedHandler}
+              >
+                <i className="fas fa-shopping-basket" />
+                <span>{this.state.cartProducts.length}</span>
+              </div>
+              <ShoppingCart
+                cartItems={this.state.cartProducts}
+                showCart={this.state.showCart}
+                closeCart={this.closeCartClickedHandler}
+                remove={this.handleRemoveCartItem}
+              />
+              <ProductsFilter
+                filterToggle={this.filterToggleClickedHandler}
+                filtersSidebarRef={this.filtersSidebarRef}
+                filterToggleRef={this.filterToggleRef}
+                inStockChanged={this.inStockChangedHandler}
+                priceFromChanged={this.priceFromChangedHandler}
+                priceToChanged={this.priceToChangedHandler}
+                mobileMode={this.state.mobileFiltersMode}
+              />
+              <div className="ProductList full-width" ref={this.productListRef}>
+                <ProductsSort
+                  sortOrder={this.state.sortOrder}
+                  sortOrderClicked={this.sortOrderClickedHandler}
+                  orderByClicked={this.orderByClickedHandler}
+                  sortBy={this.state.sortBy}
+                  orderByOptionsRef={this.orderByOptionsRef}
+                  orderByChanged={this.orderByChangedHandler}
+                  mobileMode={this.state.mobileFiltersMode}
+                  filterToggle={this.filterToggleClickedHandler}
+                />
+                {productList}
+              </div>
+              <div className="popups-wrapper">{popups}</div>
+            </div>
+          )
+        }
+      </AuthContext.Consumer>
     );
   }
 }
 
+ProductList.contextType = AuthContext;
 export default ProductList;

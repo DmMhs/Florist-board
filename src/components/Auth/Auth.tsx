@@ -78,7 +78,6 @@ class Auth extends Component<
       .auth()
       .currentUser!.getIdToken(true)
       .then(idToken => {
-        console.log(idToken);
         return idToken;
       })
       .catch(error => {
@@ -164,7 +163,8 @@ class Auth extends Component<
         value.setUserCredentials(
           response.user!.displayName,
           response.user!.uid,
-          idToken
+          idToken,
+          'facebook'
         );
         (this.props as RouteComponentProps<MatchParams> &
           RCProps<{}>).history.push('/');
@@ -214,7 +214,7 @@ class Auth extends Component<
                         ? true
                         : false
                     }
-                    className="submit-btn test"
+                    className="submit-btn"
                   >
                     SUBMIT
                   </button>

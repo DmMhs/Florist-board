@@ -41,6 +41,9 @@ class App extends Component<AppProps, AppState> {
     if (localStorage.floristAuthUserId === undefined) {
       localStorage.setItem('floristAuthUserId', '');
     }
+    if (localStorage.floristAuthMethod === undefined) {
+      localStorage.setItem('floristAuthUserId', '');
+    }
     resizeListener = () => {
       if (window.innerWidth < 576) {
         this.setState({
