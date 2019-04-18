@@ -107,20 +107,6 @@ class ProductCard extends Component<CartItem, ProductCardState> {
         {value =>
           value && (
             <div className="ProductCard">
-              <div
-                className="fb-share-button"
-                data-href="https://florist-ua.herokuapp.com"
-                data-layout="button_count"
-                data-size="small"
-              >
-                <a
-                  target="_blank"
-                  href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fflorist-ua.herokuapp.com%2F&amp;src=sdkpreparse"
-                  className="fb-xfbml-parse-ignore"
-                >
-                  Share
-                </a>
-              </div>
               <NavLink to={`/product-details/${id}`}>
                 <i className="fas fa-info-circle info" />
               </NavLink>
@@ -130,14 +116,6 @@ class ProductCard extends Component<CartItem, ProductCardState> {
                   onClick={this.likeClickedHandler}
                   ref={this.likeButtonRef}
                 />
-              ) : null}
-              {value.state.authenticationMethod === 'facebook' ? (
-                <a
-                  href="https://www.facebook.com/sharer/sharer.php"
-                  target="_blank"
-                >
-                  <i className="fas fa-share facebook-share" />
-                </a>
               ) : null}
               <div className="image">
                 <Slider images={images} auto={false} showControls={true} />
