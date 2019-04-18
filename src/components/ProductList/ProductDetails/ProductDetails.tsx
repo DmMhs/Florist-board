@@ -7,7 +7,6 @@ import { productsRef } from '../../../firebase';
 import './ProductDetails.less';
 import Helmet from 'react-helmet';
 import { AuthContext } from '../../Auth/AuthContext';
-import axios from 'axios';
 
 interface MatchParams {
   id: string;
@@ -63,20 +62,24 @@ class ProductDetails extends Component<
       })
       .catch(error => console.log(error));
   }
+  facebookShareClickedHandler = () => {
+    return FB.ui(
+      {
+        method: 'share',
+        href: `https://florist-ua.herokuapp.com/product-details/${
+          this.props.match.params.id
+        }`
+      },
+      function(response) {
+        console.log(response);
+      }
+    );
+  };
   render() {
     const imgStyle = {
       backgroundImage: `url(${this.state.productData.images[0]})`
     };
-    axios
-      .get(
-        `https://graph.facebook.com/?id=https://florist-ua.herokuapp.com/product-details/${
-          this.props.match.params.id
-        }&amp;scrape=true&amp;method=post`
-      )
-      .then(response => {
-        console.log(response);
-        console.log(this.props.match.params.id);
-      });
+
     return (
       <AuthContext.Consumer>
         {value =>
@@ -127,21 +130,11 @@ class ProductDetails extends Component<
                       {value.state.authenticationMethod === 'facebook' ? (
                         <div
                           className="fb-share-button"
-                          data-href={`https://florist-ua.herokuapp.com/product-details/${
-                            this.state.productData.id
-                          }`}
-                          data-layout="button_count"
-                          data-size="small"
+                          onClick={this.facebookShareClickedHandler}
                         >
-                          <a
-                            target="_blank"
-                            href={`https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fflorist-ua.herokuapp.com%2Fproduct-details%2F${
-                              this.state.productData.id
-                            }&amp;src=sdkpreparse`}
-                            className="fb-xfbml-parse-ignore"
-                          >
-                            SHARE <i className="fab fa-facebook" />
-                          </a>
+                          <span>
+                            SHARE <i className="fab fa-facebook-f" />
+                          </span>
                         </div>
                       ) : null}
 

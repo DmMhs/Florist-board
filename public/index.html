@@ -33,9 +33,23 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root">
-      <div id="fb-root"></div>
-      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/uk_UA/sdk.js#xfbml=1&version=v3.2&appId=592047907980240"></script>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId: '592047907980240',
+          autoLogAppEvents: true,
+          xfbml: true,
+          version: 'v3.2'
+        });
+      };
+    </script>
+    <script
+      async
+      defer
+      src="https://connect.facebook.net/en_US/sdk.js"
+    ></script>
+
+    <div id="root"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
