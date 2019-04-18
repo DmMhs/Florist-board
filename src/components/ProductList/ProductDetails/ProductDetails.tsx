@@ -85,28 +85,6 @@ class ProductDetails extends Component<
         {value =>
           value && (
             <div className="ProductDetails">
-              <Helmet>
-                <title>{this.state.productData.title} | florist.ua</title>
-                <meta property="og:type" content="og:product" />
-                <meta
-                  property="og:title"
-                  content={this.state.productData.title}
-                />
-                <meta
-                  property="og:image"
-                  content={this.state.productData.images[0]}
-                />
-                <meta
-                  property="og:description"
-                  content={this.state.productData.description}
-                />
-                <meta
-                  property="og:url"
-                  content={`https://florist-ua.herokuapp.com/product-details/${
-                    this.props.match.params.id
-                  }`}
-                />
-              </Helmet>
               {this.state.fetchInProgress === false ? (
                 <div>
                   <h1>{this.state.productData.title.toUpperCase()}</h1>
