@@ -122,7 +122,9 @@ class ProductDetails extends Component<
                         >
                           <a
                             target="_blank"
-                            href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fflorist-ua.herokuapp.com%2Fproduct-details%2F&amp;src=sdkpreparse"
+                            href={`https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fflorist-ua.herokuapp.com%2Fproduct-details%2F${
+                              this.state.productData.id
+                            }&amp;src=sdkpreparse`}
                             className="fb-xfbml-parse-ignore"
                           >
                             SHARE <i className="fab fa-facebook" />
