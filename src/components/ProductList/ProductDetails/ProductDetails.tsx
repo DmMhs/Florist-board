@@ -72,6 +72,7 @@ class ProductDetails extends Component<
           value && (
             <div className="ProductDetails">
               <Helmet>
+                <title>{this.state.productData.title} | florist.ua</title>
                 <meta property="og:type" content="og:product" />
                 <meta
                   property="og:title"
