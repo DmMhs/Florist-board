@@ -119,7 +119,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
                   href="https://www.facebook.com/sharer/sharer.php?u=https://florist-ua.herokuapp.com/&amp;src=sdkpreparse"
                   className="fb-xfbml-parse-ignore"
                 >
-                  Поширити
+                  Share
                 </a>
               </div>
               <NavLink to={`/product-details/${id}`}>
