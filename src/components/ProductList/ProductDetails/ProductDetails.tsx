@@ -116,7 +116,9 @@ class ProductDetails extends Component<
                       {value.state.authenticationMethod === 'facebook' ? (
                         <div
                           className="fb-share-button"
-                          data-href="https://florist-ua.herokuapp.com/product-details/"
+                          data-href={`https://florist-ua.herokuapp.com/product-details/${
+                            this.state.productData.id
+                          }`}
                           data-layout="button_count"
                           data-size="small"
                         >
