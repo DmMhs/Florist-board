@@ -1,11 +1,18 @@
 import React, { Component, RefObject } from 'react';
 import { NavLink } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 import './ProductCard.less';
 import Slider from '../../Slider/Slider';
 import { CartItem } from '../../../models/CartItem';
 import { AuthContext } from '../../Auth/AuthContext';
 import { productsRef } from '../../../firebase';
+
+declare global {
+  interface Window {
+    fbAsyncInit: () => void;
+  }
+}
 
 interface ProductCardState {
   isLiked: boolean;
@@ -66,6 +73,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
   };
 
   render() {
+    console.log(document.getElementsByTagName('meta'));
     const userAuthenticated = this.context.state.userAuthenticated;
     const {
       id,
@@ -100,6 +108,20 @@ class ProductCard extends Component<CartItem, ProductCardState> {
         {value =>
           value && (
             <div className="ProductCard">
+              <div
+                className="fb-share-button"
+                data-href="https://developers.facebook.com/docs/plugins/"
+                data-layout="button_count"
+                data-size="small"
+              >
+                <a
+                  target="_blank"
+                  href="https://www.facebook.com/sharer/sharer.php?u=https://florist-ua.herokuapp.com/&amp;src=sdkpreparse"
+                  className="fb-xfbml-parse-ignore"
+                >
+                  Поширити
+                </a>
+              </div>
               <NavLink to={`/product-details/${id}`}>
                 <i className="fas fa-info-circle info" />
               </NavLink>
@@ -111,7 +133,12 @@ class ProductCard extends Component<CartItem, ProductCardState> {
                 />
               ) : null}
               {value.state.authenticationMethod === 'facebook' ? (
-                <i className="fas fa-share facebook-share" />
+                <a
+                  href="https://www.facebook.com/sharer/sharer.php"
+                  target="_blank"
+                >
+                  <i className="fas fa-share facebook-share" />
+                </a>
               ) : null}
               <div className="image">
                 <Slider images={images} auto={false} showControls={true} />
