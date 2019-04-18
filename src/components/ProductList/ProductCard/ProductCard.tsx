@@ -1,6 +1,5 @@
 import React, { Component, RefObject } from 'react';
 import { NavLink } from 'react-router-dom';
-import Helmet from 'react-helmet';
 
 import './ProductCard.less';
 import Slider from '../../Slider/Slider';
