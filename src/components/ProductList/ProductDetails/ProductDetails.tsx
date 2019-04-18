@@ -7,6 +7,7 @@ import { productsRef } from '../../../firebase';
 import './ProductDetails.less';
 import Helmet from 'react-helmet';
 import { AuthContext } from '../../Auth/AuthContext';
+import axios from 'axios';
 
 interface MatchParams {
   id: string;
@@ -66,6 +67,16 @@ class ProductDetails extends Component<
     const imgStyle = {
       backgroundImage: `url(${this.state.productData.images[0]})`
     };
+    axios
+      .get(
+        `https://graph.facebook.com/?id=https://florist-ua.herokuapp.com/product-details/${
+          this.props.match.params.id
+        }&amp;scrape=true&amp;method=post`
+      )
+      .then(response => {
+        console.log(response);
+        console.log(this.props.match.params.id);
+      });
     return (
       <AuthContext.Consumer>
         {value =>
@@ -89,7 +100,7 @@ class ProductDetails extends Component<
                 <meta
                   property="og:url"
                   content={`https://florist-ua.herokuapp.com/product-details/${
-                    this.state.productData.id
+                    this.props.match.params.id
                   }`}
                 />
               </Helmet>
