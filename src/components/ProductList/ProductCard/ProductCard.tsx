@@ -7,6 +7,12 @@ import { CartItem } from '../../../models/CartItem';
 import { AuthContext } from '../../Auth/AuthContext';
 import { productsRef } from '../../../firebase';
 
+declare global {
+  interface Window {
+    fbAsyncInit: () => void;
+  }
+}
+
 interface ProductCardState {
   isLiked: boolean;
   isLikedBy: string[];
@@ -66,6 +72,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
   };
 
   render() {
+    console.log(document.getElementsByTagName('meta'));
     const userAuthenticated = this.context.state.userAuthenticated;
     const {
       id,
@@ -109,9 +116,6 @@ class ProductCard extends Component<CartItem, ProductCardState> {
                   onClick={this.likeClickedHandler}
                   ref={this.likeButtonRef}
                 />
-              ) : null}
-              {value.state.authenticationMethod === 'facebook' ? (
-                <i className="fas fa-share facebook-share" />
               ) : null}
               <div className="image">
                 <Slider images={images} auto={false} showControls={true} />

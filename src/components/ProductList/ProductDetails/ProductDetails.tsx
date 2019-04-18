@@ -5,6 +5,8 @@ import Spinner from '../../Spinner/Spinner';
 import { Product } from '../../../models/Product';
 import { productsRef } from '../../../firebase';
 import './ProductDetails.less';
+import Helmet from 'react-helmet';
+import { AuthContext } from '../../Auth/AuthContext';
 
 interface MatchParams {
   id: string;
@@ -60,50 +62,81 @@ class ProductDetails extends Component<
       })
       .catch(error => console.log(error));
   }
+  facebookShareClickedHandler = () => {
+    return FB.ui(
+      {
+        method: 'share',
+        href: `https://florist-ua.herokuapp.com/product-details/${
+          this.props.match.params.id
+        }`
+      },
+      function(response) {
+        console.log(response);
+      }
+    );
+  };
   render() {
     const imgStyle = {
       backgroundImage: `url(${this.state.productData.images[0]})`
     };
-    return (
-      <div className="ProductDetails">
-        {this.state.fetchInProgress === false ? (
-          <div>
-            <h1>{this.state.productData.title.toUpperCase()}</h1>
-            <div className="product-info-wrapper">
-              <div className="image-wrapper">
-                <div className="image" style={imgStyle} />
-                <h3 className="price">
-                  {this.state.productData.available === false ? (
-                    <span>
-                      not in stock <i className="far fa-frown" />
-                    </span>
-                  ) : (
-                    <div>
-                      only{' '}
-                      <span className="accent">
-                        {this.state.productData.price}$
-                      </span>
-                    </div>
-                  )}
-                </h3>
-                <button className="shopping-btn" type="button">
-                  <NavLink to="/shop">
-                    GO SHOPPING <i className="fas fa-shopping-cart" />
-                  </NavLink>
-                </button>
-              </div>
 
-              <div className="info">
-                <h2>Description</h2>
-                <hr />
-                <p>{this.state.productData.description}</p>
-              </div>
+    return (
+      <AuthContext.Consumer>
+        {value =>
+          value && (
+            <div className="ProductDetails">
+              {this.state.fetchInProgress === false ? (
+                <div>
+                  <h1>{this.state.productData.title.toUpperCase()}</h1>
+                  <div className="product-info-wrapper">
+                    <div className="image-wrapper">
+                      <div className="image" style={imgStyle} />
+                      <h3 className="price">
+                        {this.state.productData.available === false ? (
+                          <span>
+                            not in stock <i className="far fa-frown" />
+                          </span>
+                        ) : (
+                          <div>
+                            only{' '}
+                            <span className="accent">
+                              {this.state.productData.price}$
+                            </span>
+                          </div>
+                        )}
+                      </h3>
+                      {value.state.authenticationMethod === 'facebook' ? (
+                        <div
+                          className="fb-share-button"
+                          onClick={this.facebookShareClickedHandler}
+                        >
+                          <span>
+                            SHARE <i className="fab fa-facebook-f" />
+                          </span>
+                        </div>
+                      ) : null}
+
+                      <button className="shopping-btn" type="button">
+                        <NavLink to="/shop">
+                          GO SHOPPING <i className="fas fa-shopping-cart" />
+                        </NavLink>
+                      </button>
+                    </div>
+
+                    <div className="info">
+                      <h2>Description</h2>
+                      <hr />
+                      <p>{this.state.productData.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Spinner />
+              )}
             </div>
-          </div>
-        ) : (
-          <Spinner />
-        )}
-      </div>
+          )
+        }
+      </AuthContext.Consumer>
     );
   }
 }
