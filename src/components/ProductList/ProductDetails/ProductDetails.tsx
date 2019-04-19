@@ -122,9 +122,9 @@ class ProductDetails extends Component<
                             `http://bit.ly/2IJjnvh${
                               this.props.match.params.id
                             }`,
-                            this.state.productData.title,
-                            this.state.productData.description as string,
-                            this.state.productData.images[0]
+                            'Some test title',
+                            'Some test description',
+                            'assets/images/main-pic.jpg'
                           )}
                         >
                           <span> SHARE</span>
