@@ -119,12 +119,13 @@ class ProductDetails extends Component<
                           className="button"
                           onClick={this.shareOverrideOGMeta.bind(
                             this,
-                            `http://bit.ly/2IJjnvh${
-                              this.props.match.params.id
-                            }`,
+                            // `http://bit.ly/2IJjnvh${
+                            //   this.props.match.params.id
+                            // }`,
+                            `https://florist-ua.herokuapp.com/product-details/${this.props.match.params.id}`,
                             'Some test title',
                             'Some test description',
-                            'assets/images/main-pic.jpg'
+                            this.state.productData.images[0]
                           )}
                         >
                           <span> SHARE</span>
