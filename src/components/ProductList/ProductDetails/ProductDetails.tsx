@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FacebookShareButton, FacebookIcon } from 'react-share';
 
 import Spinner from '../../Spinner/Spinner';
 import { Product } from '../../../models/Product';
 import { productsRef } from '../../../firebase';
 import './ProductDetails.less';
-import Helmet from 'react-helmet';
 import { AuthContext } from '../../Auth/AuthContext';
 
 interface MatchParams {
@@ -63,6 +61,28 @@ class ProductDetails extends Component<
       })
       .catch(error => console.log(error));
   }
+  shareOverrideOGMeta = (
+    overrideLink: string,
+    overrideTitle: string,
+    overrideDescription: string,
+    overrideImage: string
+  ) => {
+    const params: fb.ShareOpenGraphDialogParams = {
+      method: 'share_open_graph',
+      action_type: 'og.likes',
+      action_properties: {
+        'og:url': overrideLink,
+        'og:title': overrideTitle,
+        'og:description': overrideDescription,
+        'og:image': overrideImage
+      },
+      href: overrideLink
+    };
+
+    FB.ui(params, (response: any) => {
+      console.log(response);
+    });
+  };
   render() {
     const imgStyle = {
       backgroundImage: `url(${this.state.productData.images[0]})`
@@ -93,17 +113,19 @@ class ProductDetails extends Component<
                         )}
                       </h3>
                       {value.state.authenticationMethod === 'facebook' ? (
-                        <div className="button-wrapper">
-                          <FacebookShareButton
-                            url={`https://florist-ua.herokuapp.com/product-details/${
-                              this.props.match.params.id
-                            }`}
-                          >
-                            <div>
-                              <span> SHARE</span>
-                              <FacebookIcon size={50} />
-                            </div>
-                          </FacebookShareButton>
+                        <div
+                          className="button"
+                          onClick={this.shareOverrideOGMeta.bind(
+                            this,
+                            `https://florist-ua.herokuapp.com/product-details/${
+                              this.state.productData.id
+                            }`,
+                            this.state.productData.title,
+                            this.state.productData.description as string,
+                            this.state.productData.images[0]
+                          )}
+                        >
+                          <span> SHARE</span>
                         </div>
                       ) : null}
 
