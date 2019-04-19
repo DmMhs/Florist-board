@@ -127,14 +127,14 @@ class ProductDetails extends Component<
                         )}
                       </h3>
                       {value.state.authenticationMethod === 'facebook' ? (
-                        <div
-                          className="fb-share-button"
-                          // onClick={this.facebookShareClickedHandler}
-                        >
-                          <a href="https://www.facebook.com/dialog/share?app_id=592047907980240&display=popup&href=https://florist-ua.herokuapp.com/product-details/-Laz8rjo_K-w-nnvdrky&redirect_uri=https://florist-ua.herokuapp.com/product-details/">
-                            <span>
-                              SHARE <i className="fab fa-facebook-f" />
-                            </span>
+                        <div className="fb-share-button">
+                          <a
+                            href={`https://www.facebook.com/sharer/sharer.php?u=https%3A//florist-ua.herokuapp.com/product-details/${
+                              this.props.match.params.id
+                            }`}
+                            target="_blank"
+                          >
+                            SHARE <i className="fab fa-facebook-f" />
                           </a>
                         </div>
                       ) : null}
