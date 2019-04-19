@@ -77,6 +77,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "postbuild": "react-snap",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -102,6 +103,7 @@
     "enzyme-async-helpers": "^0.9.1",
     "enzyme-to-json": "^3.3.5",
     "react-router-enzyme-context": "^1.2.0",
+    "react-snap": "^1.23.0",
     "tslint": "^5.14.0",
     "tslint-react": "^3.6.0",
     "tslint-react-hooks": "^2.0.0"
