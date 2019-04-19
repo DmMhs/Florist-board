@@ -93,13 +93,18 @@ class ProductDetails extends Component<
                         )}
                       </h3>
                       {value.state.authenticationMethod === 'facebook' ? (
-                        <FacebookShareButton
-                          url={`https://florist-ua.herokuapp.com/product-details/${
-                            this.props.match.params.id
-                          }`}
-                        >
-                          <FacebookIcon size={50} />
-                        </FacebookShareButton>
+                        <div className="button-wrapper">
+                          <FacebookShareButton
+                            url={`https://florist-ua.herokuapp.com/product-details/${
+                              this.props.match.params.id
+                            }`}
+                          >
+                            <div>
+                              <span> SHARE</span>
+                              <FacebookIcon size={50} />
+                            </div>
+                          </FacebookShareButton>
+                        </div>
                       ) : null}
 
                       <button className="shopping-btn" type="button">
