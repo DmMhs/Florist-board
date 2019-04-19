@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { FacebookShareButton, FacebookIcon } from 'react-share';
 
 import Spinner from '../../Spinner/Spinner';
 import { Product } from '../../../models/Product';
@@ -62,19 +63,6 @@ class ProductDetails extends Component<
       })
       .catch(error => console.log(error));
   }
-  // facebookShareClickedHandler = () => {
-  //   return FB.ui(
-  //     {
-  //       method: 'share',
-  //       href: `https://florist-ua.herokuapp.com/product-details/${
-  //         this.props.match.params.id
-  //       }`
-  //     },
-  //     function(response) {
-  //       console.log(response);
-  //     }
-  //   );
-  // };
   render() {
     const imgStyle = {
       backgroundImage: `url(${this.state.productData.images[0]})`
@@ -86,28 +74,6 @@ class ProductDetails extends Component<
             <div className="ProductDetails">
               {this.state.fetchInProgress === false ? (
                 <div>
-                  <Helmet>
-                    <title>{this.state.productData.title} | florist.ua</title>
-                    <meta
-                      property="og:url"
-                      content={`href=https://florist-ua.herokuapp.com/product-details/${
-                        this.state.productData.id
-                      }`}
-                    />
-                    <meta property="og:type" content="website" />
-                    <meta
-                      property="og:title"
-                      content={this.state.productData.title}
-                    />
-                    <meta
-                      property="og:description"
-                      content={this.state.productData.description}
-                    />
-                    <meta
-                      property="og:image"
-                      content={this.state.productData.images[0]}
-                    />
-                  </Helmet>
                   <h1>{this.state.productData.title.toUpperCase()}</h1>
                   <div className="product-info-wrapper">
                     <div className="image-wrapper">
@@ -127,16 +93,13 @@ class ProductDetails extends Component<
                         )}
                       </h3>
                       {value.state.authenticationMethod === 'facebook' ? (
-                        <div className="fb-share-button">
-                          <a
-                            href={`https://www.facebook.com/sharer/sharer.php?u=https%3A//florist-ua.herokuapp.com/product-details/${
-                              this.props.match.params.id
-                            }`}
-                            target="_blank"
-                          >
-                            SHARE <i className="fab fa-facebook-f" />
-                          </a>
-                        </div>
+                        <FacebookShareButton
+                          url={`https://florist-ua.herokuapp.com/product-details/${
+                            this.props.match.params.id
+                          }`}
+                        >
+                          <FacebookIcon size={50} />
+                        </FacebookShareButton>
                       ) : null}
 
                       <button className="shopping-btn" type="button">
@@ -150,6 +113,10 @@ class ProductDetails extends Component<
                       <h2>Description</h2>
                       <hr />
                       <p>{this.state.productData.description}</p>
+                      <img
+                        src={this.state.productData.images[1]}
+                        style={{ maxHeight: '200px' }}
+                      />
                     </div>
                   </div>
                 </div>
