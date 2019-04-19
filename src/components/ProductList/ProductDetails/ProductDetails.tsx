@@ -62,24 +62,23 @@ class ProductDetails extends Component<
       })
       .catch(error => console.log(error));
   }
-  facebookShareClickedHandler = () => {
-    return FB.ui(
-      {
-        method: 'share',
-        href: `https://florist-ua.herokuapp.com/product-details/${
-          this.props.match.params.id
-        }`
-      },
-      function(response) {
-        console.log(response);
-      }
-    );
-  };
+  // facebookShareClickedHandler = () => {
+  //   return FB.ui(
+  //     {
+  //       method: 'share',
+  //       href: `https://florist-ua.herokuapp.com/product-details/${
+  //         this.props.match.params.id
+  //       }`
+  //     },
+  //     function(response) {
+  //       console.log(response);
+  //     }
+  //   );
+  // };
   render() {
     const imgStyle = {
       backgroundImage: `url(${this.state.productData.images[0]})`
     };
-
     return (
       <AuthContext.Consumer>
         {value =>
@@ -87,6 +86,28 @@ class ProductDetails extends Component<
             <div className="ProductDetails">
               {this.state.fetchInProgress === false ? (
                 <div>
+                  <Helmet>
+                    <title>{this.state.productData.title} | florist.ua</title>
+                    <meta
+                      property="og:url"
+                      content={`href=https://florist-ua.herokuapp.com/product-details/${
+                        this.state.productData.id
+                      }`}
+                    />
+                    <meta property="og:type" content="website" />
+                    <meta
+                      property="og:title"
+                      content={this.state.productData.title}
+                    />
+                    <meta
+                      property="og:description"
+                      content={this.state.productData.description}
+                    />
+                    <meta
+                      property="og:image"
+                      content={this.state.productData.images[0]}
+                    />
+                  </Helmet>
                   <h1>{this.state.productData.title.toUpperCase()}</h1>
                   <div className="product-info-wrapper">
                     <div className="image-wrapper">
@@ -108,11 +129,13 @@ class ProductDetails extends Component<
                       {value.state.authenticationMethod === 'facebook' ? (
                         <div
                           className="fb-share-button"
-                          onClick={this.facebookShareClickedHandler}
+                          // onClick={this.facebookShareClickedHandler}
                         >
-                          <span>
-                            SHARE <i className="fab fa-facebook-f" />
-                          </span>
+                          <a href="https://www.facebook.com/dialog/share?app_id=592047907980240&display=popup&href=https://florist-ua.herokuapp.com/product-details/-Laz8rjo_K-w-nnvdrky&redirect_uri=https://florist-ua.herokuapp.com/product-details/">
+                            <span>
+                              SHARE <i className="fab fa-facebook-f" />
+                            </span>
+                          </a>
                         </div>
                       ) : null}
 
