@@ -119,7 +119,7 @@ class ProductDetails extends Component<
                           className="button"
                           onClick={this.shareOverrideOGMeta.bind(
                             this,
-                            `https://florist-ua.herokuapp.com/product-details/${
+                            `http://bit.ly/2IJjnvh${
                               this.props.match.params.id
                             }`,
                             this.state.productData.title,
