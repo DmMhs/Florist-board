@@ -70,12 +70,14 @@ class ProductDetails extends Component<
     const params: fb.ShareOpenGraphDialogParams = {
       method: 'share_open_graph',
       action_type: 'og.likes',
-      action_properties: {
-        'og:url': overrideLink,
-        'og:title': overrideTitle,
-        'og:description': overrideDescription,
-        'og:image': overrideImage
-      },
+      action_properties: JSON.stringify({
+        object: {
+          'og:url': overrideLink,
+          'og:title': overrideTitle,
+          'og:description': overrideDescription,
+          'og:image': overrideImage
+        }
+      }) as any,
       href: overrideLink
     };
 
