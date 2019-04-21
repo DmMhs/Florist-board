@@ -119,14 +119,14 @@ class ProductDetails extends Component<
                       {value.state.authenticationMethod === 'facebook' ? (
                         <div
                           className="button"
-                          onClick={() => this.shareOverrideOGMeta(
+                          onClick={this.shareOverrideOGMeta.bind(this,
                             BASE_URL + `/product-details/${this.props.match.params.id}`,
                             this.state.productData.title,
                             this.state.productData.description as string,
                             this.state.productData.images[0]
                           )}
                         >
-                          <span> SHARE</span>
+                          <span> SHARE <i className="fab fa-facebook-f" /></span>
                         </div>
                       ) : null}
 
@@ -141,10 +141,6 @@ class ProductDetails extends Component<
                       <h2>Description</h2>
                       <hr />
                       <p>{this.state.productData.description}</p>
-                      <img
-                        src={this.state.productData.images[1]}
-                        style={{ maxHeight: '200px' }}
-                      />
                     </div>
                   </div>
                 </div>
