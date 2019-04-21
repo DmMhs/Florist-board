@@ -9,7 +9,7 @@
     />
     <meta name="theme-color" content="#000000" />
     <meta property="fb:app_id" content="592047907980240" />
-    <meta property="og:url" content="https://florist-ua.herokuapp.com" />
+    <meta property="og:url" content="BASE_URL" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Do you need some flowers?" />
     <meta
@@ -18,10 +18,8 @@
     />
     <meta
       property="og:image"
-      content="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/products-images%2Fpalm-trees%2FpalmTree2.jpg?alt=media&token=dd4385e3-32d7-4d3d-ac87-79c8280c1c05"
+      content="assets/images/main-pic.jpg"
     />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -42,22 +40,20 @@
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
       crossorigin="anonymous"
     />
-    <title>Test</title>
+    <title>Florist.ua</title>
+
     <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId: '592047907980240',
-          autoLogAppEvents: true,
-          xfbml: true,
-          version: 'v3.2'
-        });
-      };
-    </script>
-    <script
-      async
-      defer
-      src="https://connect.facebook.net/en_US/sdk.js"
-    ></script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '592047907980240',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v3.2'
+    });
+  };
+</script>
+<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+    
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
