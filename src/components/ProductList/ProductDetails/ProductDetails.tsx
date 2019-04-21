@@ -117,12 +117,10 @@ class ProductDetails extends Component<
                       {value.state.authenticationMethod === 'facebook' ? (
                         <div
                           className="button"
-                          onClick={this.shareOverrideOGMeta.bind(
-                            this,
-                            // `http://bit.ly/2IJjnvh${
-                            //   this.props.match.params.id
-                            // }`,
-                            `https://florist-ua.herokuapp.com/product-details/${this.props.match.params.id}`,
+                          onClick={() => this.shareOverrideOGMeta(
+                            `http://bit.ly/2IJjnvh${
+                              this.props.match.params.id
+                            }`,
                             'Some test title',
                             'Some test description',
                             'https://upload.wikimedia.org/wikipedia/commons/b/ba/Flower_jtca001.jpg'
