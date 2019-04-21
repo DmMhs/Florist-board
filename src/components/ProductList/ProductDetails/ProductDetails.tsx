@@ -67,6 +67,7 @@ class ProductDetails extends Component<
     overrideDescription: string,
     overrideImage: string
   ) => {
+    console.log(overrideLink, overrideTitle, overrideDescription, overrideImage);
     const params: fb.ShareOpenGraphDialogParams = {
       method: 'share_open_graph',
       action_type: 'og.likes',
@@ -118,12 +119,13 @@ class ProductDetails extends Component<
                         <div
                           className="button"
                           onClick={() => this.shareOverrideOGMeta(
-                            `http://bit.ly/2IJjnvh${
+                            `https://bit.ly/2IJjnvh${
                               this.props.match.params.id
                             }`,
-                            'Some test title',
-                            'Some test description',
-                            'https://upload.wikimedia.org/wikipedia/commons/b/ba/Flower_jtca001.jpg'
+                            // `http://localhost:3000/product-details/${this.props.match.params.id}`,
+                            this.state.productData.title,
+                            this.state.productData.description as string,
+                            this.state.productData.images[0]
                           )}
                         >
                           <span> SHARE</span>
