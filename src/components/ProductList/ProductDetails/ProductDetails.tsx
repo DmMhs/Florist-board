@@ -6,6 +6,7 @@ import { Product } from '../../../models/Product';
 import { productsRef } from '../../../firebase';
 import './ProductDetails.less';
 import { AuthContext } from '../../Auth/AuthContext';
+import {BASE_URL} from '../../../config/main';
 
 interface MatchParams {
   id: string;
@@ -74,7 +75,7 @@ class ProductDetails extends Component<
       action_properties: JSON.stringify({
         object: {
           'og:url': overrideLink,
-          'og:title': overrideTitle,
+          'og:title': overrideTitle.toUpperCase(),
           'og:description': overrideDescription,
           'og:image': overrideImage
         }
@@ -119,10 +120,7 @@ class ProductDetails extends Component<
                         <div
                           className="button"
                           onClick={() => this.shareOverrideOGMeta(
-                            `https://bit.ly/2IJjnvh${
-                              this.props.match.params.id
-                            }`,
-                            // `http://localhost:3000/product-details/${this.props.match.params.id}`,
+                            BASE_URL + `/product-details/${this.props.match.params.id}`,
                             this.state.productData.title,
                             this.state.productData.description as string,
                             this.state.productData.images[0]
