@@ -125,7 +125,7 @@ class ProductDetails extends Component<
                             `https://florist-ua.herokuapp.com/product-details/${this.props.match.params.id}`,
                             'Some test title',
                             'Some test description',
-                            this.state.productData.images[0]
+                            'https://upload.wikimedia.org/wikipedia/commons/b/ba/Flower_jtca001.jpg'
                           )}
                         >
                           <span> SHARE</span>
