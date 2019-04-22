@@ -6,7 +6,8 @@ import { Product } from '../../../models/Product';
 import { productsRef } from '../../../firebase';
 import './ProductDetails.less';
 import { AuthContext } from '../../Auth/AuthContext';
-import {BASE_URL} from '../../../config/main';
+import { BASE_URL } from '../../../config/main';
+import { shareOverrideOGMeta } from '../../../services/share';
 
 interface MatchParams {
   id: string;
@@ -62,31 +63,6 @@ class ProductDetails extends Component<
       })
       .catch(error => console.log(error));
   }
-  shareOverrideOGMeta = (
-    overrideLink: string,
-    overrideTitle: string,
-    overrideDescription: string,
-    overrideImage: string
-  ) => {
-    console.log(overrideLink, overrideTitle, overrideDescription, overrideImage);
-    const params: fb.ShareOpenGraphDialogParams = {
-      method: 'share_open_graph',
-      action_type: 'og.likes',
-      action_properties: JSON.stringify({
-        object: {
-          'og:url': overrideLink,
-          'og:title': overrideTitle.toUpperCase(),
-          'og:description': overrideDescription,
-          'og:image': overrideImage
-        }
-      }) as any,
-      href: overrideLink
-    };
-
-    FB.ui(params, (response: any) => {
-      console.log(response);
-    });
-  };
   render() {
     const imgStyle = {
       backgroundImage: `url(${this.state.productData.images[0]})`
@@ -119,14 +95,19 @@ class ProductDetails extends Component<
                       {value.state.authenticationMethod === 'facebook' ? (
                         <div
                           className="button"
-                          onClick={this.shareOverrideOGMeta.bind(this,
-                            BASE_URL + `/product-details/${this.props.match.params.id}`,
+                          onClick={shareOverrideOGMeta.bind(
+                            this,
+                            BASE_URL +
+                              `/product-details/${this.props.match.params.id}`,
                             this.state.productData.title,
                             this.state.productData.description as string,
                             this.state.productData.images[0]
                           )}
                         >
-                          <span> SHARE <i className="fab fa-facebook-f" /></span>
+                          <span>
+                            {' '}
+                            SHARE <i className="fab fa-facebook-f" />
+                          </span>
                         </div>
                       ) : null}
 
