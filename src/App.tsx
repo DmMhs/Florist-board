@@ -45,7 +45,7 @@ class App extends Component<AppProps, AppState> {
       localStorage.setItem('floristAuthUserId', '');
     }
     resizeListener = () => {
-      if (window.innerWidth < 576) {
+      if (window.innerWidth < 768) {
         this.setState({
           showNavigation: false
         });
