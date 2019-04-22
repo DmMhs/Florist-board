@@ -3,8 +3,6 @@ import { shallow, mount } from 'enzyme';
 import ReactDOM from 'react-dom';
 
 import ProductList from './ProductList';
-import { Product } from '../../models/Product';
-import ProductCard from './ProductCard/ProductCard';
 import { CartItem } from '../../models/CartItem';
 
 it('renders without crashing', () => {
@@ -19,16 +17,18 @@ it('matches a snapshot', () => {
 });
 
 it('products list is not empty', () => {
-  const prod: Product = {
+  const prod: CartItem = {
     title: 'title',
     images: ['pathtoimage'],
     price: 10,
     currency: 'usd',
-    available: true
+    available: true,
+    id: 'strinasfasfg',
+    inCart: false
   };
   const wrapper = shallow(<ProductList products={[prod, prod, prod]} />);
-  expect(wrapper.find('.ProductList').exists()).toEqual(true);
-  expect(wrapper.find('.ProductList').text().length).toBeGreaterThan(0);
+  const instance = wrapper.instance();
+  expect(instance.props.products.length).toBeGreaterThan(0);
 });
 
 it('Removes cart items', () => {
@@ -159,32 +159,6 @@ it('Close cart button changes the state', () => {
   expect(instance.state.showCart).toBeFalsy();
 });
 
-// it('resize event has impact on state', () => {
-//   const wrapper = shallow(<ProductList products={[]} />);
-//   const instance = wrapper.instance();
-//   instance.setState({
-//     popupMessages: [],
-//     mobileFiltersMode: undefined
-//   });
-//   const resizeListener = () => {
-//     if (window.innerWidth <= 920) {
-//       instance.setState({
-//         mobileFiltersMode: true
-//       });
-//       expect(instance.state.mobileFiltersMode).toBeTruthy();
-//     } else {
-//       instance.setState({
-//         mobileFiltersMode: false
-//       });
-//       expect(instance.state.mobileFiltersMode).toBeFalsy();
-//     }
-//   };
-//   window.addEventListener('resize', resizeListener);
-//   let resizeEvent = new Event('resize');
-//   window.dispatchEvent(resizeEvent);
-//   expect(instance.state.mobileFiltersMode).toBeDefined();
-// });
-
 it('filter toggler changes the state', () => {
   const wrapper = mount(<ProductList products={[]} />);
   const instance = wrapper.instance();
@@ -193,6 +167,9 @@ it('filter toggler changes the state', () => {
   });
   instance.filterToggleClickedHandler();
   expect(instance.state.showFilters).toBeTruthy();
+  instance.filterToggleRef.current = null;
+  instance.filterToggleClickedHandler();
+  expect(instance.state.showFilters).toBeFalsy();
 });
 
 it('Changing of price range has impact on state', () => {
@@ -213,4 +190,16 @@ it('Changing of price range has impact on state', () => {
   wrapper.find('.priceFrom').simulate('change', { target: { value: 4 } });
   wrapper.find('.priceTo').simulate('change', { target: { value: 10 } });
   expect(instance.state.filterByPrice).toEqual({ from: 4, to: 10 });
+});
+
+it('Clicking on "order by" changes "orderByOptionsRef" classList', () => {
+  const wrapper = mount(<ProductList products={[]} />);
+  const instance = wrapper.instance();
+  expect(
+    instance.orderByOptionsRef.current!.classList.contains('show')
+  ).toBeFalsy();
+  instance.orderByClickedHandler();
+  expect(
+    instance.orderByOptionsRef.current!.classList.contains('show')
+  ).toBeTruthy();
 });

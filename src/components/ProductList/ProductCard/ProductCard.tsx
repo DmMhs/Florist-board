@@ -37,9 +37,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
   }
   componentDidMount() {
     if (this.state.isLiked === true) {
-      if (!this.likeButtonRef.current!.classList.contains('active')) {
-        this.likeButtonRef.current!.classList.add('active');
-      }
+      this.likeButtonRef.current!.classList.add('active');
     }
   }
 
@@ -72,8 +70,6 @@ class ProductCard extends Component<CartItem, ProductCardState> {
   };
 
   render() {
-    console.log(document.getElementsByTagName('meta'));
-    const userAuthenticated = this.context.state.userAuthenticated;
     const {
       id,
       images,
@@ -121,7 +117,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
                 <Slider images={images} auto={false} showControls={true} />
               </div>
               <div className="title">{title}</div>
-              {available ? (
+              {available === true ? (
                 <div className="price">
                   {price}
                   {currency}

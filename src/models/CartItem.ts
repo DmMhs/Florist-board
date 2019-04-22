@@ -5,7 +5,7 @@ export interface CartItem {
   price: number;
   currency: string;
   available: boolean;
-  key: number;
+  key?: number;
   id: string;
   inCart: boolean;
   description?: string;

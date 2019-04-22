@@ -81,7 +81,7 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                         </NavLink>
                       </div>
                     ) : (
-                      <a onClick={this.logout} className="log-out test">
+                      <a onClick={this.logout} className="log-out">
                         Log Out
                       </a>
                     )}
