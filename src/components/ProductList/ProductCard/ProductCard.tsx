@@ -72,8 +72,6 @@ class ProductCard extends Component<CartItem, ProductCardState> {
   };
 
   render() {
-    console.log(document.getElementsByTagName('meta'));
-    const userAuthenticated = this.context.state.userAuthenticated;
     const {
       id,
       images,

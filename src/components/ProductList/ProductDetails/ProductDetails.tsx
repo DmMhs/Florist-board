@@ -113,7 +113,8 @@ class ProductDetails extends Component<
 
                       <button className="shopping-btn" type="button">
                         <NavLink to="/shop">
-                          GO SHOPPING <i className="fas fa-shopping-cart" />
+                          <span>GO SHOPPING</span>{' '}
+                          <i className="fas fa-shopping-cart" />
                         </NavLink>
                       </button>
                     </div>

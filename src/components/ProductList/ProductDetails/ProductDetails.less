@@ -52,23 +52,39 @@
       }
 
       .shopping-btn {
-        background-color: rgb(144, 201, 144);
-        color: white;
-        border: none;
+        box-sizing: border-box;
         padding: 7px;
-        border-radius: 5px;
         font-size: 1.3rem;
         cursor: pointer;
+        border: 1.5px solid rgb(120, 192, 120);
+        background-color: white;
+        transition: 0.5s;
         &:hover {
-          background-color: rgb(105, 211, 105);
+          background-color: rgb(120, 192, 120);
+          transition: 0.5s;
+          a {
+            span {
+              color: white;
+            }
+            i {
+              color: white;
+            }
+          }
         }
         a {
           text-decoration: none;
-          color: white;
-          &:hover,
-          &:active,
-          &:visited {
-            color: white;
+          span {
+            display: inline;
+            font-size: 1.2rem;
+            color: rgb(120, 192, 120);
+            &:hover,
+            &:active,
+            &:visited {
+              color: white;
+            }
+          }
+          i {
+            color: rgb(120, 192, 120);
           }
         }
       }
@@ -104,6 +120,7 @@
 }
 @media screen and (max-width: 768px) {
   .ProductDetails {
+    margin-top: 4rem;
     .product-info-wrapper {
       display: flex;
       flex-direction: column;
