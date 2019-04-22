@@ -1,8 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import {MemoryRouter} from 'react-router-dom';
+import { shallow, mount } from 'enzyme';
+import { MemoryRouter, BrowserRouter } from 'react-router-dom';
 
+import AuthContextProvider from '../../Auth/AuthContext';
 import ProductCard from './ProductCard';
+import { notDeepEqual } from 'assert';
 
 it('renders without crashing', () => {
   const wrapper = shallow(
@@ -19,7 +21,7 @@ it('renders without crashing', () => {
       />
     </MemoryRouter>
   );
-  expect(wrapper.find(ProductCard)).toMatchSnapshot()
+  expect(wrapper.find(ProductCard)).toMatchSnapshot();
 });
 
 it('Property "available" has impact on price displaying', () => {
@@ -34,32 +36,70 @@ it('Property "available" has impact on price displaying', () => {
     inCart: false,
     addToCart: () => {}
   };
-  let wrapper = shallow(
-    <ProductCard
-      title="some"
-      images={['test', 'product']}
-      price={10.5}
-      currency="usd"
-      available={false}
-      key={0}
-      id={'asfasf'}
-      inCart={false}
-      addToCart={() => {}}
-    />
+  let wrapper = mount(
+    <BrowserRouter>
+      <AuthContextProvider>
+        <ProductCard
+          title="some"
+          images={['test', 'product']}
+          price={10.5}
+          currency="usd"
+          available={false}
+          key={0}
+          id={'asfasf'}
+          inCart={false}
+          addToCart={() => {}}
+        />
+      </AuthContextProvider>
+    </BrowserRouter>
   );
   expect(wrapper.find('.price').text()).toEqual('not available :(');
-  wrapper = shallow(
-    <ProductCard
-      title="some"
-      images={['test', 'product']}
-      price={10.5}
-      currency="usd"
-      available={true}
-      key={0}
-      id={'asfasf'}
-      inCart={false}
-      addToCart={() => {}}
-    />
+  wrapper = mount(
+    <BrowserRouter>
+      <ProductCard
+        title="some"
+        images={['test', 'product']}
+        price={10.5}
+        currency="usd"
+        available={true}
+        key={0}
+        id={'asfasf'}
+        inCart={false}
+        addToCart={() => {}}
+      />
+    </BrowserRouter>
   );
   expect(wrapper.find('.price').text()).toEqual('10.5usd');
+});
+it('likeClickedHandler changes state of component', () => {
+  const wrapper = mount(
+    <BrowserRouter>
+      <AuthContextProvider>
+        <ProductCard
+          title="some"
+          images={['test', 'product']}
+          price={10.5}
+          currency="usd"
+          available={true}
+          key={0}
+          id={'asfasf'}
+          inCart={false}
+          addToCart={() => {}}
+        />
+      </AuthContextProvider>
+    </BrowserRouter>
+  );
+
+  const authContextInstance = wrapper.find('AuthContextProvider').instance();
+  authContextInstance.setState({
+    userAuthenticated: true,
+    userId: '12345'
+  });
+
+  const productCardInstance = wrapper.find('ProductCard').instance();
+  productCardInstance.likeClickedHandler();
+
+  expect(
+    productCardInstance.likeButtonRef!.current.classList.contains('active')
+  ).toBeTruthy();
 });

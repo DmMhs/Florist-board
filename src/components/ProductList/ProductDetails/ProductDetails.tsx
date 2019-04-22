@@ -69,69 +69,67 @@ class ProductDetails extends Component<
     };
     return (
       <AuthContext.Consumer>
-        {value =>
-          value && (
-            <div className="ProductDetails">
-              {this.state.fetchInProgress === false ? (
-                <div>
-                  <h1>{this.state.productData.title.toUpperCase()}</h1>
-                  <div className="product-info-wrapper">
-                    <div className="image-wrapper">
-                      <div className="image" style={imgStyle} />
-                      <h3 className="price">
-                        {this.state.productData.available === false ? (
-                          <span>
-                            not in stock <i className="far fa-frown" />
-                          </span>
-                        ) : (
-                          <div>
-                            only{' '}
-                            <span className="accent">
-                              {this.state.productData.price}$
-                            </span>
-                          </div>
-                        )}
-                      </h3>
-                      {value.state.authenticationMethod === 'facebook' ? (
-                        <div
-                          className="button"
-                          onClick={shareOverrideOGMeta.bind(
-                            this,
-                            BASE_URL +
-                              `/product-details/${this.props.match.params.id}`,
-                            this.state.productData.title,
-                            this.state.productData.description as string,
-                            this.state.productData.images[0]
-                          )}
-                        >
-                          <span>
-                            {' '}
-                            SHARE <i className="fab fa-facebook-f" />
+        {value => (
+          <div className="ProductDetails">
+            {this.state.fetchInProgress === false ? (
+              <div>
+                <h1>{this.state.productData.title.toUpperCase()}</h1>
+                <div className="product-info-wrapper">
+                  <div className="image-wrapper">
+                    <div className="image" style={imgStyle} />
+                    <h3 className="price">
+                      {this.state.productData.available === false ? (
+                        <span>
+                          not in stock <i className="far fa-frown" />
+                        </span>
+                      ) : (
+                        <div>
+                          only{' '}
+                          <span className="accent">
+                            {this.state.productData.price}$
                           </span>
                         </div>
-                      ) : null}
+                      )}
+                    </h3>
+                    {value.state.authenticationMethod === 'facebook' ? (
+                      <div
+                        className="button"
+                        onClick={shareOverrideOGMeta.bind(
+                          this,
+                          BASE_URL +
+                            `/product-details/${this.props.match.params.id}`,
+                          this.state.productData.title,
+                          this.state.productData.description as string,
+                          this.state.productData.images[0]
+                        )}
+                      >
+                        <span>
+                          {' '}
+                          SHARE <i className="fab fa-facebook-f" />
+                        </span>
+                      </div>
+                    ) : null}
 
-                      <button className="shopping-btn" type="button">
-                        <NavLink to="/shop">
-                          <span>GO SHOPPING</span>{' '}
-                          <i className="fas fa-shopping-cart" />
-                        </NavLink>
-                      </button>
-                    </div>
+                    <button className="shopping-btn" type="button">
+                      <NavLink to="/shop">
+                        <span>GO SHOPPING</span>{' '}
+                        <i className="fas fa-shopping-cart" />
+                      </NavLink>
+                    </button>
+                  </div>
 
-                    <div className="info">
-                      <h2>Description</h2>
-                      <hr />
-                      <p>{this.state.productData.description}</p>
-                    </div>
+                  <div className="info">
+                    <h2>Description</h2>
+                    <hr />
+                    <p>{this.state.productData.description}</p>
                   </div>
                 </div>
-              ) : (
-                <Spinner />
-              )}
-            </div>
-          )
-        }
+              </div>
+            ) : (
+              <Spinner />
+            )}
+          </div>
+        )}
       </AuthContext.Consumer>
     );
   }
