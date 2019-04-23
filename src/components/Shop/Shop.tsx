@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import './Shop.less';
 import { productsRef } from '../../firebase';
 import { Product } from '../../models/Product';
 import Spinner from '../Spinner/Spinner';

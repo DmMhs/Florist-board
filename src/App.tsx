@@ -11,6 +11,7 @@ import Toggle from './components/Toggle/Toggle';
 import ProductDetails from './components/ProductList/ProductDetails/ProductDetails';
 import Auth from './components/Auth/Auth';
 import AuthContextProvider from './components/Auth/AuthContext';
+import Footer from './components/Footer/Footer';
 
 interface AppProps {}
 interface AppState {
@@ -103,6 +104,7 @@ class App extends Component<AppProps, AppState> {
             {localStorage.floristAuth !== undefined
               ? JSON.parse(localStorage.floristAuth).email
               : null}
+
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/shop" component={Shop} />
@@ -111,6 +113,7 @@ class App extends Component<AppProps, AppState> {
               <Route path="/product-details/:id" component={ProductDetails} />
               <Route path="/auth/:mode" component={Auth} />
             </Switch>
+            <Footer />
           </div>
         </AuthContextProvider>
       </BrowserRouter>

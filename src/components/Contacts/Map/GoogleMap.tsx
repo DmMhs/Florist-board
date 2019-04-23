@@ -1,22 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component, RefObject } from 'react';
 
 import './GoogleMap.less';
+import Spinner from '../../Spinner/Spinner';
 
 interface GoogleMapProps {
   url: string;
 }
 interface GoogleMapState {
   mobileMode: boolean;
+  mapIsFetching: boolean;
 }
 
 let resizeListener: EventListener;
 
 class GoogleMap extends Component<GoogleMapProps, GoogleMapState> {
+  private mapRef: RefObject<HTMLIFrameElement>;
   constructor(props: GoogleMapProps) {
     super(props);
     this.state = {
-      mobileMode: false
+      mobileMode: false,
+      mapIsFetching: true
     };
+    this.mapRef = React.createRef();
   }
   componentDidMount() {
     if (window.innerWidth < 768) {
@@ -45,7 +50,16 @@ class GoogleMap extends Component<GoogleMapProps, GoogleMapState> {
   componentWillUnmount() {
     window.removeEventListener('resize', resizeListener);
   }
+
+  mapFetchedHandler = () => {
+    this.setState({
+      mapIsFetching: false
+    });
+    console.log(this.state.mapIsFetching);
+  };
+
   render() {
+    console.log(this.state.mapIsFetching);
     const { url } = this.props;
     const googleMap =
       this.state.mobileMode === true ? (
@@ -76,6 +90,7 @@ class GoogleMap extends Component<GoogleMapProps, GoogleMapState> {
               scrolling="no"
               marginHeight={0}
               marginWidth={0}
+              onLoad={this.mapFetchedHandler}
             />
           </div>
         </div>
@@ -107,11 +122,19 @@ class GoogleMap extends Component<GoogleMapProps, GoogleMapState> {
               scrolling="no"
               marginHeight={0}
               marginWidth={0}
+              onLoad={this.mapFetchedHandler}
+              ref={this.mapRef}
             />
           </div>
         </div>
       );
-    return <div>{googleMap}</div>;
+
+    return (
+      <div>
+        {this.state.mapIsFetching === true ? <Spinner /> : null}
+        {googleMap}
+      </div>
+    );
   }
 }
 
