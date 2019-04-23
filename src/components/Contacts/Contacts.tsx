@@ -1,38 +1,26 @@
 import React, { Component } from 'react';
 
+import './Contacts.less';
+import GoogleMap from './Map/GoogleMap';
+import ContactInfo from './ContactInfo/ContactInfo';
+import { contacts } from '../../config/contacts';
+
 class Contacts extends Component {
   render() {
     return (
       <div className="Contacts">
-        <div
-          className="mapouter"
-          style={{
-            position: 'relative',
-            textAlign: 'right',
-            height: '400px',
-            width: '300px'
-          }}
-        >
-          <div
-            className="gmap_canvas"
-            style={{
-              overflow: 'hidden',
-              background: 'none!important',
-              height: '400px',
-              width: '300px'
-            }}
-          >
-            <iframe
-              width="300"
-              height="400"
-              id="gmap_canvas"
-              src="https://maps.google.com/maps?q=Lviv%2C%20Rynok%20Square&t=&z=13&ie=UTF8&iwloc=&output=embed"
-              frameBorder="0"
-              scrolling="no"
-              marginHeight={0}
-              marginWidth={0}
-            />
-          </div>
+        <div className="contacts-wrapper">
+          <h2>Where to find us ?</h2>
+          <GoogleMap url="https://maps.google.com/maps?q=Lviv%2C%20Rynok%20Square&t=&z=13&ie=UTF8&iwloc=&output=embed" />
+          <hr />
+          <ContactInfo
+            address={contacts.address}
+            phone={contacts.phone}
+            email={contacts.email}
+            instagram={contacts.links.instagram}
+            facebook={contacts.links.facebook}
+            telegram={contacts.links.telegram}
+          />
         </div>
       </div>
     );
