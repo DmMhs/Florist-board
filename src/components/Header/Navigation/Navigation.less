@@ -112,7 +112,7 @@
     bottom: 0;
     background-color: white;
     z-index: 5;
-    opacity: 0.9;
+    opacity: 0.95;
     ul {
       margin-top: 4rem;
       display: flex;
@@ -166,13 +166,16 @@
         width: calc(100% - 12px);
         a {
           padding: 6px;
-          width: 100%;
         }
       }
       .log-out {
         display: inline-block;
-        width: 100%;
+        width: calc(100% - 12px);
         color: darkred;
+      }
+      .signin-link,
+      .signup-link {
+        width: 100%;
       }
     }
     .show {

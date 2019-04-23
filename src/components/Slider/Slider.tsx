@@ -45,9 +45,9 @@ class Slider extends Component<SliderProps, SliderState> {
     resizeListener = () => {
       if (this._isMounted) {
         this.setState({
-        currentIndex: 0,
-        translateValue: 0
-      });
+          currentIndex: 0,
+          translateValue: 0
+        });
       }
     };
     window.addEventListener('resize', resizeListener);
