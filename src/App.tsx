@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, RefObject } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './App.less';
@@ -22,6 +22,7 @@ interface AppState {
 let resizeListener: EventListener;
 
 class App extends Component<AppProps, AppState> {
+  private toggleRef: RefObject<HTMLDivElement>;
   constructor(props: AppProps) {
     super(props);
     this.state = {
@@ -29,6 +30,7 @@ class App extends Component<AppProps, AppState> {
       togglePosition: 'absolute',
       products: []
     };
+    this.toggleRef = React.createRef();
   }
 
   componentDidMount() {
@@ -46,12 +48,17 @@ class App extends Component<AppProps, AppState> {
     }
     resizeListener = () => {
       if (window.innerWidth < 768) {
+        if (this.toggleRef.current!.classList.contains('active')) {
+          this.toggleRef.current!.classList.remove('active');
+        }
         this.setState({
-          showNavigation: false
+          showNavigation: false,
+          togglePosition: 'absolute'
         });
       } else {
         this.setState({
-          showNavigation: true
+          showNavigation: true,
+          togglePosition: 'absolute'
         });
       }
     };
@@ -63,21 +70,18 @@ class App extends Component<AppProps, AppState> {
   }
 
   toggleClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
-    this.setState({
-      showNavigation: !this.state.showNavigation
-    });
-
     if (!(event.target as HTMLDivElement).classList.contains('active')) {
-      (event.target as HTMLDivElement).classList.add('active');
       this.setState({
+        showNavigation: !this.state.showNavigation,
         togglePosition: 'fixed'
       });
     } else {
-      (event.target as HTMLDivElement).classList.remove('active');
       this.setState({
+        showNavigation: !this.state.showNavigation,
         togglePosition: 'absolute'
       });
     }
+    (event.target as HTMLDivElement).classList.toggle('active');
   };
 
   render() {
@@ -93,6 +97,7 @@ class App extends Component<AppProps, AppState> {
                     ? 'absolute'
                     : 'fixed'
               }}
+              ref={this.toggleRef}
             />
             {this.state.showNavigation ? <Header /> : null}
             {localStorage.floristAuth !== undefined
