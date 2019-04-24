@@ -55,11 +55,9 @@ class GoogleMap extends Component<GoogleMapProps, GoogleMapState> {
     this.setState({
       mapIsFetching: false
     });
-    console.log(this.state.mapIsFetching);
   };
 
   render() {
-    console.log(this.state.mapIsFetching);
     const { url } = this.props;
     const googleMap =
       this.state.mobileMode === true ? (
