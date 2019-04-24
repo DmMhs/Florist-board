@@ -27,7 +27,7 @@ class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      showNavigation: window.innerWidth > 576,
+      showNavigation: window.innerWidth > 768,
       togglePosition: 'absolute',
       products: []
     };
@@ -48,10 +48,10 @@ class App extends Component<AppProps, AppState> {
       localStorage.setItem('floristAuthUserId', '');
     }
     resizeListener = () => {
-      if (window.innerWidth < 768) {
-        if (this.toggleRef.current!.classList.contains('active')) {
-          this.toggleRef.current!.classList.remove('active');
-        }
+      if (this.toggleRef.current!.classList.contains('active')) {
+        this.toggleRef.current!.classList.remove('active');
+      }
+      if (window.innerWidth <= 768) {
         this.setState({
           showNavigation: false,
           togglePosition: 'absolute'
