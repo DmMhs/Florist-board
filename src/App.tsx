@@ -12,6 +12,7 @@ import ProductDetails from './components/ProductList/ProductDetails/ProductDetai
 import Auth from './components/Auth/Auth';
 import AuthContextProvider from './components/Auth/AuthContext';
 import Footer from './components/Footer/Footer';
+import PageNotFound from './components/PageNotFound/PageNotFound';
 
 interface AppProps {}
 interface AppState {
@@ -112,6 +113,7 @@ class App extends Component<AppProps, AppState> {
               <Route path="/contacts" component={Contacts} />
               <Route path="/product-details/:id" component={ProductDetails} />
               <Route path="/auth/:mode" component={Auth} />
+              <Route component={PageNotFound} />
             </Switch>
             <Footer />
           </div>

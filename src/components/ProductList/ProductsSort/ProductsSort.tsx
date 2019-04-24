@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './ProductsSort.less';
+import labels from '../../../config/labels';
 
 interface ProductsSortProps {
   sortOrder: string;
@@ -44,7 +45,7 @@ const productsSort = (props: ProductsSortProps) => {
   return (
     <div className="sort-order">
       {filterToggleIcon}
-      <span>sort by</span>
+      <span>{labels.pages.shop.sort.main}</span>
       <div className="dropdown">
         <button onClick={props.orderByClicked} className="dropbtn">
           {props.sortBy.toUpperCase()} <i className="fas fa-angle-down" />
@@ -55,14 +56,14 @@ const productsSort = (props: ProductsSortProps) => {
             onClick={props.orderByChanged}
             className="sort-by-name-btn"
           >
-            name
+            {labels.pages.shop.sort.btn.byName}
           </a>
           <a
             href="#"
             onClick={props.orderByChanged}
             className="sort-by-price-btn"
           >
-            price
+            {labels.pages.shop.sort.btn.byPrice}
           </a>
         </div>
       </div>

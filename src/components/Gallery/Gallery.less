@@ -1,5 +1,7 @@
 .Gallery {
   min-height: calc(100vh - 7rem);
+  border: 1px solid transparent;
+  box-sizing: border-box;
   h2 {
     color: #333333;
     font-weight: normal;
@@ -14,15 +16,21 @@
     margin: 0 auto;
     flex-wrap: wrap;
     box-sizing: border-box;
+    margin-bottom: 1rem;
     .column {
       -ms-flex: 25%; /* IE10 */
       flex: 25%;
       max-width: 25%;
-      // padding: 0 4px;
       img {
-        width: 100%;
+        position: relative;
+        width: calc(100% - 8px);
         margin-top: 8px;
         vertical-align: middle;
+        border: 1px solid #eee;
+        &:hover {
+          cursor: pointer;
+          box-shadow: 1px 1px 3px #ccc;
+        }
       }
     }
   }

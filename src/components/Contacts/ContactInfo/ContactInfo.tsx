@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './ContactInfo.less';
+import labels from '../../../config/labels';
 
 interface ContactInfoProps {
   address: string;
@@ -15,7 +16,7 @@ const contactInfo = (props: ContactInfoProps) => {
   const { address, phone, email, telegram, facebook, instagram } = props;
   return (
     <div className="ContactsInfo">
-      <h3>Feel free to get in touch with us!</h3>
+      <h3>{labels.pages.contacts.info}</h3>
       <hr />
       <div className="contact-option">
         <div className="icon-wrapper">

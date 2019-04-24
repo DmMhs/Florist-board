@@ -4,13 +4,14 @@ import './Contacts.less';
 import GoogleMap from './Map/GoogleMap';
 import ContactInfo from './ContactInfo/ContactInfo';
 import { contacts } from '../../config/contacts';
+import labels from '../../config/labels';
 
 class Contacts extends Component {
   render() {
     return (
       <div className="Contacts">
         <div className="contacts-wrapper">
-          <h2>Where to find us ?</h2>
+          <h2>{labels.pages.contacts.map}</h2>
           <GoogleMap url="https://maps.google.com/maps?q=Lviv%2C%20Rynok%20Square&t=&z=13&ie=UTF8&iwloc=&output=embed" />
           <hr />
           <ContactInfo

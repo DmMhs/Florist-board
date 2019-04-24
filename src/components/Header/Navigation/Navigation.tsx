@@ -74,15 +74,17 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                     {value.state.userAuthenticated === false ? (
                       <div>
                         <NavLink to="/auth/signup" className="signup-link">
-                          Sign Up <i className="fas fa-user-plus" />
+                          {labels.navigation.account.menu.signUp}{' '}
+                          <i className="fas fa-user-plus" />
                         </NavLink>
                         <NavLink to="/auth/signin" className="signin-link">
-                          Sign In <i className="fas fa-sign-in-alt" />
+                          {labels.navigation.account.menu.signIn}{' '}
+                          <i className="fas fa-sign-in-alt" />
                         </NavLink>
                       </div>
                     ) : (
                       <a onClick={this.logout} className="log-out">
-                        Log Out
+                        {labels.navigation.account.menu.logOut}
                       </a>
                     )}
                   </div>

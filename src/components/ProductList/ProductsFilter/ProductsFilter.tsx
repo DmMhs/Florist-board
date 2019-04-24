@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './ProductsFilter.less';
+import labels from '../../../config/labels';
 
 interface ProductsFilterProps {
   filterToggle:
@@ -36,23 +37,23 @@ const productsFilter = (props: ProductsFilterProps) => {
       ) : null}
       <h2>
         <span>
-          Filters <i className="fas fa-filter" />
+          {labels.pages.shop.filter.main} <i className="fas fa-filter" />
         </span>{' '}
         {closeFiltersIcon}
       </h2>
       <form className="filter-form">
         <div className="filter-option available">
-          <label>IN STOCK</label>
+          <label>{labels.pages.shop.filter.available}</label>
           <input type="checkbox" onChange={props.inStockChanged} />
         </div>
         <div className="filter-option price-range">
-          <label>PRICE RANGE</label>
+          <label>{labels.pages.shop.filter.price}</label>
           <div>
             <input
               type="number"
               onChange={props.priceFromChanged}
               className="priceFrom"
-              placeholder="from"
+              placeholder={labels.pages.shop.filter.priceInputs.from}
               min="0"
             />
             -
@@ -60,7 +61,7 @@ const productsFilter = (props: ProductsFilterProps) => {
               type="number"
               onChange={props.priceToChanged}
               className="priceTo"
-              placeholder="to"
+              placeholder={labels.pages.shop.filter.priceInputs.to}
               min="0"
             />
           </div>

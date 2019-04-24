@@ -3,11 +3,15 @@ import React, { Component, ReactElement } from 'react';
 import './Gallery.less';
 import { galleryImagesRef } from '../../firebase';
 import Spinner from '../Spinner/Spinner';
+import Modal from './Modal/Modal';
+import labels from '../../config/labels';
 
 interface GalleryProps {}
 interface GalleryState {
   images: string[];
   fetchInProgress: boolean;
+  showModal: boolean;
+  modalIndex: number;
 }
 
 class Gallery extends Component<GalleryProps, GalleryState> {
@@ -15,7 +19,9 @@ class Gallery extends Component<GalleryProps, GalleryState> {
     super(props);
     this.state = {
       images: [],
-      fetchInProgress: false
+      fetchInProgress: false,
+      showModal: false,
+      modalIndex: 0
     };
   }
   componentDidMount() {
@@ -33,15 +39,48 @@ class Gallery extends Component<GalleryProps, GalleryState> {
       });
     });
   }
+  imageClickedHandler = (index: number) => {
+    this.setState({
+      showModal: true,
+      modalIndex: index
+    });
+  };
+  prevClickedHandler = () => {
+    if (this.state.modalIndex !== 0) {
+      this.setState({
+        modalIndex: this.state.modalIndex! - 1
+      });
+    }
+  };
+  nextClickedHandler = () => {
+    if (this.state.images.length > this.state.modalIndex + 1)
+      this.setState({
+        modalIndex: this.state.modalIndex! + 1
+      });
+  };
+  closeModalClickedHandler = () => {
+    this.setState({
+      showModal: false,
+      modalIndex: 0
+    });
+  };
   render() {
     const imagesList = this.state.images.map(
       (imageUrl: string, index: number) => {
-        return <img src={imageUrl} alt={`gallery-img-${index}`} key={index} />;
+        return (
+          <img
+            src={imageUrl}
+            alt={`gallery-img-${index}`}
+            key={index}
+            onClick={this.imageClickedHandler.bind(this, index)}
+            className="image"
+          />
+        );
       }
     );
     return (
       <div className="Gallery">
-        <h2>Our Gallery</h2>
+        <h2>{labels.pages.gallery.main}</h2>
         <hr />
         {this.state.fetchInProgress === true ? (
           <Spinner />
@@ -70,6 +109,15 @@ class Gallery extends Component<GalleryProps, GalleryState> {
             </div>
           </div>
         )}
+        {this.state.showModal === true ? (
+          <Modal
+            images={imagesList}
+            initial={this.state.modalIndex}
+            prevClickedHandler={this.prevClickedHandler}
+            nextClickedHandler={this.nextClickedHandler}
+            closeModal={this.closeModalClickedHandler}
+          />
+        ) : null}
       </div>
     );
   }
