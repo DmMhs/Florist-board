@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, RefObject } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './App.less';
@@ -11,6 +11,8 @@ import Toggle from './components/Toggle/Toggle';
 import ProductDetails from './components/ProductList/ProductDetails/ProductDetails';
 import Auth from './components/Auth/Auth';
 import AuthContextProvider from './components/Auth/AuthContext';
+import Footer from './components/Footer/Footer';
+import PageNotFound from './components/PageNotFound/PageNotFound';
 
 interface AppProps {}
 interface AppState {
@@ -22,13 +24,15 @@ interface AppState {
 let resizeListener: EventListener;
 
 class App extends Component<AppProps, AppState> {
+  private toggleRef: RefObject<HTMLDivElement>;
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      showNavigation: window.innerWidth > 576,
+      showNavigation: window.innerWidth > 768,
       togglePosition: 'absolute',
       products: []
     };
+    this.toggleRef = React.createRef();
   }
 
   componentDidMount() {
@@ -45,13 +49,18 @@ class App extends Component<AppProps, AppState> {
       localStorage.setItem('floristAuthUserId', '');
     }
     resizeListener = () => {
-      if (window.innerWidth < 768) {
+      if (this.toggleRef.current!.classList.contains('active')) {
+        this.toggleRef.current!.classList.remove('active');
+      }
+      if (window.innerWidth <= 768) {
         this.setState({
-          showNavigation: false
+          showNavigation: false,
+          togglePosition: 'absolute'
         });
       } else {
         this.setState({
-          showNavigation: true
+          showNavigation: true,
+          togglePosition: 'absolute'
         });
       }
     };
@@ -63,21 +72,18 @@ class App extends Component<AppProps, AppState> {
   }
 
   toggleClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
-    this.setState({
-      showNavigation: !this.state.showNavigation
-    });
-
     if (!(event.target as HTMLDivElement).classList.contains('active')) {
-      (event.target as HTMLDivElement).classList.add('active');
       this.setState({
+        showNavigation: !this.state.showNavigation,
         togglePosition: 'fixed'
       });
     } else {
-      (event.target as HTMLDivElement).classList.remove('active');
       this.setState({
+        showNavigation: !this.state.showNavigation,
         togglePosition: 'absolute'
       });
     }
+    (event.target as HTMLDivElement).classList.toggle('active');
   };
 
   render() {
@@ -93,11 +99,13 @@ class App extends Component<AppProps, AppState> {
                     ? 'absolute'
                     : 'fixed'
               }}
+              ref={this.toggleRef}
             />
             {this.state.showNavigation ? <Header /> : null}
             {localStorage.floristAuth !== undefined
               ? JSON.parse(localStorage.floristAuth).email
               : null}
+
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/shop" component={Shop} />
@@ -105,7 +113,9 @@ class App extends Component<AppProps, AppState> {
               <Route path="/contacts" component={Contacts} />
               <Route path="/product-details/:id" component={ProductDetails} />
               <Route path="/auth/:mode" component={Auth} />
+              <Route component={PageNotFound} />
             </Switch>
+            <Footer />
           </div>
         </AuthContextProvider>
       </BrowserRouter>

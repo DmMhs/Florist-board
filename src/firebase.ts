@@ -13,4 +13,4 @@ firebase.initializeApp(config);
 export const database = firebase.database();
 export const homeImagesRef = database.ref('home-images');
 export const productsRef = database.ref('products');
-export const newproductsRef = database.ref('newproducts');
+export const galleryImagesRef = database.ref('gallery-images');

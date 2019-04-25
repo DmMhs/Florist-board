@@ -7,6 +7,7 @@ export interface AuthContextState {
   userToken: string | null | undefined;
   userAuthenticated: boolean;
   authenticationMethod: string | null | undefined;
+  lang: string | null | undefined;
 }
 
 export const AuthContext = React.createContext({
@@ -18,7 +19,8 @@ export const AuthContext = React.createContext({
     authenticationMethod?: string | null,
     event?: Event
   ) => {},
-  logout: () => {}
+  logout: () => {},
+  setLang: (lang: string | null) => {}
 });
 class AuthContextProvider extends Component<
   RouteComponentProps<{}>,
@@ -31,7 +33,8 @@ class AuthContextProvider extends Component<
       userId: '',
       userToken: '',
       userAuthenticated: false,
-      authenticationMethod: undefined
+      authenticationMethod: undefined,
+      lang: 'en'
     };
   }
   componentDidMount() {
@@ -88,13 +91,21 @@ class AuthContextProvider extends Component<
     localStorage.floristAuthUserId = '';
     localStorage.floristAuthMethod = '';
   };
+
+  setLangHandler = (lang: string | null) => {
+    this.setState({
+      lang: lang
+    });
+  };
+
   render() {
     return (
       <AuthContext.Provider
         value={{
           state: this.state,
           setUserCredentials: this.setUserCredentialsHandler,
-          logout: this.logoutHandler
+          logout: this.logoutHandler,
+          setLang: this.setLangHandler
         }}
       >
         {this.props.children}

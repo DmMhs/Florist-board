@@ -9,14 +9,15 @@ interface ToggleProps {
     | undefined;
 }
 
-const toggle = (props: ToggleProps) => {
+const toggle = React.forwardRef((props: ToggleProps, ref) => {
   return (
     <i
       className="fas fa-ellipsis-h Toggle"
       onClick={props.click}
       style={props.style}
+      ref={ref as any}
     />
   );
-};
+});
 
 export default toggle;

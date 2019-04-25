@@ -6,7 +6,8 @@ import './Auth.less';
 import Popup from '../Popup/Popup';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
-import { userInfo } from 'os';
+
+import labels from '../../config/labels';
 
 interface MatchParams {
   mode: string;
@@ -184,101 +185,140 @@ class Auth extends Component<
                     | undefined
                 }
               >
-                <div className="form-field">
-                  <label>Email:</label>
-                  <input
-                    type="email"
-                    className="email-input"
-                    onChange={this.emailInputChangeHandler}
-                    value={this.state.formData.email}
-                    required
-                  />
-                </div>
-                <div className="form-field">
-                  <label>Password:</label>
-                  <input
-                    type="password"
-                    className="password-input"
-                    minLength={6}
-                    onChange={this.passwordInputChangeHandler}
-                    value={this.state.formData.password}
-                    required
-                  />
-                </div>
-                <div className="form-field">
-                  <button
-                    type="submit"
-                    disabled={
-                      this.state.formData.password === '' ||
-                      this.state.formData.email === ''
-                        ? true
-                        : false
-                    }
-                    className="submit-btn"
-                  >
-                    SUBMIT
-                  </button>
-                  {this.state.formData.password === '' ||
-                  this.state.formData.email === '' ? (
-                    <Popup
-                      type="info"
-                      message="Please, provide a required data"
-                    />
-                  ) : null}
-                </div>
-                <hr />
-                <h3>OR</h3>
-                <div className="form-field">
-                  <p>
-                    {this.state.mode === 'signup' ? 'Sign Up' : 'Sign In'} with
-                    a Google:
-                  </p>{' '}
-                  <br />
-                  <a
-                    onClick={this.authWithGoogleHandler}
-                    className="google-auth"
-                  >
-                    <img
-                      src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Fgoogle.png?alt=media&token=3210d61d-cad2-45bc-a343-0ed08c097bb6"
-                      alt="google-pic"
-                      className="google-pic"
-                    />
-                  </a>
-                </div>
-                <div className="form-field">
-                  <p>
-                    {this.state.mode === 'signup' ? 'Sign Up' : 'Sign In'} with
-                    a Facebook:
-                  </p>{' '}
-                  <br />
-                  <a
-                    onClick={this.authWithFacebookHandler}
-                    className="facebook-auth"
-                  >
-                    <img
-                      src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Ffacebook.png?alt=media&token=32a65be5-5336-45fd-8a50-44f8880ddbd0"
-                      alt="facebook-pic"
-                      className="facebook-pic"
-                    />
-                  </a>
-                </div>
-                <hr />
-                <div className="form-field">
-                  <p>
-                    {this.state.mode === 'signup'
-                      ? 'Already have an account ?'
-                      : 'Have no account ?'}
-                  </p>
-                  <button type="button" className="switch-btn">
-                    <NavLink
-                      to={`/auth/${
-                        this.state.mode === 'signup' ? 'signin' : 'signup'
-                      }`}
-                    >
-                      {this.state.mode === 'signup' ? 'SIGN IN' : 'SIGN UP'}
-                    </NavLink>
-                  </button>
-                </div>
+                {value.state.userAuthenticated === false ? (
+                  <div>
+                    <div className="form-field">
+                      <label>
+                        {labels[value.state.lang as string].pages.auth.email}
+                      </label>
+                      <input
+                        type="email"
+                        className="email-input"
+                        onChange={this.emailInputChangeHandler}
+                        value={this.state.formData.email}
+                        required
+                      />
+                    </div>
+                    <div className="form-field">
+                      <label>
+                        {labels[value.state.lang as string].pages.auth.password}
+                      </label>
+                      <input
+                        type="password"
+                        className="password-input"
+                        minLength={6}
+                        onChange={this.passwordInputChangeHandler}
+                        value={this.state.formData.password}
+                        required
+                      />
+                    </div>
+                    <div className="form-field">
+                      <button
+                        type="submit"
+                        disabled={
+                          this.state.formData.password === '' ||
+                          this.state.formData.email === ''
+                            ? true
+                            : false
+                        }
+                        className="submit-btn"
+                      >
+                        {labels[value.state.lang as string].pages.auth.btn}
+                      </button>
+                      {this.state.formData.password === '' ||
+                      this.state.formData.email === '' ? (
+                        <Popup
+                          type="info"
+                          message="Please, provide a required data"
+                        />
+                      ) : null}
+                    </div>
+                    <hr />
+                    <h3>
+                      {
+                        labels[value.state.lang as string].pages.auth
+                          .alternative
+                      }
+                    </h3>
+                    <div className="form-field">
+                      <p>
+                        {this.state.mode === 'signup'
+                          ? labels[value.state.lang as string].pages.auth.signup
+                              .google
+                          : labels[value.state.lang as string].pages.auth.signin
+                              .google}
+                      </p>{' '}
+                      <br />
+                      <a
+                        onClick={this.authWithGoogleHandler}
+                        className="google-auth"
+                      >
+                        <img
+                          src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Fgoogle.png?alt=media&token=3210d61d-cad2-45bc-a343-0ed08c097bb6"
+                          alt="google-pic"
+                          className="google-pic"
+                        />
+                      </a>
+                    </div>
+                    <div className="form-field">
+                      <p>
+                        {this.state.mode === 'signup'
+                          ? labels[value.state.lang as string].pages.auth.signup
+                              .facebook
+                          : labels[value.state.lang as string].pages.auth.signin
+                              .facebook}
+                      </p>
+                      <br />
+                      <a
+                        onClick={this.authWithFacebookHandler}
+                        className="facebook-auth"
+                      >
+                        <img
+                          src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Ffacebook.png?alt=media&token=32a65be5-5336-45fd-8a50-44f8880ddbd0"
+                          alt="facebook-pic"
+                          className="facebook-pic"
+                        />
+                      </a>
+                    </div>
+                    <hr />
+                    <div className="form-field">
+                      <p>
+                        {this.state.mode === 'signup'
+                          ? labels[value.state.lang as string].pages.auth.signup
+                              .account
+                          : labels[value.state.lang as string].pages.auth.signin
+                              .account}
+                      </p>
+                      <button type="button" className="switch-btn">
+                        <NavLink
+                          to={`/auth/${
+                            this.state.mode === 'signup' ? 'signin' : 'signup'
+                          }`}
+                        >
+                          {this.state.mode === 'signup'
+                            ? labels[value.state.lang as string].pages.auth
+                                .signup.btn
+                            : labels[value.state.lang as string].pages.auth
+                                .signin.btn}
+                        </NavLink>
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="authenticated-message">
+                    {' '}
+                    <h2>
+                      {
+                        labels[value.state.lang as string].pages.auth.isAuth
+                          .main
+                      }{' '}
+                      <i className="far fa-flushed" />
+                    </h2>{' '}
+                    <span>
+                      {labels[value.state.lang as string].pages.auth.isAuth.sub}
+                    </span>
+                  </div>
+                )}
               </form>
             )
           }
