@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import './ProductsSort.less';
 import labels from '../../../config/labels';
+import { AuthContext } from '../../Auth/AuthContext';
 
 interface ProductsSortProps {
   sortOrder: string;
@@ -23,6 +24,7 @@ interface ProductsSortProps {
 }
 
 const productsSort = (props: ProductsSortProps) => {
+  const context = useContext(AuthContext);
   const sortByNameOrderIcon =
     props.sortOrder === 'default' ? (
       <i className="fas fa-sort-alpha-down" onClick={props.sortOrderClicked} />
@@ -45,10 +47,17 @@ const productsSort = (props: ProductsSortProps) => {
   return (
     <div className="sort-order">
       {filterToggleIcon}
-      <span>{labels.pages.shop.sort.main}</span>
+      <span>{labels[context.state.lang as string].pages.shop.sort.main}</span>
       <div className="dropdown">
         <button onClick={props.orderByClicked} className="dropbtn">
-          {props.sortBy.toUpperCase()} <i className="fas fa-angle-down" />
+          {props.sortBy === 'name'
+            ? labels[
+                context.state.lang as string
+              ].pages.shop.sort.btn.byName.toUpperCase()
+            : labels[
+                context.state.lang as string
+              ].pages.shop.sort.btn.byPrice.toUpperCase()}{' '}
+          <i className="fas fa-angle-down" />
         </button>
         <div ref={props.orderByOptionsRef} className="dropdown-content">
           <a
@@ -56,14 +65,14 @@ const productsSort = (props: ProductsSortProps) => {
             onClick={props.orderByChanged}
             className="sort-by-name-btn"
           >
-            {labels.pages.shop.sort.btn.byName}
+            {labels[context.state.lang as string].pages.shop.sort.btn.byName}
           </a>
           <a
             href="#"
             onClick={props.orderByChanged}
             className="sort-by-price-btn"
           >
-            {labels.pages.shop.sort.btn.byPrice}
+            {labels[context.state.lang as string].pages.shop.sort.btn.byPrice}
           </a>
         </div>
       </div>

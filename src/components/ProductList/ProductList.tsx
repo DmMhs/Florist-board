@@ -11,7 +11,7 @@ import sortByName from '../../services/sortByName';
 import sortByPrice from '../../services/sortByPrice';
 import Popup from '../Popup/Popup';
 import { AuthContext } from '../Auth/AuthContext';
-import { productsRef } from '../../firebase';
+import labels from '../../config/labels';
 
 interface ProductListProps {
   products: CartItem[];
@@ -88,6 +88,21 @@ class ProductList extends Component<ProductListProps, ProductListState> {
   }
 
   addToCartClickedHandler = (productData: CartItem) => {
+    const context = this.context;
+    const removePopup = () => {
+      const timer = setTimeout(() => {
+        const newPopupMessages = [...this.state.popupMessages];
+        const index = newPopupMessages.findIndex(
+          (i: { id: string; el: JSX.Element }) => {
+            return i.id === productData.id;
+          }
+        );
+        newPopupMessages.splice(index, 1);
+        this.setState({
+          popupMessages: newPopupMessages
+        });
+      }, 3000);
+    };
     if (productData.available) {
       const cartProducts = this.state.cartProducts;
       const index = cartProducts.findIndex((i: CartItem) => {
@@ -100,39 +115,49 @@ class ProductList extends Component<ProductListProps, ProductListState> {
           cartProducts: [...cartProducts, productData]
         });
       }
-      this.setState(
-        {
-          popupMessages: [
-            ...this.state.popupMessages,
-            {
-              id: productData.id,
-              el: (
-                <Popup
-                  type="success"
-                  message={`Product "${
-                    productData.title
-                  }" was added to the cart`}
-                  key={productData.id}
-                />
-              )
-            }
-          ]
-        },
-        () => {
-          const timer = setTimeout(() => {
-            const newPopupMessages = [...this.state.popupMessages];
-            const index = newPopupMessages.findIndex(
-              (i: { id: string; el: JSX.Element }) => {
-                return i.id === productData.id;
+      if (context.state.lang === 'uk') {
+        this.setState(
+          {
+            popupMessages: [
+              ...this.state.popupMessages,
+              {
+                id: productData.id,
+                el: (
+                  <Popup
+                    type="success"
+                    message={`Продукт "${
+                      productData.title
+                    }" було додано у кошик`}
+                    key={productData.id}
+                  />
+                )
               }
-            );
-            newPopupMessages.splice(index, 1);
-            this.setState({
-              popupMessages: newPopupMessages
-            });
-          }, 3000);
-        }
-      );
+            ]
+          },
+          removePopup
+        );
+      } else {
+        this.setState(
+          {
+            popupMessages: [
+              ...this.state.popupMessages,
+              {
+                id: productData.id,
+                el: (
+                  <Popup
+                    type="success"
+                    message={`Product "${
+                      productData.title
+                    }" was added to the cart`}
+                    key={productData.id}
+                  />
+                )
+              }
+            ]
+          },
+          removePopup
+        );
+      }
     }
   };
   toggleCartClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -189,9 +214,11 @@ class ProductList extends Component<ProductListProps, ProductListState> {
   orderByChangedHandler = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
+    const context = this.context;
     this.setState({
       sortBy:
-        (event.target as HTMLAnchorElement).innerText === 'name'
+        (event.target as HTMLAnchorElement).innerText ===
+        labels[context.state.lang as string].pages.shop.sort.btn.byName
           ? 'name'
           : 'price'
     });

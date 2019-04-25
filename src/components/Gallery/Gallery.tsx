@@ -5,6 +5,7 @@ import { galleryImagesRef } from '../../firebase';
 import Spinner from '../Spinner/Spinner';
 import Modal from './Modal/Modal';
 import labels from '../../config/labels';
+import { AuthContext } from '../Auth/AuthContext';
 
 interface GalleryProps {}
 interface GalleryState {
@@ -79,46 +80,50 @@ class Gallery extends Component<GalleryProps, GalleryState> {
       }
     );
     return (
-      <div className="Gallery">
-        <h2>{labels.pages.gallery.main}</h2>
-        <hr />
-        {this.state.fetchInProgress === true ? (
-          <Spinner />
-        ) : (
-          <div className="images-wrapper">
-            <div className="column">
-              {imagesList.slice(0, Math.floor(imagesList.length / 4))}
-            </div>
-            <div className="column">
-              {imagesList.slice(
-                Math.floor(imagesList.length / 4),
-                Math.floor(imagesList.length / 4) * 2
-              )}
-            </div>
-            <div className="column">
-              {imagesList.slice(
-                Math.floor(imagesList.length / 4) * 2,
-                Math.floor(imagesList.length / 4) * 3
-              )}
-            </div>
-            <div className="column">
-              {imagesList.slice(
-                Math.floor(imagesList.length / 4) * 3,
-                imagesList.length + 1
-              )}
-            </div>
+      <AuthContext.Consumer>
+        {value => (
+          <div className="Gallery">
+            <h2>{labels[value.state.lang as string].pages.gallery.main}</h2>
+            <hr />
+            {this.state.fetchInProgress === true ? (
+              <Spinner />
+            ) : (
+              <div className="images-wrapper">
+                <div className="column">
+                  {imagesList.slice(0, Math.floor(imagesList.length / 4))}
+                </div>
+                <div className="column">
+                  {imagesList.slice(
+                    Math.floor(imagesList.length / 4),
+                    Math.floor(imagesList.length / 4) * 2
+                  )}
+                </div>
+                <div className="column">
+                  {imagesList.slice(
+                    Math.floor(imagesList.length / 4) * 2,
+                    Math.floor(imagesList.length / 4) * 3
+                  )}
+                </div>
+                <div className="column">
+                  {imagesList.slice(
+                    Math.floor(imagesList.length / 4) * 3,
+                    imagesList.length + 1
+                  )}
+                </div>
+              </div>
+            )}
+            {this.state.showModal === true ? (
+              <Modal
+                images={imagesList}
+                initial={this.state.modalIndex}
+                prevClickedHandler={this.prevClickedHandler}
+                nextClickedHandler={this.nextClickedHandler}
+                closeModal={this.closeModalClickedHandler}
+              />
+            ) : null}
           </div>
         )}
-        {this.state.showModal === true ? (
-          <Modal
-            images={imagesList}
-            initial={this.state.modalIndex}
-            prevClickedHandler={this.prevClickedHandler}
-            nextClickedHandler={this.nextClickedHandler}
-            closeModal={this.closeModalClickedHandler}
-          />
-        ) : null}
-      </div>
+      </AuthContext.Consumer>
     );
   }
 }

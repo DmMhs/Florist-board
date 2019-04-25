@@ -17,12 +17,13 @@
       color: tomato;
     }
   }
+
   .dropbtn {
     background-color: tomato;
     color: white;
     padding: 16px;
     font-size: 16px;
-    width: 100px;
+    width: 150px;
     border: none;
     cursor: pointer;
     &:hover,
@@ -44,15 +45,14 @@
       background-color: #ddd;
     }
   }
-
   .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 160px;
+    width: 150px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
+    z-index: 3 !important;
     a {
       color: black;
       padding: 12px 16px;

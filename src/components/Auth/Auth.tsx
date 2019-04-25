@@ -6,7 +6,7 @@ import './Auth.less';
 import Popup from '../Popup/Popup';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
-import { userInfo } from 'os';
+
 import labels from '../../config/labels';
 
 interface MatchParams {
@@ -188,7 +188,9 @@ class Auth extends Component<
                 {value.state.userAuthenticated === false ? (
                   <div>
                     <div className="form-field">
-                      <label>{labels.pages.auth.email}</label>
+                      <label>
+                        {labels[value.state.lang as string].pages.auth.email}
+                      </label>
                       <input
                         type="email"
                         className="email-input"
@@ -198,7 +200,9 @@ class Auth extends Component<
                       />
                     </div>
                     <div className="form-field">
-                      <label>{labels.pages.auth.password}</label>
+                      <label>
+                        {labels[value.state.lang as string].pages.auth.password}
+                      </label>
                       <input
                         type="password"
                         className="password-input"
@@ -219,7 +223,7 @@ class Auth extends Component<
                         }
                         className="submit-btn"
                       >
-                        {labels.pages.auth.btn}
+                        {labels[value.state.lang as string].pages.auth.btn}
                       </button>
                       {this.state.formData.password === '' ||
                       this.state.formData.email === '' ? (
@@ -230,12 +234,19 @@ class Auth extends Component<
                       ) : null}
                     </div>
                     <hr />
-                    <h3>{labels.pages.auth.alternative}</h3>
+                    <h3>
+                      {
+                        labels[value.state.lang as string].pages.auth
+                          .alternative
+                      }
+                    </h3>
                     <div className="form-field">
                       <p>
                         {this.state.mode === 'signup'
-                          ? labels.pages.auth.signup.google
-                          : labels.pages.auth.signin.google}
+                          ? labels[value.state.lang as string].pages.auth.signup
+                              .google
+                          : labels[value.state.lang as string].pages.auth.signin
+                              .google}
                       </p>{' '}
                       <br />
                       <a
@@ -252,8 +263,10 @@ class Auth extends Component<
                     <div className="form-field">
                       <p>
                         {this.state.mode === 'signup'
-                          ? labels.pages.auth.signup.facebook
-                          : labels.pages.auth.signin.facebook}
+                          ? labels[value.state.lang as string].pages.auth.signup
+                              .facebook
+                          : labels[value.state.lang as string].pages.auth.signin
+                              .facebook}
                       </p>
                       <br />
                       <a
@@ -271,8 +284,10 @@ class Auth extends Component<
                     <div className="form-field">
                       <p>
                         {this.state.mode === 'signup'
-                          ? labels.pages.auth.signup.account
-                          : labels.pages.auth.signin.account}
+                          ? labels[value.state.lang as string].pages.auth.signup
+                              .account
+                          : labels[value.state.lang as string].pages.auth.signin
+                              .account}
                       </p>
                       <button type="button" className="switch-btn">
                         <NavLink
@@ -281,8 +296,10 @@ class Auth extends Component<
                           }`}
                         >
                           {this.state.mode === 'signup'
-                            ? labels.pages.auth.signup.btn
-                            : labels.pages.auth.signin.btn}
+                            ? labels[value.state.lang as string].pages.auth
+                                .signup.btn
+                            : labels[value.state.lang as string].pages.auth
+                                .signin.btn}
                         </NavLink>
                       </button>
                     </div>
@@ -291,10 +308,15 @@ class Auth extends Component<
                   <div className="authenticated-message">
                     {' '}
                     <h2>
-                      {labels.pages.auth.isAuth.main}{' '}
+                      {
+                        labels[value.state.lang as string].pages.auth.isAuth
+                          .main
+                      }{' '}
                       <i className="far fa-flushed" />
                     </h2>{' '}
-                    <span>{labels.pages.auth.isAuth.sub}</span>
+                    <span>
+                      {labels[value.state.lang as string].pages.auth.isAuth.sub}
+                    </span>
                   </div>
                 )}
               </form>

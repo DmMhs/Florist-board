@@ -11,16 +11,21 @@ interface NavigationState {}
 class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
   private authOptionsToggleRef: RefObject<HTMLAnchorElement>;
   private authOptionsRef: RefObject<HTMLDivElement>;
+  private langOptionsRef: RefObject<HTMLDivElement>;
+  private langOptionsToggleRef: RefObject<HTMLAnchorElement>;
 
   constructor(props: RouteComponentProps<{}>) {
     super(props);
     this.authOptionsRef = React.createRef();
     this.authOptionsToggleRef = React.createRef();
+    this.langOptionsRef = React.createRef();
+    this.langOptionsToggleRef = React.createRef();
   }
   accountClickedHandler = () => {
     this.authOptionsToggleRef.current!.classList.toggle('active');
     this.authOptionsRef.current!.classList.toggle('show');
   };
+
   logout = () => {
     const value = this.context;
     firebase.auth().signOut();
@@ -28,6 +33,14 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
     if ((this.props as RouteComponentProps<{}>).history !== undefined) {
       (this.props as RouteComponentProps<{}>).history.push('/');
     }
+  };
+  langBtnClickedHandler = () => {
+    this.langOptionsRef.current!.classList.toggle('show');
+    this.langOptionsToggleRef.current!.classList.toggle('active');
+  };
+  langOptionClickedHandler = (option: string) => {
+    const context = this.context;
+    context.setLang(option);
   };
   render() {
     return (
@@ -38,22 +51,25 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
               <ul>
                 <li>
                   <NavLink to="/" exact={true}>
-                    {labels.navigation.home} <i className="fas fa-home" />
+                    {labels[value.state.lang as string].navigation.home}{' '}
+                    <i className="fas fa-home" />
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/shop">
-                    {labels.navigation.shop} <i className="fas fa-leaf" />
+                    {labels[value.state.lang as string].navigation.shop}{' '}
+                    <i className="fas fa-leaf" />
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/gallery">
-                    {labels.navigation.gallery} <i className="far fa-image" />
+                    {labels[value.state.lang as string].navigation.gallery}{' '}
+                    <i className="far fa-image" />
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/contacts">
-                    {labels.navigation.contacts}{' '}
+                    {labels[value.state.lang as string].navigation.contacts}{' '}
                     <i className="fas fa-map-marker-alt" />
                   </NavLink>
                 </li>
@@ -63,7 +79,7 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                     onClick={this.accountClickedHandler}
                     ref={this.authOptionsToggleRef}
                   >
-                    {labels.navigation.account.main}{' '}
+                    {labels[value.state.lang as string].navigation.account.main}{' '}
                     <i className="fas fa-user-circle" />{' '}
                     <i className="fas fa-caret-down" />
                   </a>
@@ -74,18 +90,55 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                     {value.state.userAuthenticated === false ? (
                       <div>
                         <NavLink to="/auth/signup" className="signup-link">
-                          {labels.navigation.account.menu.signUp}{' '}
+                          {
+                            labels[value.state.lang as string].navigation
+                              .account.menu.signUp
+                          }{' '}
                           <i className="fas fa-user-plus" />
                         </NavLink>
                         <NavLink to="/auth/signin" className="signin-link">
-                          {labels.navigation.account.menu.signIn}{' '}
+                          {
+                            labels[value.state.lang as string].navigation
+                              .account.menu.signIn
+                          }{' '}
                           <i className="fas fa-sign-in-alt" />
                         </NavLink>
                       </div>
                     ) : (
                       <a onClick={this.logout} className="log-out">
-                        {labels.navigation.account.menu.logOut}
+                        {
+                          labels[value.state.lang as string].navigation.account
+                            .menu.logOut
+                        }
                       </a>
+                    )}
+                  </div>
+                </li>
+                <li className="langLink">
+                  <a
+                    className="lang-btn"
+                    onClick={this.langBtnClickedHandler}
+                    ref={this.langOptionsToggleRef}
+                  >
+                    {labels[value.state.lang as string].navigation.lang}
+                    {value.state.lang === 'en' ? (
+                      <img src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Funited-kingdom.png?alt=media&token=791aa1e1-7dc6-467f-a716-3eb8dce0b313" />
+                    ) : (
+                      <img src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Fukraine.png?alt=media&token=9305aa3b-0e62-411e-b6ae-7dbbcaa72e74" />
+                    )}{' '}
+                    <i className="fas fa-caret-down" />
+                  </a>
+                  <div className="lang-options" ref={this.langOptionsRef}>
+                    {value.state.lang === 'uk' ? (
+                      <img
+                        src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Funited-kingdom.png?alt=media&token=791aa1e1-7dc6-467f-a716-3eb8dce0b313"
+                        onClick={this.langOptionClickedHandler.bind(this, 'en')}
+                      />
+                    ) : (
+                      <img
+                        src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Fukraine.png?alt=media&token=9305aa3b-0e62-411e-b6ae-7dbbcaa72e74"
+                        onClick={this.langOptionClickedHandler.bind(this, 'uk')}
+                      />
                     )}
                   </div>
                 </li>

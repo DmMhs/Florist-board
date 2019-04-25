@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import './ContactInfo.less';
 import labels from '../../../config/labels';
+import { AuthContext } from '../../Auth/AuthContext';
 
 interface ContactInfoProps {
   address: string;
@@ -14,9 +15,10 @@ interface ContactInfoProps {
 
 const contactInfo = (props: ContactInfoProps) => {
   const { address, phone, email, telegram, facebook, instagram } = props;
+  const context = useContext(AuthContext);
   return (
     <div className="ContactsInfo">
-      <h3>{labels.pages.contacts.info}</h3>
+      <h3>{labels[context.state.lang as string].pages.contacts.info}</h3>
       <hr />
       <div className="contact-option">
         <div className="icon-wrapper">

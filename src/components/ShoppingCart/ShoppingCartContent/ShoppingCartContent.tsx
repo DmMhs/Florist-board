@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import './ShoppingCartContent.less';
+import { AuthContext } from '../../Auth/AuthContext';
+import labels from '../../../config/labels';
 
 interface ShoppingCartContentProps {
   totalPrice: number;
@@ -12,32 +14,43 @@ interface ShoppingCartContentProps {
 
 const ShoppingCartContent = (props: ShoppingCartContentProps) => {
   const { totalPrice, cartItemsList } = props;
+  const context = useContext(AuthContext);
   const totalPriceFormatted = totalPrice.toFixed(2);
   return cartItemsList.length > 0 ? (
     <div>
       <ul>
         <li>
-          <span>PRODUCT</span>
+          <span>
+            {labels[context.state.lang as string].pages.shop.cart.title}
+          </span>
           <span />
-          <span>AMOUNT</span>
-          <span>PRICE</span>
+          <span>
+            {labels[context.state.lang as string].pages.shop.cart.amount}
+          </span>
+          <span>
+            {labels[context.state.lang as string].pages.shop.cart.price}
+          </span>
           <span />
         </li>
         <hr />
         {cartItemsList}
       </ul>
       <div className="order">
-        <p>Total Sum: {totalPriceFormatted}$</p>
+        <p>
+          {labels[context.state.lang as string].pages.shop.cart.total}{' '}
+          {totalPriceFormatted}$
+        </p>
         <button type="button" className="order-btn">
-          ORDER
+          {labels[context.state.lang as string].pages.shop.cart.orderBtn}
         </button>
       </div>
     </div>
   ) : (
     <div>
-      <h4>cart is empty</h4>
+      <h4>{labels[context.state.lang as string].pages.shop.cart.empty}</h4>
       <button type="button" className="fix" onClick={props.fixEmptyCart}>
-        <span>LET'S FIX IT</span> <i className="far fa-smile-wink" />
+        <span>{labels[context.state.lang as string].pages.shop.cart.btn}</span>{' '}
+        <i className="far fa-smile-wink" />
       </button>
     </div>
   );

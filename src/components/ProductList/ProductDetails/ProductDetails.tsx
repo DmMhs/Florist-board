@@ -4,10 +4,11 @@ import { NavLink } from 'react-router-dom';
 import Spinner from '../../Spinner/Spinner';
 import { Product } from '../../../models/Product';
 import { productsRef } from '../../../firebase';
-import './ProductDetails.less';
 import { AuthContext } from '../../Auth/AuthContext';
 import { BASE_URL } from '../../../config/main';
 import { shareOverrideOGMeta } from '../../../services/share';
+import labels from '../../../config/labels';
+import './ProductDetails.less';
 
 interface MatchParams {
   id: string;
@@ -80,11 +81,18 @@ class ProductDetails extends Component<
                     <h3 className="price">
                       {this.state.productData.available === false ? (
                         <span>
-                          not in stock <i className="far fa-frown" />
+                          {
+                            labels[value.state.lang as string].pages
+                              .productDetails.notAvailable
+                          }{' '}
+                          <i className="far fa-frown" />
                         </span>
                       ) : (
                         <div>
-                          only{' '}
+                          {
+                            labels[value.state.lang as string].pages
+                              .productDetails.only
+                          }{' '}
                           <span className="accent">
                             {this.state.productData.price}$
                           </span>
@@ -104,22 +112,35 @@ class ProductDetails extends Component<
                         )}
                       >
                         <span>
-                          {' '}
-                          SHARE <i className="fab fa-facebook-f" />
+                          {
+                            labels[value.state.lang as string].pages
+                              .productDetails.facebookShare
+                          }{' '}
+                          <i className="fab fa-facebook-f" />
                         </span>
                       </div>
                     ) : null}
 
                     <button className="shopping-btn" type="button">
                       <NavLink to="/shop">
-                        <span>GO SHOPPING</span>{' '}
+                        <span>
+                          {
+                            labels[value.state.lang as string].pages
+                              .productDetails.goShopping
+                          }
+                        </span>{' '}
                         <i className="fas fa-shopping-cart" />
                       </NavLink>
                     </button>
                   </div>
 
                   <div className="info">
-                    <h2>Description</h2>
+                    <h2>
+                      {
+                        labels[value.state.lang as string].pages.productDetails
+                          .description
+                      }
+                    </h2>
                     <hr />
                     <p>{this.state.productData.description}</p>
                   </div>
