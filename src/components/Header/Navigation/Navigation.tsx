@@ -120,7 +120,9 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                     onClick={this.langBtnClickedHandler}
                     ref={this.langOptionsToggleRef}
                   >
-                    {labels[value.state.lang as string].navigation.lang}
+                    <span>
+                      {labels[value.state.lang as string].navigation.lang}
+                    </span>
                     {value.state.lang === 'en' ? (
                       <img src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Funited-kingdom.png?alt=media&token=791aa1e1-7dc6-467f-a716-3eb8dce0b313" />
                     ) : (
@@ -130,15 +132,19 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                   </a>
                   <div className="lang-options" ref={this.langOptionsRef}>
                     {value.state.lang === 'uk' ? (
-                      <img
-                        src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Funited-kingdom.png?alt=media&token=791aa1e1-7dc6-467f-a716-3eb8dce0b313"
+                      <a
                         onClick={this.langOptionClickedHandler.bind(this, 'en')}
-                      />
+                      >
+                        <span>{labels.en.navigation.lang}</span>{' '}
+                        <img src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Funited-kingdom.png?alt=media&token=791aa1e1-7dc6-467f-a716-3eb8dce0b313" />
+                      </a>
                     ) : (
-                      <img
-                        src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Fukraine.png?alt=media&token=9305aa3b-0e62-411e-b6ae-7dbbcaa72e74"
+                      <a
                         onClick={this.langOptionClickedHandler.bind(this, 'uk')}
-                      />
+                      >
+                        <span>{labels.uk.navigation.lang}</span>
+                        <img src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Fukraine.png?alt=media&token=9305aa3b-0e62-411e-b6ae-7dbbcaa72e74" />
+                      </a>
                     )}
                   </div>
                 </li>

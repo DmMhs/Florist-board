@@ -6,6 +6,7 @@ import Slider from '../../Slider/Slider';
 import { CartItem } from '../../../models/CartItem';
 import { AuthContext } from '../../Auth/AuthContext';
 import { productsRef } from '../../../firebase';
+import labels from '../../../config/labels';
 
 declare global {
   interface Window {
@@ -74,6 +75,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
       id,
       images,
       title,
+      title_uk,
       price,
       currency,
       available,
@@ -116,14 +118,18 @@ class ProductCard extends Component<CartItem, ProductCardState> {
               <div className="image">
                 <Slider images={images} auto={false} showControls={true} />
               </div>
-              <div className="title">{title}</div>
+              <div className="title">
+                {value.state.lang === 'en' ? title : title_uk}
+              </div>
               {available === true ? (
                 <div className="price">
                   {price}
                   {currency}
                 </div>
               ) : (
-                <div className="price">not available :(</div>
+                <div className="price">
+                  {labels[value.state.lang as string].pages.shop.notAvailable}
+                </div>
               )}
               <div className="action-panel">
                 {available ? actionIcon : null}{' '}

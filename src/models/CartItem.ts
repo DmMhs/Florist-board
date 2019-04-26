@@ -1,6 +1,7 @@
 import React from 'react';
 export interface CartItem {
   title: string;
+  title_uk: string;
   images: string[];
   price: number;
   currency: string;
@@ -9,6 +10,7 @@ export interface CartItem {
   id: string;
   inCart: boolean;
   description?: string;
+  description_uk?: string;
   likedBy?: boolean;
   addToCart?:
     | ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void)

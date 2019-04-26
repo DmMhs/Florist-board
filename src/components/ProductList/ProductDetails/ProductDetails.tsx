@@ -40,11 +40,13 @@ class ProductDetails extends Component<
     this.state = {
       productData: {
         title: '',
+        title_uk: '',
         images: [],
         price: 0,
         currency: '',
         available: false,
-        description: ''
+        description: '',
+        description_uk: ''
       },
       fetchInProgress: false
     };
@@ -74,7 +76,11 @@ class ProductDetails extends Component<
           <div className="ProductDetails">
             {this.state.fetchInProgress === false ? (
               <div>
-                <h1>{this.state.productData.title.toUpperCase()}</h1>
+                <h1>
+                  {value.state.lang === 'en'
+                    ? this.state.productData.title.toUpperCase()
+                    : this.state.productData.title_uk.toUpperCase()}
+                </h1>
                 <div className="product-info-wrapper">
                   <div className="image-wrapper">
                     <div className="image" style={imgStyle} />
@@ -142,7 +148,11 @@ class ProductDetails extends Component<
                       }
                     </h2>
                     <hr />
-                    <p>{this.state.productData.description}</p>
+                    <p>
+                      {value.state.lang === 'en'
+                        ? this.state.productData.description
+                        : this.state.productData.description_uk}
+                    </p>
                   </div>
                 </div>
               </div>

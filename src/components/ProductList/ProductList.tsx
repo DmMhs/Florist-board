@@ -248,6 +248,7 @@ class ProductList extends Component<ProductListProps, ProductListState> {
       return (
         <ProductCard
           title={p.title}
+          title_uk={p.title_uk}
           images={p.images}
           price={p.price}
           currency={p.currency}
