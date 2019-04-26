@@ -124,8 +124,10 @@ class ProductDetails extends Component<
                           this,
                           BASE_URL +
                             `/product-details/${this.props.match.params.id}`,
-                          title,
-                          description as string,
+                          value.state.lang === 'en' ? title : title_uk,
+                          value.state.lang === 'en'
+                            ? (description as string)
+                            : (description_uk as string),
                           images[0]
                         )}
                       >
