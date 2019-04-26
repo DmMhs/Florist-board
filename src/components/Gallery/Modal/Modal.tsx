@@ -38,31 +38,34 @@ class Modal extends Component<ModalProps, ModalState> {
     };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     const { images, initial } = this.props;
     this.setState({
       activeSlide: images[initial]
     });
   }
 
-  render() {
+  public render() {
+    const {
+      closeModal,
+      prevClickedHandler,
+      nextClickedHandler,
+      images
+    } = this.props;
+
+    const { activeSlide, current } = this.state;
+
     return (
       <div className="Modal">
         <div className="modal-content">
-          <i className="fas fa-times close" onClick={this.props.closeModal} />
+          <i className="fas fa-times close" onClick={closeModal} />
           <div className="slide-wrapper">
-            {this.state.activeSlide !== null ? this.state.activeSlide : null}
+            {activeSlide !== null ? activeSlide : null}
           </div>
-          <LeftArrow
-            goToPrevSlide={this.props.prevClickedHandler}
-            show={true}
-          />
-          <RightArrow
-            goToNextSlide={this.props.nextClickedHandler}
-            show={true}
-          />
+          <LeftArrow goToPrevSlide={prevClickedHandler} show={true} />
+          <RightArrow goToNextSlide={nextClickedHandler} show={true} />
           <span className="current-count">
-            {this.state.current! + 1}/{this.props.images.length}
+            {current! + 1}/{images.length}
           </span>
         </div>
       </div>

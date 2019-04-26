@@ -47,7 +47,8 @@
           &.log-out:hover,
           &.log-out:active,
           &.log-out:active {
-            background-color: rgb(199, 196, 196);
+            background-color: tomato;
+            color: white;
           }
         }
       }
@@ -79,7 +80,7 @@
       height: 100%;
     }
     .log-out {
-      color: darkred;
+      color: #333333;
     }
 
     a {
@@ -101,10 +102,13 @@
     .lang-btn {
       display: flex;
       flex-direction: row;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       flex-wrap: nowrap;
       padding: 6px;
+      span {
+        width: 100px;
+      }
       &.active {
         background-color: #eee;
         color: #333333;
@@ -125,11 +129,21 @@
       width: 100%;
       overflow: auto;
       z-index: 1;
-      box-sizing: border-box;
       background-color: #eee;
       border-radius: 0;
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
+      a {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        box-sizing: border-box;
+        span {
+          width: 100px;
+        }
+      }
       &.show {
         display: flex;
         flex-direction: column;
@@ -142,7 +156,7 @@
       }
       img {
         max-width: 1.3rem;
-        margin: 8px;
+        margin: 0 5px;
       }
     }
   }
@@ -152,7 +166,41 @@
     z-index: 1;
   }
 }
-
+@media screen and (max-width: 1050px) {
+  .Navigation {
+    ul {
+      li {
+        a {
+          font-size: 1rem;
+        }
+        &.accountLink {
+          a {
+            font-size: 1rem;
+          }
+          .dropdown-content {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+    .langLink {
+      position: fixed;
+      bottom: 3rem;
+      margin: 10 20px;
+      width: 100%;
+      .lang-btn {
+        span {
+          width: 50px;
+        }
+      }
+      .lang-options {
+        margin: 0 auto;
+        margin-top: 2rem;
+        width: calc(75% + 12px);
+      }
+    }
+  }
+}
 @media screen and (max-width: 768px) {
   .Navigation {
     position: fixed;
@@ -182,6 +230,7 @@
           display: inline-block;
           margin: 0 auto;
           width: 75%;
+          font-size: 1.3rem;
         }
         &.accountLink {
           box-sizing: content-box;
@@ -191,6 +240,25 @@
           margin: 0 auto;
           margin-top: 5px;
           width: 75%;
+          a {
+            font-size: 1.3rem;
+          }
+        }
+        &.langLink {
+          position: fixed;
+          bottom: 3rem;
+          margin: 10 20px;
+          width: 100%;
+          .lang-btn {
+            span {
+              width: 70px;
+            }
+          }
+          .lang-options {
+            margin: 0 auto;
+            margin-top: 2rem;
+            width: calc(75% + 12px);
+          }
         }
       }
     }
@@ -200,7 +268,6 @@
       white-space: nowrap;
       color: #333333;
       padding: 6px;
-      font-size: 1.3rem;
       border-radius: 5px;
       cursor: pointer;
       width: 100%;
@@ -233,10 +300,19 @@
       bottom: 3rem;
       margin: 10 20px;
       width: 100%;
+      .lang-btn {
+        justify-content: center;
+        span {
+          width: 100%;
+        }
+      }
       .lang-options {
         margin: 0 auto;
         margin-top: 2rem;
         width: calc(75% + 12px);
+        a {
+          justify-content: center;
+        }
       }
     }
     .show {

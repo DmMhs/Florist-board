@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { withRouter, RouteComponentProps as RCProps } from 'react-router-dom';
+import {
+  withRouter,
+  RouteComponentProps as RCProps,
+  NavLink
+} from 'react-router-dom';
 
-import './Auth.less';
 import Popup from '../Popup/Popup';
-import { NavLink } from 'react-router-dom';
-import { AuthContext } from './AuthContext';
-
+import { AppContext } from '../../AppContext';
 import labels from '../../config/labels';
+import './Auth.less';
 
 interface MatchParams {
   mode: string;
@@ -38,7 +40,7 @@ class Auth extends Component<
   RouteComponentProps<MatchParams> & RCProps<{}>,
   AuthState
 > {
-  static getDerivedStateFromProps(
+  public static getDerivedStateFromProps(
     props: RouteComponentProps<MatchParams> & RCProps<{}>,
     state: AuthState
   ) {
@@ -58,7 +60,9 @@ class Auth extends Component<
     };
   }
 
-  emailInputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  private emailInputChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const updatedFormData = { ...this.state.formData };
     updatedFormData.email = event.target.value;
     this.setState({
@@ -66,7 +70,9 @@ class Auth extends Component<
     });
   };
 
-  passwordInputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  private passwordInputChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const updatedFormData = { ...this.state.formData };
     updatedFormData.password = event.target.value;
     this.setState({
@@ -74,7 +80,7 @@ class Auth extends Component<
     });
   };
 
-  getIdToken = () => {
+  private getIdToken = () => {
     return firebase
       .auth()
       .currentUser!.getIdToken(true)
@@ -86,7 +92,7 @@ class Auth extends Component<
       });
   };
 
-  formSubmitHandler = (
+  private formSubmitHandler = (
     event: React.MouseEvent<HTMLFormElement, MouseEvent>
   ) => {
     event.preventDefault();
@@ -136,7 +142,7 @@ class Auth extends Component<
     }
   };
 
-  authWithGoogleHandler = () => {
+  private authWithGoogleHandler = () => {
     const value = this.context;
     firebase
       .auth()
@@ -154,7 +160,7 @@ class Auth extends Component<
       .catch(error => console.log(error));
   };
 
-  authWithFacebookHandler = () => {
+  private authWithFacebookHandler = () => {
     const value = this.context;
     firebase
       .auth()
@@ -172,10 +178,25 @@ class Auth extends Component<
       })
       .catch(error => console.log(error));
   };
-  render() {
+
+  public render() {
+    const { email, password } = this.state.formData;
+    const { mode } = this.state;
+    const context = this.context;
+
+    const infoPopup = (
+      <Popup
+        type="info"
+        message={
+          context.state.lang === 'en'
+            ? 'Please, provide a required data'
+            : 'Будь ласка, введіть дані'
+        }
+      />
+    );
     return (
       <div className="Auth">
-        <AuthContext.Consumer>
+        <AppContext.Consumer>
           {value =>
             value && (
               <form
@@ -195,7 +216,7 @@ class Auth extends Component<
                         type="email"
                         className="email-input"
                         onChange={this.emailInputChangeHandler}
-                        value={this.state.formData.email}
+                        value={email}
                         required
                       />
                     </div>
@@ -208,7 +229,7 @@ class Auth extends Component<
                         className="password-input"
                         minLength={6}
                         onChange={this.passwordInputChangeHandler}
-                        value={this.state.formData.password}
+                        value={password}
                         required
                       />
                     </div>
@@ -216,22 +237,13 @@ class Auth extends Component<
                       <button
                         type="submit"
                         disabled={
-                          this.state.formData.password === '' ||
-                          this.state.formData.email === ''
-                            ? true
-                            : false
+                          password === '' || email === '' ? true : false
                         }
                         className="submit-btn"
                       >
                         {labels[value.state.lang as string].pages.auth.btn}
                       </button>
-                      {this.state.formData.password === '' ||
-                      this.state.formData.email === '' ? (
-                        <Popup
-                          type="info"
-                          message="Please, provide a required data"
-                        />
-                      ) : null}
+                      {password === '' || email === '' ? infoPopup : null}
                     </div>
                     <hr />
                     <h3>
@@ -242,7 +254,7 @@ class Auth extends Component<
                     </h3>
                     <div className="form-field">
                       <p>
-                        {this.state.mode === 'signup'
+                        {mode === 'signup'
                           ? labels[value.state.lang as string].pages.auth.signup
                               .google
                           : labels[value.state.lang as string].pages.auth.signin
@@ -262,7 +274,7 @@ class Auth extends Component<
                     </div>
                     <div className="form-field">
                       <p>
-                        {this.state.mode === 'signup'
+                        {mode === 'signup'
                           ? labels[value.state.lang as string].pages.auth.signup
                               .facebook
                           : labels[value.state.lang as string].pages.auth.signin
@@ -283,7 +295,7 @@ class Auth extends Component<
                     <hr />
                     <div className="form-field">
                       <p>
-                        {this.state.mode === 'signup'
+                        {mode === 'signup'
                           ? labels[value.state.lang as string].pages.auth.signup
                               .account
                           : labels[value.state.lang as string].pages.auth.signin
@@ -292,10 +304,10 @@ class Auth extends Component<
                       <button type="button" className="switch-btn">
                         <NavLink
                           to={`/auth/${
-                            this.state.mode === 'signup' ? 'signin' : 'signup'
+                            mode === 'signup' ? 'signin' : 'signup'
                           }`}
                         >
-                          {this.state.mode === 'signup'
+                          {mode === 'signup'
                             ? labels[value.state.lang as string].pages.auth
                                 .signup.btn
                             : labels[value.state.lang as string].pages.auth
@@ -322,11 +334,11 @@ class Auth extends Component<
               </form>
             )
           }
-        </AuthContext.Consumer>
+        </AppContext.Consumer>
       </div>
     );
   }
 }
 
-Auth.contextType = AuthContext;
+Auth.contextType = AppContext;
 export default withRouter<RouteComponentProps<MatchParams> & RCProps<{}>>(Auth);

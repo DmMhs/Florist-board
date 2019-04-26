@@ -21,7 +21,7 @@ let interval: number;
 let resizeListener: EventListener;
 
 class Slider extends Component<SliderProps, SliderState> {
-  _isMounted = false;
+  private _isMounted = false;
   private sliderRef: RefObject<HTMLDivElement>;
   constructor(props: SliderProps) {
     super(props);
@@ -33,7 +33,7 @@ class Slider extends Component<SliderProps, SliderState> {
     this.sliderRef = React.createRef();
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this._isMounted = true;
     if (this.props.auto) {
       interval = window.setInterval(
@@ -53,7 +53,7 @@ class Slider extends Component<SliderProps, SliderState> {
     window.addEventListener('resize', resizeListener);
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     this._isMounted = false;
     if (this.props.auto) {
       window.clearInterval(interval);
@@ -62,7 +62,7 @@ class Slider extends Component<SliderProps, SliderState> {
     window.removeEventListener('resize', resizeListener);
   }
 
-  goToPrevSlide = () => {
+  private goToPrevSlide = () => {
     if (this.state.currentIndex === 0) {
       return this.setState({
         currentIndex: 0,
@@ -75,7 +75,7 @@ class Slider extends Component<SliderProps, SliderState> {
     });
   };
 
-  goToNextSlide = () => {
+  private goToNextSlide = () => {
     if (this.state.currentIndex === this.props.images.length - 1) {
       return this.setState({
         currentIndex: 0,
@@ -89,11 +89,11 @@ class Slider extends Component<SliderProps, SliderState> {
     });
   };
 
-  slideWidth = () => {
+  private slideWidth = () => {
     return this.sliderRef.current ? this.sliderRef.current!.clientWidth : 0;
   };
 
-  render() {
+  public render() {
     const { images } = this.props;
     const slides = images.map((i: string, index: number) => {
       return <Slide key={index} imgSrc={i} />;

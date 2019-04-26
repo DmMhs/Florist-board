@@ -2,7 +2,7 @@ import React, { Component, RefObject } from 'react';
 import { NavLink, withRouter, RouteComponentProps } from 'react-router-dom';
 import firebase from 'firebase';
 
-import { AuthContext } from '../../Auth/AuthContext';
+import { AppContext } from '../../../AppContext';
 import labels from '../../../config/labels';
 import './Navigation.less';
 
@@ -21,12 +21,13 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
     this.langOptionsRef = React.createRef();
     this.langOptionsToggleRef = React.createRef();
   }
-  accountClickedHandler = () => {
+
+  private accountClickedHandler = () => {
     this.authOptionsToggleRef.current!.classList.toggle('active');
     this.authOptionsRef.current!.classList.toggle('show');
   };
 
-  logout = () => {
+  private logoutClickedHandler = () => {
     const value = this.context;
     firebase.auth().signOut();
     value.logout();
@@ -34,18 +35,19 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
       (this.props as RouteComponentProps<{}>).history.push('/');
     }
   };
-  langBtnClickedHandler = () => {
+
+  private langBtnClickedHandler = () => {
     this.langOptionsRef.current!.classList.toggle('show');
     this.langOptionsToggleRef.current!.classList.toggle('active');
   };
-  langOptionClickedHandler = (option: string) => {
+  private langOptionClickedHandler = (option: string) => {
     const context = this.context;
     context.setLang(option);
   };
-  render() {
+  public render() {
     return (
       <div className="Navigation">
-        <AuthContext.Consumer>
+        <AppContext.Consumer>
           {value =>
             value && (
               <ul>
@@ -105,7 +107,10 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                         </NavLink>
                       </div>
                     ) : (
-                      <a onClick={this.logout} className="log-out">
+                      <a
+                        onClick={this.logoutClickedHandler}
+                        className="log-out"
+                      >
                         {
                           labels[value.state.lang as string].navigation.account
                             .menu.logOut
@@ -120,7 +125,9 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                     onClick={this.langBtnClickedHandler}
                     ref={this.langOptionsToggleRef}
                   >
-                    {labels[value.state.lang as string].navigation.lang}
+                    <span>
+                      {labels[value.state.lang as string].navigation.lang}
+                    </span>
                     {value.state.lang === 'en' ? (
                       <img src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Funited-kingdom.png?alt=media&token=791aa1e1-7dc6-467f-a716-3eb8dce0b313" />
                     ) : (
@@ -130,26 +137,30 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                   </a>
                   <div className="lang-options" ref={this.langOptionsRef}>
                     {value.state.lang === 'uk' ? (
-                      <img
-                        src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Funited-kingdom.png?alt=media&token=791aa1e1-7dc6-467f-a716-3eb8dce0b313"
+                      <a
                         onClick={this.langOptionClickedHandler.bind(this, 'en')}
-                      />
+                      >
+                        <span>{labels.en.navigation.lang}</span>{' '}
+                        <img src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Funited-kingdom.png?alt=media&token=791aa1e1-7dc6-467f-a716-3eb8dce0b313" />
+                      </a>
                     ) : (
-                      <img
-                        src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Fukraine.png?alt=media&token=9305aa3b-0e62-411e-b6ae-7dbbcaa72e74"
+                      <a
                         onClick={this.langOptionClickedHandler.bind(this, 'uk')}
-                      />
+                      >
+                        <span>{labels.uk.navigation.lang}</span>
+                        <img src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Fukraine.png?alt=media&token=9305aa3b-0e62-411e-b6ae-7dbbcaa72e74" />
+                      </a>
                     )}
                   </div>
                 </li>
               </ul>
             )
           }
-        </AuthContext.Consumer>
+        </AppContext.Consumer>
       </div>
     );
   }
 }
 
-Navigation.contextType = AuthContext;
+Navigation.contextType = AppContext;
 export default withRouter<RouteComponentProps<{}>>(Navigation);

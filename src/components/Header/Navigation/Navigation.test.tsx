@@ -4,7 +4,7 @@ import firebase from 'firebase';
 
 import Navigation from './Navigation';
 import { BrowserRouter } from 'react-router-dom';
-import AuthContextProvider, { AuthContext } from '../../Auth/AuthContext';
+import AppContextProvider, { AppContext } from '../../../AppContext';
 import { config } from '../../../firebase';
 
 it('Navigation component matches a snapshot', () => {
@@ -15,12 +15,12 @@ it('Navigation component matches a snapshot', () => {
 it('Refs are defined', () => {
   const wrapper = mount(
     <BrowserRouter>
-      <AuthContextProvider.WrappedComponent>
+      <AppContextProvider.WrappedComponent>
         <Navigation.WrappedComponent />
-      </AuthContextProvider.WrappedComponent>
+      </AppContextProvider.WrappedComponent>
     </BrowserRouter>
   );
-  const contextInstance = wrapper.find('AuthContextProvider').instance();
+  const contextInstance = wrapper.find('AppContextProvider').instance();
   const navigationInstance = wrapper.find('Navigation').instance();
   contextInstance.setState({
     userLogin: 'testLogin',
@@ -36,12 +36,12 @@ it('Refs are defined', () => {
 it('Logs out', () => {
   const wrapper = mount(
     <BrowserRouter>
-      <AuthContextProvider.WrappedComponent>
+      <AppContextProvider.WrappedComponent>
         <Navigation.WrappedComponent />
-      </AuthContextProvider.WrappedComponent>
+      </AppContextProvider.WrappedComponent>
     </BrowserRouter>
   );
-  const contextInstance = wrapper.find('AuthContextProvider').instance();
+  const contextInstance = wrapper.find('AppContextProvider').instance();
   const navigationInstance = wrapper.find('Navigation').instance();
   if (!firebase.apps.length) {
     firebase.initializeApp(config);

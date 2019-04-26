@@ -5,7 +5,7 @@ import { galleryImagesRef } from '../../firebase';
 import Spinner from '../Spinner/Spinner';
 import Modal from './Modal/Modal';
 import labels from '../../config/labels';
-import { AuthContext } from '../Auth/AuthContext';
+import { AppContext } from '../../AppContext';
 
 interface GalleryProps {}
 interface GalleryState {
@@ -25,7 +25,8 @@ class Gallery extends Component<GalleryProps, GalleryState> {
       modalIndex: 0
     };
   }
-  componentDidMount() {
+
+  public componentDidMount() {
     this.setState({
       fetchInProgress: true
     });
@@ -40,32 +41,38 @@ class Gallery extends Component<GalleryProps, GalleryState> {
       });
     });
   }
-  imageClickedHandler = (index: number) => {
+
+  private imageClickedHandler = (index: number) => {
     this.setState({
       showModal: true,
       modalIndex: index
     });
   };
-  prevClickedHandler = () => {
+
+  private prevClickedHandler = () => {
     if (this.state.modalIndex !== 0) {
       this.setState({
         modalIndex: this.state.modalIndex! - 1
       });
     }
   };
-  nextClickedHandler = () => {
-    if (this.state.images.length > this.state.modalIndex + 1)
+
+  private nextClickedHandler = () => {
+    if (this.state.images.length > this.state.modalIndex + 1) {
       this.setState({
         modalIndex: this.state.modalIndex! + 1
       });
+    }
   };
-  closeModalClickedHandler = () => {
+
+  private closeModalClickedHandler = () => {
     this.setState({
       showModal: false,
       modalIndex: 0
     });
   };
-  render() {
+
+  public render() {
     const imagesList = this.state.images.map(
       (imageUrl: string, index: number) => {
         return (
@@ -80,7 +87,7 @@ class Gallery extends Component<GalleryProps, GalleryState> {
       }
     );
     return (
-      <AuthContext.Consumer>
+      <AppContext.Consumer>
         {value => (
           <div className="Gallery">
             <h2>{labels[value.state.lang as string].pages.gallery.main}</h2>
@@ -123,7 +130,7 @@ class Gallery extends Component<GalleryProps, GalleryState> {
             ) : null}
           </div>
         )}
-      </AuthContext.Consumer>
+      </AppContext.Consumer>
     );
   }
 }

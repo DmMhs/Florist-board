@@ -18,7 +18,7 @@ interface ShoppingCartState {
 }
 
 class ShoppingCart extends Component<ShoppingCartProps, ShoppingCartState> {
-  static getDerivedStateFromProps(
+  public static getDerivedStateFromProps(
     props: ShoppingCartProps,
     state: ShoppingCartState
   ) {
@@ -38,7 +38,8 @@ class ShoppingCart extends Component<ShoppingCartProps, ShoppingCartState> {
       cartProducts: []
     };
   }
-  reduceAmountClickedHandler = (amount: number, index: number) => {
+
+  private reduceAmountClickedHandler = (amount: number, index: number) => {
     if (amount > 1) {
       const newCart = { ...this.state.cartProducts };
       newCart[index].amount = newCart[index].amount - 1;
@@ -47,27 +48,31 @@ class ShoppingCart extends Component<ShoppingCartProps, ShoppingCartState> {
       });
     }
   };
-  increaseAmountClickedHandler = (index: number) => {
+  private increaseAmountClickedHandler = (index: number) => {
     const newCart = { ...this.state.cartProducts };
     newCart[index].amount = newCart[index].amount + 1;
     this.setState({
       cartProducts: newCart
     });
   };
-  removeClickedHandler = (index: number) => {
+  private removeClickedHandler = (index: number) => {
     const newCartProducts = this.state.cartProducts.splice(index, 1);
     this.setState({
       cartProducts: newCartProducts
     });
   };
-  render() {
+  public render() {
     const { showCart, closeCart, remove } = this.props;
+    const { cartProducts } = this.state;
+
     const style = {
       display: showCart ? 'flex' : 'none'
     };
+
     let totalPrice = 0;
     let cartItemPrice = 0;
-    const cartItems = this.state.cartProducts;
+    const cartItems = cartProducts;
+
     const cartItemsList = cartItems.map(
       (i: Partial<CartItem> & { amount: number }, index: number) => {
         totalPrice += +i.price! * i.amount!;

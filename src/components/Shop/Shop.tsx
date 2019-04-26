@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 
-import './Shop.less';
 import { productsRef } from '../../firebase';
 import { Product } from '../../models/Product';
 import Spinner from '../Spinner/Spinner';
 import ProductList from '../ProductList/ProductList';
 import { CartItem } from '../../models/CartItem';
 
+import './Shop.less';
+
 interface ShopProps {}
+
 interface ShopState {
   products: Product[];
   fetchInProgress: boolean;
 }
+
 class Shop extends Component<ShopProps, ShopState> {
   constructor(props: ShopProps) {
     super(props);
@@ -20,12 +23,13 @@ class Shop extends Component<ShopProps, ShopState> {
       fetchInProgress: false
     };
   }
-  componentDidMount() {
+
+  public componentDidMount() {
     this.setState({
       fetchInProgress: true
     });
     productsRef.on('value', snapshot => {
-      const newProducts: Array<Product> = [];
+      const newProducts: Product[] = [];
       snapshot!.forEach((product: firebase.database.DataSnapshot) => {
         newProducts.push({
           ...product.val(),
@@ -41,15 +45,16 @@ class Shop extends Component<ShopProps, ShopState> {
     });
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     productsRef.off('value');
   }
 
-  render() {
+  public render() {
+    const { products } = this.state;
     const shopContent = this.state.fetchInProgress ? (
       <Spinner />
     ) : (
-      <ProductList products={this.state.products as CartItem[]} />
+      <ProductList products={products as CartItem[]} />
     );
     return <div className="Shop">{shopContent}</div>;
   }

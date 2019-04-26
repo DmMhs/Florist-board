@@ -15,6 +15,15 @@
   "rules": {
     "max-line-length": {
       "options": [120]
-    }
+    },
+    "member-ordering": false,
+    "interface-name": false,
+    "ordered-imports": false,
+    "no-empty-interface": false,
+    "no-object-literal-type-assertion": false,
+    "object-literal-sort-keys": false,
+    "no-empty": false,
+    "no-console": false,
+    "jsx-boolean-value": false
   }
 }

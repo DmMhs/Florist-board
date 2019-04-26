@@ -19,6 +19,7 @@ let labels: any = {
     },
     pages: {
       shop: {
+        notAvailable: 'not available :(',
         sort: {
           main: 'sort by',
           btn: {
@@ -105,6 +106,7 @@ let labels: any = {
     },
     pages: {
       shop: {
+        notAvailable: 'немає :(',
         sort: {
           main: 'сортувати за',
           btn: {
@@ -160,7 +162,7 @@ let labels: any = {
           btn: 'РЕЄСТРАЦІЯ'
         }
       },
-      pageNotFound: 'Сторінка не знайдена',
+      pageNotFound: 'Сторінку не знайдено',
       productDetails: {
         description: 'Опис',
         only: 'тільки',

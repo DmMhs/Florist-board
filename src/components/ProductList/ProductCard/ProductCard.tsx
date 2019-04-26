@@ -4,8 +4,9 @@ import { NavLink } from 'react-router-dom';
 import './ProductCard.less';
 import Slider from '../../Slider/Slider';
 import { CartItem } from '../../../models/CartItem';
-import { AuthContext } from '../../Auth/AuthContext';
+import { AppContext } from '../../../AppContext';
 import { productsRef } from '../../../firebase';
+import labels from '../../../config/labels';
 
 declare global {
   interface Window {
@@ -19,7 +20,10 @@ interface ProductCardState {
 }
 
 class ProductCard extends Component<CartItem, ProductCardState> {
-  static getDerivedStateFromProps(props: CartItem, state: ProductCardState) {
+  public static getDerivedStateFromProps(
+    props: CartItem,
+    state: ProductCardState
+  ) {
     return {
       isLiked: props.likedBy
     };
@@ -35,13 +39,13 @@ class ProductCard extends Component<CartItem, ProductCardState> {
       isLikedBy: []
     };
   }
-  componentDidMount() {
+  public componentDidMount() {
     if (this.state.isLiked === true) {
       this.likeButtonRef.current!.classList.add('active');
     }
   }
 
-  likeClickedHandler = async () => {
+  private likeClickedHandler = async () => {
     this.likeButtonRef.current!.classList.toggle('active');
     await productsRef
       .child(this.props.id)
@@ -53,7 +57,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
         });
       });
     if (this.state.isLiked === true) {
-      let newLikedByList = [...this.state.isLikedBy];
+      const newLikedByList = [...this.state.isLikedBy];
       const index = newLikedByList.findIndex((val: string) => {
         return val === this.context.state.userId;
       });
@@ -69,17 +73,16 @@ class ProductCard extends Component<CartItem, ProductCardState> {
     }
   };
 
-  render() {
+  public render() {
     const {
       id,
       images,
       title,
+      title_uk,
       price,
       currency,
       available,
-      inCart,
-      likedBy,
-      description
+      inCart
     } = this.props;
 
     const actionIcon = inCart ? (
@@ -99,7 +102,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
       </div>
     );
     return (
-      <AuthContext.Consumer>
+      <AppContext.Consumer>
         {value =>
           value && (
             <div className="ProductCard">
@@ -116,14 +119,18 @@ class ProductCard extends Component<CartItem, ProductCardState> {
               <div className="image">
                 <Slider images={images} auto={false} showControls={true} />
               </div>
-              <div className="title">{title}</div>
+              <div className="title">
+                {value.state.lang === 'en' ? title : title_uk}
+              </div>
               {available === true ? (
                 <div className="price">
                   {price}
                   {currency}
                 </div>
               ) : (
-                <div className="price">not available :(</div>
+                <div className="price">
+                  {labels[value.state.lang as string].pages.shop.notAvailable}
+                </div>
               )}
               <div className="action-panel">
                 {available ? actionIcon : null}{' '}
@@ -131,10 +138,10 @@ class ProductCard extends Component<CartItem, ProductCardState> {
             </div>
           )
         }
-      </AuthContext.Consumer>
+      </AppContext.Consumer>
     );
   }
 }
 
-ProductCard.contextType = AuthContext;
+ProductCard.contextType = AppContext;
 export default ProductCard;

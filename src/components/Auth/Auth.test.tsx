@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 import firebase from 'firebase';
 
 import Auth from './Auth';
-import AuthContextProvider from './AuthContext';
+import AppContextProvider from '../../AppContext';
 import { BrowserRouter } from 'react-router-dom';
 import { config } from '../../firebase';
 
@@ -12,8 +12,8 @@ it('Auth component matches a snapshot', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-it('AuthContext component matches a snapshot', () => {
-  const wrapper = shallow(<AuthContextProvider />);
+it('AppContext component matches a snapshot', () => {
+  const wrapper = shallow(<AppContextProvider />);
   expect(wrapper).toMatchSnapshot();
 });
 
@@ -85,10 +85,10 @@ it('Authorization with Google works', () => {
 it('Setting user credentails and logout change Auth context state', () => {
   const wrapper = mount(
     <BrowserRouter>
-      <AuthContextProvider.WrappedComponent />
+      <AppContextProvider.WrappedComponent />
     </BrowserRouter>
   );
-  const instance = wrapper.find('AuthContextProvider').instance();
+  const instance = wrapper.find('AppContextProvider').instance();
   instance.setState({
     userLogin: '',
     userId: '',
@@ -115,10 +115,10 @@ it('Changes state if local storage auth credentials are not empty', () => {
   localStorage.floristAuthToken = 'asfasfasf';
   const wrapper = mount(
     <BrowserRouter>
-      <AuthContextProvider.WrappedComponent />
+      <AppContextProvider.WrappedComponent />
     </BrowserRouter>
   );
-  const instance = wrapper.find('AuthContextProvider').instance();
+  const instance = wrapper.find('AppContextProvider').instance();
   expect(instance.state.userAuthenticated).toBeTruthy();
 });
 
@@ -126,12 +126,12 @@ it('Google and Facebook authorization clicking envokes a handlers', async () => 
   const match = { params: { mode: 'signin' } };
   const wrapper = mount(
     <BrowserRouter>
-      <AuthContextProvider.WrappedComponent>
+      <AppContextProvider.WrappedComponent>
         <Auth.WrappedComponent match={match} />
-      </AuthContextProvider.WrappedComponent>
+      </AppContextProvider.WrappedComponent>
     </BrowserRouter>
   );
-  const contextInstance = wrapper.find('AuthContextProvider').instance();
+  const contextInstance = wrapper.find('AppContextProvider').instance();
   const authInstance = wrapper.find('Auth').instance();
   const spyGoogle = jest.spyOn(authInstance, 'authWithGoogleHandler');
   const spyFacebook = jest.spyOn(authInstance, 'authWithFacebookHandler');

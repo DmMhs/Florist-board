@@ -21,7 +21,8 @@ class Home extends Component<HomeProps, HomeState> {
       isFetching: false
     };
   }
-  componentDidMount() {
+
+  public componentDidMount() {
     homeImagesRef.on('value', snapshot => {
       this.setState({
         isFetching: true
@@ -37,16 +38,13 @@ class Home extends Component<HomeProps, HomeState> {
     });
   }
 
-  render() {
+  public render() {
+    const { bannerImages } = this.state;
     return (
       <div className="Home">
-        {this.state.bannerImages.length <= 0 ? <Spinner /> : null}
+        {bannerImages.length <= 0 ? <Spinner /> : null}
         <div className="slider-wrapper">
-          <Slider
-            images={this.state.bannerImages}
-            auto={true}
-            showControls={true}
-          />
+          <Slider images={bannerImages} auto={true} showControls={true} />
         </div>
       </div>
     );

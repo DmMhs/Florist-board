@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import './ProductsSort.less';
 import labels from '../../../config/labels';
-import { AuthContext } from '../../Auth/AuthContext';
+import { AppContext } from '../../../AppContext';
 
 interface ProductsSortProps {
   sortOrder: string;
@@ -24,33 +24,45 @@ interface ProductsSortProps {
 }
 
 const productsSort = (props: ProductsSortProps) => {
-  const context = useContext(AuthContext);
+  const context = useContext(AppContext);
+
+  const {
+    orderByChanged,
+    orderByClicked,
+    orderByOptionsRef,
+    sortOrderClicked,
+    sortOrder,
+    filterToggle,
+    mobileMode,
+    sortBy
+  } = props;
+
   const sortByNameOrderIcon =
     props.sortOrder === 'default' ? (
-      <i className="fas fa-sort-alpha-down" onClick={props.sortOrderClicked} />
+      <i className="fas fa-sort-alpha-down" onClick={sortOrderClicked} />
     ) : (
-      <i className="fas fa-sort-alpha-up" onClick={props.sortOrderClicked} />
+      <i className="fas fa-sort-alpha-up" onClick={sortOrderClicked} />
     );
+
   const sortByPriceOrderIcon =
-    props.sortOrder === 'default' ? (
-      <i
-        className="fas fa-sort-numeric-down"
-        onClick={props.sortOrderClicked}
-      />
+    sortOrder === 'default' ? (
+      <i className="fas fa-sort-numeric-down" onClick={sortOrderClicked} />
     ) : (
-      <i className="fas fa-sort-numeric-up" onClick={props.sortOrderClicked} />
+      <i className="fas fa-sort-numeric-up" onClick={sortOrderClicked} />
     );
+
   const filterToggleIcon =
-    props.mobileMode === true ? (
-      <i className="fas fa-filter filter-toggle" onClick={props.filterToggle} />
+    mobileMode === true ? (
+      <i className="fas fa-filter filter-toggle" onClick={filterToggle} />
     ) : null;
+
   return (
     <div className="sort-order">
       {filterToggleIcon}
       <span>{labels[context.state.lang as string].pages.shop.sort.main}</span>
       <div className="dropdown">
-        <button onClick={props.orderByClicked} className="dropbtn">
-          {props.sortBy === 'name'
+        <button onClick={orderByClicked} className="dropbtn">
+          {sortBy === 'name'
             ? labels[
                 context.state.lang as string
               ].pages.shop.sort.btn.byName.toUpperCase()
@@ -59,24 +71,16 @@ const productsSort = (props: ProductsSortProps) => {
               ].pages.shop.sort.btn.byPrice.toUpperCase()}{' '}
           <i className="fas fa-angle-down" />
         </button>
-        <div ref={props.orderByOptionsRef} className="dropdown-content">
-          <a
-            href="#"
-            onClick={props.orderByChanged}
-            className="sort-by-name-btn"
-          >
+        <div ref={orderByOptionsRef} className="dropdown-content">
+          <a href="#" onClick={orderByChanged} className="sort-by-name-btn">
             {labels[context.state.lang as string].pages.shop.sort.btn.byName}
           </a>
-          <a
-            href="#"
-            onClick={props.orderByChanged}
-            className="sort-by-price-btn"
-          >
+          <a href="#" onClick={orderByChanged} className="sort-by-price-btn">
             {labels[context.state.lang as string].pages.shop.sort.btn.byPrice}
           </a>
         </div>
       </div>
-      {props.sortBy === 'name' ? sortByNameOrderIcon : sortByPriceOrderIcon}
+      {sortBy === 'name' ? sortByNameOrderIcon : sortByPriceOrderIcon}
     </div>
   );
 };

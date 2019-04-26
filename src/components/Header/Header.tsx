@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Navigation from './Navigation/Navigation';
-import labels from '../../config/labels';
+
 import './Header.less';
 
 const header = () => {
