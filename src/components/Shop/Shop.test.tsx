@@ -5,16 +5,24 @@ import { shallow } from 'enzyme';
 
 import { Product } from '../../models/Product';
 import { productsRef } from '../../firebase';
-
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Shop />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+import { BrowserRouter } from 'react-router-dom';
+import AppContextProvider from '../../AppContext';
 
 it('product images do fetch', async () => {
-  const wrapper = shallow(<Shop />);
-  const instance = wrapper.instance();
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <Shop />
+      </AppContextProvider>
+    </BrowserRouter>
+  );
+
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    lang: 'en'
+  });
+
+  const instance = wrapper.find('Shop').instance();
 
   await productsRef.once('value').then(snapshot => {
     instance.setState({

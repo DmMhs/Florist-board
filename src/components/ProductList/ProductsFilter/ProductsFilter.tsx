@@ -4,6 +4,7 @@ import labels from '../../../config/labels';
 import { AppContext } from '../../../AppContext';
 
 import './ProductsFilter.less';
+import { withRouter, RouteComponentProps } from 'react-router';
 
 interface ProductsFilterProps {
   filterToggle:
@@ -23,7 +24,9 @@ interface ProductsFilterProps {
   mobileMode?: boolean;
 }
 
-const productsFilter = (props: ProductsFilterProps) => {
+const productsFilter = (
+  props: RouteComponentProps<{}> & ProductsFilterProps
+) => {
   const context = useContext(AppContext);
 
   const {
@@ -96,4 +99,6 @@ const productsFilter = (props: ProductsFilterProps) => {
   );
 };
 
-export default productsFilter;
+export default withRouter<RouteComponentProps<{}> & ProductsFilterProps>(
+  productsFilter
+);

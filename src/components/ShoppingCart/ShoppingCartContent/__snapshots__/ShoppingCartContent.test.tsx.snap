@@ -1,47 +1,131 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches a snapshot 1`] = `
-<div>
-  <ul>
-    <li>
-      <span>
-        PRODUCT
-      </span>
-      <span />
-      <span>
-        AMOUNT
-      </span>
-      <span>
-        PRICE
-      </span>
-      <span />
-    </li>
-    <hr />
-    <span
-      key="1"
-    >
-      jast a test
-    </span>
-    <span
-      key="1"
-    >
-      jast a test
-    </span>
-  </ul>
-  <div
-    className="order"
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
   >
-    <p>
-      Total Sum: 
-      100.00
-      $
-    </p>
-    <button
-      className="order-btn"
-      type="button"
-    >
-      ORDER
-    </button>
-  </div>
-</div>
+    <withRouter(AppContextProvider)>
+      <Route>
+        <AppContextProvider
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+        >
+          <ShoppingCartContent
+            cartItemsList={
+              Array [
+                <span>
+                  jast a test
+                </span>,
+                <span>
+                  jast a test
+                </span>,
+              ]
+            }
+            fixEmptyCart={[Function]}
+            totalPrice={100}
+          >
+            <div>
+              <ul>
+                <li>
+                  <span>
+                    PRODUCT
+                  </span>
+                  <span />
+                  <span>
+                    AMOUNT
+                  </span>
+                  <span>
+                    PRICE
+                  </span>
+                  <span />
+                </li>
+                <hr />
+                <span
+                  key="1"
+                >
+                  jast a test
+                </span>
+                <span
+                  key="1"
+                >
+                  jast a test
+                </span>
+              </ul>
+              <div
+                className="order"
+              >
+                <p>
+                  Total Sum:
+                   
+                  100.00
+                  $
+                </p>
+                <button
+                  className="order-btn"
+                  type="button"
+                >
+                  ORDER
+                </button>
+              </div>
+            </div>
+          </ShoppingCartContent>
+        </AppContextProvider>
+      </Route>
+    </withRouter(AppContextProvider)>
+  </Router>
+</BrowserRouter>
 `;

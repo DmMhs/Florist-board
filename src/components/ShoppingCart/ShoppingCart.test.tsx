@@ -2,31 +2,54 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import ShoppingCart from './ShoppingCart';
-const cartItem = {
-  title: 'qwerty',
-  images: ['asd', 'qwr'],
-  price: 100,
-  amount: 1,
-  currency: 'usd',
-  available: true,
-  key: 10,
-  id: 'asgtqwr',
-  inCart: false,
-  remove: undefined
-};
+import { BrowserRouter } from 'react-router-dom';
+import AppContextProvider from '../../AppContext';
+
 it('ShoppingCartItem matches a snapshot', () => {
-  const wrapper = shallow(
-    <ShoppingCart
-      cartItems={[cartItem, cartItem]}
-      showCart={true}
-      closeCart={() => {}}
-      remove={() => {}}
-    />
+  const cartItem = {
+    title: 'qwerty',
+    images: ['asd', 'qwr'],
+    price: 100,
+    amount: 1,
+    currency: 'usd',
+    available: true,
+    key: 10,
+    id: 'asgtqwr',
+    inCart: false,
+    remove: undefined
+  };
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <ShoppingCart.WrappedComponent
+          cartItems={[cartItem]}
+          showCart={true}
+          closeCart={() => {}}
+          remove={() => {}}
+        />
+      </AppContextProvider>
+    </BrowserRouter>
   );
+  const context = wrapper.find('AppContaxtProvider').instance();
+  context.setState({
+    lang: 'en'
+  });
   expect(wrapper).toMatchSnapshot();
 });
 
 it("Increasing cart item's amount changes the state", () => {
+  const cartItem = {
+    title: 'qwerty',
+    images: ['asd', 'qwr'],
+    price: 100,
+    amount: 1,
+    currency: 'usd',
+    available: true,
+    key: 10,
+    id: 'asgtqwr',
+    inCart: false,
+    remove: undefined
+  };
   const wrapper = shallow(
     <ShoppingCart
       cartItems={[cartItem]}
@@ -41,7 +64,7 @@ it("Increasing cart item's amount changes the state", () => {
 });
 
 it("Reducing cart item's amount changes the state", () => {
-  const cartItem2 = {
+  const cartItem = {
     title: 'qwerty',
     images: ['asd', 'qwr'],
     price: 100,
@@ -55,7 +78,7 @@ it("Reducing cart item's amount changes the state", () => {
   };
   const wrapper = shallow(
     <ShoppingCart
-      cartItems={[cartItem2]}
+      cartItems={[cartItem]}
       showCart={true}
       closeCart={() => {}}
       remove={() => {}}

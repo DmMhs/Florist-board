@@ -1,9 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Gallery from './Gallery';
+import { mount } from 'enzyme';
+import { BrowserRouter } from 'react-router-dom';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Gallery />, div);
-  ReactDOM.unmountComponentAtNode(div);
+import Gallery from './Gallery';
+import AppContextProvider from '../../AppContext';
+
+it('matches a snapshot', () => {
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <Gallery.WrappedComponent />
+      </AppContextProvider>
+    </BrowserRouter>
+  );
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    lang: 'en'
+  });
+  expect(wrapper).toMatchSnapshot();
 });

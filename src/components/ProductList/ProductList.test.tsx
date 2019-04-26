@@ -1,15 +1,10 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import ReactDOM from 'react-dom';
 
 import ProductList from './ProductList';
 import { CartItem } from '../../models/CartItem';
-
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<ProductList products={[]} />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+import AppContextProvider from '../../AppContext';
+import { BrowserRouter } from 'react-router-dom';
 
 it('matches a snapshot', () => {
   const wrapper = shallow(<ProductList products={[]} />);
@@ -68,8 +63,18 @@ it('Add to cart works', () => {
     inCart: false,
     amount: 1
   };
-  const wrapper = shallow(<ProductList products={[]} />);
-  const instance = wrapper.instance();
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <ProductList products={[]} />
+      </AppContextProvider>
+    </BrowserRouter>
+  );
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    lang: 'en'
+  });
+  const instance = wrapper.find('ProductList').instance();
   instance.state = {
     showCart: false,
     cartProducts: [],
@@ -80,8 +85,14 @@ it('Add to cart works', () => {
 });
 
 it('toggleCart works', () => {
-  const wrapper = mount(<ProductList products={[]} />);
-  const instance = wrapper.instance();
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <ProductList products={[]} />
+      </AppContextProvider>
+    </BrowserRouter>
+  );
+  const instance = wrapper.find('ProductList').instance();
   instance.state = {
     showCart: false,
     cartProducts: []
@@ -91,8 +102,14 @@ it('toggleCart works', () => {
 });
 
 it('state changes on filters toggle click', () => {
-  const wrapper = mount(<ProductList products={[]} />);
-  const instance = wrapper.instance();
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <ProductList products={[]} />
+      </AppContextProvider>
+    </BrowserRouter>
+  );
+  const instance = wrapper.find('ProductList').instance();
   instance.state = {
     showFilters: true
   };
@@ -101,12 +118,27 @@ it('state changes on filters toggle click', () => {
 });
 
 it('Filter by price works', () => {
-  const wrapper = mount(<ProductList products={[]} />);
-  const instance = wrapper.instance();
-  instance.state = {
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <ProductList products={[]} />{' '}
+      </AppContextProvider>
+    </BrowserRouter>
+  );
+  const instance = wrapper.find('ProductList').instance();
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    userLogin: 'testLogin',
+    userId: 'testId',
+    userToken: 'testToken',
+    authenticationMethod: undefined,
+    lang: 'en',
+    userAuthenticated: false
+  });
+  instance.setState({
     showFilters: true,
     checkForPrice: false
-  };
+  });
   expect(instance.state.checkForPrice).toBeFalsy();
   wrapper.find('.priceFrom').simulate('change');
   expect(instance.state.checkForPrice).toBeTruthy();
@@ -119,8 +151,23 @@ it('Filter by price works', () => {
 });
 
 it('Click on sort button changes the state', () => {
-  const wrapper = mount(<ProductList products={[]} />);
-  const instance = wrapper.instance();
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <ProductList products={[]} />
+      </AppContextProvider>
+    </BrowserRouter>
+  );
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    userLogin: 'testLogin',
+    userId: 'testId',
+    userToken: 'testToken',
+    authenticationMethod: undefined,
+    lang: 'en',
+    userAuthenticated: false
+  });
+  const instance = wrapper.find('ProductList').instance();
   instance.state = {
     sortBy: 'name'
   };
@@ -129,8 +176,23 @@ it('Click on sort button changes the state', () => {
 });
 
 it('sort order button changes the state', () => {
-  const wrapper = mount(<ProductList products={[]} />);
-  const instance = wrapper.instance();
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <ProductList products={[]} />
+      </AppContextProvider>
+    </BrowserRouter>
+  );
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    userLogin: 'testLogin',
+    userId: 'testId',
+    userToken: 'testToken',
+    authenticationMethod: undefined,
+    lang: 'en',
+    userAuthenticated: false
+  });
+  const instance = wrapper.find('ProductList').instance();
   instance.state = {
     sortBy: 'name',
     sortOrder: 'default'
@@ -140,8 +202,23 @@ it('sort order button changes the state', () => {
 });
 
 it('In stock filter changes the state', () => {
-  const wrapper = mount(<ProductList products={[]} />);
-  const instance = wrapper.instance();
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <ProductList products={[]} />
+      </AppContextProvider>
+    </BrowserRouter>
+  );
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    userLogin: 'testLogin',
+    userId: 'testId',
+    userToken: 'testToken',
+    authenticationMethod: undefined,
+    lang: 'en',
+    userAuthenticated: false
+  });
+  const instance = wrapper.find('ProductList').instance();
   instance.state = {
     checkForAvailable: false
   };
@@ -150,8 +227,23 @@ it('In stock filter changes the state', () => {
 });
 
 it('Close cart button changes the state', () => {
-  const wrapper = mount(<ProductList products={[]} />);
-  const instance = wrapper.instance();
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <ProductList products={[]} />
+      </AppContextProvider>
+    </BrowserRouter>
+  );
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    userLogin: 'testLogin',
+    userId: 'testId',
+    userToken: 'testToken',
+    authenticationMethod: undefined,
+    lang: 'en',
+    userAuthenticated: false
+  });
+  const instance = wrapper.find('ProductList').instance();
   instance.state = {
     showCart: true
   };
@@ -160,8 +252,23 @@ it('Close cart button changes the state', () => {
 });
 
 it('filter toggler changes the state', () => {
-  const wrapper = mount(<ProductList products={[]} />);
-  const instance = wrapper.instance();
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <ProductList products={[]} />
+      </AppContextProvider>
+    </BrowserRouter>
+  );
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    userLogin: 'testLogin',
+    userId: 'testId',
+    userToken: 'testToken',
+    authenticationMethod: undefined,
+    lang: 'en',
+    userAuthenticated: false
+  });
+  const instance = wrapper.find('ProductList').instance();
   instance.setState({
     showFilters: false
   });
@@ -173,8 +280,23 @@ it('filter toggler changes the state', () => {
 });
 
 it('Changing of price range has impact on state', () => {
-  const wrapper = mount(<ProductList products={[]} />);
-  const instance = wrapper.instance();
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <ProductList products={[]} />
+      </AppContextProvider>
+    </BrowserRouter>
+  );
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    userLogin: 'testLogin',
+    userId: 'testId',
+    userToken: 'testToken',
+    authenticationMethod: undefined,
+    lang: 'en',
+    userAuthenticated: false
+  });
+  const instance = wrapper.find('ProductList').instance();
   instance.setState({
     showCart: false,
     cartProducts: [],
@@ -193,8 +315,23 @@ it('Changing of price range has impact on state', () => {
 });
 
 it('Clicking on "order by" changes "orderByOptionsRef" classList', () => {
-  const wrapper = mount(<ProductList products={[]} />);
-  const instance = wrapper.instance();
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <ProductList products={[]} />
+      </AppContextProvider>
+    </BrowserRouter>
+  );
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    userLogin: 'testLogin',
+    userId: 'testId',
+    userToken: 'testToken',
+    authenticationMethod: undefined,
+    lang: 'en',
+    userAuthenticated: false
+  });
+  const instance = wrapper.find('ProductList').instance();
   expect(
     instance.orderByOptionsRef.current!.classList.contains('show')
   ).toBeFalsy();

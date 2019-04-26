@@ -21,9 +21,15 @@ it('Submit event has impact on the state', async () => {
   let match = { params: { mode: 'signin' } };
   let wrapper = mount(
     <BrowserRouter>
-      <Auth.WrappedComponent match={match} />
+      <AppContextProvider>
+        <Auth.WrappedComponent match={match} />
+      </AppContextProvider>
     </BrowserRouter>
   );
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    lang: 'en'
+  });
   let instance = wrapper.find('Auth').instance();
   instance.setState({
     formData: {
@@ -61,9 +67,15 @@ it('Authorization with Google works', () => {
   const match = { params: { mode: 'signin' } };
   const wrapper = mount(
     <BrowserRouter>
-      <Auth.WrappedComponent match={match} />
+      <AppContextProvider>
+        <Auth.WrappedComponent match={match} />
+      </AppContextProvider>
     </BrowserRouter>
   );
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    lang: 'en'
+  });
   const instance = wrapper.find('Auth').instance();
   instance.setState({
     formData: {
@@ -93,21 +105,27 @@ it('Setting user credentails and logout change Auth context state', () => {
     userLogin: '',
     userId: '',
     userToken: '',
-    userAuthenticated: false
+    userAuthenticated: false,
+    authenticationMethod: undefined,
+    lang: 'en'
   });
   instance.setUserCredentialsHandler('testLogin', 'testId', 'testToken');
   expect(instance.state).toEqual({
     userLogin: 'testLogin',
     userId: 'testId',
     userToken: 'testToken',
-    userAuthenticated: true
+    userAuthenticated: true,
+    authenticationMethod: undefined,
+    lang: 'en'
   });
   instance.logoutHandler();
   expect(instance.state).toEqual({
     userLogin: '',
     userId: '',
     userToken: '',
-    userAuthenticated: false
+    userAuthenticated: false,
+    authenticationMethod: undefined,
+    lang: 'en'
   });
 });
 

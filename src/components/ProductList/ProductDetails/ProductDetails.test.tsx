@@ -1,53 +1,74 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import { BrowserRouter } from 'react-router-dom';
 
 import ProductDetails from './ProductDetails';
 import { productsRef } from '../../../firebase';
-import { BrowserRouter } from 'react-router-dom';
+import AppContextProvider from '../../../AppContext';
 
 it('renders without crashing', () => {
-  const wrapper = shallow(
-    <ProductDetails
-      match={{
-        params: { id: '-Laz5nc-kJiI1uDubC9K' },
-        isExact: true,
-        path: '',
-        url: ''
-      }}
-    />
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <ProductDetails
+          match={{
+            params: { id: '-Laz5nc-kJiI1uDubC9K' },
+            isExact: true,
+            path: '',
+            url: ''
+          }}
+        />
+      </AppContextProvider>
+    </BrowserRouter>
   );
-  expect(wrapper.instance().state.title).not.toEqual('');
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    lang: 'en'
+  });
+  expect(wrapper).toMatchSnapshot();
 });
 
 it('details must be rendered', () => {
   const wrapper = mount(
     <BrowserRouter>
-      <ProductDetails
-        match={{
-          params: { id: '-Laz5nc-kJiI1uDubC9K' },
-          isExact: true,
-          path: '',
-          url: ''
-        }}
-      />
+      <AppContextProvider>
+        <ProductDetails
+          match={{
+            params: { id: '-Laz5nc-kJiI1uDubC9K' },
+            isExact: true,
+            path: '',
+            url: ''
+          }}
+        />
+      </AppContextProvider>
     </BrowserRouter>
   );
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    lang: 'en'
+  });
   expect(wrapper.find('.ProductDetails').exists()).toBeTruthy();
 });
 
 it('product data do fetch', async () => {
   const wrapper = mount(
     <BrowserRouter>
-      <ProductDetails
-        match={{
-          params: { id: '-Laz5nc-kJiI1uDubC9K' },
-          isExact: true,
-          path: '',
-          url: ''
-        }}
-      />
+      <AppContextProvider>
+        <ProductDetails
+          match={{
+            params: { id: '-Laz5nc-kJiI1uDubC9K' },
+            isExact: true,
+            path: '',
+            url: ''
+          }}
+        />
+      </AppContextProvider>
     </BrowserRouter>
   );
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    lang: 'en'
+  });
   const instance = wrapper.find('ProductDetails').instance();
   instance.state = {
     productData: {},

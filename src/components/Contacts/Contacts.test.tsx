@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
+
 import Contacts from './Contacts';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Contacts />, div);
-  ReactDOM.unmountComponentAtNode(div);
+it('matches a snapshot', () => {
+  const wrapper = shallow(<Contacts />);
+  expect(wrapper).toMatchSnapshot();
 });

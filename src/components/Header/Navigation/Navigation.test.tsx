@@ -50,13 +50,17 @@ it('Logs out', () => {
     userLogin: 'testLogin',
     userId: 'testId',
     userToken: 'testToken',
-    userAuthenticated: true
+    userAuthenticated: true,
+    athenticationMethod: undefined,
+    lang: 'en'
   });
-  navigationInstance.logout();
+  navigationInstance.logoutClickedHandler();
   expect(contextInstance.state).toEqual({
     userLogin: '',
     userId: '',
     userToken: '',
-    userAuthenticated: false
+    userAuthenticated: false,
+    athenticationMethod: undefined,
+    lang: 'en'
   });
 });
