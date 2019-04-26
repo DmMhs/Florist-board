@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 
-import './ProductsFilter.less';
 import labels from '../../../config/labels';
-import { AuthContext } from '../../Auth/AuthContext';
+import { AppContext } from '../../../AppContext';
+
+import './ProductsFilter.less';
 
 interface ProductsFilterProps {
   filterToggle:
@@ -23,18 +24,29 @@ interface ProductsFilterProps {
 }
 
 const productsFilter = (props: ProductsFilterProps) => {
-  const context = useContext(AuthContext);
+  const context = useContext(AppContext);
+
+  const {
+    filterToggle,
+    filterToggleRef,
+    inStockChanged,
+    priceFromChanged,
+    priceToChanged,
+    filtersSidebarRef
+  } = props;
+
   const closeFiltersIcon =
     props.mobileMode === true ? (
-      <i className="fas fa-times close" onClick={props.filterToggle} />
+      <i className="fas fa-times close" onClick={filterToggle} />
     ) : null;
+
   return (
-    <div className="filter-wrapper hide" ref={props.filtersSidebarRef}>
+    <div className="filter-wrapper hide" ref={filtersSidebarRef}>
       {props.mobileMode === false ? (
         <i
           className="fas fa-filter toggle"
-          onClick={props.filterToggle}
-          ref={props.filterToggleRef}
+          onClick={filterToggle}
+          ref={filterToggleRef}
         />
       ) : null}
       <h2>
@@ -49,7 +61,7 @@ const productsFilter = (props: ProductsFilterProps) => {
           <label>
             {labels[context.state.lang as string].pages.shop.filter.available}
           </label>
-          <input type="checkbox" onChange={props.inStockChanged} />
+          <input type="checkbox" onChange={inStockChanged} />
         </div>
         <div className="filter-option price-range">
           <label>
@@ -58,7 +70,7 @@ const productsFilter = (props: ProductsFilterProps) => {
           <div>
             <input
               type="number"
-              onChange={props.priceFromChanged}
+              onChange={priceFromChanged}
               className="priceFrom"
               placeholder={
                 labels[context.state.lang as string].pages.shop.filter
@@ -69,7 +81,7 @@ const productsFilter = (props: ProductsFilterProps) => {
             -
             <input
               type="number"
-              onChange={props.priceToChanged}
+              onChange={priceToChanged}
               className="priceTo"
               placeholder={
                 labels[context.state.lang as string].pages.shop.filter

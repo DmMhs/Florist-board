@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { MemoryRouter, BrowserRouter } from 'react-router-dom';
 
-import AuthContextProvider from '../../Auth/AuthContext';
+import AppContextProvider from '../../../AppContext';
 import ProductCard from './ProductCard';
 import { notDeepEqual } from 'assert';
 
@@ -38,7 +38,7 @@ it('Property "available" has impact on price displaying', () => {
   };
   let wrapper = mount(
     <BrowserRouter>
-      <AuthContextProvider>
+      <AppContextProvider>
         <ProductCard
           title="some"
           images={['test', 'product']}
@@ -50,7 +50,7 @@ it('Property "available" has impact on price displaying', () => {
           inCart={false}
           addToCart={() => {}}
         />
-      </AuthContextProvider>
+      </AppContextProvider>
     </BrowserRouter>
   );
   expect(wrapper.find('.price').text()).toEqual('not available :(');
@@ -74,7 +74,7 @@ it('Property "available" has impact on price displaying', () => {
 it('likeClickedHandler changes state of component', () => {
   const wrapper = mount(
     <BrowserRouter>
-      <AuthContextProvider>
+      <AppContextProvider>
         <ProductCard
           title="some"
           images={['test', 'product']}
@@ -86,12 +86,12 @@ it('likeClickedHandler changes state of component', () => {
           inCart={false}
           addToCart={() => {}}
         />
-      </AuthContextProvider>
+      </AppContextProvider>
     </BrowserRouter>
   );
 
-  const authContextInstance = wrapper.find('AuthContextProvider').instance();
-  authContextInstance.setState({
+  const AppContextInstance = wrapper.find('AppContextProvider').instance();
+  AppContextInstance.setState({
     userAuthenticated: true,
     userId: '12345'
   });

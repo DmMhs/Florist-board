@@ -6,7 +6,7 @@ exports[`Auth component matches a snapshot 1`] = `
 </Route>
 `;
 
-exports[`AuthContext component matches a snapshot 1`] = `
+exports[`AppContext component matches a snapshot 1`] = `
 <Route>
   <Component />
 </Route>

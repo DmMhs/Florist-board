@@ -3,16 +3,15 @@ import ProductCard from './ProductCard/ProductCard';
 
 import { CartItem } from '../../models/CartItem';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
-
-import './ProductList.less';
 import ProductsFilter from './ProductsFilter/ProductsFilter';
 import ProductsSort from './ProductsSort/ProductsSort';
 import sortByName from '../../services/sortByName';
 import sortByPrice from '../../services/sortByPrice';
 import Popup from '../Popup/Popup';
-import { AuthContext } from '../Auth/AuthContext';
+import { AppContext } from '../../AppContext';
 import labels from '../../config/labels';
 
+import './ProductList.less';
 interface ProductListProps {
   products: CartItem[];
 }
@@ -29,7 +28,7 @@ interface ProductListState {
   sortOrder: string;
   showFilters: boolean;
   mobileFiltersMode: boolean;
-  popupMessages: { id: string; el: JSX.Element }[];
+  popupMessages: Array<{ id: string; el: JSX.Element }>;
 }
 
 let resizeListener: EventListener;
@@ -39,6 +38,7 @@ class ProductList extends Component<ProductListProps, ProductListState> {
   private filtersSidebarRef: React.RefObject<HTMLDivElement>;
   private productListRef: React.RefObject<HTMLDivElement>;
   public filterToggleRef: React.RefObject<HTMLDivElement>;
+
   constructor(props: ProductListProps) {
     super(props);
     this.state = {
@@ -53,13 +53,14 @@ class ProductList extends Component<ProductListProps, ProductListState> {
       mobileFiltersMode: false,
       popupMessages: []
     };
+
     this.orderByOptionsRef = React.createRef();
     this.filtersSidebarRef = React.createRef();
     this.productListRef = React.createRef();
     this.filterToggleRef = React.createRef();
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     if (window.innerWidth <= 920) {
       this.setState({
         mobileFiltersMode: true
@@ -83,11 +84,11 @@ class ProductList extends Component<ProductListProps, ProductListState> {
     window.addEventListener('resize', resizeListener);
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     window.removeEventListener('resize', resizeListener);
   }
 
-  addToCartClickedHandler = (productData: CartItem) => {
+  private addToCartClickedHandler = (productData: CartItem) => {
     const context = this.context;
     const removePopup = () => {
       const timer = setTimeout(() => {
@@ -160,17 +161,21 @@ class ProductList extends Component<ProductListProps, ProductListState> {
       }
     }
   };
-  toggleCartClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+
+  private toggleCartClickedHandler = (
+    event: React.MouseEvent<HTMLDivElement>
+  ) => {
     this.setState({
       showCart: !this.state.showCart
     });
   };
-  closeCartClickedHandler = () => {
+
+  private closeCartClickedHandler = () => {
     this.setState({
       showCart: false
     });
   };
-  handleRemoveCartItem = (index: number) => {
+  private handleRemoveCartItem = (index: number) => {
     const confirm = window.confirm('Are you sure?');
     if (confirm) {
       this.state.cartProducts[index].inCart = false;
@@ -182,12 +187,17 @@ class ProductList extends Component<ProductListProps, ProductListState> {
       });
     }
   };
-  inStockChangedHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+  private inStockChangedHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     this.setState({
       checkForAvailable: !this.state.checkForAvailable
     });
   };
-  priceFromChangedHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  private priceFromChangedHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const priceFilter = { ...this.state.filterByPrice };
     priceFilter.from = event.target.value === '' ? 0 : +event.target.value;
     this.setState({
@@ -196,7 +206,9 @@ class ProductList extends Component<ProductListProps, ProductListState> {
     });
   };
 
-  priceToChangedHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  private priceToChangedHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const priceFilter = { ...this.state.filterByPrice };
     priceFilter.to = event.target.value === '' ? Infinity : +event.target.value;
     this.setState({
@@ -204,14 +216,16 @@ class ProductList extends Component<ProductListProps, ProductListState> {
       checkForPrice: true
     });
   };
-  sortOrderClickedHandler = (
+
+  private sortOrderClickedHandler = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     this.setState({
       sortOrder: this.state.sortOrder === 'inverse' ? 'default' : 'inverse'
     });
   };
-  orderByChangedHandler = (
+
+  private orderByChangedHandler = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     const context = this.context;
@@ -223,10 +237,12 @@ class ProductList extends Component<ProductListProps, ProductListState> {
           : 'price'
     });
   };
-  orderByClickedHandler = () => {
+
+  private orderByClickedHandler = () => {
     this.orderByOptionsRef.current!.classList.toggle('show');
   };
-  filterToggleClickedHandler = () => {
+
+  private filterToggleClickedHandler = () => {
     if (this.filterToggleRef.current === null) {
       this.setState({
         showFilters: !this.state.showFilters
@@ -242,8 +258,21 @@ class ProductList extends Component<ProductListProps, ProductListState> {
     }
   };
 
-  render() {
+  public render() {
     const { products } = this.props;
+
+    const {
+      popupMessages,
+      checkForAvailable,
+      checkForPrice,
+      filterByPrice,
+      sortOrder,
+      sortBy,
+      cartProducts,
+      showCart,
+      mobileFiltersMode
+    } = this.state;
+
     let productList = products.map((p: CartItem, index: number) => {
       return (
         <ProductCard
@@ -265,38 +294,42 @@ class ProductList extends Component<ProductListProps, ProductListState> {
         />
       );
     });
-    const popups = this.state.popupMessages.map(
-      (p: { id: string; el: JSX.Element }) => {
-        return p.el;
-      }
-    );
-    if (this.state.checkForAvailable === true) {
+
+    const popups = popupMessages.map((p: { id: string; el: JSX.Element }) => {
+      return p.el;
+    });
+
+    if (checkForAvailable === true) {
       productList = productList.filter(item => {
         return item.props.available === true;
       });
     }
-    if (this.state.checkForPrice === true) {
+
+    if (checkForPrice === true) {
       productList = productList.filter(item => {
         return (
-          item.props.price >= this.state.filterByPrice.from &&
-          item.props.price <= this.state.filterByPrice.to
+          item.props.price >= filterByPrice.from &&
+          item.props.price <= filterByPrice.to
         );
       });
     }
-    if (this.state.sortBy === 'name') {
+
+    if (sortBy === 'name') {
       productList =
-        this.state.sortOrder === 'inverse'
+        sortOrder === 'inverse'
           ? productList.sort(sortByName).reverse()
           : productList.sort(sortByName);
     }
-    if (this.state.sortBy === 'price') {
+
+    if (sortBy === 'price') {
       productList =
-        this.state.sortOrder === 'inverse'
+        sortOrder === 'inverse'
           ? productList.sort(sortByPrice).reverse()
           : productList.sort(sortByPrice);
     }
+
     return (
-      <AuthContext.Consumer>
+      <AppContext.Consumer>
         {value =>
           value && (
             <div className="main-wrapper">
@@ -305,11 +338,11 @@ class ProductList extends Component<ProductListProps, ProductListState> {
                 onClick={this.toggleCartClickedHandler}
               >
                 <i className="fas fa-shopping-basket" />
-                <span>{this.state.cartProducts.length}</span>
+                <span>{cartProducts.length}</span>
               </div>
               <ShoppingCart
-                cartItems={this.state.cartProducts}
-                showCart={this.state.showCart}
+                cartItems={cartProducts}
+                showCart={showCart}
                 closeCart={this.closeCartClickedHandler}
                 remove={this.handleRemoveCartItem}
               />
@@ -320,17 +353,17 @@ class ProductList extends Component<ProductListProps, ProductListState> {
                 inStockChanged={this.inStockChangedHandler}
                 priceFromChanged={this.priceFromChangedHandler}
                 priceToChanged={this.priceToChangedHandler}
-                mobileMode={this.state.mobileFiltersMode}
+                mobileMode={mobileFiltersMode}
               />
               <div className="ProductList full-width" ref={this.productListRef}>
                 <ProductsSort
-                  sortOrder={this.state.sortOrder}
+                  sortOrder={sortOrder}
                   sortOrderClicked={this.sortOrderClickedHandler}
                   orderByClicked={this.orderByClickedHandler}
-                  sortBy={this.state.sortBy}
+                  sortBy={sortBy}
                   orderByOptionsRef={this.orderByOptionsRef}
                   orderByChanged={this.orderByChangedHandler}
-                  mobileMode={this.state.mobileFiltersMode}
+                  mobileMode={mobileFiltersMode}
                   filterToggle={this.filterToggleClickedHandler}
                 />
                 {productList}
@@ -339,10 +372,10 @@ class ProductList extends Component<ProductListProps, ProductListState> {
             </div>
           )
         }
-      </AuthContext.Consumer>
+      </AppContext.Consumer>
     );
   }
 }
 
-ProductList.contextType = AuthContext;
+ProductList.contextType = AppContext;
 export default ProductList;

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import './ProductCard.less';
 import Slider from '../../Slider/Slider';
 import { CartItem } from '../../../models/CartItem';
-import { AuthContext } from '../../Auth/AuthContext';
+import { AppContext } from '../../../AppContext';
 import { productsRef } from '../../../firebase';
 import labels from '../../../config/labels';
 
@@ -20,7 +20,10 @@ interface ProductCardState {
 }
 
 class ProductCard extends Component<CartItem, ProductCardState> {
-  static getDerivedStateFromProps(props: CartItem, state: ProductCardState) {
+  public static getDerivedStateFromProps(
+    props: CartItem,
+    state: ProductCardState
+  ) {
     return {
       isLiked: props.likedBy
     };
@@ -36,13 +39,13 @@ class ProductCard extends Component<CartItem, ProductCardState> {
       isLikedBy: []
     };
   }
-  componentDidMount() {
+  public componentDidMount() {
     if (this.state.isLiked === true) {
       this.likeButtonRef.current!.classList.add('active');
     }
   }
 
-  likeClickedHandler = async () => {
+  private likeClickedHandler = async () => {
     this.likeButtonRef.current!.classList.toggle('active');
     await productsRef
       .child(this.props.id)
@@ -54,7 +57,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
         });
       });
     if (this.state.isLiked === true) {
-      let newLikedByList = [...this.state.isLikedBy];
+      const newLikedByList = [...this.state.isLikedBy];
       const index = newLikedByList.findIndex((val: string) => {
         return val === this.context.state.userId;
       });
@@ -70,7 +73,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
     }
   };
 
-  render() {
+  public render() {
     const {
       id,
       images,
@@ -79,9 +82,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
       price,
       currency,
       available,
-      inCart,
-      likedBy,
-      description
+      inCart
     } = this.props;
 
     const actionIcon = inCart ? (
@@ -101,7 +102,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
       </div>
     );
     return (
-      <AuthContext.Consumer>
+      <AppContext.Consumer>
         {value =>
           value && (
             <div className="ProductCard">
@@ -137,10 +138,10 @@ class ProductCard extends Component<CartItem, ProductCardState> {
             </div>
           )
         }
-      </AuthContext.Consumer>
+      </AppContext.Consumer>
     );
   }
 }
 
-ProductCard.contextType = AuthContext;
+ProductCard.contextType = AppContext;
 export default ProductCard;

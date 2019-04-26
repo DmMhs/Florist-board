@@ -162,7 +162,7 @@ let labels: any = {
           btn: 'РЕЄСТРАЦІЯ'
         }
       },
-      pageNotFound: 'Сторінка не знайдена',
+      pageNotFound: 'Сторінку не знайдено',
       productDetails: {
         description: 'Опис',
         only: 'тільки',

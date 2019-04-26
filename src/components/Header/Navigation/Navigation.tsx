@@ -2,7 +2,7 @@ import React, { Component, RefObject } from 'react';
 import { NavLink, withRouter, RouteComponentProps } from 'react-router-dom';
 import firebase from 'firebase';
 
-import { AuthContext } from '../../Auth/AuthContext';
+import { AppContext } from '../../../AppContext';
 import labels from '../../../config/labels';
 import './Navigation.less';
 
@@ -21,12 +21,13 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
     this.langOptionsRef = React.createRef();
     this.langOptionsToggleRef = React.createRef();
   }
-  accountClickedHandler = () => {
+
+  private accountClickedHandler = () => {
     this.authOptionsToggleRef.current!.classList.toggle('active');
     this.authOptionsRef.current!.classList.toggle('show');
   };
 
-  logout = () => {
+  private logoutClickedHandler = () => {
     const value = this.context;
     firebase.auth().signOut();
     value.logout();
@@ -34,18 +35,19 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
       (this.props as RouteComponentProps<{}>).history.push('/');
     }
   };
-  langBtnClickedHandler = () => {
+
+  private langBtnClickedHandler = () => {
     this.langOptionsRef.current!.classList.toggle('show');
     this.langOptionsToggleRef.current!.classList.toggle('active');
   };
-  langOptionClickedHandler = (option: string) => {
+  private langOptionClickedHandler = (option: string) => {
     const context = this.context;
     context.setLang(option);
   };
-  render() {
+  public render() {
     return (
       <div className="Navigation">
-        <AuthContext.Consumer>
+        <AppContext.Consumer>
           {value =>
             value && (
               <ul>
@@ -105,7 +107,10 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                         </NavLink>
                       </div>
                     ) : (
-                      <a onClick={this.logout} className="log-out">
+                      <a
+                        onClick={this.logoutClickedHandler}
+                        className="log-out"
+                      >
                         {
                           labels[value.state.lang as string].navigation.account
                             .menu.logOut
@@ -151,11 +156,11 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
               </ul>
             )
           }
-        </AuthContext.Consumer>
+        </AppContext.Consumer>
       </div>
     );
   }
 }
 
-Navigation.contextType = AuthContext;
+Navigation.contextType = AppContext;
 export default withRouter<RouteComponentProps<{}>>(Navigation);

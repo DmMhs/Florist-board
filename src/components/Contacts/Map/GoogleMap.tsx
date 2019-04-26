@@ -23,7 +23,7 @@ class GoogleMap extends Component<GoogleMapProps, GoogleMapState> {
     };
     this.mapRef = React.createRef();
   }
-  componentDidMount() {
+  public componentDidMount() {
     if (window.innerWidth < 768) {
       this.setState({
         mobileMode: true

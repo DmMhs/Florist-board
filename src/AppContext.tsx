@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-export interface AuthContextState {
+export interface AppContextState {
   userLogin: string | null | undefined;
   userId: string | null | undefined;
   userToken: string | null | undefined;
@@ -10,8 +10,8 @@ export interface AuthContextState {
   lang: string | null | undefined;
 }
 
-export const AuthContext = React.createContext({
-  state: {} as AuthContextState,
+export const AppContext = React.createContext({
+  state: {} as AppContextState,
   setUserCredentials: (
     userLogin: string | null,
     userId: string | null,
@@ -22,9 +22,9 @@ export const AuthContext = React.createContext({
   logout: () => {},
   setLang: (lang: string | null) => {}
 });
-class AuthContextProvider extends Component<
+class AppContextProvider extends Component<
   RouteComponentProps<{}>,
-  AuthContextState
+  AppContextState
 > {
   constructor(props: RouteComponentProps<{}>) {
     super(props);
@@ -37,7 +37,7 @@ class AuthContextProvider extends Component<
       lang: 'en'
     };
   }
-  componentDidMount() {
+  public componentDidMount() {
     if (
       localStorage.floristAuthToken === '' ||
       localStorage.floristAuthToken === undefined
@@ -59,7 +59,7 @@ class AuthContextProvider extends Component<
       });
     }
   }
-  setUserCredentialsHandler = (
+  private setUserCredentialsHandler = (
     userLogin: string | null | undefined,
     userId: string | null | undefined,
     userToken: string | null | undefined,
@@ -78,7 +78,7 @@ class AuthContextProvider extends Component<
     localStorage.floristAuthUserId = userId;
     localStorage.floristAuthMethod = authenticationMethod;
   };
-  logoutHandler = () => {
+  private logoutHandler = () => {
     this.setState({
       userAuthenticated: false,
       userLogin: '',
@@ -92,15 +92,15 @@ class AuthContextProvider extends Component<
     localStorage.floristAuthMethod = '';
   };
 
-  setLangHandler = (lang: string | null) => {
+  private setLangHandler = (lang: string | null) => {
     this.setState({
-      lang: lang
+      lang
     });
   };
 
-  render() {
+  public render() {
     return (
-      <AuthContext.Provider
+      <AppContext.Provider
         value={{
           state: this.state,
           setUserCredentials: this.setUserCredentialsHandler,
@@ -109,9 +109,9 @@ class AuthContextProvider extends Component<
         }}
       >
         {this.props.children}
-      </AuthContext.Provider>
+      </AppContext.Provider>
     );
   }
 }
 
-export default withRouter<RouteComponentProps<{}>>(AuthContextProvider);
+export default withRouter<RouteComponentProps<{}>>(AppContextProvider);

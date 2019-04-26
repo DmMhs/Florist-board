@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 
-import './Contacts.less';
 import GoogleMap from './Map/GoogleMap';
 import ContactInfo from './ContactInfo/ContactInfo';
 import { contacts } from '../../config/contacts';
 import labels from '../../config/labels';
-import { AuthContext } from '../Auth/AuthContext';
+import { AppContext } from '../../AppContext';
+
+import './Contacts.less';
 
 class Contacts extends Component {
-  render() {
+  public render() {
     return (
-      <AuthContext.Consumer>
+      <AppContext.Consumer>
         {value => (
           <div className="Contacts">
             <div className="contacts-wrapper">
@@ -28,7 +29,7 @@ class Contacts extends Component {
             </div>
           </div>
         )}
-      </AuthContext.Consumer>
+      </AppContext.Consumer>
     );
   }
 }

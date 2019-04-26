@@ -4,10 +4,11 @@ import { NavLink } from 'react-router-dom';
 import Spinner from '../../Spinner/Spinner';
 import { Product } from '../../../models/Product';
 import { productsRef } from '../../../firebase';
-import { AuthContext } from '../../Auth/AuthContext';
+import { AppContext } from '../../../AppContext';
 import { BASE_URL } from '../../../config/main';
 import { shareOverrideOGMeta } from '../../../services/share';
 import labels from '../../../config/labels';
+
 import './ProductDetails.less';
 
 interface MatchParams {
@@ -17,10 +18,10 @@ interface MatchParams {
 interface Props extends RouteComponentProps<MatchParams> {}
 
 interface RouteComponentProps<P> {
-  match: match<P>;
+  match: Match<P>;
 }
 
-interface match<P> {
+interface Match<P> {
   params: P;
   isExact: boolean;
   path: string;
@@ -51,7 +52,8 @@ class ProductDetails extends Component<
       fetchInProgress: false
     };
   }
-  componentDidMount() {
+
+  public componentDidMount() {
     this.setState({
       fetchInProgress: true
     });
@@ -66,26 +68,38 @@ class ProductDetails extends Component<
       })
       .catch(error => console.log(error));
   }
-  render() {
+
+  public render() {
+    const {
+      title,
+      title_uk,
+      description,
+      description_uk,
+      available,
+      price,
+      images
+    } = this.state.productData;
+
     const imgStyle = {
       backgroundImage: `url(${this.state.productData.images[0]})`
     };
+
     return (
-      <AuthContext.Consumer>
+      <AppContext.Consumer>
         {value => (
           <div className="ProductDetails">
             {this.state.fetchInProgress === false ? (
               <div>
                 <h1>
                   {value.state.lang === 'en'
-                    ? this.state.productData.title.toUpperCase()
-                    : this.state.productData.title_uk.toUpperCase()}
+                    ? title.toUpperCase()
+                    : title_uk.toUpperCase()}
                 </h1>
                 <div className="product-info-wrapper">
                   <div className="image-wrapper">
                     <div className="image" style={imgStyle} />
                     <h3 className="price">
-                      {this.state.productData.available === false ? (
+                      {available === false ? (
                         <span>
                           {
                             labels[value.state.lang as string].pages
@@ -99,9 +113,7 @@ class ProductDetails extends Component<
                             labels[value.state.lang as string].pages
                               .productDetails.only
                           }{' '}
-                          <span className="accent">
-                            {this.state.productData.price}$
-                          </span>
+                          <span className="accent">{price}$</span>
                         </div>
                       )}
                     </h3>
@@ -112,9 +124,9 @@ class ProductDetails extends Component<
                           this,
                           BASE_URL +
                             `/product-details/${this.props.match.params.id}`,
-                          this.state.productData.title,
-                          this.state.productData.description as string,
-                          this.state.productData.images[0]
+                          title,
+                          description as string,
+                          images[0]
                         )}
                       >
                         <span>
@@ -149,9 +161,7 @@ class ProductDetails extends Component<
                     </h2>
                     <hr />
                     <p>
-                      {value.state.lang === 'en'
-                        ? this.state.productData.description
-                        : this.state.productData.description_uk}
+                      {value.state.lang === 'en' ? description : description_uk}
                     </p>
                   </div>
                 </div>
@@ -161,7 +171,7 @@ class ProductDetails extends Component<
             )}
           </div>
         )}
-      </AuthContext.Consumer>
+      </AppContext.Consumer>
     );
   }
 }

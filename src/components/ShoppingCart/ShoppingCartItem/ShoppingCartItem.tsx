@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import './ShoppingCartItem.less';
 import { CartItem } from '../../../models/CartItem';
+import './ShoppingCartItem.less';
 
 const ShoppingCartItem = (
   props: Partial<CartItem> & { cartItemPrice: number }

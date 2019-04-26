@@ -10,7 +10,7 @@ import Home from './components/Home/Home';
 import Toggle from './components/Toggle/Toggle';
 import ProductDetails from './components/ProductList/ProductDetails/ProductDetails';
 import Auth from './components/Auth/Auth';
-import AuthContextProvider from './components/Auth/AuthContext';
+import AppContextProvider from './AppContext';
 import Footer from './components/Footer/Footer';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 
@@ -35,7 +35,7 @@ class App extends Component<AppProps, AppState> {
     this.toggleRef = React.createRef();
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     if (localStorage.floristAuthLogin === undefined) {
       localStorage.setItem('floristAuthLogin', '');
     }
@@ -67,11 +67,11 @@ class App extends Component<AppProps, AppState> {
     window.addEventListener('resize', resizeListener);
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     window.removeEventListener('resize', resizeListener);
   }
 
-  toggleClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+  public toggleClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     if (!(event.target as HTMLDivElement).classList.contains('active')) {
       this.setState({
         showNavigation: !this.state.showNavigation,
@@ -86,10 +86,10 @@ class App extends Component<AppProps, AppState> {
     (event.target as HTMLDivElement).classList.toggle('active');
   };
 
-  render() {
+  public render() {
     return (
       <BrowserRouter>
-        <AuthContextProvider>
+        <AppContextProvider>
           <div className="App">
             <Toggle
               click={this.toggleClickedHandler}
@@ -117,7 +117,7 @@ class App extends Component<AppProps, AppState> {
             </Switch>
             <Footer />
           </div>
-        </AuthContextProvider>
+        </AppContextProvider>
       </BrowserRouter>
     );
   }

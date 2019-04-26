@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import './ShoppingCartContent.less';
-import { AuthContext } from '../../Auth/AuthContext';
+import { AppContext } from '../../../AppContext';
 import labels from '../../../config/labels';
 
 interface ShoppingCartContentProps {
@@ -14,7 +14,7 @@ interface ShoppingCartContentProps {
 
 const ShoppingCartContent = (props: ShoppingCartContentProps) => {
   const { totalPrice, cartItemsList } = props;
-  const context = useContext(AuthContext);
+  const context = useContext(AppContext);
   const totalPriceFormatted = totalPrice.toFixed(2);
   return cartItemsList.length > 0 ? (
     <div>
