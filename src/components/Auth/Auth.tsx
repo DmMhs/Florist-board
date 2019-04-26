@@ -173,6 +173,17 @@ class Auth extends Component<
       .catch(error => console.log(error));
   };
   render() {
+    const context = this.context;
+    const infoPopup = (
+      <Popup
+        type="info"
+        message={
+          context.state.lang === 'en'
+            ? 'Please, provide a required data'
+            : 'Будь ласка, введіть дані'
+        }
+      />
+    );
     return (
       <div className="Auth">
         <AuthContext.Consumer>
@@ -226,12 +237,9 @@ class Auth extends Component<
                         {labels[value.state.lang as string].pages.auth.btn}
                       </button>
                       {this.state.formData.password === '' ||
-                      this.state.formData.email === '' ? (
-                        <Popup
-                          type="info"
-                          message="Please, provide a required data"
-                        />
-                      ) : null}
+                      this.state.formData.email === ''
+                        ? infoPopup
+                        : null}
                     </div>
                     <hr />
                     <h3>

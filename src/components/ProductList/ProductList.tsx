@@ -126,7 +126,7 @@ class ProductList extends Component<ProductListProps, ProductListState> {
                   <Popup
                     type="success"
                     message={`Продукт "${
-                      productData.title
+                      productData.title_uk
                     }" було додано у кошик`}
                     key={productData.id}
                   />
