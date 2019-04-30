@@ -23,7 +23,7 @@ interface ModalState {
 }
 
 class Modal extends Component<ModalProps, ModalState> {
-  static getDerivedStateFromProps(props: ModalProps, state: ModalState) {
+  public static getDerivedStateFromProps(props: ModalProps, state: ModalState) {
     const { images, initial } = props;
     return {
       activeSlide: images[initial],

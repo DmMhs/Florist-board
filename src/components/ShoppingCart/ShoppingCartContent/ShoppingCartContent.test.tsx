@@ -6,13 +6,13 @@ import { BrowserRouter } from 'react-router-dom';
 import AppContextProvider from '../../../AppContext';
 
 it('matches a snapshot', () => {
-  const TestJSX = <span key={1}>jast a test</span>;
+  const TestJSX = <span key={1}>just a test</span>;
   const wrapper = mount(
     <BrowserRouter>
       <AppContextProvider>
         <ShoppingCartContent
           totalPrice={100}
-          cartItemsList={[TestJSX, TestJSX]}
+          cartItemsList={[TestJSX]}
           fixEmptyCart={() => {}}
         />
       </AppContextProvider>

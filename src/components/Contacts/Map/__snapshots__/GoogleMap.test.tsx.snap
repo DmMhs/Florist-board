@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GoogleMap component matches a snapshot 1`] = `
+<div>
+  <WithStyles(CircularIndeterminate) />
+  <div
+    className="mapouter Map"
+    style={
+      Object {
+        "height": "400px",
+        "position": "relative",
+        "textAlign": "right",
+        "width": "700px",
+      }
+    }
+  >
+    <div
+      className="gmap_canvas"
+      style={
+        Object {
+          "background": "none!important",
+          "height": "400px",
+          "overflow": "hidden",
+          "width": "700px",
+        }
+      }
+    >
+      <iframe
+        frameBorder="0"
+        height="400"
+        id="gmap_canvas"
+        marginHeight={0}
+        marginWidth={0}
+        onLoad={[Function]}
+        scrolling="no"
+        src="dumb-url"
+        width="700"
+      />
+    </div>
+  </div>
+</div>
+`;

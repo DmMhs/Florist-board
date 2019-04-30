@@ -15,7 +15,7 @@ const toggle = React.forwardRef((props: ToggleProps, ref) => {
       className="fas fa-ellipsis-h Toggle"
       onClick={props.click}
       style={props.style}
-      ref={ref as any}
+      ref={ref as React.RefObject<HTMLElement>}
     />
   );
 });

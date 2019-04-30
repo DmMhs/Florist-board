@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 import firebase from 'firebase';
 
 import Auth from './Auth';
-import AppContextProvider from '../../AppContext';
+import AppContextProvider, { AppContext } from '../../AppContext';
 import { BrowserRouter } from 'react-router-dom';
 import { config } from '../../firebase';
 
@@ -48,7 +48,9 @@ it('Submit event has impact on the state', async () => {
   match = { params: { mode: 'signup' } };
   wrapper = mount(
     <BrowserRouter>
-      <Auth.WrappedComponent match={match} />
+      <AppContextProvider>
+        <Auth.WrappedComponent match={match} />
+      </AppContextProvider>
     </BrowserRouter>
   );
   instance = wrapper.find('Auth').instance();
@@ -63,7 +65,7 @@ it('Submit event has impact on the state', async () => {
   expect(instance.state.formData.password).toEqual('');
 });
 
-it('Authorization with Google works', () => {
+it('Email and password inputs change the state', () => {
   const match = { params: { mode: 'signin' } };
   const wrapper = mount(
     <BrowserRouter>
@@ -140,33 +142,33 @@ it('Changes state if local storage auth credentials are not empty', () => {
   expect(instance.state.userAuthenticated).toBeTruthy();
 });
 
-it('Google and Facebook authorization clicking envokes a handlers', async () => {
+it('Google and Facebook authorization clicking envokes handlers', () => {
   const match = { params: { mode: 'signin' } };
   const wrapper = mount(
     <BrowserRouter>
-      <AppContextProvider.WrappedComponent>
+      <AppContextProvider>
         <Auth.WrappedComponent match={match} />
-      </AppContextProvider.WrappedComponent>
+      </AppContextProvider>
     </BrowserRouter>
   );
-  const contextInstance = wrapper.find('AppContextProvider').instance();
-  const authInstance = wrapper.find('Auth').instance();
-  const spyGoogle = jest.spyOn(authInstance, 'authWithGoogleHandler');
-  const spyFacebook = jest.spyOn(authInstance, 'authWithFacebookHandler');
-  authInstance.forceUpdate();
-  contextInstance.setState({
-    userLogin: '',
-    userId: '',
-    userToken: '',
+  const context = wrapper.find('AppContextProvider').instance();
+  const instance = wrapper.find('Auth').instance();
+  const spyGoogle = jest.spyOn(instance, 'authWithGoogleHandler');
+  const spyFacebook = jest.spyOn(instance, 'authWithFacebookHandler');
+  instance.forceUpdate();
+  wrapper.update();
+  context.setState({
+    lang: 'en',
     userAuthenticated: false
   });
-  authInstance.setState({
+  instance.setState({
     formData: {
       email: 'bob_awesome@mail.com',
       password: 'bob_awesome'
     },
     mode: 'signin'
   });
+  wrapper.update();
   wrapper.find('.google-auth').simulate('click');
   expect(spyGoogle).toHaveBeenCalled();
   wrapper.find('.facebook-auth').simulate('click');

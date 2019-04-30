@@ -1,26 +1,28 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 
-import Contacts from './Contacts';
-import { BrowserRouter } from 'react-router-dom';
+import PageNotFound from './PageNotFound';
 import AppContextProvider from '../../AppContext';
+import { BrowserRouter } from 'react-router-dom';
 
-it('matches a snapshot', () => {
-  const wrapper = shallow(<Contacts />);
+it('PageNotFound component matches a snapshot', () => {
+  const wrapper = shallow(<PageNotFound />);
   expect(wrapper).toMatchSnapshot();
 });
 
-it('contacts are displayed', () => {
+it('Message is not empty', () => {
   const wrapper = mount(
     <BrowserRouter>
       <AppContextProvider>
-        <Contacts />
+        <PageNotFound />
       </AppContextProvider>
     </BrowserRouter>
   );
   const context = wrapper.find('AppContextProvider').instance();
+
   context.setState({
     lang: 'en'
   });
-  expect(wrapper.find('.Contacts').exists()).toBeTruthy();
+
+  expect(wrapper.find('.message').text().length).toBeGreaterThan(0);
 });

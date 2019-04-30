@@ -50,6 +50,7 @@ class Shop extends Component<ShopProps, ShopState> {
   }
 
   public render() {
+    console.log(this.state.products);
     const { products } = this.state;
     const shopContent = this.state.fetchInProgress ? (
       <Spinner />

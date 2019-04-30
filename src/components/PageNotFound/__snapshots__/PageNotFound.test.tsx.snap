@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageNotFound component matches a snapshot 1`] = `
+<div
+  className="PageNotFound"
+>
+  <h2>
+    <span
+      className="message"
+    >
+      Сторінку не знайдено
+    </span>
+     
+    <i
+      className="far fa-grimace"
+    />
+  </h2>
+</div>
+`;

@@ -21,8 +21,8 @@ it('ShoppingCartItem matches a snapshot', () => {
   const wrapper = mount(
     <BrowserRouter>
       <AppContextProvider>
-        <ShoppingCart.WrappedComponent
-          cartItems={[cartItem]}
+        <ShoppingCart
+          cartItems={[]}
           showCart={true}
           closeCart={() => {}}
           remove={() => {}}
@@ -30,7 +30,7 @@ it('ShoppingCartItem matches a snapshot', () => {
       </AppContextProvider>
     </BrowserRouter>
   );
-  const context = wrapper.find('AppContaxtProvider').instance();
+  const context = wrapper.find('AppContextProvider').instance();
   context.setState({
     lang: 'en'
   });

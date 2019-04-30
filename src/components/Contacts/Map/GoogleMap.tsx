@@ -47,17 +47,17 @@ class GoogleMap extends Component<GoogleMapProps, GoogleMapState> {
     window.addEventListener('resize', resizeListener);
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     window.removeEventListener('resize', resizeListener);
   }
 
-  mapFetchedHandler = () => {
+  private mapFetchedHandler = () => {
     this.setState({
       mapIsFetching: false
     });
   };
 
-  render() {
+  public render() {
     const { url } = this.props;
     const googleMap =
       this.state.mobileMode === true ? (

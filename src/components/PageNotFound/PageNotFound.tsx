@@ -9,9 +9,11 @@ const pageNotFound = () => {
   return (
     <div className="PageNotFound">
       <h2>
-        {context.state.lang === 'en'
-          ? labels.en.pages.pageNotFound
-          : labels.uk.pages.pageNotFound}{' '}
+        <span className="message">
+          {context.state.lang === 'en'
+            ? labels.en.pages.pageNotFound
+            : labels.uk.pages.pageNotFound}
+        </span>{' '}
         <i className="far fa-grimace" />
       </h2>
     </div>

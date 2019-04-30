@@ -68,10 +68,7 @@ exports[`matches a snapshot 1`] = `
             cartItemsList={
               Array [
                 <span>
-                  jast a test
-                </span>,
-                <span>
-                  jast a test
+                  just a test
                 </span>,
               ]
             }
@@ -97,12 +94,7 @@ exports[`matches a snapshot 1`] = `
                 <span
                   key="1"
                 >
-                  jast a test
-                </span>
-                <span
-                  key="1"
-                >
-                  jast a test
+                  just a test
                 </span>
               </ul>
               <div

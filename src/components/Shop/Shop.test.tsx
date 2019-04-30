@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Shop from './Shop';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import { Product } from '../../models/Product';
 import { productsRef } from '../../firebase';
@@ -23,7 +23,6 @@ it('product images do fetch', async () => {
   });
 
   const instance = wrapper.find('Shop').instance();
-
   await productsRef.once('value').then(snapshot => {
     instance.setState({
       fetchInProgress: true

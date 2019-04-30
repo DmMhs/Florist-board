@@ -82,7 +82,6 @@ it('likeClickedHandler changes state of component', () => {
           currency="usd"
           available={true}
           key={0}
-          id={'asfasf'}
           inCart={false}
           addToCart={() => {}}
         />
@@ -92,11 +91,20 @@ it('likeClickedHandler changes state of component', () => {
 
   const AppContextInstance = wrapper.find('AppContextProvider').instance();
   AppContextInstance.setState({
+    userLogin: 'safasf',
+    userId: 'rqwrqw',
+    userToken: 'safas',
     userAuthenticated: true,
-    userId: '12345'
+    authenticationMethod: undefined,
+    lang: 'en'
   });
 
   const productCardInstance = wrapper.find('ProductCard').instance();
+  productCardInstance.setState({
+    isLikedBy: [],
+    isLiked: false
+  });
+
   productCardInstance.likeClickedHandler();
 
   expect(

@@ -340,3 +340,38 @@ it('Clicking on "order by" changes "orderByOptionsRef" classList', () => {
     instance.orderByOptionsRef.current!.classList.contains('show')
   ).toBeTruthy();
 });
+
+it('resize listener changes the state', () => {
+  global.innerWidth = 1000;
+
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <ProductList products={[]} />
+      </AppContextProvider>
+    </BrowserRouter>
+  );
+
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
+    userLogin: 'testLogin',
+    userId: 'testId',
+    userToken: 'testToken',
+    authenticationMethod: undefined,
+    lang: 'en',
+    userAuthenticated: false
+  });
+
+  const instance = wrapper.find('ProductList').instance();
+  instance.setState({
+    mobileFiltersMode: false
+  });
+
+  global.innerWidth = 800;
+  window.dispatchEvent(new Event('resize'));
+  expect(instance.state.mobileFiltersMode).toBeTruthy();
+
+  global.innerWidth = 1200;
+  window.dispatchEvent(new Event('resize'));
+  expect(instance.state.mobileFiltersMode).toBeFalsy();
+});
