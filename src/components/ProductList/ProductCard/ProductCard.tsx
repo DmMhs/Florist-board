@@ -20,7 +20,7 @@ interface ProductCardState {
 }
 
 class ProductCard extends Component<CartItem, ProductCardState> {
-  public static npmgetDerivedStateFromProps(
+  public static getDerivedStateFromProps(
     props: CartItem,
     state: ProductCardState
   ) {

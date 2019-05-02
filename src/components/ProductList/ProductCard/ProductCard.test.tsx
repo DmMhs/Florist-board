@@ -4,7 +4,6 @@ import { MemoryRouter, BrowserRouter } from 'react-router-dom';
 
 import AppContextProvider from '../../../AppContext';
 import ProductCard from './ProductCard';
-import { notDeepEqual } from 'assert';
 
 it('renders without crashing', () => {
   const wrapper = shallow(
