@@ -5,9 +5,3 @@ exports[`Auth component matches a snapshot 1`] = `
   <Component />
 </Route>
 `;
-
-exports[`AppContext component matches a snapshot 1`] = `
-<Route>
-  <Component />
-</Route>
-`;

@@ -1,4 +1,4 @@
-import React, { Component, ReactElement } from 'react';
+import React, { Component } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 import './Gallery.less';
@@ -8,7 +8,6 @@ import Modal from './Modal/Modal';
 import labels from '../../config/labels';
 import { AppContext } from '../../AppContext';
 
-interface GalleryProps {}
 interface GalleryState {
   images: string[];
   fetchInProgress: boolean;

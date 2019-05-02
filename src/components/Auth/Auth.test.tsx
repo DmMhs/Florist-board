@@ -12,11 +12,6 @@ it('Auth component matches a snapshot', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-it('AppContext component matches a snapshot', () => {
-  const wrapper = shallow(<AppContextProvider />);
-  expect(wrapper).toMatchSnapshot();
-});
-
 it('Submit event has impact on the state', async () => {
   let match = { params: { mode: 'signin' } };
   let wrapper = mount(
@@ -100,52 +95,6 @@ it('Email and password inputs change the state', () => {
   expect(instance.state.formData.password).toEqual('Test password');
 });
 
-it('Setting user credentails and logout change Auth context state', () => {
-  const wrapper = mount(
-    <BrowserRouter>
-      <AppContextProvider.WrappedComponent />
-    </BrowserRouter>
-  );
-  const instance = wrapper.find('AppContextProvider').instance();
-  instance.setState({
-    userLogin: '',
-    userId: '',
-    userToken: '',
-    userAuthenticated: false,
-    authenticationMethod: undefined,
-    lang: 'en'
-  });
-  instance.setUserCredentialsHandler('testLogin', 'testId', 'testToken');
-  expect(instance.state).toEqual({
-    userLogin: 'testLogin',
-    userId: 'testId',
-    userToken: 'testToken',
-    userAuthenticated: true,
-    authenticationMethod: undefined,
-    lang: 'en'
-  });
-  instance.logoutHandler();
-  expect(instance.state).toEqual({
-    userLogin: '',
-    userId: '',
-    userToken: '',
-    userAuthenticated: false,
-    authenticationMethod: undefined,
-    lang: 'en'
-  });
-});
-
-it('Changes state if local storage auth credentials are not empty', () => {
-  localStorage.floristAuthToken = 'asfasfasf';
-  const wrapper = mount(
-    <BrowserRouter>
-      <AppContextProvider.WrappedComponent />
-    </BrowserRouter>
-  );
-  const instance = wrapper.find('AppContextProvider').instance();
-  expect(instance.state.userAuthenticated).toBeTruthy();
-});
-
 it('Google and Facebook authorization clicking envokes handlers', () => {
   const match = { params: { mode: 'signin' } };
   const wrapper = mount(
@@ -189,16 +138,11 @@ it('getIdToken throws error for not authenticated user', async () => {
     </BrowserRouter>
   );
 
-  const context = wrapper.find('AppContextProvider').instance();
   const instance = wrapper.find('Auth').instance();
 
   if (!firebase.apps.length) {
     firebase.initializeApp(config);
   }
-
-  const test = () => {
-    return instance.getIdToken();
-  };
   expect(() => {
     return instance.getIdToken();
   }).toThrow();
