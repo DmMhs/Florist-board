@@ -15,6 +15,8 @@ import Slider from '../components/Slider/Slider';
 import ProductList from '../components/ProductList/ProductList';
 import ProductCard from '../components/ProductList/ProductCard/ProductCard';
 import Popup from '../components/Popup/Popup';
+import AppContextProvider from '../AppContext';
+import { BrowserRouter } from 'react-router-dom';
 
 const productMock = {
   title: 'super cactus',
@@ -42,9 +44,27 @@ storiesOf('Button', module)
 storiesOf('Florist', module)
   .add('App', () => <App />)
   .add('Home', () => <Home />)
-  .add('Shop', () => <Shop />)
-  .add('Gallery', () => <Gallery />)
-  .add('Cotacts', () => <Contacts />)
+  .add('Shop', () => (
+    <BrowserRouter>
+      <AppContextProvider>
+        <Shop />
+      </AppContextProvider>
+    </BrowserRouter>
+  ))
+  .add('Gallery', () => (
+    <BrowserRouter>
+      <AppContextProvider>
+        <Gallery />
+      </AppContextProvider>
+    </BrowserRouter>
+  ))
+  .add('Contacts', () => (
+    <BrowserRouter>
+      <AppContextProvider>
+        <Contacts />
+      </AppContextProvider>
+    </BrowserRouter>
+  ))
   .add('Spinner', () => <Spinner />)
   .add('Slider', () => (
     <div style={{ width: '700px', height: '200px' }}>
@@ -60,7 +80,17 @@ storiesOf('Florist', module)
     </div>
   ))
   .add('ProductList', () => (
-    <ProductList products={[productMock, productMock, productMock]} />
+    <BrowserRouter>
+      <AppContextProvider>
+        <ProductList products={[productMock, productMock, productMock]} />
+      </AppContextProvider>
+    </BrowserRouter>
   ))
-  .add('ProductCard', () => <ProductCard {...productMock} />)
+  .add('ProductCard', () => (
+    <BrowserRouter>
+      <AppContextProvider>
+        <ProductCard {...productMock} />
+      </AppContextProvider>
+    </BrowserRouter>
+  ))
   .add('Popup', () => <Popup message="added to cart" type="success" />);
