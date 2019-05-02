@@ -5,22 +5,24 @@ import ShoppingCartContent from './ShoppingCartContent';
 import { BrowserRouter } from 'react-router-dom';
 import AppContextProvider from '../../../AppContext';
 
-it('matches a snapshot', () => {
-  const TestJSX = <span key={1}>just a test</span>;
-  const wrapper = mount(
-    <BrowserRouter>
-      <AppContextProvider>
-        <ShoppingCartContent
-          totalPrice={100}
-          cartItemsList={[TestJSX]}
-          fixEmptyCart={() => {}}
-        />
-      </AppContextProvider>
-    </BrowserRouter>
-  );
-  const context = wrapper.find('AppContextProvider').instance();
-  context.setState({
-    lang: 'en'
+describe('ShoppingCartContent works as expected', () => {
+  it('matches a snapshot', () => {
+    const TestJSX = <span key={1}>just a test</span>;
+    const wrapper = mount(
+      <BrowserRouter>
+        <AppContextProvider>
+          <ShoppingCartContent
+            totalPrice={100}
+            cartItemsList={[TestJSX]}
+            fixEmptyCart={() => {}}
+          />
+        </AppContextProvider>
+      </BrowserRouter>
+    );
+    const context = wrapper.find('AppContextProvider').instance();
+    context.setState({
+      lang: 'en'
+    });
+    expect(wrapper).toMatchSnapshot();
   });
-  expect(wrapper).toMatchSnapshot();
 });

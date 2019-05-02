@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches a snapshot 1`] = `
+exports[`ProductsFilter works as expected matches a snapshot 1`] = `
 <BrowserRouter>
   <Router
     history={

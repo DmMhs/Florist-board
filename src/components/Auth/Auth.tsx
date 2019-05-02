@@ -152,7 +152,8 @@ class Auth extends Component<
         value.setUserCredentials(
           response.user!.email,
           response.user!.uid,
-          idToken
+          idToken,
+          'google'
         );
         (this.props as RouteComponentProps<MatchParams> &
           RCProps<{}>).history.push('/');

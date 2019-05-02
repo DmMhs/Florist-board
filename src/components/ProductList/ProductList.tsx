@@ -225,13 +225,11 @@ class ProductList extends Component<ProductListProps, ProductListState> {
     });
   };
 
-  private orderByChangedHandler = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
+  private orderByChangedHandler = (orderBy: string) => {
     const context = this.context;
     this.setState({
       sortBy:
-        (event.target as HTMLAnchorElement).innerText ===
+        orderBy ===
         labels[context.state.lang as string].pages.shop.sort.btn.byName
           ? 'name'
           : 'price'
@@ -288,7 +286,7 @@ class ProductList extends Component<ProductListProps, ProductListState> {
           likedBy={
             p.likedBy === undefined
               ? false
-              : (p.likedBy as any).includes(this.context.state.userId)
+              : (p.likedBy as string[]).includes(this.context.state.userId)
           }
           addToCart={this.addToCartClickedHandler.bind(this, p as CartItem)}
         />

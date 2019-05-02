@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ContactInfo component matches a snapshot 1`] = `
+exports[`ContactsInfo works as expected ContactInfo component matches a snapshot 1`] = `
 <BrowserRouter>
   <Router
     history={

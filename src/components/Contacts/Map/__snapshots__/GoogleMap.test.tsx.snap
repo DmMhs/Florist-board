@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GoogleMap component matches a snapshot 1`] = `
+exports[`GoogleMap works as expected GoogleMap component matches a snapshot 1`] = `
 <div>
   <WithStyles(CircularIndeterminate) />
   <div

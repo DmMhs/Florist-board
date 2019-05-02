@@ -14,9 +14,7 @@ interface ProductsSortProps {
     | undefined;
   sortBy: string;
   orderByOptionsRef: React.RefObject<HTMLDivElement>;
-  orderByChanged:
-    | ((event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void)
-    | undefined;
+  orderByChanged: (orderBy: string) => void;
   mobileMode?: boolean;
   filterToggle?:
     | ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void)
@@ -73,12 +71,28 @@ const productsSort = (props: ProductsSortProps) => {
         </button>
         <div ref={orderByOptionsRef} className="dropdown-content">
           {sortBy === 'name' ? (
-            <a href="#" onClick={orderByChanged} className="sort-by-price-btn">
-              {labels[context.state.lang as string].pages.shop.sort.btn.byPrice}
+            <a
+              href="#"
+              onClick={orderByChanged!.bind(
+                props,
+                labels[context.state.lang as string].pages.shop.sort.btn.byPrice
+              )}
+              className="sort-by-price-btn"
+            >
+              {labels[context.state.lang as string].pages.shop.sort.btn.byPrice}{' '}
+              <i className="fas fa-dollar-sign" />
             </a>
           ) : (
-            <a href="#" onClick={orderByChanged} className="sort-by-name-btn">
-              {labels[context.state.lang as string].pages.shop.sort.btn.byName}
+            <a
+              href="#"
+              onClick={orderByChanged!.bind(
+                props,
+                labels[context.state.lang as string].pages.shop.sort.btn.byName
+              )}
+              className="sort-by-name-btn"
+            >
+              {labels[context.state.lang as string].pages.shop.sort.btn.byName}{' '}
+              <i className="fas fa-signature" />
             </a>
           )}
         </div>

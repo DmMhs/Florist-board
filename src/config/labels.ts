@@ -1,4 +1,4 @@
-let labels: any = {
+const labels: any = {
   en: {
     brand: 'FLORIST.UA',
     navigation: {
@@ -110,8 +110,8 @@ let labels: any = {
         sort: {
           main: 'сортувати за',
           btn: {
-            byName: "ім'ям",
-            byPrice: 'ціною'
+            byName: "IМ'ЯМ",
+            byPrice: 'ЦІНОЮ'
           }
         },
         filter: {

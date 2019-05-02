@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders without crashing 1`] = `
+exports[`ProductCard works as expected renders without crashing 1`] = `
 <ProductCard
   available={false}
   currency="usd"
