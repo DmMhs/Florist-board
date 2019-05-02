@@ -19,22 +19,16 @@
   }
 
   .dropbtn {
-    background-color: tomato;
-    color: white;
+    background-color: #eee;
+    outline: none;
+    color: #333333;
     padding: 16px;
-    font-size: 16px;
+    font-size: 1.1rem;
     width: 150px;
     border: none;
     cursor: pointer;
-    &:hover,
-    &:focus {
-      background-color: rgb(197, 78, 57);
-    }
     i {
-      color: white;
-      &:hover {
-        color: white;
-      }
+      color: #333333;
     }
   }
   .dropdown {
@@ -42,19 +36,21 @@
     position: relative;
     display: inline-block;
     a:hover {
-      background-color: #ddd;
+      transition: 0.3s;
+      background-color: tomato;
+      color: white;
     }
   }
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: #eee;
     width: 150px;
     overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 3 !important;
+    font-size: 1.3rem;
     a {
-      color: black;
+      color: #333333;
       padding: 12px 16px;
       text-decoration: none;
       display: block;

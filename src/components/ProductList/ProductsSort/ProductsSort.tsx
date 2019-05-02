@@ -69,15 +69,18 @@ const productsSort = (props: ProductsSortProps) => {
             : labels[
                 context.state.lang as string
               ].pages.shop.sort.btn.byPrice.toUpperCase()}{' '}
-          <i className="fas fa-angle-down" />
+          <i className="fas fa-caret-down" />
         </button>
         <div ref={orderByOptionsRef} className="dropdown-content">
-          <a href="#" onClick={orderByChanged} className="sort-by-name-btn">
-            {labels[context.state.lang as string].pages.shop.sort.btn.byName}
-          </a>
-          <a href="#" onClick={orderByChanged} className="sort-by-price-btn">
-            {labels[context.state.lang as string].pages.shop.sort.btn.byPrice}
-          </a>
+          {sortBy === 'name' ? (
+            <a href="#" onClick={orderByChanged} className="sort-by-price-btn">
+              {labels[context.state.lang as string].pages.shop.sort.btn.byPrice}
+            </a>
+          ) : (
+            <a href="#" onClick={orderByChanged} className="sort-by-name-btn">
+              {labels[context.state.lang as string].pages.shop.sort.btn.byName}
+            </a>
+          )}
         </div>
       </div>
       {sortBy === 'name' ? sortByNameOrderIcon : sortByPriceOrderIcon}

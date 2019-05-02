@@ -23,8 +23,8 @@ let labels: any = {
         sort: {
           main: 'sort by',
           btn: {
-            byName: 'name',
-            byPrice: 'price'
+            byName: 'NAME',
+            byPrice: 'PRICE'
           }
         },
         filter: {
