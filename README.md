@@ -17,6 +17,8 @@ Technologies:
 * Storybook
 
 ## (!) IMPORTANT
-App is preconfigured for working on a localhost. Being hosted it will not be able to share product details on facebook.
+App is preconfigured for working on a localhost. Being hosted it will not be able to share product details on facebook. You still will be able to login with my facebook app, but for making share functionality to work you will need to register your own facebook app (you can find out more here: https://developers.facebook.com/).
 Requirements for the real world functionality:
-* replace BASE_URL value (../src/config/main.ts) with a real URL of a deployed app.
+* replace BASE_URL value (../src/config/main.ts) with a real URL of a deployed app;
+* register your own app on "facebook developers" and add login functionality to it;
+* add domain of the hosted app to the "facebook developers".
