@@ -24,17 +24,6 @@ it('renders without crashing', () => {
 });
 
 it('Property "available" has impact on price displaying', () => {
-  const p = {
-    title: 'some',
-    images: ['test', 'product'],
-    price: 10.5,
-    currency: 'usd',
-    available: false,
-    key: 0,
-    id: 'asfasf',
-    inCart: false,
-    addToCart: () => {}
-  };
   let wrapper = mount(
     <BrowserRouter>
       <AppContextProvider>
@@ -70,6 +59,7 @@ it('Property "available" has impact on price displaying', () => {
   );
   expect(wrapper.find('.price').text()).toEqual('10.5usd');
 });
+
 it('likeClickedHandler changes state of component', () => {
   const wrapper = mount(
     <BrowserRouter>
@@ -88,8 +78,8 @@ it('likeClickedHandler changes state of component', () => {
     </BrowserRouter>
   );
 
-  const AppContextInstance = wrapper.find('AppContextProvider').instance();
-  AppContextInstance.setState({
+  const context = wrapper.find('AppContextProvider').instance();
+  context.setState({
     userLogin: 'safasf',
     userId: 'rqwrqw',
     userToken: 'safas',
@@ -97,16 +87,13 @@ it('likeClickedHandler changes state of component', () => {
     authenticationMethod: undefined,
     lang: 'en'
   });
-
-  const productCardInstance = wrapper.find('ProductCard').instance();
-  productCardInstance.setState({
+  const instance = wrapper.find('ProductCard').instance();
+  instance.setState({
     isLikedBy: [],
-    isLiked: false
+    isLiked: true
   });
-
-  productCardInstance.likeClickedHandler();
-
+  instance.likeClickedHandler();
   expect(
-    productCardInstance.likeButtonRef!.current.classList.contains('active')
+    instance.likeButtonRef!.current.classList.contains('active')
   ).toBeTruthy();
 });

@@ -178,3 +178,28 @@ it('Google and Facebook authorization clicking envokes handlers', () => {
   wrapper.find('.facebook-auth').simulate('click');
   expect(spyFacebook).toHaveBeenCalled();
 });
+
+it('getIdToken throws error for not authenticated user', async () => {
+  const match = { params: { mode: 'signin' } };
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider>
+        <Auth.WrappedComponent match={match} />
+      </AppContextProvider>
+    </BrowserRouter>
+  );
+
+  const context = wrapper.find('AppContextProvider').instance();
+  const instance = wrapper.find('Auth').instance();
+
+  if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+  }
+
+  const test = () => {
+    return instance.getIdToken();
+  };
+  expect(() => {
+    return instance.getIdToken();
+  }).toThrow();
+});

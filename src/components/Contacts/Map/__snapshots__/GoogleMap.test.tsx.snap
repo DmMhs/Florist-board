@@ -7,10 +7,10 @@ exports[`GoogleMap component matches a snapshot 1`] = `
     className="mapouter Map"
     style={
       Object {
-        "height": "400px",
+        "height": "450px",
         "position": "relative",
         "textAlign": "right",
-        "width": "700px",
+        "width": "724px",
       }
     }
   >
@@ -19,22 +19,22 @@ exports[`GoogleMap component matches a snapshot 1`] = `
       style={
         Object {
           "background": "none!important",
-          "height": "400px",
+          "height": "450px",
           "overflow": "hidden",
-          "width": "700px",
+          "width": "724px",
         }
       }
     >
       <iframe
         frameBorder="0"
-        height="400"
+        height="450"
         id="gmap_canvas"
         marginHeight={0}
         marginWidth={0}
         onLoad={[Function]}
         scrolling="no"
         src="dumb-url"
-        width="700"
+        width="724px"
       />
     </div>
   </div>
