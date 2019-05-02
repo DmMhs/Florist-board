@@ -11,7 +11,7 @@ export interface CartItem {
   inCart: boolean;
   description?: string;
   description_uk?: string;
-  likedBy?: boolean;
+  likedBy?: boolean | string[];
   addToCart?:
     | ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void)
     | undefined;

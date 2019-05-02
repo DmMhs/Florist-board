@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Navigation component matches a snapshot 1`] = `
+exports[`Navigation works as expected Navigation component matches a snapshot 1`] = `
 <Route>
   <Component />
 </Route>

@@ -1,33 +1,41 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Shop from './Shop';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import { Product } from '../../models/Product';
 import { productsRef } from '../../firebase';
+import { BrowserRouter } from 'react-router-dom';
+import AppContextProvider from '../../AppContext';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Shop />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+describe('Shop works as expected', () => {
+  it('product images do fetch', async () => {
+    const wrapper = mount(
+      <BrowserRouter>
+        <AppContextProvider>
+          <Shop />
+        </AppContextProvider>
+      </BrowserRouter>
+    );
 
-it('product images do fetch', async () => {
-  const wrapper = shallow(<Shop />);
-  const instance = wrapper.instance();
+    const context = wrapper.find('AppContextProvider').instance();
+    context.setState({
+      lang: 'en'
+    });
 
-  await productsRef.once('value').then(snapshot => {
-    instance.setState({
-      fetchInProgress: true
+    const instance = wrapper.find('Shop').instance();
+    await productsRef.once('value').then(snapshot => {
+      instance.setState({
+        fetchInProgress: true
+      });
+      const newProducts: Array<Product> = [];
+      snapshot!.forEach((product: firebase.database.DataSnapshot) => {
+        newProducts.push(product.val());
+      });
+      instance.setState({
+        products: newProducts,
+        fetchInProgress: false
+      });
     });
-    const newProducts: Array<Product> = [];
-    snapshot!.forEach((product: firebase.database.DataSnapshot) => {
-      newProducts.push(product.val());
-    });
-    instance.setState({
-      products: newProducts,
-      fetchInProgress: false
-    });
+    expect(instance.state.products.length).toBeGreaterThan(0);
   });
-  expect(instance.state.products.length).toBeGreaterThan(0);
 });

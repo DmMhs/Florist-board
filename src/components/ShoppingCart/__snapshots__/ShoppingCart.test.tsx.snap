@@ -1,61 +1,120 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ShoppingCartItem matches a snapshot 1`] = `
-<div
-  className="ShoppingCart"
-  style={
-    Object {
-      "display": "flex",
-    }
-  }
->
-  <div
-    className="cart-content"
-  >
-    <i
-      className="fas fa-times close-cart"
-      onClick={[Function]}
-    />
-    <ShoppingCartContent
-      cartItemsList={
-        Array [
-          <ShoppingCartItem
-            amount={1}
-            cartItemPrice={100}
-            currency="usd"
-            id="asgtqwr"
-            images={
-              Array [
-                "asd",
-                "qwr",
-              ]
-            }
-            increaseAmount={[Function]}
-            reduceAmount={[Function]}
-            remove={[Function]}
-            title="qwerty"
-          />,
-          <ShoppingCartItem
-            amount={1}
-            cartItemPrice={100}
-            currency="usd"
-            id="asgtqwr"
-            images={
-              Array [
-                "asd",
-                "qwr",
-              ]
-            }
-            increaseAmount={[Function]}
-            reduceAmount={[Function]}
-            remove={[Function]}
-            title="qwerty"
-          />,
-        ]
+exports[`ShoppingCart works as expected ShoppingCartItem matches a snapshot 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
       }
-      fixEmptyCart={[Function]}
-      totalPrice={200}
-    />
-  </div>
-</div>
+    }
+  >
+    <withRouter(AppContextProvider)>
+      <Route>
+        <AppContextProvider
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+        >
+          <ShoppingCart
+            cartItems={Array []}
+            closeCart={[Function]}
+            remove={[Function]}
+            showCart={true}
+          >
+            <div
+              className="ShoppingCart"
+              style={
+                Object {
+                  "display": "flex",
+                }
+              }
+            >
+              <div
+                className="cart-content"
+              >
+                <i
+                  className="fas fa-times close-cart"
+                  onClick={[Function]}
+                />
+                <ShoppingCartContent
+                  cartItemsList={Array []}
+                  fixEmptyCart={[Function]}
+                  totalPrice={0}
+                >
+                  <div>
+                    <h4>
+                      cart is empty
+                    </h4>
+                    <button
+                      className="fix"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span>
+                        LET'S FIX IT
+                      </span>
+                       
+                      <i
+                        className="far fa-smile-wink"
+                      />
+                    </button>
+                  </div>
+                </ShoppingCartContent>
+              </div>
+            </div>
+          </ShoppingCart>
+        </AppContextProvider>
+      </Route>
+    </withRouter(AppContextProvider)>
+  </Router>
+</BrowserRouter>
 `;

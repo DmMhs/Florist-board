@@ -1,53 +1,124 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches a snapshot 1`] = `
-<div
-  className="filter-wrapper hide"
->
-  <h2>
-    <span>
-      Filters 
-      <i
-        className="fas fa-filter"
-      />
-    </span>
-     
-  </h2>
-  <form
-    className="filter-form"
+exports[`ProductsFilter works as expected matches a snapshot 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
   >
-    <div
-      className="filter-option available"
-    >
-      <label>
-        IN STOCK
-      </label>
-      <input
-        type="checkbox"
-      />
-    </div>
-    <div
-      className="filter-option price-range"
-    >
-      <label>
-        PRICE RANGE
-      </label>
-      <div>
-        <input
-          className="priceFrom"
-          min="0"
-          placeholder="from"
-          type="number"
-        />
-        -
-        <input
-          className="priceTo"
-          min="0"
-          placeholder="to"
-          type="number"
-        />
-      </div>
-    </div>
-  </form>
-</div>
+    <withRouter(AppContextProvider)>
+      <Route>
+        <AppContextProvider
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+        >
+          <productsFilter>
+            <div
+              className="filter-wrapper hide"
+            >
+              <h2>
+                <span>
+                  Filters
+                   
+                  <i
+                    className="fas fa-filter"
+                  />
+                </span>
+                 
+              </h2>
+              <form
+                className="filter-form"
+              >
+                <div
+                  className="filter-option available"
+                >
+                  <label>
+                    IN STOCK
+                  </label>
+                  <input
+                    type="checkbox"
+                  />
+                </div>
+                <div
+                  className="filter-option price-range"
+                >
+                  <label>
+                    PRICE RANGE
+                  </label>
+                  <div>
+                    <input
+                      className="priceFrom"
+                      min="0"
+                      placeholder="from"
+                      type="number"
+                    />
+                    -
+                    <input
+                      className="priceTo"
+                      min="0"
+                      placeholder="to"
+                      type="number"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </productsFilter>
+        </AppContextProvider>
+      </Route>
+    </withRouter(AppContextProvider)>
+  </Router>
+</BrowserRouter>
 `;

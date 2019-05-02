@@ -47,17 +47,17 @@ class GoogleMap extends Component<GoogleMapProps, GoogleMapState> {
     window.addEventListener('resize', resizeListener);
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     window.removeEventListener('resize', resizeListener);
   }
 
-  mapFetchedHandler = () => {
+  private mapFetchedHandler = () => {
     this.setState({
       mapIsFetching: false
     });
   };
 
-  render() {
+  public render() {
     const { url } = this.props;
     const googleMap =
       this.state.mobileMode === true ? (
@@ -67,7 +67,7 @@ class GoogleMap extends Component<GoogleMapProps, GoogleMapState> {
             position: 'relative',
             textAlign: 'right',
             height: '400px',
-            width: '300px'
+            width: `${window.innerWidth - 50}px`
           }}
         >
           <div
@@ -76,11 +76,11 @@ class GoogleMap extends Component<GoogleMapProps, GoogleMapState> {
               overflow: 'hidden',
               background: 'none!important',
               height: '400px',
-              width: '300px'
+              width: `${window.innerWidth - 50}px`
             }}
           >
             <iframe
-              width="300"
+              width={`${window.innerWidth - 50}px`}
               height="400"
               id="gmap_canvas"
               src={url}
@@ -98,8 +98,8 @@ class GoogleMap extends Component<GoogleMapProps, GoogleMapState> {
           style={{
             position: 'relative',
             textAlign: 'right',
-            height: '400px',
-            width: '700px'
+            height: '450px',
+            width: `${window.innerWidth - 300}px`
           }}
         >
           <div
@@ -107,13 +107,13 @@ class GoogleMap extends Component<GoogleMapProps, GoogleMapState> {
             style={{
               overflow: 'hidden',
               background: 'none!important',
-              height: '400px',
-              width: '700px'
+              height: '450px',
+              width: `${window.innerWidth - 300}px`
             }}
           >
             <iframe
-              width="700"
-              height="400"
+              width={`${window.innerWidth - 300}px`}
+              height="450"
               id="gmap_canvas"
               src={url}
               frameBorder="0"

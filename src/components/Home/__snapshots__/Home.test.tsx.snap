@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home component matches a snapshot 1`] = `
+exports[`Home works as expected Home component matches a snapshot 1`] = `
 <div
   className="Home"
 >

@@ -1,4 +1,5 @@
-import React, { Component, ReactElement } from 'react';
+import React, { Component } from 'react';
+import { withRouter, RouteComponentProps } from 'react-router';
 
 import './Gallery.less';
 import { galleryImagesRef } from '../../firebase';
@@ -7,7 +8,6 @@ import Modal from './Modal/Modal';
 import labels from '../../config/labels';
 import { AppContext } from '../../AppContext';
 
-interface GalleryProps {}
 interface GalleryState {
   images: string[];
   fetchInProgress: boolean;
@@ -15,8 +15,8 @@ interface GalleryState {
   modalIndex: number;
 }
 
-class Gallery extends Component<GalleryProps, GalleryState> {
-  constructor(props: GalleryProps) {
+class Gallery extends Component<RouteComponentProps<{}>, GalleryState> {
+  constructor(props: RouteComponentProps<{}>) {
     super(props);
     this.state = {
       images: [],
@@ -135,4 +135,4 @@ class Gallery extends Component<GalleryProps, GalleryState> {
   }
 }
 
-export default Gallery;
+export default withRouter<RouteComponentProps<{}>>(Gallery);

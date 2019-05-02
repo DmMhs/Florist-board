@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Popup component matches a snapshot 1`] = `
+exports[`Popup works as expected Popup component matches a snapshot 1`] = `
 <div
   className="Popup"
   style={
