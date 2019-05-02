@@ -37,11 +37,14 @@ it('Submit event has impact on the state', async () => {
       password: 'bob_awesome'
     }
   });
+
   expect(instance.state.mode).toEqual('signin');
   if (!firebase.apps.length) {
     firebase.initializeApp(config);
   }
+
   wrapper.find('form').simulate('submit');
+
   expect(instance.state.formData.email).toEqual('');
   expect(instance.state.formData.password).toEqual('');
 
@@ -60,6 +63,7 @@ it('Submit event has impact on the state', async () => {
       password: 'test_mail'
     }
   });
+
   wrapper.find('form').simulate('submit');
   expect(instance.state.formData.email).toEqual('');
   expect(instance.state.formData.password).toEqual('');

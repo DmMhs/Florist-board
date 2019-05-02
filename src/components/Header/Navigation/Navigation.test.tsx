@@ -34,10 +34,11 @@ it('Refs are defined', () => {
 });
 
 it('Logs out', () => {
+  const historyMock = { push: jest.fn() };
   const wrapper = mount(
     <BrowserRouter>
       <AppContextProvider.WrappedComponent>
-        <Navigation.WrappedComponent />
+        <Navigation.WrappedComponent history={historyMock} />
       </AppContextProvider.WrappedComponent>
     </BrowserRouter>
   );
@@ -63,4 +64,45 @@ it('Logs out', () => {
     athenticationMethod: undefined,
     lang: 'en'
   });
+  expect(historyMock.push.mock.calls[0]).toEqual(['/']);
+});
+
+it('langBtnClickedHandler toggles the refs classes', () => {
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider.WrappedComponent>
+        <Navigation.WrappedComponent />
+      </AppContextProvider.WrappedComponent>
+    </BrowserRouter>
+  );
+  const context = wrapper.find('AppContextProvider').instance();
+  const instance = wrapper.find('Navigation').instance();
+
+  instance.langOptionsRef.current!.className = '';
+  instance.langOptionsToggleRef.current!.classList = '';
+
+  context.setState({
+    lang: 'en'
+  });
+
+  instance.langBtnClickedHandler();
+  expect(instance.langOptionsRef.current!.className).toEqual('show');
+  expect(instance.langOptionsToggleRef.current!.className).toEqual('active');
+});
+
+it('langOptionClickedHandler changes the context', () => {
+  const wrapper = mount(
+    <BrowserRouter>
+      <AppContextProvider.WrappedComponent>
+        <Navigation.WrappedComponent />
+      </AppContextProvider.WrappedComponent>
+    </BrowserRouter>
+  );
+  const context = wrapper.find('AppContextProvider').instance();
+  const instance = wrapper.find('Navigation').instance();
+  context.setState({
+    lang: 'en'
+  });
+  instance.langOptionClickedHandler('uk');
+  expect(context.state.lang).toEqual('uk');
 });

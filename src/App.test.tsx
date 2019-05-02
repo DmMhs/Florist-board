@@ -42,19 +42,21 @@ it('reacts on toggle click', () => {
   expect(instance.state.showNavigation).toBeFalsy();
 });
 
-// it('resize event has impact on state', () => {
-//   const wrapper = mount(<App />);
-//   const instance = wrapper.instance();
+it('resize event has impact on state', () => {
+  const wrapper = mount(<App />);
+  const instance = wrapper.instance();
 
-//   instance.setState({
-//     showNavigation: undefined
-//   });
+  instance.setState({
+    showNavigation: undefined
+  });
 
-//   global.innerWidth = 600;
-//   window.dispatchEvent(new Event('resize'));
-//   expect(instance.state.showNavigation).toBeFalsy();
+  console.log(wrapper.ref('toggleRef'));
 
-//   global.innerWidth = 800;
-//   window.dispatchEvent(new Event('resize'));
-//   expect(instance.state.showNavigation).toBeTruthy();
-// });
+  // global.innerWidth = 600;
+  // window.dispatchEvent(new Event('resize'));
+  // expect(instance.state.showNavigation).toBeFalsy();
+
+  // global.innerWidth = 800;
+  // window.dispatchEvent(new Event('resize'));
+  // expect(instance.state.showNavigation).toBeTruthy();
+});
