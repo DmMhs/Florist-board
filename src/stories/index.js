@@ -17,6 +17,9 @@ import ProductCard from '../components/ProductList/ProductCard/ProductCard';
 import Popup from '../components/Popup/Popup';
 import AppContextProvider from '../AppContext';
 import { BrowserRouter } from 'react-router-dom';
+import PageNotFound from '../components/PageNotFound/PageNotFound';
+import ShoppingCart from '../components/ShoppingCart/ShoppingCart';
+import Toggle from '../components/Toggle/Toggle';
 
 const productMock = {
   title: 'super cactus',
@@ -93,4 +96,18 @@ storiesOf('Florist', module)
       </AppContextProvider>
     </BrowserRouter>
   ))
-  .add('Popup', () => <Popup message="added to cart" type="success" />);
+  .add('Popup', () => <Popup message="added to cart" type="success" />)
+  .add('PageNotFound', () => <PageNotFound />)
+  .add('ShoppingCart', () => (
+    <BrowserRouter>
+      <AppContextProvider>
+        <ShoppingCart
+          cartItems={[]}
+          showCart={true}
+          closeCart={() => {}}
+          remove={() => {}}
+        />
+      </AppContextProvider>
+    </BrowserRouter>
+  ))
+  .add('Toggle', () => <Toggle />);
