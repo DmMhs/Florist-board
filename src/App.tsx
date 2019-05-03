@@ -13,6 +13,7 @@ import Auth from './components/Auth/Auth';
 import AppContextProvider from './AppContext';
 import Footer from './components/Footer/Footer';
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import Admin from './components/Admin/Admin';
 
 interface AppProps {}
 interface AppState {
@@ -111,6 +112,7 @@ class App extends Component<AppProps, AppState> {
               <Route path="/shop" component={Shop} />
               <Route path="/gallery" component={Gallery} />
               <Route path="/contacts" component={Contacts} />
+              <Route path="/admin" component={Admin} />
               <Route path="/product-details/:id" component={ProductDetails} />
               <Route path="/auth/:mode" component={Auth} />
               <Route component={PageNotFound} />

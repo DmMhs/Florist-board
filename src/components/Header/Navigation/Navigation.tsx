@@ -89,6 +89,9 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                     {value.state.userLogin!.length > 0 ? (
                       <p className="user-login">{value.state.userLogin}</p>
                     ) : null}
+                    <NavLink to="/admin">
+                      <i className="fas fa-users-cog" />
+                    </NavLink>
                     {value.state.userAuthenticated === false ? (
                       <div>
                         <NavLink to="/auth/signup" className="signup-link">
