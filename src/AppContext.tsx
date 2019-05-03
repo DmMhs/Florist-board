@@ -5,6 +5,7 @@ export interface AppContextState {
   userLogin: string | null | undefined;
   userId: string | null | undefined;
   userToken: string | null | undefined;
+  userRole: string | null | undefined;
   userAuthenticated: boolean;
   authenticationMethod: string | null | undefined;
   lang: string | null | undefined;
@@ -32,6 +33,7 @@ class AppContextProvider extends Component<
       userLogin: '',
       userId: '',
       userToken: '',
+      userRole: '',
       userAuthenticated: false,
       authenticationMethod: undefined,
       lang: 'en'
@@ -84,6 +86,7 @@ class AppContextProvider extends Component<
       userLogin: '',
       userId: '',
       userToken: '',
+      userRole: '',
       authenticationMethod: undefined
     });
     localStorage.floristAuthLogin = '';
