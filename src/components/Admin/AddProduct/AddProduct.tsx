@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import './AddProduct.less';
 import { AppContext } from '../../../AppContext';
+import { storageRef, productsRef } from '../../../firebase';
+import { Product } from '../../../models/Product';
 
 interface AddProductProps {
   editModeEnabled?: boolean;
@@ -68,11 +70,10 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const updatedImages: File[] = [...this.state.images];
-    console.log(event.target.files);
-    // updatedImages[position] = event.target.files as any;
-    // this.setState({
-    //   images: updatedImages
-    // });
+    updatedImages[position] = event.target.files as any;
+    this.setState({
+      images: updatedImages
+    });
   };
 
   private titleInputChangedHandler = (
@@ -99,8 +100,11 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
     });
   };
 
-  private formSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  private formSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const { available, images, title, title_uk, price, currency, description, description_uk } = this.state;
+
     this.setState({
       available: true,
       title: '',
@@ -111,10 +115,53 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
       description: '',
       description_uk: ''
     });
+
+    const formattedFolderName = title.toLowerCase();
+    const imagesRef = storageRef.child('products-images').child(formattedFolderName);
+    const imageURLs: string[] = [];
+    let productKey: string = '';
+
+    const newProduct: Product = {
+      title,
+      title_uk,
+      price,
+      available,
+      description,
+      description_uk,
+      currency,
+      images: imageURLs
+    }
+    await productsRef
+      .push(newProduct)
+      .then(response => {
+        productKey = response.key as string;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    await Promise.all(images.map(async (image: File) => {
+      const file = (image as any)[0]; 
+      const formattedFileName = (image as any)[0].name.split('.')[0]
+      await imagesRef
+        .child(formattedFileName)
+        .put(file)
+        .catch(err => {
+          console.log(err);
+        });
+      const imageURL = await imagesRef.child(formattedFileName).getDownloadURL();
+      imageURLs.push(imageURL);
+    }));
+    productsRef
+    .child(productKey)
+    .update({
+      images: imageURLs
+    })
+    .catch(err => {
+      console.log(err);
+    });
   };
 
   public render() {
-    console.log(this.state);
     return (
       <AppContext.Consumer>
         {value =>
@@ -204,7 +251,6 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
                 />
               </div>
               <button type="submit">SUBMIT</button>
-              {this.state.images}
             </form>
           )
         }
