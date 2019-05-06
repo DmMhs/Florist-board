@@ -156,7 +156,7 @@ class Auth extends Component<
           idToken,
           'google'
         );
-        await axios.post(
+        axios.post(
           'https://us-central1-florist-cb933.cloudfunctions.net/giveAdminRole',
           {
             admin: true
