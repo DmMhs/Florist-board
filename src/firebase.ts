@@ -10,7 +10,7 @@ export const config = {
 };
 
 firebase.initializeApp(config);
-export const storage = firebase.storage();
+export const storageRef = firebase.storage().ref();
 export const database = firebase.database();
 export const homeImagesRef = database.ref('home-images');
 export const productsRef = database.ref('products');
