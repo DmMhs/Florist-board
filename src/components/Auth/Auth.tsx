@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
+import axios from 'axios';
 import {
   withRouter,
   RouteComponentProps as RCProps,
@@ -154,6 +155,12 @@ class Auth extends Component<
           response.user!.uid,
           idToken,
           'google'
+        );
+        axios.post(
+          'https://us-central1-florist-cb933.cloudfunctions.net/giveAdminRole',
+          {
+            admin: true
+          }
         );
         (this.props as RouteComponentProps<MatchParams> &
           RCProps<{}>).history.push('/');
