@@ -85,13 +85,18 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                     <i className="fas fa-user-circle" />{' '}
                     <i className="fas fa-caret-down" />
                   </a>
+
                   <div className="dropdown-content" ref={this.authOptionsRef}>
                     {value.state.userLogin!.length > 0 ? (
                       <p className="user-login">{value.state.userLogin}</p>
                     ) : null}
-                    <NavLink to="/admin">
-                      <i className="fas fa-users-cog" />
-                    </NavLink>
+
+                    {value.state.userRole === 'admin' ? (
+                      <NavLink to="/admin">
+                        <i className="fas fa-users-cog" />
+                      </NavLink>
+                    ) : null}
+
                     {value.state.userAuthenticated === false ? (
                       <div>
                         <NavLink to="/auth/signup" className="signup-link">
