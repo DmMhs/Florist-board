@@ -18,6 +18,7 @@ export const AppContext = React.createContext({
     userId: string | null,
     userToken: string | null,
     authenticationMethod?: string | null,
+    userRole?: string | null,
     event?: Event
   ) => {},
   logout: () => {},
@@ -33,7 +34,7 @@ class AppContextProvider extends Component<
       userLogin: '',
       userId: '',
       userToken: '',
-      userRole: '',
+      userRole: 'admin',
       userAuthenticated: false,
       authenticationMethod: undefined,
       lang: 'en'
@@ -61,11 +62,13 @@ class AppContextProvider extends Component<
       });
     }
   }
+
   private setUserCredentialsHandler = (
     userLogin: string | null | undefined,
     userId: string | null | undefined,
     userToken: string | null | undefined,
     authenticationMethod?: string | null | undefined,
+    userRole?: string | null | undefined,
     event?: Event
   ) => {
     this.setState({
@@ -73,12 +76,14 @@ class AppContextProvider extends Component<
       userLogin,
       userId,
       userToken,
-      authenticationMethod
+      authenticationMethod,
+      userRole
     });
     localStorage.floristAuthLogin = userLogin;
     localStorage.floristAuthToken = userToken;
     localStorage.floristAuthUserId = userId;
     localStorage.floristAuthMethod = authenticationMethod;
+    localStorage.floristUserRole = userRole;
   };
   private logoutHandler = () => {
     this.setState({
@@ -93,6 +98,7 @@ class AppContextProvider extends Component<
     localStorage.floristAuthToken = '';
     localStorage.floristAuthUserId = '';
     localStorage.floristAuthMethod = '';
+    localStorage.floristUserRole = '';
   };
 
   private setLangHandler = (lang: string | null) => {
@@ -102,6 +108,7 @@ class AppContextProvider extends Component<
   };
 
   public render() {
+    console.log('Context state: ' + this.state.userRole);
     return (
       <AppContext.Provider
         value={{

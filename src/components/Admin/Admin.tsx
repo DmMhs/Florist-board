@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import firebase from 'firebase';
 
 import './Admin.less';
 import { AppContext } from '../../AppContext';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps, withRouter, Redirect } from 'react-router';
 import AddProduct from './AddProduct/AddProduct';
+import labels from '../../config/labels';
+import AddGalleryImage from './AddGalleryImage/AddGalleryImage';
 
 interface AdminState {
   mode:
@@ -29,12 +32,13 @@ class Admin extends Component<RouteComponentProps<{}>, AdminState> {
       | 'configurate-labels'
   ) => {
     this.setState({
-      mode: mode
+      mode
     });
   };
 
   public render() {
     const { mode } = this.state;
+
     let form: JSX.Element;
     switch (mode) {
       case 'add-product':
@@ -44,7 +48,7 @@ class Admin extends Component<RouteComponentProps<{}>, AdminState> {
         form = <h3>Edit Product Form</h3>;
         break;
       case 'configurate-gallery':
-        form = <h3>Gallery Images Form</h3>;
+        form = <AddGalleryImage />;
         break;
       case 'configurate-labels':
         form = <h3>Labels Form</h3>;
@@ -52,13 +56,12 @@ class Admin extends Component<RouteComponentProps<{}>, AdminState> {
       default:
         form = <h3>Default form</h3>;
     }
-
     return (
       <AppContext.Consumer>
         {value =>
-          value && (
+          value && value.state.userRole === 'admin' ? (
             <div className="Admin">
-              <h1>Admin Control Panel</h1>
+              <h1>{labels[value.state.lang as string].pages.admin.title}</h1>
               <hr />
               <ul className="admin-actions">
                 <li>
@@ -86,6 +89,8 @@ class Admin extends Component<RouteComponentProps<{}>, AdminState> {
               </ul>
               <div className="form-wrapper">{form}</div>
             </div>
+          ) : (
+            <Redirect to="/" />
           )
         }
       </AppContext.Consumer>
