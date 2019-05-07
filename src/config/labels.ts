@@ -18,6 +18,9 @@ const labels: any = {
       lang: 'LANG'
     },
     pages: {
+      admin: {
+        title: 'Admin Control Panel'
+      },
       shop: {
         notAvailable: 'not available :(',
         sort: {
@@ -105,6 +108,9 @@ const labels: any = {
       lang: 'МОВА'
     },
     pages: {
+      admin: {
+        title: 'Панель Керування Адміністратора'
+      },
       shop: {
         notAvailable: 'немає :(',
         sort: {

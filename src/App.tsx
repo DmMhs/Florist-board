@@ -14,6 +14,7 @@ import AppContextProvider from './AppContext';
 import Footer from './components/Footer/Footer';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Admin from './components/Admin/Admin';
+import { database } from './firebase';
 
 interface AppProps {}
 interface AppState {
@@ -48,6 +49,9 @@ class App extends Component<AppProps, AppState> {
     }
     if (localStorage.floristAuthMethod === undefined) {
       localStorage.setItem('floristAuthUserId', '');
+    }
+    if (localStorage.floristUserRole === undefined) {
+      localStorage.setItem('floristUserRole', '');
     }
     resizeListener = () => {
       if (this.toggleRef.current!.classList.contains('active')) {

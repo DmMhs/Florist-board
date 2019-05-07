@@ -100,10 +100,21 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
     });
   };
 
-  private formSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+  private formSubmitHandler = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
 
-    const { available, images, title, title_uk, price, currency, description, description_uk } = this.state;
+    const {
+      available,
+      images,
+      title,
+      title_uk,
+      price,
+      currency,
+      description,
+      description_uk
+    } = this.state;
 
     this.setState({
       available: true,
@@ -117,7 +128,9 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
     });
 
     const formattedFolderName = title.toLowerCase();
-    const imagesRef = storageRef.child('products-images').child(formattedFolderName);
+    const imagesRef = storageRef
+      .child('products-images')
+      .child(formattedFolderName);
     const imageURLs: string[] = [];
     let productKey: string = '';
 
@@ -130,7 +143,7 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
       description_uk,
       currency,
       images: imageURLs
-    }
+    };
     await productsRef
       .push(newProduct)
       .then(response => {
@@ -139,26 +152,30 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
       .catch(err => {
         console.log(err);
       });
-    await Promise.all(images.map(async (image: File) => {
-      const file = (image as any)[0]; 
-      const formattedFileName = (image as any)[0].name.split('.')[0]
-      await imagesRef
-        .child(formattedFileName)
-        .put(file)
-        .catch(err => {
-          console.log(err);
-        });
-      const imageURL = await imagesRef.child(formattedFileName).getDownloadURL();
-      imageURLs.push(imageURL);
-    }));
+    await Promise.all(
+      images.map(async (image: File) => {
+        const file = (image as any)[0];
+        const formattedFileName = (image as any)[0].name.split('.')[0];
+        await imagesRef
+          .child(formattedFileName)
+          .put(file)
+          .catch(err => {
+            console.log(err);
+          });
+        const imageURL = await imagesRef
+          .child(formattedFileName)
+          .getDownloadURL();
+        imageURLs.push(imageURL);
+      })
+    );
     productsRef
-    .child(productKey)
-    .update({
-      images: imageURLs
-    })
-    .catch(err => {
-      console.log(err);
-    });
+      .child(productKey)
+      .update({
+        images: imageURLs
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   public render() {
