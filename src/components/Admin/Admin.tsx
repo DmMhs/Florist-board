@@ -7,6 +7,7 @@ import { RouteComponentProps, withRouter, Redirect } from 'react-router';
 import AddProduct from './AddProduct/AddProduct';
 import labels from '../../config/labels';
 import AddGalleryImage from './AddGalleryImage/AddGalleryImage';
+import ChangeLabels from './ChangeLabels/ChangeLabels';
 
 interface AdminState {
   mode:
@@ -53,7 +54,7 @@ class Admin extends Component<RouteComponentProps<{}>, AdminState> {
         form = <AddGalleryImage />;
         break;
       case 'configurate-labels':
-        form = <h3>Labels Form</h3>;
+        form = <ChangeLabels />;
         break;
       default:
         form = <h3>Hm...</h3>;
