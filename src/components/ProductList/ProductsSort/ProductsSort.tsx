@@ -54,10 +54,12 @@ const productsSort = (props: ProductsSortProps) => {
       <i className="fas fa-filter filter-toggle" onClick={filterToggle} />
     ) : null;
 
+  const labelsRoot = labels[context.state.lang as string].pages.shop.sort;
+
   return (
     <div className="sort-order">
       {filterToggleIcon}
-      <span>{labels[context.state.lang as string].pages.shop.sort.main}</span>
+      <span>{labelsRoot.main}</span>
       <div className="dropdown">
         <button onClick={orderByClicked} className="dropbtn">
           {sortBy === 'name'
@@ -73,26 +75,18 @@ const productsSort = (props: ProductsSortProps) => {
           {sortBy === 'name' ? (
             <a
               href="#"
-              onClick={orderByChanged!.bind(
-                props,
-                labels[context.state.lang as string].pages.shop.sort.btn.byPrice
-              )}
+              onClick={orderByChanged!.bind(props, labelsRoot.btn.byPrice)}
               className="sort-by-price-btn"
             >
-              {labels[context.state.lang as string].pages.shop.sort.btn.byPrice}{' '}
-              <i className="fas fa-dollar-sign" />
+              {labelsRoot.btn.byPrice} <i className="fas fa-dollar-sign" />
             </a>
           ) : (
             <a
               href="#"
-              onClick={orderByChanged!.bind(
-                props,
-                labels[context.state.lang as string].pages.shop.sort.btn.byName
-              )}
+              onClick={orderByChanged!.bind(props, labelsRoot.btn.byName)}
               className="sort-by-name-btn"
             >
-              {labels[context.state.lang as string].pages.shop.sort.btn.byName}{' '}
-              <i className="fas fa-signature" />
+              {labelsRoot.btn.byName} <i className="fas fa-signature" />
             </a>
           )}
         </div>

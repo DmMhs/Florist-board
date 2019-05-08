@@ -4,6 +4,7 @@ import './AddProduct.less';
 import { AppContext } from '../../../AppContext';
 import { storageRef, productsRef } from '../../../firebase';
 import { Product } from '../../../models/Product';
+import labels from '../../../config/labels';
 
 interface AddProductProps {
   editModeEnabled?: boolean;
@@ -179,21 +180,26 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
   };
 
   public render() {
+    const context = this.context;
+    const labelsRoot =
+      labels[context.state.lang as string].pages.admin.addProductForm;
+    const submitBtnLabel =
+      labels[context.state.lang as string].pages.admin.submitBtn;
     return (
       <AppContext.Consumer>
         {value =>
           value && (
             <form onSubmit={this.formSubmitHandler} className="AddProduct">
               <div className="form-control">
-                <label>Product available:</label>
+                <label>{labelsRoot.available.title}</label>
                 <br />
                 <select onChange={this.availableChangedHandler}>
-                  <option value="true">yes</option>
-                  <option value="false">no</option>
+                  <option value="true">{labelsRoot.available.option1}</option>
+                  <option value="false">{labelsRoot.available.option2}</option>
                 </select>
               </div>
               <div className="form-control">
-                <label>Product title:</label>
+                <label>{labelsRoot.title}</label>
                 <br />
                 <input
                   type="text"
@@ -201,7 +207,7 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
                   required
                   value={this.state.title as string}
                 />
-                <label>Product title uk: </label>
+                <label>{labelsRoot.title_ua}</label>
                 <br />
                 <input
                   type="text"
@@ -211,7 +217,7 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
                 />
               </div>
               <div className="form-control product-images">
-                <label>Product images:</label>
+                <label>{labelsRoot.images}</label>
                 <br />
                 <div className="input-wrapper">
                   <input
@@ -233,7 +239,7 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
                 </div>
               </div>
               <div className="form-control">
-                <label>Product price:</label>
+                <label>{labelsRoot.price}</label>
                 <br />
                 <div className="price">
                   <input
@@ -250,7 +256,7 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
                 </div>
               </div>
               <div className="form-control">
-                <label>Product description:</label>
+                <label>{labelsRoot.description}</label>
                 <br />
                 <textarea
                   required
@@ -258,7 +264,7 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
                   onChange={this.descriptionChangedHandler}
                   value={this.state.description as string}
                 />
-                <label>Product description uk:</label>
+                <label>{labelsRoot.description_ua}</label>
                 <br />
                 <textarea
                   required
@@ -267,7 +273,7 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
                   value={this.state.description_uk as string}
                 />
               </div>
-              <button type="submit">SUBMIT</button>
+              <button type="submit">{submitBtnLabel}</button>
             </form>
           )
         }
@@ -276,4 +282,5 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
   }
 }
 
+AddProduct.contextType = AppContext;
 export default AddProduct;

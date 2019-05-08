@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './AddGalleryImage.less';
 import { AppContext } from '../../../AppContext';
 import { storageRef, galleryImagesRef } from '../../../firebase';
+import labels from '../../../config/labels';
 
 interface AddGalleryImageProps {}
 
@@ -28,7 +29,7 @@ class AddGalleryImage extends Component<
       this.setState({
         totalImagesNumber: Object.keys(snapshot!.val()).length
       });
-    })
+    });
   }
 
   private imgInputChangedHandler = (
@@ -42,9 +43,7 @@ class AddGalleryImage extends Component<
     });
   };
 
-  private formSubmitHandler = (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
+  private formSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { images } = this.state;
     this.setState({
@@ -70,17 +69,27 @@ class AddGalleryImage extends Component<
   };
 
   public render() {
-    const color = this.state.totalImagesNumber%4 === 0 ? 'green' : 'darkred';
+    const context = this.context;
+    const labelsRoot =
+      labels[context.state.lang as string].pages.admin.addGalleryImageForm;
+    const submitBtnLabel =
+      labels[context.state.lang as string].pages.admin.submitBtn;
+    const color = this.state.totalImagesNumber % 4 === 0 ? 'green' : 'darkred';
     return (
       <AppContext.Consumer>
         {value =>
           value && (
             <form onSubmit={this.formSubmitHandler} className="AddProduct">
               <div className="form-control product-images">
-              <p style={{color}}>(Number of images)%4 must be equal to 0 for the best gallery displaying </p> 
-              Number of images in gallery: {this.state.totalImagesNumber}
-              <hr />
-                <label>Add image to the galery:</label>
+                <p style={{ color }} className="gallery-info">
+                  {labelsRoot.info.restriction}
+                </p>
+                <p className="gallery-info">
+                  {labelsRoot.info.totalImagesNumber}{' '}
+                  {this.state.totalImagesNumber}
+                </p>
+                <hr />
+                <label>{labelsRoot.add}</label>
                 <br />
                 <div className="input-wrapper">
                   <input
@@ -89,7 +98,7 @@ class AddGalleryImage extends Component<
                   />
                 </div>
               </div>
-              <button type="submit">SUBMIT</button>
+              <button type="submit">{submitBtnLabel}</button>
             </form>
           )
         }
@@ -97,5 +106,7 @@ class AddGalleryImage extends Component<
     );
   }
 }
+
+AddGalleryImage.contextType = AppContext;
 
 export default AddGalleryImage;

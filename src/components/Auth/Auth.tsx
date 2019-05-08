@@ -150,18 +150,21 @@ class Auth extends Component<
       .auth()
       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(async response => {
-        await axios.post(
-          'https://us-central1-florist-cb933.cloudfunctions.net/assignUserRole',
-          null,
-          {
-            params: {
-              id: response.user!.uid
+        axios
+          .post(
+            'https://us-central1-florist-cb933.cloudfunctions.net/assignUserRole',
+            null,
+            {
+              params: {
+                id: response.user!.uid
+              }
             }
-          }
-        );
+          )
+          .catch(err => console.log(err));
+
         const idToken = await this.getIdToken();
         const role = await userRole();
-        console.log('role const: ' + role);
+
         value.setUserCredentials(
           response.user!.email,
           response.user!.uid,
@@ -182,14 +185,7 @@ class Auth extends Component<
       .auth()
       .signInWithPopup(new firebase.auth.FacebookAuthProvider())
       .then(async response => {
-        const idToken = await this.getIdToken();
-        value.setUserCredentials(
-          response.user!.displayName,
-          response.user!.uid,
-          idToken,
-          'facebook'
-        );
-        await axios.post(
+        axios.post(
           'https://us-central1-florist-cb933.cloudfunctions.net/assignUserRole',
           null,
           {
@@ -198,6 +194,18 @@ class Auth extends Component<
             }
           }
         );
+
+        const idToken = await this.getIdToken();
+        const role = await userRole();
+
+        value.setUserCredentials(
+          response.user!.displayName,
+          response.user!.uid,
+          idToken,
+          'facebook',
+          role
+        );
+
         (this.props as RouteComponentProps<MatchParams> &
           RCProps<{}>).history.push('/');
       })
