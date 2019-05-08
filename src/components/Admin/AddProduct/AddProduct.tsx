@@ -189,7 +189,7 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
       <AppContext.Consumer>
         {value =>
           value && (
-            <form onSubmit={this.formSubmitHandler} className="AddProduct">
+            <form onSubmit={this.formSubmitHandler} className="AddProduct form">
               <div className="form-control">
                 <label>{labelsRoot.available.title}</label>
                 <br />

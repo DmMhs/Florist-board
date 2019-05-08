@@ -7,6 +7,7 @@ import labels from '../../config/labels';
 import { AppContext } from '../../AppContext';
 
 import './Contacts.less';
+import { urls } from '../../config/urls';
 
 class Contacts extends Component {
   public render() {
@@ -16,7 +17,7 @@ class Contacts extends Component {
           <div className="Contacts">
             <div className="contacts-wrapper">
               <h2>{labels[value.state.lang as string].pages.contacts.map}</h2>
-              <GoogleMap url="https://maps.google.com/maps?q=Lviv%2C%20Rynok%20Square&t=&z=13&ie=UTF8&iwloc=&output=embed" />
+              <GoogleMap url={urls.google_map_address} />
               <hr />
               <ContactInfo
                 address={contacts[value.state.lang as string].address}
