@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import { AppContext } from '../../../AppContext';
 import labels from '../../../config/labels';
 import './Navigation.less';
+import { urls } from '../../../config/urls';
 
 interface NavigationState {}
 
@@ -125,9 +126,9 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                   >
                     <span>{labelsRoot.lang}</span>
                     {value.state.lang === 'en' ? (
-                      <img src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Funited-kingdom.png?alt=media&token=791aa1e1-7dc6-467f-a716-3eb8dce0b313" />
+                      <img src={urls.en_flag} />
                     ) : (
-                      <img src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Fukraine.png?alt=media&token=9305aa3b-0e62-411e-b6ae-7dbbcaa72e74" />
+                      <img src={urls.ua_flag} />
                     )}{' '}
                     <i className="fas fa-caret-down" />
                   </a>
@@ -137,14 +138,14 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                         onClick={this.langOptionClickedHandler.bind(this, 'en')}
                       >
                         <span>{labels.en.navigation.lang}</span>{' '}
-                        <img src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Funited-kingdom.png?alt=media&token=791aa1e1-7dc6-467f-a716-3eb8dce0b313" />
+                        <img src={urls.en_flag} />
                       </a>
                     ) : (
                       <a
                         onClick={this.langOptionClickedHandler.bind(this, 'ua')}
                       >
                         <span>{labels.ua.navigation.lang}</span>
-                        <img src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Fukraine.png?alt=media&token=9305aa3b-0e62-411e-b6ae-7dbbcaa72e74" />
+                        <img src={urls.ua_flag} />
                       </a>
                     )}
                   </div>

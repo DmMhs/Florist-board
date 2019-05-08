@@ -79,7 +79,7 @@ class AddGalleryImage extends Component<
       <AppContext.Consumer>
         {value =>
           value && (
-            <form onSubmit={this.formSubmitHandler} className="AddProduct">
+            <form onSubmit={this.formSubmitHandler} className="AddProduct form">
               <div className="form-control product-images">
                 <p style={{ color }} className="gallery-info">
                   {labelsRoot.info.restriction}
