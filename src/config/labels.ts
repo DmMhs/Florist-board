@@ -19,7 +19,35 @@ const labels: any = {
     },
     pages: {
       admin: {
-        title: 'Admin Control Panel'
+        title: 'Admin Control Panel',
+        navigation: {
+          addProduct: 'ADD PRODUCT',
+          galleryImages: 'GALLERY IMAGES',
+          labels: 'LABELS'
+        },
+        addProductForm: {
+          available: {
+            title: 'Product available: ',
+            option1: 'yes',
+            option2: 'no'
+          },
+          title: 'Product title (EN): ',
+          title_ua: 'Product title (UA): ',
+          images: 'Product images: ',
+          price: 'Product price: ',
+          description: 'Product description (EN): ',
+          description_ua: 'Product description (UA): '
+        },
+        addGalleryImageForm: {
+          info: {
+            restriction:
+              'Expression "(Number of images)/4" should has no remainder for the best gallery displaying',
+            totalImagesNumber: 'Number of images in gallery: '
+          },
+          add: 'Add image to the galery:'
+        },
+        changeLabelsForm: {},
+        submitBtn: 'SUBMIT'
       },
       shop: {
         notAvailable: 'not available :(',
@@ -89,7 +117,7 @@ const labels: any = {
     },
     footer: 'FLORIST.UA © All Rights Reserved'
   },
-  uk: {
+  ua: {
     brand: 'FLORIST.UA',
     navigation: {
       home: 'ГОЛОВНА',
@@ -109,7 +137,35 @@ const labels: any = {
     },
     pages: {
       admin: {
-        title: 'Панель Керування Адміністратора'
+        title: 'Адмін Панель',
+        navigation: {
+          addProduct: 'ДОДАТИ ПРОДУКТ',
+          galleryImages: 'ГАЛЕРЕЯ',
+          labels: 'ЛЕЙБЛИ'
+        },
+        addProductForm: {
+          available: {
+            title: 'Продукт в наявності: ',
+            option1: 'так',
+            option2: 'ні'
+          },
+          title: 'Назва продукту (EN): ',
+          title_ua: 'Назва продукту (UA): ',
+          images: 'Картинки продукту: ',
+          price: 'Вартість продукту: ',
+          description: 'Опис продукту (EN): ',
+          description_ua: 'Опис продукту (UA): '
+        },
+        addGalleryImageForm: {
+          info: {
+            restriction:
+              'Кількість картинок повинна бути кратною чотирьом для найкращого відображення галереї',
+            totalImagesNumber: 'Кількість картинок в галереї: '
+          },
+          add: 'Добавити картинку в галерею:'
+        },
+        changeLabelsForm: {},
+        submitBtn: 'ПІДТВЕРДИТИ'
       },
       shop: {
         notAvailable: 'немає :(',

@@ -45,6 +45,8 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
     context.setLang(option);
   };
   public render() {
+    const context = this.context;
+    const labelsRoot = labels[context.state.lang as string].navigation;
     return (
       <div className="Navigation">
         <AppContext.Consumer>
@@ -53,25 +55,22 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
               <ul>
                 <li>
                   <NavLink to="/" exact={true}>
-                    {labels[value.state.lang as string].navigation.home}{' '}
-                    <i className="fas fa-home" />
+                    {labelsRoot.home} <i className="fas fa-home" />
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/shop">
-                    {labels[value.state.lang as string].navigation.shop}{' '}
-                    <i className="fas fa-leaf" />
+                    {labelsRoot.shop} <i className="fas fa-leaf" />
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/gallery">
-                    {labels[value.state.lang as string].navigation.gallery}{' '}
-                    <i className="far fa-image" />
+                    {labelsRoot.gallery} <i className="far fa-image" />
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/contacts">
-                    {labels[value.state.lang as string].navigation.contacts}{' '}
+                    {labelsRoot.contacts}{' '}
                     <i className="fas fa-map-marker-alt" />
                   </NavLink>
                 </li>
@@ -81,7 +80,7 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                     onClick={this.accountClickedHandler}
                     ref={this.authOptionsToggleRef}
                   >
-                    {labels[value.state.lang as string].navigation.account.main}{' '}
+                    {labelsRoot.account.main}{' '}
                     <i className="fas fa-user-circle" />{' '}
                     <i className="fas fa-caret-down" />
                   </a>
@@ -100,17 +99,11 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                     {value.state.userAuthenticated === false ? (
                       <div>
                         <NavLink to="/auth/signup" className="signup-link">
-                          {
-                            labels[value.state.lang as string].navigation
-                              .account.menu.signUp
-                          }{' '}
+                          {labelsRoot.account.menu.signUp}{' '}
                           <i className="fas fa-user-plus" />
                         </NavLink>
                         <NavLink to="/auth/signin" className="signin-link">
-                          {
-                            labels[value.state.lang as string].navigation
-                              .account.menu.signIn
-                          }{' '}
+                          {labelsRoot.account.menu.signIn}{' '}
                           <i className="fas fa-sign-in-alt" />
                         </NavLink>
                       </div>
@@ -119,10 +112,7 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                         onClick={this.logoutClickedHandler}
                         className="log-out"
                       >
-                        {
-                          labels[value.state.lang as string].navigation.account
-                            .menu.logOut
-                        }
+                        {labelsRoot.account.menu.logOut}
                       </a>
                     )}
                   </div>
@@ -133,9 +123,7 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                     onClick={this.langBtnClickedHandler}
                     ref={this.langOptionsToggleRef}
                   >
-                    <span>
-                      {labels[value.state.lang as string].navigation.lang}
-                    </span>
+                    <span>{labelsRoot.lang}</span>
                     {value.state.lang === 'en' ? (
                       <img src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Funited-kingdom.png?alt=media&token=791aa1e1-7dc6-467f-a716-3eb8dce0b313" />
                     ) : (
@@ -144,7 +132,7 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                     <i className="fas fa-caret-down" />
                   </a>
                   <div className="lang-options" ref={this.langOptionsRef}>
-                    {value.state.lang === 'uk' ? (
+                    {value.state.lang === 'ua' ? (
                       <a
                         onClick={this.langOptionClickedHandler.bind(this, 'en')}
                       >
@@ -153,9 +141,9 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                       </a>
                     ) : (
                       <a
-                        onClick={this.langOptionClickedHandler.bind(this, 'uk')}
+                        onClick={this.langOptionClickedHandler.bind(this, 'ua')}
                       >
-                        <span>{labels.uk.navigation.lang}</span>
+                        <span>{labels.ua.navigation.lang}</span>
                         <img src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Fukraine.png?alt=media&token=9305aa3b-0e62-411e-b6ae-7dbbcaa72e74" />
                       </a>
                     )}

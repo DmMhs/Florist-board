@@ -43,6 +43,8 @@ const productsFilter = (
       <i className="fas fa-times close" onClick={filterToggle} />
     ) : null;
 
+  const labelsRoot = labels[context.state.lang as string].pages.shop.filter;
+
   return (
     <div className="filter-wrapper hide" ref={filtersSidebarRef}>
       {props.mobileMode === false ? (
@@ -54,31 +56,23 @@ const productsFilter = (
       ) : null}
       <h2>
         <span>
-          {labels[context.state.lang as string].pages.shop.filter.main}{' '}
-          <i className="fas fa-filter" />
+          {labelsRoot.main} <i className="fas fa-filter" />
         </span>{' '}
         {closeFiltersIcon}
       </h2>
       <form className="filter-form">
         <div className="filter-option available">
-          <label>
-            {labels[context.state.lang as string].pages.shop.filter.available}
-          </label>
+          <label>{labelsRoot.available}</label>
           <input type="checkbox" onChange={inStockChanged} />
         </div>
         <div className="filter-option price-range">
-          <label>
-            {labels[context.state.lang as string].pages.shop.filter.price}
-          </label>
+          <label>{labelsRoot.price}</label>
           <div>
             <input
               type="number"
               onChange={priceFromChanged}
               className="priceFrom"
-              placeholder={
-                labels[context.state.lang as string].pages.shop.filter
-                  .priceInputs.from
-              }
+              placeholder={labelsRoot.priceInputs.from}
               min="0"
             />
             -
@@ -86,10 +80,7 @@ const productsFilter = (
               type="number"
               onChange={priceToChanged}
               className="priceTo"
-              placeholder={
-                labels[context.state.lang as string].pages.shop.filter
-                  .priceInputs.to
-              }
+              placeholder={labelsRoot.priceInputs.to}
               min="0"
             />
           </div>

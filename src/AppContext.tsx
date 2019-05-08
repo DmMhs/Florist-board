@@ -34,7 +34,7 @@ class AppContextProvider extends Component<
       userLogin: '',
       userId: '',
       userToken: '',
-      userRole: 'admin',
+      userRole: '',
       userAuthenticated: false,
       authenticationMethod: undefined,
       lang: 'en'
@@ -49,6 +49,7 @@ class AppContextProvider extends Component<
         userLogin: '',
         userId: '',
         userToken: '',
+        userRole: '',
         authenticationMethod: '',
         userAuthenticated: false
       });
@@ -57,6 +58,7 @@ class AppContextProvider extends Component<
         userLogin: localStorage.floristAuthLogin,
         userId: localStorage.floristAuthUserId,
         userToken: localStorage.floristAuthToken,
+        userRole: localStorage.floristUserRole,
         authenticationMethod: localStorage.floristAuthMethod,
         userAuthenticated: true
       });
@@ -108,7 +110,6 @@ class AppContextProvider extends Component<
   };
 
   public render() {
-    console.log('Context state: ' + this.state.userRole);
     return (
       <AppContext.Provider
         value={{

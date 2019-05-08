@@ -2,7 +2,7 @@ export const contacts: any = {
   en: {
     address: 'Rynok Square, Lviv, UA'
   },
-  uk: {
+  ua: {
     address: 'Пл. Ринок, м. Львів, Україна'
   },
   postCode: '346346',
