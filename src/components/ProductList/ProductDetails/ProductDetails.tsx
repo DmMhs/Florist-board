@@ -84,6 +84,10 @@ class ProductDetails extends Component<
       backgroundImage: `url(${this.state.productData.images[0]})`
     };
 
+    const context = this.context;
+    const labelsRoot =
+      labels[context.state.lang as string].pages.productDetails;
+
     return (
       <AppContext.Consumer>
         {value => (
@@ -101,18 +105,12 @@ class ProductDetails extends Component<
                     <h3 className="price">
                       {available === false ? (
                         <span>
-                          {
-                            labels[value.state.lang as string].pages
-                              .productDetails.notAvailable
-                          }{' '}
+                          {labelsRoot.notAvailable}{' '}
                           <i className="far fa-frown" />
                         </span>
                       ) : (
                         <div>
-                          {
-                            labels[value.state.lang as string].pages
-                              .productDetails.only
-                          }{' '}
+                          {labelsRoot.only}{' '}
                           <span className="accent">{price}$</span>
                         </div>
                       )}
@@ -132,10 +130,7 @@ class ProductDetails extends Component<
                         )}
                       >
                         <span>
-                          {
-                            labels[value.state.lang as string].pages
-                              .productDetails.facebookShare
-                          }{' '}
+                          {labelsRoot.facebookShare}{' '}
                           <i className="fab fa-facebook-f" />
                         </span>
                       </div>
@@ -143,24 +138,14 @@ class ProductDetails extends Component<
 
                     <button className="shopping-btn" type="button">
                       <NavLink to="/shop">
-                        <span>
-                          {
-                            labels[value.state.lang as string].pages
-                              .productDetails.goShopping
-                          }
-                        </span>{' '}
+                        <span>{labelsRoot.goShopping}</span>{' '}
                         <i className="fas fa-shopping-cart" />
                       </NavLink>
                     </button>
                   </div>
 
                   <div className="info">
-                    <h2>
-                      {
-                        labels[value.state.lang as string].pages.productDetails
-                          .description
-                      }
-                    </h2>
+                    <h2>{labelsRoot.description}</h2>
                     <hr />
                     <p>
                       {value.state.lang === 'en' ? description : description_uk}
@@ -177,5 +162,7 @@ class ProductDetails extends Component<
     );
   }
 }
+
+ProductDetails.contextType = AppContext;
 
 export default ProductDetails;

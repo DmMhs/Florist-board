@@ -12,7 +12,7 @@ const pageNotFound = () => {
         <span className="message">
           {context.state.lang === 'en'
             ? labels.en.pages.pageNotFound
-            : labels.uk.pages.pageNotFound}
+            : labels.ua.pages.pageNotFound}
         </span>{' '}
         <i className="far fa-grimace" />
       </h2>

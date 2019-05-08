@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { CartItem } from '../../../models/CartItem';
 import './ShoppingCartItem.less';
+import { AppContext } from '../../../AppContext';
 
 const ShoppingCartItem = (
   props: Partial<CartItem> & { cartItemPrice: number }
@@ -13,11 +14,14 @@ const ShoppingCartItem = (
     reduceAmount,
     images,
     title,
+    title_uk,
     id,
     amount,
     cartItemPrice,
     currency
   } = props;
+  const context = useContext(AppContext);
+  const productTitle = context.state.lang === 'ua' ? title_uk : title;
   return (
     <li className="cart-item">
       <div
@@ -27,7 +31,7 @@ const ShoppingCartItem = (
         }}
       />
       <span className="product-name">
-        {title}
+        {productTitle}
         <NavLink to={`/product-details/${id}`}>
           <i className="fas fa-info-circle info" />
         </NavLink>

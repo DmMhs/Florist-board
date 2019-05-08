@@ -38,6 +38,8 @@ class Admin extends Component<RouteComponentProps<{}>, AdminState> {
 
   public render() {
     const { mode } = this.state;
+    const context = this.context;
+    const labelsRoot = labels[context.state.lang as string].pages.admin;
 
     let form: JSX.Element;
     switch (mode) {
@@ -54,19 +56,19 @@ class Admin extends Component<RouteComponentProps<{}>, AdminState> {
         form = <h3>Labels Form</h3>;
         break;
       default:
-        form = <h3>Default form</h3>;
+        form = <h3>Hm...</h3>;
     }
     return (
       <AppContext.Consumer>
         {value =>
           value && value.state.userRole === 'admin' ? (
             <div className="Admin">
-              <h1>{labels[value.state.lang as string].pages.admin.title}</h1>
+              <h1>{labelsRoot.title}</h1>
               <hr />
               <ul className="admin-actions">
                 <li>
                   <a onClick={this.switchModeTo.bind(this, 'add-product')}>
-                    Add Product
+                    {labelsRoot.navigation.addProduct}
                   </a>
                 </li>
                 <li>
@@ -76,14 +78,14 @@ class Admin extends Component<RouteComponentProps<{}>, AdminState> {
                       'configurate-gallery'
                     )}
                   >
-                    Gallery Images
+                    {labelsRoot.navigation.galleryImages}
                   </a>
                 </li>
                 <li>
                   <a
                     onClick={this.switchModeTo.bind(this, 'configurate-labels')}
                   >
-                    Labels
+                    {labelsRoot.navigation.labels}
                   </a>
                 </li>
               </ul>
@@ -97,4 +99,7 @@ class Admin extends Component<RouteComponentProps<{}>, AdminState> {
     );
   }
 }
+
+Admin.contextType = AppContext;
+
 export default withRouter<RouteComponentProps<{}>>(Admin);
