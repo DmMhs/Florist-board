@@ -39,12 +39,16 @@ class ChangeLabels extends Component<ChangeLabelsProps, ChangeLabelsState> {
   };
 
   private formSubmitHandler = () => {};
-  private changeBrandHandler = (
+
+  private changeOptionHandler = (
+    option: string,
     lang: string,
-    event: React.ChangeEvent<HTMLInputElement>
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
   ) => {
     const updatedLabels = { ...this.state.newLabels };
-    updatedLabels[lang].brand = event.target.value;
+    updatedLabels[lang].navigation[option] = event.target.value;
     this.setState({
       newLabels: updatedLabels
     });
@@ -56,10 +60,13 @@ class ChangeLabels extends Component<ChangeLabelsProps, ChangeLabelsState> {
       <FormContent
         labels={this.state.newLabels}
         lang="en"
-        changeBrand={
-          this.changeBrandHandler as (
+        changeOption={
+          this.changeOptionHandler as (
+            option: string,
             lang: string,
-            event: React.ChangeEvent<HTMLInputElement>
+            event:
+              | React.ChangeEvent<HTMLInputElement>
+              | React.ChangeEvent<HTMLSelectElement>
           ) => void
         }
       />
