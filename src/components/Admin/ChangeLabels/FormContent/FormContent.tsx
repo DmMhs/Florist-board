@@ -411,6 +411,393 @@ class FormContent extends Component<FormContentProps, FormContentState> {
           <p className="current">
             Current value: {labels[lang].pages.admin.addGalleryImageForm.add}
           </p>
+          <p className="red">changeLabelsForm: </p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.admin.changeLabelsForm',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.admin.changeLabelsForm}
+          </p>
+        </div>
+
+        <div className="form-control">
+          <label>Change pages/shop... </label>
+          <br />
+          <p>notAvailable:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.shop.notAvailable',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.shop.notAvailable}
+          </p>
+          <p>sort/main:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.shop.sort.main',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.shop.sort.main}
+          </p>
+          <p>sort/btn/byName:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.shop.sort.btn.byName',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.shop.sort.btn.byName}
+          </p>
+          <p>sort/btn/byPrice:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.shop.sort.btn.byPrice',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.shop.sort.btn.byPrice}
+          </p>
+          <p>filter/main:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.shop.filter.main',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.shop.filter.main}
+          </p>
+          <p>filter/available:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.shop.filter.available',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.shop.filter.available}
+          </p>
+          <p>filter/price:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.shop.filter.price',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.shop.filter.price}
+          </p>
+          <p>filter/priceInputs/from:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.shop.filter.priceInputs.from',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.shop.filter.priceInputs.from}
+          </p>
+          <p>filter/priceInputs/to:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.shop.filter.priceInputs.to',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.shop.filter.priceInputs.to}
+          </p>
+          <p>cart/empty:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.shop.cart.empty',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.shop.cart.empty}
+          </p>
+          <p>cart/btn:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.shop.cart.btn',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.shop.cart.btn}
+          </p>
+          <p>cart/title:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.shop.cart.title',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.shop.cart.title}
+          </p>
+          <p>cart/amount:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.shop.cart.amount',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.shop.cart.amount}
+          </p>
+          <p>cart/price:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.shop.cart.price',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.shop.cart.price}
+          </p>
+          <p>cart/total:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.shop.cart.total',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.shop.cart.total}
+          </p>
+          <p>cart/orderBtn:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.shop.cart.orderBtn',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.shop.cart.orderBtn}
+          </p>
+        </div>
+
+        <div className="form-control">
+          <label>Change pages/gallery/main: </label>
+          <br />
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.gallery.main',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.gallery.main}
+          </p>
+        </div>
+
+        <div className="form-control">
+          <label>Change pages/contacts... </label>
+          <br />
+          <p>map:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.contacts.map',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.contacts.map}
+          </p>
+          <p>info:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.contacts.info',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.contacts.info}
+          </p>
+        </div>
+
+        <div className="form-control">
+          <label>Change pages/auth... </label>
+          <br />
+          <p>email:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.auth.email',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.auth.email}
+          </p>
+          <p>password:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.auth.password',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.auth.password}
+          </p>
+          <p>btn:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.auth.btn',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.auth.btn}
+          </p>
+          <p>alternative:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.auth.alternative',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.auth.alternative}
+          </p>
+          <p>isAuth/main:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.auth.isAuth.main',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.auth.isAuth.main}
+          </p>
+          <p>isAuth/sub:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.auth.isAuth.sub',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.auth.isAuth.sub}
+          </p>
+        </div>
+
+        <div className="form-control">
+          <label>Change pages/pageNotFound: </label>
+          <br />
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'brand',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">Current value: {labels[lang].brand}</p>
+        </div>
+
+        <div className="form-control">
+          <label>Change pages/productDetails: </label>
+          <br />
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'brand',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">Current value: {labels[lang].brand}</p>
         </div>
       </div>
     );
