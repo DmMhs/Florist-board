@@ -29,20 +29,23 @@ class FormContent extends Component<FormContentProps, FormContentState> {
       labels: props.labels
     };
   }
+
   constructor(props: FormContentProps) {
     super(props);
     this.state = {
       labels: {}
     };
   }
+
   public render() {
     const { labels } = this.state;
     const { lang } = this.props;
+    const { change, current } = labels[lang].pages.admin.changeLabelsForm;
 
     return (
       <div className="FormContent">
         <div className="form-control">
-          <label>Change the brand name: </label>
+          <label>{change} brand: </label>
           <br />
           <input
             type="text"
@@ -57,14 +60,14 @@ class FormContent extends Component<FormContentProps, FormContentState> {
         </div>
 
         <div className="form-control">
-          <label>Change navigation label for... </label>
+          <label>{change} navigation... </label>
           <br />
-          <p>home page:</p>
+          <p>home:</p>
           <input
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'home',
+              'navigation.home',
               lang as string
             )}
             required
@@ -72,12 +75,12 @@ class FormContent extends Component<FormContentProps, FormContentState> {
           <p className="current">
             Current value: {labels[lang].navigation.home}
           </p>
-          <p>shop page:</p>
+          <p>shop:</p>
           <input
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'shop',
+              'navigation.shop',
               lang as string
             )}
             required
@@ -85,12 +88,12 @@ class FormContent extends Component<FormContentProps, FormContentState> {
           <p className="current">
             Current value: {labels[lang].navigation.shop}
           </p>
-          <p>gallery page:</p>
+          <p>gallery:</p>
           <input
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'gallery',
+              'navigation.gallery',
               lang as string
             )}
             required
@@ -103,7 +106,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'contacts',
+              'navigation.contacts',
               lang as string
             )}
             required
@@ -116,7 +119,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'cart',
+              'navigation.cart',
               lang as string
             )}
             required
@@ -124,12 +127,12 @@ class FormContent extends Component<FormContentProps, FormContentState> {
           <p className="current">
             Current value: {labels[lang].navigation.cart}
           </p>
-          <p>account/main dropdown option:</p>
+          <p>account/main:</p>
           <input
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'account.main',
+              'navigation.account.main',
               lang as string
             )}
             required
@@ -137,12 +140,12 @@ class FormContent extends Component<FormContentProps, FormContentState> {
           <p className="current">
             Current value: {labels[lang].navigation.account.main}
           </p>
-          <p>account/menu/signIn dropdown option:</p>
+          <p>account/menu/signIn:</p>
           <input
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'account.menu.signIn',
+              'navigation.account.menu.signIn',
               lang as string
             )}
             required
@@ -150,12 +153,12 @@ class FormContent extends Component<FormContentProps, FormContentState> {
           <p className="current">
             Current value: {labels[lang].navigation.account.menu.signIn}
           </p>
-          <p>account/menu/signUp dropdown option:</p>
+          <p>account/menu/signUp:</p>
           <input
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'account.menu.signUp',
+              'navigation.account.menu.signUp',
               lang as string
             )}
             required
@@ -163,12 +166,12 @@ class FormContent extends Component<FormContentProps, FormContentState> {
           <p className="current">
             Current value: {labels[lang].navigation.account.menu.signUp}
           </p>
-          <p>account/menu/logOut dropdown option:</p>
+          <p>account/menu/logOut:</p>
           <input
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'account.menu.logOut',
+              'navigation.account.menu.logOut',
               lang as string
             )}
             required
@@ -176,12 +179,12 @@ class FormContent extends Component<FormContentProps, FormContentState> {
           <p className="current">
             Current value: {labels[lang].navigation.account.menu.logOut}
           </p>
-          <p>lang select button:</p>
+          <p>lang:</p>
           <input
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'lang',
+              'navigation.lang',
               lang as string
             )}
             required
@@ -192,7 +195,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
         </div>
 
         <div className="form-control">
-          <label>Change pages/admin... </label>
+          <label>{change} pages/admin... </label>
           <br />
           <p>title: </p>
           <input
@@ -411,23 +414,36 @@ class FormContent extends Component<FormContentProps, FormContentState> {
           <p className="current">
             Current value: {labels[lang].pages.admin.addGalleryImageForm.add}
           </p>
-          <p className="red">changeLabelsForm: </p>
+          <p className="red">changeLabelsForm/change: </p>
           <input
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'pages.admin.changeLabelsForm',
+              'pages.admin.changeLabelsForm.change',
               lang as string
             )}
             required
           />
           <p className="current">
-            Current value: {labels[lang].pages.admin.changeLabelsForm}
+            Current value: {labels[lang].pages.admin.changeLabelsForm.change}
+          </p>
+          <p className="red">changeLabelsForm/current: </p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.admin.changeLabelsForm.current',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.admin.changeLabelsForm.current}
           </p>
         </div>
 
         <div className="form-control">
-          <label>Change pages/shop... </label>
+          <label>{change} pages/shop... </label>
           <br />
           <p>notAvailable:</p>
           <input
@@ -640,7 +656,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
         </div>
 
         <div className="form-control">
-          <label>Change pages/gallery/main: </label>
+          <label>{change} pages/gallery/main: </label>
           <br />
           <input
             type="text"
@@ -657,7 +673,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
         </div>
 
         <div className="form-control">
-          <label>Change pages/contacts... </label>
+          <label>{change} pages/contacts... </label>
           <br />
           <p>map:</p>
           <input
@@ -688,7 +704,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
         </div>
 
         <div className="form-control">
-          <label>Change pages/auth... </label>
+          <label>{change} pages/auth... </label>
           <br />
           <p>email:</p>
           <input
@@ -768,36 +784,212 @@ class FormContent extends Component<FormContentProps, FormContentState> {
           <p className="current">
             Current value: {labels[lang].pages.auth.isAuth.sub}
           </p>
+          <p>signup/google:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.auth.signup.google',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.auth.signup.google}
+          </p>
+          <p>signup/facebook:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.auth.signup.facebook',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.auth.signup.facebook}
+          </p>
+          <p>signup/account:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.auth.signup.account',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.auth.signup.account}
+          </p>
+          <p>signup/btn:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.auth.signup.btn',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.auth.signup.btn}
+          </p>
+          <p>signin/google:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.auth.signin.google',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.auth.signin.google}
+          </p>
+          <p>signin/facebook:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.auth.signin.facebook',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.auth.signin.facebook}
+          </p>
+          <p>signin/account:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.auth.signin.account',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.auth.signin.account}
+          </p>
+          <p>signin/btn:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.auth.signin.btn',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.auth.signin.btn}
+          </p>
         </div>
 
         <div className="form-control">
-          <label>Change pages/pageNotFound: </label>
+          <label>{change} pages/pageNotFound: </label>
           <br />
           <input
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'brand',
+              'pages.pageNotFound',
               lang as string
             )}
             required
           />
-          <p className="current">Current value: {labels[lang].brand}</p>
+          <p className="current">
+            Current value: {labels[lang].pages.pageNotFound}
+          </p>
         </div>
 
         <div className="form-control">
-          <label>Change pages/productDetails: </label>
+          <label>{change} pages/productDetails... </label>
+          <br />
+          <p>description:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.productDetails.description',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.productDetails.description}
+          </p>
+          <p>only:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.productDetails.only',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.productDetails.only}
+          </p>
+          <p>notAvailable:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.productDetails.notAvailable',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.productDetails.notAvailable}
+          </p>
+          <p>facebookShare:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.productDetails.facebookShare',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.productDetails.facebookShare}
+          </p>
+          <p>goShopping:</p>
+          <input
+            type="text"
+            onChange={this.props.changeOption!.bind(
+              this.props,
+              'pages.productDetails.goShopping',
+              lang as string
+            )}
+            required
+          />
+          <p className="current">
+            Current value: {labels[lang].pages.productDetails.goShopping}
+          </p>
+        </div>
+
+        <div className="form-control">
+          <label>{change} footer: </label>
           <br />
           <input
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'brand',
+              'footer',
               lang as string
             )}
             required
           />
-          <p className="current">Current value: {labels[lang].brand}</p>
+          <p className="current">Current value: {labels[lang].footer}</p>
         </div>
       </div>
     );
