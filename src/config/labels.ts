@@ -46,7 +46,10 @@ const labels: any = {
           },
           add: 'Add image to the galery:'
         },
-        changeLabelsForm: {},
+        changeLabelsForm: {
+          change: 'Change ',
+          current: 'Current value: '
+        },
         submitBtn: 'SUBMIT'
       },
       shop: {
@@ -164,7 +167,10 @@ const labels: any = {
           },
           add: 'Добавити картинку в галерею:'
         },
-        changeLabelsForm: {},
+        changeLabelsForm: {
+          change: 'Змінити ',
+          current: 'Поточне значення '
+        },
         submitBtn: 'ПІДТВЕРДИТИ'
       },
       shop: {
