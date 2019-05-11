@@ -8,10 +8,12 @@ import { Labels } from '../../../models/Labels';
 import { urls } from '../../../config/urls';
 import Spinner from '../../Spinner/Spinner';
 import FormContent from './FormContent/FormContent';
+import { createObjectPath } from '../../../services/createObjectPath';
 
 interface ChangeLabelsProps {}
 interface ChangeLabelsState {
   newLabels: Labels;
+  fetchedLabels: Labels;
   fetchInProgress: boolean;
 }
 
@@ -20,24 +22,28 @@ class ChangeLabels extends Component<ChangeLabelsProps, ChangeLabelsState> {
     super(props);
     this.state = {
       newLabels: {},
+      fetchedLabels: {},
       fetchInProgress: true
     };
   }
 
   public componentDidMount = () => {
-    //database.ref('labels').set(labels);
+    // database.ref().child('labels').set(labels);
     this.setState({
       fetchInProgress: true
     });
-    database.ref('labels').on('value', snapshot => {
+    database.ref().child('labels').on('value', snapshot => {
       this.setState({
         newLabels: snapshot!.val(),
+        fetchedLabels: snapshot!.val(),
         fetchInProgress: false
       });
     });
   };
 
-  private formSubmitHandler = () => {};
+  private formSubmitHandler = () => {
+    database.ref().child('labels').update(this.state.newLabels);
+  };
 
   private changeOptionHandler = (
     option: string,
@@ -46,30 +52,21 @@ class ChangeLabels extends Component<ChangeLabelsProps, ChangeLabelsState> {
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>
   ) => {
-    const pathArr = option.split('.');
-    const check = pathArr.length > 1;
-    let updatedLabels = { ...this.state.newLabels };
 
-    // if (check === true) {
-    //   updatedLabels[lang];
-    //   let obj = updatedLabels;
-    //   for (let i = 0; i < pathArr.length; i++) {
-    //     console.log(Object.keys(updatedLabels[lang].pathArr[i]));
-    //   }
-
-    //   this.setState({
-    //     newLabels: updatedLabels
-    //   });
-    // } else {
-    //   updatedLabels[lang][option] = event.target.value;
-    //   this.setState({
-    //     newLabels: updatedLabels
-    //   });
+    const updatedLabels = { ...this.state.newLabels };
+    createObjectPath(updatedLabels[lang], option, event.target.value as string);
+    this.setState({
+      newLabels: updatedLabels
+    });
   };
   public render() {
+    const context = this.context;
+    const lang = context.state.lang;
+    const labelsRoot = context.state.labels[lang].pages.admin;
+
     const formContentEN = (
       <FormContent
-        labels={this.state.newLabels}
+        labels={this.state.fetchedLabels}
         lang="en"
         changeOption={
           this.changeOptionHandler as (
@@ -85,7 +82,7 @@ class ChangeLabels extends Component<ChangeLabelsProps, ChangeLabelsState> {
 
     const formContentUa = (
       <FormContent
-        labels={this.state.newLabels}
+        labels={this.state.fetchedLabels}
         lang="ua"
         changeOption={
           this.changeOptionHandler as (
@@ -109,18 +106,18 @@ class ChangeLabels extends Component<ChangeLabelsProps, ChangeLabelsState> {
               ) : (
                 <div>
                   <h3>
-                    Labels Configuration{' '}
+                    {labelsRoot.changeLabelsForm.main}{' '}
                     <img src={urls.en_flag} className="flag-image" />
                   </h3>
                   <hr />
                   {formContentEN}
                   <h3>
-                    Labels Configuration{' '}
+                  {value.state.lang === 'en' ? 'Labels Configuration' : 'Налаштування лейблів'}{' '}
                     <img src={urls.ua_flag} className="flag-image" />
                   </h3>
                   <hr />
                   {formContentUa}
-                  <button type="submit">SUBMIT</button>
+                  <button type="submit">{labelsRoot.submitBtn}</button>
                 </div>
               )}
             </form>

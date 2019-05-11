@@ -47,6 +47,7 @@ const labels: any = {
           add: 'Add image to the galery:'
         },
         changeLabelsForm: {
+          main: 'Labels Configuration',
           change: 'Change ',
           current: 'Current value: '
         },
@@ -168,8 +169,9 @@ const labels: any = {
           add: 'Добавити картинку в галерею:'
         },
         changeLabelsForm: {
+          main: 'Налаштування лейблів',
           change: 'Змінити ',
-          current: 'Поточне значення '
+          current: 'Поточне значення: '
         },
         submitBtn: 'ПІДТВЕРДИТИ'
       },
