@@ -3,7 +3,6 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { database } from './firebase';
 import { Labels } from './models/Labels';
 import Spinner from './components/Spinner/Spinner';
-import labels from './config/labels';
 
 export interface AppContextState {
   userLogin: string | null | undefined;
