@@ -23,7 +23,9 @@ const labels: any = {
         navigation: {
           addProduct: 'ADD PRODUCT',
           galleryImages: 'GALLERY IMAGES',
-          labels: 'LABELS'
+          labels: 'LABELS',
+          urls: 'URLs',
+          contacts: 'CONTACTS'
         },
         addProductForm: {
           available: {
@@ -48,9 +50,9 @@ const labels: any = {
         },
         changeLabelsForm: {
           main: 'Labels Configuration',
-          change: 'Change ',
-          current: 'Current value: '
         },
+        change: 'Change ',
+        current: 'Current value: ',
         submitBtn: 'SUBMIT'
       },
       shop: {
@@ -145,7 +147,9 @@ const labels: any = {
         navigation: {
           addProduct: 'ДОДАТИ ПРОДУКТ',
           galleryImages: 'ГАЛЕРЕЯ',
-          labels: 'ЛЕЙБЛИ'
+          labels: 'ЛЕЙБЛИ',
+          urls: 'ПОСИЛАННЯ',
+          contacts: 'КОНТАКТИ'
         },
         addProductForm: {
           available: {
@@ -170,9 +174,9 @@ const labels: any = {
         },
         changeLabelsForm: {
           main: 'Налаштування лейблів',
-          change: 'Змінити ',
-          current: 'Поточне значення: '
         },
+        change: 'Змінити ',
+        current: 'Поточне значення: ',
         submitBtn: 'ПІДТВЕРДИТИ'
       },
       shop: {

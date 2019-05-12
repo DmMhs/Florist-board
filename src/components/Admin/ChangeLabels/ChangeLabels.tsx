@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import './ChangeLabels.less';
 import { AppContext } from '../../../AppContext';
-import labels from '../../../config/labels';
 import { database } from '../../../firebase';
 import { Labels } from '../../../models/Labels';
 import { urls } from '../../../config/urls';

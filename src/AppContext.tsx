@@ -3,6 +3,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { database } from './firebase';
 import { Labels } from './models/Labels';
 import Spinner from './components/Spinner/Spinner';
+import labels from './config/labels';
 
 export interface AppContextState {
   userLogin: string | null | undefined;
@@ -48,6 +49,7 @@ class AppContextProvider extends Component<
     };
   }
   public componentDidMount() {
+    // database.ref().child('labels').set(labels);
     database.ref().child('labels').on('value', snapshot => {
       this.setState({
         labels: snapshot!.val(),
@@ -123,7 +125,6 @@ class AppContextProvider extends Component<
   };
 
   public render() {
-    console.log(this.state.labels);
     return (
       this.state.fetchInProgress === true ? <Spinner /> :
       <AppContext.Provider

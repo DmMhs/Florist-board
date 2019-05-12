@@ -45,8 +45,8 @@ class FormContent extends Component<FormContentProps, FormContentState> {
     const context = this.context;
     const contextLang = context.state.lang;
     const contextLabels = context.state.labels;
-    const {change, current} = contextLabels[contextLang].pages.admin.changeLabelsForm;
-
+    const {change, current} = contextLabels[contextLang].pages.admin;
+    console.log(current);
     return (
       <div className="FormContent">
         <div className="form-control">
@@ -397,24 +397,24 @@ class FormContent extends Component<FormContentProps, FormContentState> {
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'pages.admin.changeLabelsForm.change',
+              'pages.admin.change',
               lang as string
             )}
           />
           <p className="current">
-            {current} {labels[lang].pages.admin.changeLabelsForm.change}
+            {current} {labels[lang].pages.admin.change}
           </p>
           <p>changeLabelsForm/current: </p>
           <input
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'pages.admin.changeLabelsForm.current',
+              'pages.admin.current',
               lang as string
             )}
           />
           <p className="current">
-            {current} {labels[lang].pages.admin.changeLabelsForm.current}
+            {current} {labels[lang].pages.admin.current}
           </p>
         </div>
 

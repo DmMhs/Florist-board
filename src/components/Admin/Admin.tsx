@@ -7,13 +7,17 @@ import { RouteComponentProps, withRouter, Redirect } from 'react-router';
 import AddProduct from './AddProduct/AddProduct';
 import AddGalleryImage from './AddGalleryImage/AddGalleryImage';
 import ChangeLabels from './ChangeLabels/ChangeLabels';
+import ChangeContacts from './ChangeContacts/ChangeContacts';
+import ChangeURLs from './ChangeURLs/ChangeURLs';
 
 interface AdminState {
   mode:
     | 'add-product'
     | 'edit-product'
     | 'configurate-gallery'
-    | 'configurate-labels';
+    | 'configurate-labels' 
+    | 'configurate-urls' 
+    | 'configurate-contacts';
 }
 
 class Admin extends Component<RouteComponentProps<{}>, AdminState> {
@@ -30,6 +34,8 @@ class Admin extends Component<RouteComponentProps<{}>, AdminState> {
       | 'edit-product'
       | 'configurate-gallery'
       | 'configurate-labels'
+      | 'configurate-urls'
+      | 'configurate-contacts'
   ) => {
     this.setState({
       mode
@@ -57,6 +63,12 @@ class Admin extends Component<RouteComponentProps<{}>, AdminState> {
       case 'configurate-labels':
         form = <ChangeLabels />;
         break;
+      case 'configurate-urls':
+        form = <ChangeURLs />;
+        break;
+      case 'configurate-contacts':
+        form = <ChangeContacts />;
+        break;  
       default:
         form = <h3>Hm...</h3>;
     }
@@ -88,6 +100,20 @@ class Admin extends Component<RouteComponentProps<{}>, AdminState> {
                     onClick={this.switchModeTo.bind(this, 'configurate-labels')}
                   >
                     {labelsRoot.navigation.labels}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    onClick={this.switchModeTo.bind(this, 'configurate-urls')}
+                  >
+                    {labelsRoot.navigation.urls}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    onClick={this.switchModeTo.bind(this, 'configurate-contacts')}
+                  >
+                    {labelsRoot.navigation.contacts}
                   </a>
                 </li>
               </ul>
