@@ -1,14 +1,16 @@
 import React, { useContext } from 'react';
 
-import './Footer.less';
-import labels from '../../config/labels';
 import { AppContext } from '../../AppContext';
+import './Footer.less';
 
 const footer = () => {
   const context = useContext(AppContext);
+  const labels = context.state.labels;
+  const lang = context.state.lang;
+
   return (
     <div className="Footer">
-      <span>{labels[context.state.lang as string].footer}</span>
+      <span>{labels[lang as string].footer}</span>
     </div>
   );
 };

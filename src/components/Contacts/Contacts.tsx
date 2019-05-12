@@ -3,24 +3,26 @@ import React, { Component } from 'react';
 import GoogleMap from './Map/GoogleMap';
 import ContactInfo from './ContactInfo/ContactInfo';
 import { contacts } from '../../config/contacts';
-import labels from '../../config/labels';
 import { AppContext } from '../../AppContext';
-
-import './Contacts.less';
 import { urls } from '../../config/urls';
+import './Contacts.less';
 
 class Contacts extends Component {
   public render() {
+    const context = this.context;
+    const labels = context.state.labels;
+    const lang = context.state.lang;
+
     return (
       <AppContext.Consumer>
         {value => (
           <div className="Contacts">
             <div className="contacts-wrapper">
-              <h2>{labels[value.state.lang as string].pages.contacts.map}</h2>
+              <h2>{labels[lang].pages.contacts.map}</h2>
               <GoogleMap url={urls.google_map_address} />
               <hr />
               <ContactInfo
-                address={contacts[value.state.lang as string].address}
+                address={contacts[lang].address}
                 phone={contacts.phone}
                 email={contacts.email}
                 instagram={contacts.links.instagram}
@@ -34,5 +36,7 @@ class Contacts extends Component {
     );
   }
 }
+
+Contacts.contextType = AppContext;
 
 export default Contacts;

@@ -3,9 +3,8 @@ import { NavLink, withRouter, RouteComponentProps } from 'react-router-dom';
 import firebase from 'firebase';
 
 import { AppContext } from '../../../AppContext';
-import labels from '../../../config/labels';
-import './Navigation.less';
 import { urls } from '../../../config/urls';
+import './Navigation.less';
 
 interface NavigationState {}
 
@@ -47,7 +46,10 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
   };
   public render() {
     const context = this.context;
-    const labelsRoot = labels[context.state.lang as string].navigation;
+    const lang = context.state.lang;
+    const labels = context.state.labels;
+    const labelsRoot = labels[lang as string].navigation;
+
     return (
       <div className="Navigation">
         <AppContext.Consumer>

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
 
-import './Gallery.less';
 import { galleryImagesRef } from '../../firebase';
 import Spinner from '../Spinner/Spinner';
 import Modal from './Modal/Modal';
-import labels from '../../config/labels';
 import { AppContext } from '../../AppContext';
+import './Gallery.less';
 
 interface GalleryState {
   images: string[];
@@ -86,11 +85,16 @@ class Gallery extends Component<RouteComponentProps<{}>, GalleryState> {
         );
       }
     );
+
+    const context = this.context;
+    const labels = context.state.labels;
+    const lang = context.state.lang;
+
     return (
       <AppContext.Consumer>
         {value => (
           <div className="Gallery">
-            <h2>{labels[value.state.lang as string].pages.gallery.main}</h2>
+            <h2>{labels[lang].pages.gallery.main}</h2>
             <hr />
             {this.state.fetchInProgress === true ? (
               <Spinner />
@@ -134,5 +138,7 @@ class Gallery extends Component<RouteComponentProps<{}>, GalleryState> {
     );
   }
 }
+
+Gallery.contextType = AppContext;
 
 export default withRouter<RouteComponentProps<{}>>(Gallery);

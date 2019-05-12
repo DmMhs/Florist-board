@@ -116,7 +116,7 @@ class ProductList extends Component<ProductListProps, ProductListState> {
           cartProducts: [...cartProducts, productData]
         });
       }
-      if (context.state.lang === 'uk') {
+      if (context.state.lang === 'ua') {
         this.setState(
           {
             popupMessages: [

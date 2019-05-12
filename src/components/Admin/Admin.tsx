@@ -5,7 +5,6 @@ import './Admin.less';
 import { AppContext } from '../../AppContext';
 import { RouteComponentProps, withRouter, Redirect } from 'react-router';
 import AddProduct from './AddProduct/AddProduct';
-import labels from '../../config/labels';
 import AddGalleryImage from './AddGalleryImage/AddGalleryImage';
 import ChangeLabels from './ChangeLabels/ChangeLabels';
 
@@ -40,7 +39,9 @@ class Admin extends Component<RouteComponentProps<{}>, AdminState> {
   public render() {
     const { mode } = this.state;
     const context = this.context;
-    const labelsRoot = labels[context.state.lang as string].pages.admin;
+    const lang = context.state.lang;
+    const labels = context.state.labels;
+    const labelsRoot = labels[lang].pages.admin;
 
     let form: JSX.Element;
     switch (mode) {

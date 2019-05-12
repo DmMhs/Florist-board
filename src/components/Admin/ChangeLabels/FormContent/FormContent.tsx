@@ -41,8 +41,11 @@ class FormContent extends Component<FormContentProps, FormContentState> {
   public render() {
     const { labels } = this.state;
     const { lang } = this.props;
+    
     const context = this.context;
-    const {change, current} = context.state.labels[context.state.lang].pages.admin.changeLabelsForm;
+    const contextLang = context.state.lang;
+    const contextLabels = context.state.labels;
+    const {change, current} = contextLabels[contextLang].pages.admin.changeLabelsForm;
 
     return (
       <div className="FormContent">

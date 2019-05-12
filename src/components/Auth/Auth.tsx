@@ -6,12 +6,10 @@ import {
   RouteComponentProps as RCProps,
   NavLink
 } from 'react-router-dom';
-
 import Popup from '../Popup/Popup';
 import { AppContext } from '../../AppContext';
-import labels from '../../config/labels';
-import './Auth.less';
 import { userRole } from '../../services/userRole';
+import './Auth.less';
 
 interface MatchParams {
   mode: string;
@@ -216,12 +214,14 @@ class Auth extends Component<
     const { email, password } = this.state.formData;
     const { mode } = this.state;
     const context = this.context;
+    const lang = context.state.lang;
+    const labels = context.state.labels;
 
     const infoPopup = (
       <Popup
         type="info"
         message={
-          context.state.lang === 'en'
+          lang === 'en'
             ? 'Please, provide a required data'
             : 'Будь ласка, введіть дані'
         }
@@ -243,7 +243,7 @@ class Auth extends Component<
                   <div>
                     <div className="form-field">
                       <label>
-                        {labels[value.state.lang as string].pages.auth.email}
+                        {labels[lang].pages.auth.email}
                       </label>
                       <input
                         type="email"
@@ -255,7 +255,7 @@ class Auth extends Component<
                     </div>
                     <div className="form-field">
                       <label>
-                        {labels[value.state.lang as string].pages.auth.password}
+                        {labels[lang].pages.auth.password}
                       </label>
                       <input
                         type="password"
@@ -274,23 +274,23 @@ class Auth extends Component<
                         }
                         className="submit-btn"
                       >
-                        {labels[value.state.lang as string].pages.auth.btn}
+                        {labels[lang].pages.auth.btn}
                       </button>
                       {password === '' || email === '' ? infoPopup : null}
                     </div>
                     <hr />
                     <h3>
                       {
-                        labels[value.state.lang as string].pages.auth
+                        labels[lang].pages.auth
                           .alternative
                       }
                     </h3>
                     <div className="form-field">
                       <p>
                         {mode === 'signup'
-                          ? labels[value.state.lang as string].pages.auth.signup
+                          ? labels[lang].pages.auth.signup
                               .google
-                          : labels[value.state.lang as string].pages.auth.signin
+                          : labels[lang].pages.auth.signin
                               .google}
                       </p>{' '}
                       <br />
@@ -308,9 +308,9 @@ class Auth extends Component<
                     <div className="form-field">
                       <p>
                         {mode === 'signup'
-                          ? labels[value.state.lang as string].pages.auth.signup
+                          ? labels[lang].pages.auth.signup
                               .facebook
-                          : labels[value.state.lang as string].pages.auth.signin
+                          : labels[lang].pages.auth.signin
                               .facebook}
                       </p>
                       <br />
@@ -329,9 +329,9 @@ class Auth extends Component<
                     <div className="form-field">
                       <p>
                         {mode === 'signup'
-                          ? labels[value.state.lang as string].pages.auth.signup
+                          ? labels[lang].pages.auth.signup
                               .account
-                          : labels[value.state.lang as string].pages.auth.signin
+                          : labels[lang].pages.auth.signin
                               .account}
                       </p>
                       <button type="button" className="switch-btn">
@@ -341,9 +341,9 @@ class Auth extends Component<
                           }`}
                         >
                           {mode === 'signup'
-                            ? labels[value.state.lang as string].pages.auth
+                            ? labels[lang].pages.auth
                                 .signup.btn
-                            : labels[value.state.lang as string].pages.auth
+                            : labels[lang].pages.auth
                                 .signin.btn}
                         </NavLink>
                       </button>
