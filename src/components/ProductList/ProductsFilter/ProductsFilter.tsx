@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
 
-import labels from '../../../config/labels';
 import { AppContext } from '../../../AppContext';
-
-import './ProductsFilter.less';
 import { withRouter, RouteComponentProps } from 'react-router';
+import './ProductsFilter.less';
 
 interface ProductsFilterProps {
   filterToggle:
@@ -28,6 +26,8 @@ const productsFilter = (
   props: RouteComponentProps<{}> & ProductsFilterProps
 ) => {
   const context = useContext(AppContext);
+  const labels = context.state.labels;
+  const lang = context.state.lang;
 
   const {
     filterToggle,
@@ -43,7 +43,7 @@ const productsFilter = (
       <i className="fas fa-times close" onClick={filterToggle} />
     ) : null;
 
-  const labelsRoot = labels[context.state.lang as string].pages.shop.filter;
+  const labelsRoot = labels[lang as string].pages.shop.filter;
 
   return (
     <div className="filter-wrapper hide" ref={filtersSidebarRef}>

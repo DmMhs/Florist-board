@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 
-import './ShoppingCartContent.less';
 import { AppContext } from '../../../AppContext';
-import labels from '../../../config/labels';
+import './ShoppingCartContent.less';
 
 interface ShoppingCartContentProps {
   totalPrice: number;
@@ -15,20 +14,22 @@ interface ShoppingCartContentProps {
 const ShoppingCartContent = (props: ShoppingCartContentProps) => {
   const { totalPrice, cartItemsList } = props;
   const context = useContext(AppContext);
+  const labels = context.state.labels;
+  const lang = context.state.lang;
   const totalPriceFormatted = totalPrice.toFixed(2);
   return cartItemsList.length > 0 ? (
     <div>
       <ul>
         <li>
           <span>
-            {labels[context.state.lang as string].pages.shop.cart.title}
+            {labels[lang as string].pages.shop.cart.title}
           </span>
           <span />
           <span>
-            {labels[context.state.lang as string].pages.shop.cart.amount}
+            {labels[lang as string].pages.shop.cart.amount}
           </span>
           <span>
-            {labels[context.state.lang as string].pages.shop.cart.price}
+            {labels[lang as string].pages.shop.cart.price}
           </span>
           <span />
         </li>
@@ -37,19 +38,19 @@ const ShoppingCartContent = (props: ShoppingCartContentProps) => {
       </ul>
       <div className="order">
         <p>
-          {labels[context.state.lang as string].pages.shop.cart.total}{' '}
+          {labels[lang as string].pages.shop.cart.total}{' '}
           {totalPriceFormatted}$
         </p>
         <button type="button" className="order-btn">
-          {labels[context.state.lang as string].pages.shop.cart.orderBtn}
+          {labels[lang as string].pages.shop.cart.orderBtn}
         </button>
       </div>
     </div>
   ) : (
     <div>
-      <h4>{labels[context.state.lang as string].pages.shop.cart.empty}</h4>
+      <h4>{labels[lang as string].pages.shop.cart.empty}</h4>
       <button type="button" className="fix" onClick={props.fixEmptyCart}>
-        <span>{labels[context.state.lang as string].pages.shop.cart.btn}</span>{' '}
+        <span>{labels[lang as string].pages.shop.cart.btn}</span>{' '}
         <i className="far fa-smile-wink" />
       </button>
     </div>

@@ -4,7 +4,6 @@ import './AddProduct.less';
 import { AppContext } from '../../../AppContext';
 import { storageRef, productsRef } from '../../../firebase';
 import { Product } from '../../../models/Product';
-import labels from '../../../config/labels';
 
 interface AddProductProps {
   editModeEnabled?: boolean;
@@ -145,6 +144,7 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
       currency,
       images: imageURLs
     };
+
     await productsRef
       .push(newProduct)
       .then(response => {
@@ -153,6 +153,7 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
       .catch(err => {
         console.log(err);
       });
+
     await Promise.all(
       images.map(async (image: File) => {
         const file = (image as any)[0];
@@ -169,6 +170,7 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
         imageURLs.push(imageURL);
       })
     );
+
     productsRef
       .child(productKey)
       .update({
@@ -181,10 +183,13 @@ class AddProduct extends Component<AddProductProps, AddProductState> {
 
   public render() {
     const context = this.context;
+    const labels = context.state.labels;
+    const lang = context.state.lang;
+
     const labelsRoot =
-      labels[context.state.lang as string].pages.admin.addProductForm;
+      labels[lang].pages.admin.addProductForm;
     const submitBtnLabel =
-      labels[context.state.lang as string].pages.admin.submitBtn;
+      labels[lang].pages.admin.submitBtn;
     return (
       <AppContext.Consumer>
         {value =>

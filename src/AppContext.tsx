@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { database } from './firebase';
+import { Labels } from './models/Labels';
+import Spinner from './components/Spinner/Spinner';
+import labels from './config/labels';
 
 export interface AppContextState {
   userLogin: string | null | undefined;
@@ -9,6 +13,8 @@ export interface AppContextState {
   userAuthenticated: boolean;
   authenticationMethod: string | null | undefined;
   lang: string | null | undefined;
+  labels: Labels;
+  fetchInProgress: boolean;
 }
 
 export const AppContext = React.createContext({
@@ -37,10 +43,19 @@ class AppContextProvider extends Component<
       userRole: '',
       userAuthenticated: false,
       authenticationMethod: undefined,
-      lang: 'en'
+      lang: 'en',
+      labels: {},
+      fetchInProgress: true
     };
   }
   public componentDidMount() {
+    // database.ref().child('labels').set(labels);
+    database.ref().child('labels').on('value', snapshot => {
+      this.setState({
+        labels: snapshot!.val(),
+        fetchInProgress: false
+      });
+    });
     if (
       localStorage.floristAuthToken === '' ||
       localStorage.floristAuthToken === undefined
@@ -111,6 +126,7 @@ class AppContextProvider extends Component<
 
   public render() {
     return (
+      this.state.fetchInProgress === true ? <Spinner /> :
       <AppContext.Provider
         value={{
           state: this.state,

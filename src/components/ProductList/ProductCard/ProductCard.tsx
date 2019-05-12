@@ -1,12 +1,11 @@
 import React, { Component, RefObject } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import './ProductCard.less';
 import Slider from '../../Slider/Slider';
 import { CartItem } from '../../../models/CartItem';
 import { AppContext } from '../../../AppContext';
 import { productsRef } from '../../../firebase';
-import labels from '../../../config/labels';
+import './ProductCard.less';
 
 declare global {
   interface Window {
@@ -85,6 +84,10 @@ class ProductCard extends Component<CartItem, ProductCardState> {
       inCart
     } = this.props;
 
+    const context = this.context;
+    const labels = context.state.labels;
+    const lang = context.state.lang;
+
     const actionIcon = inCart ? (
       <div>
         <div className="action">
@@ -120,7 +123,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
                 <Slider images={images} auto={false} showControls={true} />
               </div>
               <div className="title">
-                {value.state.lang === 'en' ? title : title_uk}
+                {lang === 'en' ? title : title_uk}
               </div>
               {available === true ? (
                 <div className="price">
@@ -129,7 +132,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
                 </div>
               ) : (
                 <div className="price">
-                  {labels[value.state.lang as string].pages.shop.notAvailable}
+                  {labels[lang].pages.shop.notAvailable}
                 </div>
               )}
               <div className="action-panel">
@@ -144,4 +147,5 @@ class ProductCard extends Component<CartItem, ProductCardState> {
 }
 
 ProductCard.contextType = AppContext;
+
 export default ProductCard;

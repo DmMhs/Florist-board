@@ -6,8 +6,7 @@ import { Product } from '../../../models/Product';
 import { productsRef } from '../../../firebase';
 import { AppContext } from '../../../AppContext';
 import { BASE_URL } from '../../../config/main';
-import { shareOverrideOGMeta } from '../../../services/share';
-import labels from '../../../config/labels';
+import { shareOverrideOGMeta } from '../../../services/share'
 
 import './ProductDetails.less';
 
@@ -85,8 +84,10 @@ class ProductDetails extends Component<
     };
 
     const context = this.context;
+    const labels = context.state.labels;
+    const lang = context.state.lang;
     const labelsRoot =
-      labels[context.state.lang as string].pages.productDetails;
+      labels[lang].pages.productDetails;
 
     return (
       <AppContext.Consumer>
@@ -95,7 +96,7 @@ class ProductDetails extends Component<
             {this.state.fetchInProgress === false ? (
               <div>
                 <h1>
-                  {value.state.lang === 'en'
+                  {lang === 'en'
                     ? title.toUpperCase()
                     : title_uk.toUpperCase()}
                 </h1>
@@ -148,7 +149,7 @@ class ProductDetails extends Component<
                     <h2>{labelsRoot.description}</h2>
                     <hr />
                     <p>
-                      {value.state.lang === 'en' ? description : description_uk}
+                      {lang === 'en' ? description : description_uk}
                     </p>
                   </div>
                 </div>

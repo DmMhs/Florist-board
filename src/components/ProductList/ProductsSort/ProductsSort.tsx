@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 
-import './ProductsSort.less';
-import labels from '../../../config/labels';
 import { AppContext } from '../../../AppContext';
+import './ProductsSort.less';
 
 interface ProductsSortProps {
   sortOrder: string;
@@ -23,6 +22,8 @@ interface ProductsSortProps {
 
 const productsSort = (props: ProductsSortProps) => {
   const context = useContext(AppContext);
+  const labels = context.state.labels;
+  const lang = context.state.lang;
 
   const {
     orderByChanged,
@@ -54,7 +55,7 @@ const productsSort = (props: ProductsSortProps) => {
       <i className="fas fa-filter filter-toggle" onClick={filterToggle} />
     ) : null;
 
-  const labelsRoot = labels[context.state.lang as string].pages.shop.sort;
+  const labelsRoot = labels[lang as string].pages.shop.sort;
 
   return (
     <div className="sort-order">
@@ -63,12 +64,8 @@ const productsSort = (props: ProductsSortProps) => {
       <div className="dropdown">
         <button onClick={orderByClicked} className="dropbtn">
           {sortBy === 'name'
-            ? labels[
-                context.state.lang as string
-              ].pages.shop.sort.btn.byName.toUpperCase()
-            : labels[
-                context.state.lang as string
-              ].pages.shop.sort.btn.byPrice.toUpperCase()}{' '}
+            ? labels[lang as string].pages.shop.sort.btn.byName.toUpperCase()
+            : labels[lang as string].pages.shop.sort.btn.byPrice.toUpperCase()}{' '}
           <i className="fas fa-caret-down" />
         </button>
         <div ref={orderByOptionsRef} className="dropdown-content">

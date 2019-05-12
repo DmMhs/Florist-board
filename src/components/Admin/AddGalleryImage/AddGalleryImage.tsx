@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import './AddGalleryImage.less';
 import { AppContext } from '../../../AppContext';
 import { storageRef, galleryImagesRef } from '../../../firebase';
-import labels from '../../../config/labels';
 
 interface AddGalleryImageProps {}
 
@@ -70,10 +69,13 @@ class AddGalleryImage extends Component<
 
   public render() {
     const context = this.context;
+    const labels = context.state.labels;
+    const lang = context.state.lang;
+
     const labelsRoot =
-      labels[context.state.lang as string].pages.admin.addGalleryImageForm;
+      labels[lang].pages.admin.addGalleryImageForm;
     const submitBtnLabel =
-      labels[context.state.lang as string].pages.admin.submitBtn;
+      labels[lang].pages.admin.submitBtn;
     const color = this.state.totalImagesNumber % 4 === 0 ? 'green' : 'darkred';
     return (
       <AppContext.Consumer>

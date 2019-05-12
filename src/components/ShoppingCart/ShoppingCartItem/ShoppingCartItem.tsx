@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { CartItem } from '../../../models/CartItem';
-import './ShoppingCartItem.less';
 import { AppContext } from '../../../AppContext';
+import './ShoppingCartItem.less';
 
 const ShoppingCartItem = (
   props: Partial<CartItem> & { cartItemPrice: number }

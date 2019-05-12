@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { Labels } from '../../../../models/Labels';
 import './FormContent.less';
+import { AppContext } from '../../../../AppContext';
 
 interface FormContentProps {
   labels: Labels;
@@ -40,8 +41,12 @@ class FormContent extends Component<FormContentProps, FormContentState> {
   public render() {
     const { labels } = this.state;
     const { lang } = this.props;
-    const { change, current } = labels[lang].pages.admin.changeLabelsForm;
-
+    
+    const context = this.context;
+    const contextLang = context.state.lang;
+    const contextLabels = context.state.labels;
+    const {change, current} = contextLabels[contextLang].pages.admin;
+    console.log(current);
     return (
       <div className="FormContent">
         <div className="form-control">
@@ -54,9 +59,8 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'brand',
               lang as string
             )}
-            required
           />
-          <p className="current">Current value: {labels[lang].brand}</p>
+          <p className="current">{current} {labels[lang].brand}</p>
         </div>
 
         <div className="form-control">
@@ -70,10 +74,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'navigation.home',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].navigation.home}
+            {current} {labels[lang].navigation.home}
           </p>
           <p>shop:</p>
           <input
@@ -83,10 +86,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'navigation.shop',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].navigation.shop}
+            {current} {labels[lang].navigation.shop}
           </p>
           <p>gallery:</p>
           <input
@@ -96,10 +98,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'navigation.gallery',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].navigation.gallery}
+            {current} {labels[lang].navigation.gallery}
           </p>
           <p>contacts page:</p>
           <input
@@ -109,10 +110,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'navigation.contacts',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].navigation.contacts}
+            {current} {labels[lang].navigation.contacts}
           </p>
           <p>cart:</p>
           <input
@@ -122,10 +122,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'navigation.cart',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].navigation.cart}
+            {current} {labels[lang].navigation.cart}
           </p>
           <p>account/main:</p>
           <input
@@ -135,10 +134,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'navigation.account.main',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].navigation.account.main}
+            {current} {labels[lang].navigation.account.main}
           </p>
           <p>account/menu/signIn:</p>
           <input
@@ -148,10 +146,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'navigation.account.menu.signIn',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].navigation.account.menu.signIn}
+            {current} {labels[lang].navigation.account.menu.signIn}
           </p>
           <p>account/menu/signUp:</p>
           <input
@@ -161,10 +158,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'navigation.account.menu.signUp',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].navigation.account.menu.signUp}
+            {current} {labels[lang].navigation.account.menu.signUp}
           </p>
           <p>account/menu/logOut:</p>
           <input
@@ -174,10 +170,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'navigation.account.menu.logOut',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].navigation.account.menu.logOut}
+            {current} {labels[lang].navigation.account.menu.logOut}
           </p>
           <p>lang:</p>
           <input
@@ -187,10 +182,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'navigation.lang',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].navigation.lang}
+            {current} {labels[lang].navigation.lang}
           </p>
         </div>
 
@@ -205,10 +199,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.admin.title',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.admin.title}
+            {current} {labels[lang].pages.admin.title}
           </p>
           <p>navigation/addProduct: </p>
           <input
@@ -218,10 +211,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.admin.navigation.addProduct',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.admin.navigation.addProduct}
+            {current} {labels[lang].pages.admin.navigation.addProduct}
           </p>
           <p>navigation/galleryImages: </p>
           <input
@@ -231,10 +223,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.admin.navigation.galleryImages',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.admin.navigation.galleryImages}
+            {current} {labels[lang].pages.admin.navigation.galleryImages}
           </p>
           <p>navigation/labels: </p>
           <input
@@ -244,10 +235,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.admin.navigation.labels',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.admin.navigation.labels}
+            {current} {labels[lang].pages.admin.navigation.labels}
           </p>
           <p>addProductForm/available/title: </p>
           <input
@@ -257,10 +247,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.admin.addProductForm.available.title',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value:{' '}
+            {current}{' '}
             {labels[lang].pages.admin.addProductForm.available.title}
           </p>
           <p>addProductForm/available/option1: </p>
@@ -271,10 +260,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.admin.addProductForm.available.option1',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value:{' '}
+            {current}{' '}
             {labels[lang].pages.admin.addProductForm.available.option1}
           </p>
           <p>addProductForm/available/option2: </p>
@@ -285,10 +273,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.admin.addProductForm.available.option2',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value:{' '}
+            {current}{' '}
             {labels[lang].pages.admin.addProductForm.available.option2}
           </p>
           <p>addProductForm/title: </p>
@@ -299,10 +286,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.admin.addProductForm.title',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.admin.addProductForm.title}
+            {current} {labels[lang].pages.admin.addProductForm.title}
           </p>
           <p>addProductForm/title_ua: </p>
           <input
@@ -312,10 +298,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.admin.addProductForm.title_ua',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.admin.addProductForm.title_ua}
+            {current} {labels[lang].pages.admin.addProductForm.title_ua}
           </p>
           <p>addProductForm/images: </p>
           <input
@@ -325,10 +310,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.admin.addProductForm.images',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.admin.addProductForm.images}
+            {current} {labels[lang].pages.admin.addProductForm.images}
           </p>
           <p>addProductForm/price: </p>
           <input
@@ -338,10 +322,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.admin.addProductForm.price',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.admin.addProductForm.price}
+            {current} {labels[lang].pages.admin.addProductForm.price}
           </p>
           <p>addProductForm/description: </p>
           <input
@@ -351,10 +334,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.admin.addProductForm.description',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.admin.addProductForm.description}
+            {current} {labels[lang].pages.admin.addProductForm.description}
           </p>
           <p>addProductForm/description_ua: </p>
           <input
@@ -364,10 +346,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.admin.addProductForm.description_ua',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value:{' '}
+            {current}{' '}
             {labels[lang].pages.admin.addProductForm.description_ua}
           </p>
           <p>addGalleryImageForm/info/restriction: </p>
@@ -378,10 +359,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.admin.addGalleryImageForm.info.restriction',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value:{' '}
+            {current}{' '}
             {labels[lang].pages.admin.addGalleryImageForm.info.restriction}
           </p>
           <p>addGalleryImageForm/info/totalImagesNumber: </p>
@@ -392,10 +372,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.admin.addGalleryImageForm.info.totalImagesNumber',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value:{' '}
+            {current}{' '}
             {
               labels[lang].pages.admin.addGalleryImageForm.info
                 .totalImagesNumber
@@ -409,36 +388,33 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.admin.addGalleryImageForm.add',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.admin.addGalleryImageForm.add}
+            {current} {labels[lang].pages.admin.addGalleryImageForm.add}
           </p>
-          <p className="red">changeLabelsForm/change: </p>
+          <p>changeLabelsForm/change: </p>
           <input
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'pages.admin.changeLabelsForm.change',
+              'pages.admin.change',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.admin.changeLabelsForm.change}
+            {current} {labels[lang].pages.admin.change}
           </p>
-          <p className="red">changeLabelsForm/current: </p>
+          <p>changeLabelsForm/current: </p>
           <input
             type="text"
             onChange={this.props.changeOption!.bind(
               this.props,
-              'pages.admin.changeLabelsForm.current',
+              'pages.admin.current',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.admin.changeLabelsForm.current}
+            {current} {labels[lang].pages.admin.current}
           </p>
         </div>
 
@@ -453,10 +429,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.shop.notAvailable',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.shop.notAvailable}
+            {current} {labels[lang].pages.shop.notAvailable}
           </p>
           <p>sort/main:</p>
           <input
@@ -466,10 +441,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.shop.sort.main',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.shop.sort.main}
+            {current} {labels[lang].pages.shop.sort.main}
           </p>
           <p>sort/btn/byName:</p>
           <input
@@ -479,10 +453,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.shop.sort.btn.byName',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.shop.sort.btn.byName}
+            {current} {labels[lang].pages.shop.sort.btn.byName}
           </p>
           <p>sort/btn/byPrice:</p>
           <input
@@ -492,10 +465,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.shop.sort.btn.byPrice',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.shop.sort.btn.byPrice}
+            {current} {labels[lang].pages.shop.sort.btn.byPrice}
           </p>
           <p>filter/main:</p>
           <input
@@ -505,10 +477,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.shop.filter.main',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.shop.filter.main}
+            {current} {labels[lang].pages.shop.filter.main}
           </p>
           <p>filter/available:</p>
           <input
@@ -518,10 +489,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.shop.filter.available',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.shop.filter.available}
+            {current} {labels[lang].pages.shop.filter.available}
           </p>
           <p>filter/price:</p>
           <input
@@ -531,10 +501,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.shop.filter.price',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.shop.filter.price}
+            {current} {labels[lang].pages.shop.filter.price}
           </p>
           <p>filter/priceInputs/from:</p>
           <input
@@ -544,10 +513,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.shop.filter.priceInputs.from',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.shop.filter.priceInputs.from}
+            {current} {labels[lang].pages.shop.filter.priceInputs.from}
           </p>
           <p>filter/priceInputs/to:</p>
           <input
@@ -557,10 +525,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.shop.filter.priceInputs.to',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.shop.filter.priceInputs.to}
+            {current} {labels[lang].pages.shop.filter.priceInputs.to}
           </p>
           <p>cart/empty:</p>
           <input
@@ -570,10 +537,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.shop.cart.empty',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.shop.cart.empty}
+            {current} {labels[lang].pages.shop.cart.empty}
           </p>
           <p>cart/btn:</p>
           <input
@@ -583,10 +549,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.shop.cart.btn',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.shop.cart.btn}
+            {current} {labels[lang].pages.shop.cart.btn}
           </p>
           <p>cart/title:</p>
           <input
@@ -596,10 +561,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.shop.cart.title',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.shop.cart.title}
+            {current} {labels[lang].pages.shop.cart.title}
           </p>
           <p>cart/amount:</p>
           <input
@@ -609,10 +573,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.shop.cart.amount',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.shop.cart.amount}
+            {current} {labels[lang].pages.shop.cart.amount}
           </p>
           <p>cart/price:</p>
           <input
@@ -622,10 +585,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.shop.cart.price',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.shop.cart.price}
+            {current} {labels[lang].pages.shop.cart.price}
           </p>
           <p>cart/total:</p>
           <input
@@ -635,10 +597,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.shop.cart.total',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.shop.cart.total}
+            {current} {labels[lang].pages.shop.cart.total}
           </p>
           <p>cart/orderBtn:</p>
           <input
@@ -648,10 +609,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.shop.cart.orderBtn',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.shop.cart.orderBtn}
+            {current} {labels[lang].pages.shop.cart.orderBtn}
           </p>
         </div>
 
@@ -665,10 +625,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.gallery.main',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.gallery.main}
+            {current} {labels[lang].pages.gallery.main}
           </p>
         </div>
 
@@ -683,10 +642,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.contacts.map',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.contacts.map}
+            {current} {labels[lang].pages.contacts.map}
           </p>
           <p>info:</p>
           <input
@@ -696,10 +654,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.contacts.info',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.contacts.info}
+            {current} {labels[lang].pages.contacts.info}
           </p>
         </div>
 
@@ -714,10 +671,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.auth.email',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.auth.email}
+            {current} {labels[lang].pages.auth.email}
           </p>
           <p>password:</p>
           <input
@@ -727,10 +683,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.auth.password',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.auth.password}
+            {current} {labels[lang].pages.auth.password}
           </p>
           <p>btn:</p>
           <input
@@ -740,10 +695,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.auth.btn',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.auth.btn}
+            {current} {labels[lang].pages.auth.btn}
           </p>
           <p>alternative:</p>
           <input
@@ -753,10 +707,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.auth.alternative',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.auth.alternative}
+            {current} {labels[lang].pages.auth.alternative}
           </p>
           <p>isAuth/main:</p>
           <input
@@ -766,10 +719,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.auth.isAuth.main',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.auth.isAuth.main}
+            {current} {labels[lang].pages.auth.isAuth.main}
           </p>
           <p>isAuth/sub:</p>
           <input
@@ -779,10 +731,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.auth.isAuth.sub',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.auth.isAuth.sub}
+            {current} {labels[lang].pages.auth.isAuth.sub}
           </p>
           <p>signup/google:</p>
           <input
@@ -792,10 +743,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.auth.signup.google',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.auth.signup.google}
+            {current} {labels[lang].pages.auth.signup.google}
           </p>
           <p>signup/facebook:</p>
           <input
@@ -805,10 +755,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.auth.signup.facebook',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.auth.signup.facebook}
+            {current} {labels[lang].pages.auth.signup.facebook}
           </p>
           <p>signup/account:</p>
           <input
@@ -818,10 +767,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.auth.signup.account',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.auth.signup.account}
+            {current} {labels[lang].pages.auth.signup.account}
           </p>
           <p>signup/btn:</p>
           <input
@@ -831,10 +779,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.auth.signup.btn',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.auth.signup.btn}
+            {current} {labels[lang].pages.auth.signup.btn}
           </p>
           <p>signin/google:</p>
           <input
@@ -844,10 +791,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.auth.signin.google',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.auth.signin.google}
+            {current} {labels[lang].pages.auth.signin.google}
           </p>
           <p>signin/facebook:</p>
           <input
@@ -857,10 +803,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.auth.signin.facebook',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.auth.signin.facebook}
+            {current} {labels[lang].pages.auth.signin.facebook}
           </p>
           <p>signin/account:</p>
           <input
@@ -870,10 +815,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.auth.signin.account',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.auth.signin.account}
+            {current} {labels[lang].pages.auth.signin.account}
           </p>
           <p>signin/btn:</p>
           <input
@@ -883,10 +827,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.auth.signin.btn',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.auth.signin.btn}
+            {current} {labels[lang].pages.auth.signin.btn}
           </p>
         </div>
 
@@ -900,10 +843,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.pageNotFound',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.pageNotFound}
+            {current} {labels[lang].pages.pageNotFound}
           </p>
         </div>
 
@@ -918,10 +860,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.productDetails.description',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.productDetails.description}
+            {current} {labels[lang].pages.productDetails.description}
           </p>
           <p>only:</p>
           <input
@@ -931,10 +872,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.productDetails.only',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.productDetails.only}
+            {current} {labels[lang].pages.productDetails.only}
           </p>
           <p>notAvailable:</p>
           <input
@@ -944,10 +884,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.productDetails.notAvailable',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.productDetails.notAvailable}
+            {current} {labels[lang].pages.productDetails.notAvailable}
           </p>
           <p>facebookShare:</p>
           <input
@@ -957,10 +896,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.productDetails.facebookShare',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.productDetails.facebookShare}
+            {current} {labels[lang].pages.productDetails.facebookShare}
           </p>
           <p>goShopping:</p>
           <input
@@ -970,10 +908,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'pages.productDetails.goShopping',
               lang as string
             )}
-            required
           />
           <p className="current">
-            Current value: {labels[lang].pages.productDetails.goShopping}
+            {current} {labels[lang].pages.productDetails.goShopping}
           </p>
         </div>
 
@@ -987,13 +924,14 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               'footer',
               lang as string
             )}
-            required
           />
-          <p className="current">Current value: {labels[lang].footer}</p>
+          <p className="current">{current} {labels[lang].footer}</p>
         </div>
       </div>
     );
   }
 }
+
+FormContent.contextType = AppContext;
 
 export default FormContent;
