@@ -3,12 +3,28 @@ import firebase from 'firebase';
 
 import './Admin.less';
 import { AppContext } from '../../AppContext';
-import { RouteComponentProps, withRouter, Redirect } from 'react-router';
+import { RouteComponentProps as RCProps, withRouter, Redirect } from 'react-router';
 import AddProduct from './AddProduct/AddProduct';
 import AddGalleryImage from './AddGalleryImage/AddGalleryImage';
 import ChangeLabels from './ChangeLabels/ChangeLabels';
 import ChangeContacts from './ChangeContacts/ChangeContacts';
 import ChangeURLs from './ChangeURLs/ChangeURLs';
+interface MatchParams {
+  mode: string;
+}
+
+interface Props extends RouteComponentProps<MatchParams> {}
+
+interface RouteComponentProps<P> {
+  match: match<P>;
+}
+
+interface match<P> {
+  params: P;
+  isExact: boolean;
+  path: string;
+  url: string;
+}
 
 interface AdminState {
   mode:
@@ -20,8 +36,18 @@ interface AdminState {
     | 'configurate-contacts';
 }
 
-class Admin extends Component<RouteComponentProps<{}>, AdminState> {
-  constructor(props: RouteComponentProps<{}>) {
+class Admin extends Component<RouteComponentProps<MatchParams> & RCProps<{}>, AdminState> {
+
+  public static getDerivedStateFromProps(
+    props: RouteComponentProps<MatchParams> & RCProps<{}>,
+    state: AdminState
+  ) {
+    return {
+      mode: props.match.params.mode
+    };
+  }
+
+  constructor(props: RouteComponentProps<MatchParams> & RCProps<{}>) {
     super(props);
     this.state = {
       mode: 'add-product'
@@ -37,9 +63,8 @@ class Admin extends Component<RouteComponentProps<{}>, AdminState> {
       | 'configurate-urls'
       | 'configurate-contacts'
   ) => {
-    this.setState({
-      mode
-    });
+    (this.props as RouteComponentProps<MatchParams> &
+      RCProps<{}>).history.replace(`${mode}`);
   };
 
   public render() {
@@ -130,4 +155,4 @@ class Admin extends Component<RouteComponentProps<{}>, AdminState> {
 
 Admin.contextType = AppContext;
 
-export default withRouter<RouteComponentProps<{}>>(Admin);
+export default withRouter<RouteComponentProps<MatchParams> & RCProps<{}>>(Admin);

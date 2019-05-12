@@ -104,11 +104,18 @@ class ProductCard extends Component<CartItem, ProductCardState> {
         </div>
       </div>
     );
+
+    const adminIcons = context.state.userRole === 'admin' ? <div className="adminIcons">
+      <NavLink to={`/admin/edit-product?id=${id}`}><i className="far fa-edit" /></NavLink>
+      <i className="far fa-trash-alt" />
+    </div> : null;
+
     return (
       <AppContext.Consumer>
         {value =>
           value && (
             <div className="ProductCard">
+              {adminIcons}
               <NavLink to={`/product-details/${id}`}>
                 <i className="fas fa-info-circle info" />
               </NavLink>

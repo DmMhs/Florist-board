@@ -94,7 +94,7 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                     ) : null}
 
                     {value.state.userRole === 'admin' ? (
-                      <NavLink to="/admin">
+                      <NavLink to="/admin/add-product">
                         <i className="fas fa-users-cog" />
                       </NavLink>
                     ) : null}

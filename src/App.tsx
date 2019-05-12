@@ -115,7 +115,7 @@ class App extends Component<AppProps, AppState> {
               <Route path="/shop" component={Shop} />
               <Route path="/gallery" component={Gallery} />
               <Route path="/contacts" component={Contacts} />
-              <Route path="/admin" component={Admin} />
+              <Route path="/admin/:mode" exact component={Admin} />
               <Route path="/product-details/:id" component={ProductDetails} />
               <Route path="/auth/:mode" component={Auth} />
               <Route component={PageNotFound} />
