@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import './Modal.less';
-import LeftArrow from '../../Slider/LeftArrow/LeftArrow';
-import RightArrow from '../../Slider/RightArrow/RightArrow';
+import LeftArrow from '../../../components/Slider/LeftArrow/LeftArrow';
+import RightArrow from '../../../components/Slider/RightArrow/RightArrow';
 
 interface ModalProps {
   images: JSX.Element[];

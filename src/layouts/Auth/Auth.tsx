@@ -6,7 +6,7 @@ import {
   RouteComponentProps as RCProps,
   NavLink
 } from 'react-router-dom';
-import Popup from '../Popup/Popup';
+import { Popup } from '../../components';
 import { AppContext } from '../../AppContext';
 import { userRole } from '../../services/userRole';
 import './Auth.less';

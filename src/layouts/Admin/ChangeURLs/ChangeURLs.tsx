@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { database } from '../../../firebase';
 import { AppContext } from '../../../AppContext';
-import Spinner from '../../Spinner/Spinner';
+import {Spinner} from '../../../components';
 import { createObjectPath } from '../../../services/createObjectPath';
 import './ChangeURLs.less';
 

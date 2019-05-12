@@ -2,19 +2,18 @@ import React, { Component, RefObject } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './App.less';
-import Header from './components/Header/Header';
-import Shop from './components/Shop/Shop';
-import Gallery from './components/Gallery/Gallery';
-import Contacts from './components/Contacts/Contacts';
-import Home from './components/Home/Home';
+import Header from './layouts/Header/Header';
+import Shop from './layouts/Shop/Shop';
+import Gallery from './layouts/Gallery/Gallery';
+import Contacts from './layouts/Contacts/Contacts';
+import Home from './layouts/Home/Home';
 import Toggle from './components/Toggle/Toggle';
-import ProductDetails from './components/ProductList/ProductDetails/ProductDetails';
-import Auth from './components/Auth/Auth';
+import ProductDetails from './layouts/ProductList/ProductDetails/ProductDetails';
+import Auth from './layouts/Auth/Auth';
 import AppContextProvider from './AppContext';
-import Footer from './components/Footer/Footer';
-import PageNotFound from './components/PageNotFound/PageNotFound';
-import Admin from './components/Admin/Admin';
-import { database } from './firebase';
+import Footer from './layouts/Footer/Footer';
+import PageNotFound from './layouts/PageNotFound/PageNotFound';
+import Admin from './layouts/Admin/Admin';
 
 interface AppProps {}
 interface AppState {

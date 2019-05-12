@@ -7,7 +7,7 @@ import ProductsFilter from './ProductsFilter/ProductsFilter';
 import ProductsSort from './ProductsSort/ProductsSort';
 import sortByName from '../../services/sortByName';
 import sortByPrice from '../../services/sortByPrice';
-import Popup from '../Popup/Popup';
+import {Popup} from '../../components';
 import { AppContext } from '../../AppContext';
 import labels from '../../config/labels';
 

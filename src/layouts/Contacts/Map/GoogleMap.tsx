@@ -1,7 +1,7 @@
 import React, { Component, RefObject } from 'react';
 
+import {Spinner} from '../../../components';
 import './GoogleMap.less';
-import Spinner from '../../Spinner/Spinner';
 
 interface GoogleMapProps {
   url: string;

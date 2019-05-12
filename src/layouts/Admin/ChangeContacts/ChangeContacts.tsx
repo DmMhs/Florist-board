@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 
 import { database } from '../../../firebase';
 import { AppContext } from '../../../AppContext';
-import Spinner from '../../Spinner/Spinner';
+import {Spinner} from '../../../components';
 import { createObjectPath } from '../../../services/createObjectPath';
 import './ChangeContacts.less';
-import { contacts } from '../../../config/contacts';
-import { urls } from '../../../config/urls';
 
 interface ChangeContactsProps {}
 interface ChangeContactsState {

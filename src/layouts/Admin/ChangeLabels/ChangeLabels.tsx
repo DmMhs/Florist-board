@@ -5,7 +5,7 @@ import { AppContext } from '../../../AppContext';
 import { database } from '../../../firebase';
 import { Labels } from '../../../models/Labels';
 import { urls } from '../../../config/urls';
-import Spinner from '../../Spinner/Spinner';
+import {Spinner} from '../../../components';
 import FormContent from './FormContent/FormContent';
 import { createObjectPath } from '../../../services/createObjectPath';
 

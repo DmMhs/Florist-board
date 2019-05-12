@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 import { galleryImagesRef } from '../../firebase';
-import Spinner from '../Spinner/Spinner';
+import {Spinner} from '../../components';
 import Modal from './Modal/Modal';
 import { AppContext } from '../../AppContext';
 import './Gallery.less';

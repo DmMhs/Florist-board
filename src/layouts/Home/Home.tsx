@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import Slider from '../Slider/Slider';
 
 import { homeImagesRef } from '../../firebase';
-
+import Spinner from '../../components/Spinner/Spinner';
+import Slider from '../../components/Slider/Slider';
 import './Home.less';
-import Spinner from '../Spinner/Spinner';
 
 interface HomeProps {}
 

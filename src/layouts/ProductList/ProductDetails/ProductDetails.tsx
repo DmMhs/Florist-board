@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import Spinner from '../../Spinner/Spinner';
+import {Spinner} from '../../../components';
 import { Product } from '../../../models/Product';
 import { productsRef } from '../../../firebase';
 import { AppContext } from '../../../AppContext';

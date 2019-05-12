@@ -1,7 +1,7 @@
 import React, { Component, RefObject } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import Slider from '../../Slider/Slider';
+import {Slider} from '../../../components';
 import { CartItem } from '../../../models/CartItem';
 import { AppContext } from '../../../AppContext';
 import { productsRef } from '../../../firebase';

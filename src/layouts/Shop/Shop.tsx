@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { productsRef } from '../../firebase';
 import { Product } from '../../models/Product';
-import Spinner from '../Spinner/Spinner';
+import {Spinner}  from '../../components';
 import ProductList from '../ProductList/ProductList';
 import { CartItem } from '../../models/CartItem';
 
