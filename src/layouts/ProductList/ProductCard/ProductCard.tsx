@@ -1,11 +1,12 @@
 import React, { Component, RefObject } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import {Slider} from '../../../components';
+import { Slider } from '../../../components';
 import { CartItem } from '../../../models/CartItem';
 import { AppContext } from '../../../AppContext';
 import { productsRef } from '../../../firebase';
 import './ProductCard.less';
+import { deleteProduct } from '../../../services/deleteProduct';
 
 declare global {
   interface Window {
@@ -105,10 +106,18 @@ class ProductCard extends Component<CartItem, ProductCardState> {
       </div>
     );
 
-    const adminIcons = context.state.userRole === 'admin' ? <div className="adminIcons">
-      <NavLink to={`/admin/edit-product?id=${id}`}><i className="far fa-edit" /></NavLink>
-      <i className="far fa-trash-alt" />
-    </div> : null;
+    const adminIcons =
+      context.state.userRole === 'admin' ? (
+        <div className="adminIcons">
+          <NavLink to={`/admin/edit-product?id=${id}`}>
+            <i className="far fa-edit" />
+          </NavLink>
+          <i
+            className="far fa-trash-alt"
+            onClick={deleteProduct.bind(this, id, title)}
+          />
+        </div>
+      ) : null;
 
     return (
       <AppContext.Consumer>
@@ -129,9 +138,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
               <div className="image">
                 <Slider images={images} auto={false} showControls={true} />
               </div>
-              <div className="title">
-                {lang === 'en' ? title : title_uk}
-              </div>
+              <div className="title">{lang === 'en' ? title : title_uk}</div>
               {available === true ? (
                 <div className="price">
                   {price}
