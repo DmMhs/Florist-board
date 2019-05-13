@@ -21,15 +21,36 @@
       -ms-flex: 25%; /* IE10 */
       flex: 25%;
       max-width: 25%;
-      img {
+      .img-wrapper {
         position: relative;
-        width: calc(100% - 8px);
-        margin-top: 8px;
-        vertical-align: middle;
-        border: 1px solid #eee;
-        &:hover {
-          cursor: pointer;
-          box-shadow: 1px 1px 3px #ccc;
+        .adminIcons {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          margin: 0 auto;
+          background-color: whitesmoke;
+          border-radius: 5px;
+          z-index: 1;
+          i {
+            margin: 5px 7px;
+            color: #333333;
+            font-size: 1.2rem;
+            cursor: pointer;
+            &:hover {
+              color: #696868;
+            }
+          }
+        }
+        img {
+          position: relative;
+          width: calc(100% - 8px);
+          margin-top: 8px;
+          vertical-align: middle;
+          border: 1px solid #eee;
+          &:hover {
+            cursor: pointer;
+            box-shadow: 1px 1px 3px #ccc;
+          }
         }
       }
     }

@@ -3,7 +3,11 @@ import firebase from 'firebase';
 
 import './Admin.less';
 import { AppContext } from '../../AppContext';
-import { RouteComponentProps as RCProps, withRouter, Redirect } from 'react-router';
+import {
+  RouteComponentProps as RCProps,
+  withRouter,
+  Redirect
+} from 'react-router';
 import AddProduct from './AddProduct/AddProduct';
 import AddGalleryImage from './AddGalleryImage/AddGalleryImage';
 import ChangeLabels from './ChangeLabels/ChangeLabels';
@@ -31,13 +35,15 @@ interface AdminState {
     | 'add-product'
     | 'edit-product'
     | 'configurate-gallery'
-    | 'configurate-labels' 
-    | 'configurate-urls' 
+    | 'configurate-labels'
+    | 'configurate-urls'
     | 'configurate-contacts';
 }
 
-class Admin extends Component<RouteComponentProps<MatchParams> & RCProps<{}>, AdminState> {
-
+class Admin extends Component<
+  RouteComponentProps<MatchParams> & RCProps<{}>,
+  AdminState
+> {
   public static getDerivedStateFromProps(
     props: RouteComponentProps<MatchParams> & RCProps<{}>,
     state: AdminState
@@ -80,7 +86,7 @@ class Admin extends Component<RouteComponentProps<MatchParams> & RCProps<{}>, Ad
         form = <AddProduct />;
         break;
       case 'edit-product':
-        form = <h3>Edit Product Form</h3>;
+        form = <AddProduct editModeEnabled={true} />;
         break;
       case 'configurate-gallery':
         form = <AddGalleryImage />;
@@ -93,7 +99,7 @@ class Admin extends Component<RouteComponentProps<MatchParams> & RCProps<{}>, Ad
         break;
       case 'configurate-contacts':
         form = <ChangeContacts />;
-        break;  
+        break;
       default:
         form = <h3>Hm...</h3>;
     }
@@ -128,15 +134,16 @@ class Admin extends Component<RouteComponentProps<MatchParams> & RCProps<{}>, Ad
                   </a>
                 </li>
                 <li>
-                  <a
-                    onClick={this.switchModeTo.bind(this, 'configurate-urls')}
-                  >
+                  <a onClick={this.switchModeTo.bind(this, 'configurate-urls')}>
                     {labelsRoot.navigation.urls}
                   </a>
                 </li>
                 <li>
                   <a
-                    onClick={this.switchModeTo.bind(this, 'configurate-contacts')}
+                    onClick={this.switchModeTo.bind(
+                      this,
+                      'configurate-contacts'
+                    )}
                   >
                     {labelsRoot.navigation.contacts}
                   </a>
@@ -155,4 +162,6 @@ class Admin extends Component<RouteComponentProps<MatchParams> & RCProps<{}>, Ad
 
 Admin.contextType = AppContext;
 
-export default withRouter<RouteComponentProps<MatchParams> & RCProps<{}>>(Admin);
+export default withRouter<RouteComponentProps<MatchParams> & RCProps<{}>>(
+  Admin
+);

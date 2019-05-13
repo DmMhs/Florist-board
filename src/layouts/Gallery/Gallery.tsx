@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 import { galleryImagesRef } from '../../firebase';
-import {Spinner} from '../../components';
+import { Spinner } from '../../components';
 import Modal from './Modal/Modal';
 import { AppContext } from '../../AppContext';
 import './Gallery.less';
@@ -72,21 +72,29 @@ class Gallery extends Component<RouteComponentProps<{}>, GalleryState> {
   };
 
   public render() {
+    const context = this.context;
+    const adminIcons =
+      context.state.userRole === 'admin' ? (
+        <div className="adminIcons">
+          <i className="far fa-trash-alt" />
+        </div>
+      ) : null;
     const imagesList = this.state.images.map(
       (imageUrl: string, index: number) => {
         return (
-          <img
-            src={imageUrl}
-            alt={`gallery-img-${index}`}
-            key={index}
-            onClick={this.imageClickedHandler.bind(this, index)}
-            className="image"
-          />
+          <div className="img-wrapper" key={index}>
+            {adminIcons}
+            <img
+              src={imageUrl}
+              alt={`gallery-img-${index}`}
+              onClick={this.imageClickedHandler.bind(this, index)}
+              className="image"
+            />
+          </div>
         );
       }
     );
 
-    const context = this.context;
     const labels = context.state.labels;
     const lang = context.state.lang;
 
