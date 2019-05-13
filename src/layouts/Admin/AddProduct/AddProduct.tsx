@@ -200,34 +200,22 @@ class AddProduct extends Component<
         .child(this.state.productId as string)
         .child('images')
         .remove()
-        .then(response => {
-          console.log('2');
-        })
         .catch(err => console.log(err));
-
-      console.log('NEW PRODUCT!');
-      console.log({ ...newProduct });
 
       await productsRef
         .child(this.state.productId as string)
         .set({ ...newProduct })
-        .then(response => {
-          console.log('3');
-        })
         .catch(err => console.log(err));
 
       await Promise.all(
         images.map(async (image: File) => {
-          console.log(image);
           const file = (image as any)[0];
           const formattedFileName = (image as any)[0].name.split('.')[0];
-          console.log('ffname: ' + formattedFileName);
           await storageRef
             .child('products-images')
             .child(newProduct.title.toLowerCase())
             .child(formattedFileName)
             .put(file)
-            .then(response => console.log(4))
             .catch(err => {
               console.log(err);
             });
@@ -238,7 +226,6 @@ class AddProduct extends Component<
             .child(formattedFileName)
             .getDownloadURL()
             .catch(err => console.log(err));
-          console.log(imageURL);
           imageURLs.push(imageURL);
         })
       );
@@ -256,7 +243,6 @@ class AddProduct extends Component<
         .push(newProduct)
         .then(response => {
           productKey = response.key as string;
-          console.log(productKey);
         })
         .catch(err => {
           console.log(err);

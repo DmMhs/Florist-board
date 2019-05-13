@@ -8,8 +8,6 @@ export const deleteProductImagesByIdAndFolderName = (
     .child(id)
     .once('value')
     .then(snapshot => {
-      console.log('1');
-      console.log(snapshot!.val());
       const images = snapshot!.val().images;
       images.map(async (image: string) => {
         const rawName = storageRef
@@ -23,9 +21,6 @@ export const deleteProductImagesByIdAndFolderName = (
           .child(folderName)
           .child(readyName)
           .delete()
-          .then(response => {
-            console.log(readyName + ' DELETED!');
-          })
           .catch(err => {
             console.log(err);
           });

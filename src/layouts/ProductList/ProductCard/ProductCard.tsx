@@ -114,7 +114,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
           </NavLink>
           <i
             className="far fa-trash-alt"
-            onClick={deleteProduct.bind(this, id, title)}
+            onClick={deleteProduct.bind(this, id, title.toLowerCase())}
           />
         </div>
       ) : null;
