@@ -74,7 +74,6 @@ class ProductCard extends Component<CartItem, ProductCardState> {
   };
 
   public render() {
-    console.log(this.props);
     const {
       id,
       images,

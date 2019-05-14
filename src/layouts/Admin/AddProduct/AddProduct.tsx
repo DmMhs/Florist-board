@@ -297,8 +297,6 @@ class AddProduct extends Component<
     const editModeEnabled = this.props.editModeEnabled;
     let editProductForm: JSX.Element;
 
-    console.log(this.state.images);
-
     if (editModeEnabled === true) {
       const editAvailable = this.state.available;
       const editTitleUA = this.state.title_ua;
