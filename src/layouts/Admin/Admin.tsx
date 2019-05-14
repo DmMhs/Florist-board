@@ -111,12 +111,18 @@ class Admin extends Component<
               <h1>{labelsRoot.title}</h1>
               <hr />
               <ul className="admin-actions">
-                <li>
+                <li
+                  className={this.state.mode === 'add-product' ? 'active' : ''}
+                >
                   <a onClick={this.switchModeTo.bind(this, 'add-product')}>
                     {labelsRoot.navigation.addProduct}
                   </a>
                 </li>
-                <li>
+                <li
+                  className={
+                    this.state.mode === 'configurate-gallery' ? 'active' : ''
+                  }
+                >
                   <a
                     onClick={this.switchModeTo.bind(
                       this,
@@ -126,19 +132,31 @@ class Admin extends Component<
                     {labelsRoot.navigation.galleryImages}
                   </a>
                 </li>
-                <li>
+                <li
+                  className={
+                    this.state.mode === 'configurate-labels' ? 'active' : ''
+                  }
+                >
                   <a
                     onClick={this.switchModeTo.bind(this, 'configurate-labels')}
                   >
                     {labelsRoot.navigation.labels}
                   </a>
                 </li>
-                <li>
+                <li
+                  className={
+                    this.state.mode === 'configurate-urls' ? 'active' : ''
+                  }
+                >
                   <a onClick={this.switchModeTo.bind(this, 'configurate-urls')}>
                     {labelsRoot.navigation.urls}
                   </a>
                 </li>
-                <li>
+                <li
+                  className={
+                    this.state.mode === 'configurate-contacts' ? 'active' : ''
+                  }
+                >
                   <a
                     onClick={this.switchModeTo.bind(
                       this,

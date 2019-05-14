@@ -34,16 +34,31 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
     if ((this.props as RouteComponentProps<{}>).history !== undefined) {
       (this.props as RouteComponentProps<{}>).history.push('/');
     }
+    if (value.state.mobileMode === true) {
+      value.hideNavigation();
+    }
   };
 
   private langBtnClickedHandler = () => {
     this.langOptionsRef.current!.classList.toggle('show');
     this.langOptionsToggleRef.current!.classList.toggle('active');
   };
+
   private langOptionClickedHandler = (option: string) => {
     const context = this.context;
     context.setLang(option);
+    if (context.state.mobileMode === true) {
+      context.hideNavigation();
+    }
   };
+
+  private navigationItemClickedHandler = () => {
+    const context = this.context;
+    if (context.state.mobileMode === true) {
+      context.hideNavigation();
+    }
+  };
+
   public render() {
     const context = this.context;
     const lang = context.state.lang;
@@ -56,22 +71,22 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
           {value =>
             value && (
               <ul>
-                <li>
+                <li onClick={this.navigationItemClickedHandler}>
                   <NavLink to="/" exact={true}>
                     {labelsRoot.home} <i className="fas fa-home" />
                   </NavLink>
                 </li>
-                <li>
+                <li onClick={this.navigationItemClickedHandler}>
                   <NavLink to="/shop">
                     {labelsRoot.shop} <i className="fas fa-leaf" />
                   </NavLink>
                 </li>
-                <li>
+                <li onClick={this.navigationItemClickedHandler}>
                   <NavLink to="/gallery">
                     {labelsRoot.gallery} <i className="far fa-image" />
                   </NavLink>
                 </li>
-                <li>
+                <li onClick={this.navigationItemClickedHandler}>
                   <NavLink to="/contacts">
                     {labelsRoot.contacts}{' '}
                     <i className="fas fa-map-marker-alt" />
@@ -94,8 +109,12 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
                     ) : null}
 
                     {value.state.userRole === 'admin' ? (
-                      <div>
-                        <NavLink to="/admin/add-product" className="admin">
+                      <div className="admin-wrapper">
+                        <NavLink
+                          to="/admin/add-product"
+                          className="admin"
+                          onClick={this.navigationItemClickedHandler}
+                        >
                           <i className="fas fa-users-cog" />
                         </NavLink>
                       </div>
@@ -103,11 +122,19 @@ class Navigation extends Component<RouteComponentProps<{}>, NavigationState> {
 
                     {value.state.userAuthenticated === false ? (
                       <div>
-                        <NavLink to="/auth/signup" className="signup-link">
+                        <NavLink
+                          to="/auth/signup"
+                          className="signup-link"
+                          onClick={this.navigationItemClickedHandler}
+                        >
                           {labelsRoot.account.menu.signUp}{' '}
                           <i className="fas fa-user-plus" />
                         </NavLink>
-                        <NavLink to="/auth/signin" className="signin-link">
+                        <NavLink
+                          to="/auth/signin"
+                          className="signin-link"
+                          onClick={this.navigationItemClickedHandler}
+                        >
                           {labelsRoot.account.menu.signIn}{' '}
                           <i className="fas fa-sign-in-alt" />
                         </NavLink>

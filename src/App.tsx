@@ -1,7 +1,6 @@
 import React, { Component, RefObject } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import './App.less';
 import Header from './layouts/Header/Header';
 import Shop from './layouts/Shop/Shop';
 import Gallery from './layouts/Gallery/Gallery';
@@ -10,10 +9,11 @@ import Home from './layouts/Home/Home';
 import Toggle from './components/Toggle/Toggle';
 import ProductDetails from './layouts/ProductList/ProductDetails/ProductDetails';
 import Auth from './layouts/Auth/Auth';
-import AppContextProvider from './AppContext';
+import AppContextProvider, { AppContext } from './AppContext';
 import Footer from './layouts/Footer/Footer';
 import PageNotFound from './layouts/PageNotFound/PageNotFound';
 import Admin from './layouts/Admin/Admin';
+import './App.less';
 
 interface AppProps {}
 interface AppState {
@@ -52,6 +52,7 @@ class App extends Component<AppProps, AppState> {
     if (localStorage.floristUserRole === undefined) {
       localStorage.setItem('floristUserRole', '');
     }
+    const context = this.context;
     resizeListener = () => {
       if (this.toggleRef.current!.classList.contains('active')) {
         this.toggleRef.current!.classList.remove('active');
@@ -61,11 +62,15 @@ class App extends Component<AppProps, AppState> {
           showNavigation: false,
           togglePosition: 'absolute'
         });
+        context.hideNavigation();
+        context.enableMobileMode();
       } else {
         this.setState({
           showNavigation: true,
           togglePosition: 'absolute'
         });
+        context.showNavigation();
+        context.disableMobileMode();
       }
     };
     window.addEventListener('resize', resizeListener);
@@ -76,36 +81,27 @@ class App extends Component<AppProps, AppState> {
   }
 
   public toggleClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (!(event.target as HTMLDivElement).classList.contains('active')) {
-      this.setState({
-        showNavigation: !this.state.showNavigation,
-        togglePosition: 'fixed'
-      });
-    } else {
-      this.setState({
-        showNavigation: !this.state.showNavigation,
-        togglePosition: 'absolute'
-      });
-    }
+    const context = this.context;
+    context.toggleNavigation();
     (event.target as HTMLDivElement).classList.toggle('active');
   };
 
   public render() {
     return (
-      <BrowserRouter>
-        <AppContextProvider>
+      <AppContext.Consumer>
+        {value => (
           <div className="App">
             <Toggle
               click={this.toggleClickedHandler}
               style={{
                 position:
-                  this.state.togglePosition === 'absolute'
+                  value.state.togglePosition === 'absolute'
                     ? 'absolute'
                     : 'fixed'
               }}
               ref={this.toggleRef}
             />
-            {this.state.showNavigation ? <Header /> : null}
+            {value.state.showNavigation ? <Header /> : null}
             {localStorage.floristAuth !== undefined
               ? JSON.parse(localStorage.floristAuth).email
               : null}
@@ -122,10 +118,12 @@ class App extends Component<AppProps, AppState> {
             </Switch>
             <Footer />
           </div>
-        </AppContextProvider>
-      </BrowserRouter>
+        )}
+      </AppContext.Consumer>
     );
   }
 }
+
+App.contextType = AppContext;
 
 export default App;

@@ -81,7 +81,12 @@
     .log-out {
       color: #333333;
     }
-
+    .admin-wrapper {
+      .admin {
+        border-bottom-left-radius: 0%;
+        border-bottom-right-radius: 0%;
+      }
+    }
     a {
       background-color: #eee;
       border-radius: 0;
@@ -282,9 +287,11 @@
       .admin {
         width: 100%;
       }
-      .admin {
-        border-radius: 0%;
-        border: 1px solid red;
+      .admin-wrapper {
+        .admin {
+          border-bottom-left-radius: 0%;
+          border-bottom-right-radius: 0%;
+        }
       }
     }
     .langLink {
