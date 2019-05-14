@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import {Spinner} from '../../../components';
+import { Spinner } from '../../../components';
 import { Product } from '../../../models/Product';
 import { productsRef } from '../../../firebase';
 import { AppContext } from '../../../AppContext';
 import { BASE_URL } from '../../../config/main';
-import { shareOverrideOGMeta } from '../../../services/share'
+import { shareOverrideOGMeta } from '../../../services/share';
 
 import './ProductDetails.less';
 
@@ -40,13 +40,13 @@ class ProductDetails extends Component<
     this.state = {
       productData: {
         title: '',
-        title_uk: '',
+        title_ua: '',
         images: [],
         price: 0,
         currency: '',
         available: false,
         description: '',
-        description_uk: ''
+        description_ua: ''
       },
       fetchInProgress: false
     };
@@ -71,9 +71,9 @@ class ProductDetails extends Component<
   public render() {
     const {
       title,
-      title_uk,
+      title_ua,
       description,
-      description_uk,
+      description_ua,
       available,
       price,
       images
@@ -86,8 +86,7 @@ class ProductDetails extends Component<
     const context = this.context;
     const labels = context.state.labels;
     const lang = context.state.lang;
-    const labelsRoot =
-      labels[lang].pages.productDetails;
+    const labelsRoot = labels[lang].pages.productDetails;
 
     return (
       <AppContext.Consumer>
@@ -96,9 +95,7 @@ class ProductDetails extends Component<
             {this.state.fetchInProgress === false ? (
               <div>
                 <h1>
-                  {lang === 'en'
-                    ? title.toUpperCase()
-                    : title_uk.toUpperCase()}
+                  {lang === 'en' ? title.toUpperCase() : title_ua.toUpperCase()}
                 </h1>
                 <div className="product-info-wrapper">
                   <div className="image-wrapper">
@@ -123,10 +120,10 @@ class ProductDetails extends Component<
                           this,
                           BASE_URL +
                             `/product-details/${this.props.match.params.id}`,
-                          value.state.lang === 'en' ? title : title_uk,
+                          value.state.lang === 'en' ? title : title_ua,
                           value.state.lang === 'en'
                             ? (description as string)
-                            : (description_uk as string),
+                            : (description_ua as string),
                           images[0]
                         )}
                       >
@@ -148,9 +145,7 @@ class ProductDetails extends Component<
                   <div className="info">
                     <h2>{labelsRoot.description}</h2>
                     <hr />
-                    <p>
-                      {lang === 'en' ? description : description_uk}
-                    </p>
+                    <p>{lang === 'en' ? description : description_ua}</p>
                   </div>
                 </div>
               </div>

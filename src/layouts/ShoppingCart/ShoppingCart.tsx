@@ -92,7 +92,7 @@ class ShoppingCart extends Component<ShoppingCartProps, ShoppingCartState> {
             }
             images={i.images as string[]}
             title={i.title as string}
-            title_uk={i.title_uk as string}
+            title_ua={i.title_ua as string}
             id={i.id as string}
             amount={i.amount}
             cartItemPrice={cartItemPrice}

@@ -14,14 +14,14 @@ const ShoppingCartItem = (
     reduceAmount,
     images,
     title,
-    title_uk,
+    title_ua,
     id,
     amount,
     cartItemPrice,
     currency
   } = props;
   const context = useContext(AppContext);
-  const productTitle = context.state.lang === 'ua' ? title_uk : title;
+  const productTitle = context.state.lang === 'ua' ? title_ua : title;
   return (
     <li className="cart-item">
       <div
