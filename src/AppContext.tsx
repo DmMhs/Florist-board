@@ -14,6 +14,9 @@ export interface AppContextState {
   lang: string | null | undefined;
   labels: Labels;
   fetchInProgress: boolean;
+  showNavigation: boolean;
+  mobileMode: boolean;
+  togglePosition: 'absolute' | 'fixed';
 }
 
 export const AppContext = React.createContext({
@@ -27,8 +30,14 @@ export const AppContext = React.createContext({
     event?: Event
   ) => {},
   logout: () => {},
-  setLang: (lang: string | null) => {}
+  setLang: (lang: string | null) => {},
+  hideNavigation: () => {},
+  showNavigation: () => {},
+  enableMobileMode: () => {},
+  disableMobileMode: () => {},
+  toggleNavigation: () => {}
 });
+
 class AppContextProvider extends Component<
   RouteComponentProps<{}>,
   AppContextState
@@ -44,17 +53,23 @@ class AppContextProvider extends Component<
       authenticationMethod: undefined,
       lang: 'en',
       labels: {},
-      fetchInProgress: true
+      fetchInProgress: true,
+      mobileMode: window.innerWidth <= 768,
+      showNavigation: window.innerWidth > 768,
+      togglePosition: 'absolute'
     };
   }
   public componentDidMount() {
     // database.ref().child('labels').set(labels);
-    database.ref().child('labels').on('value', snapshot => {
-      this.setState({
-        labels: snapshot!.val(),
-        fetchInProgress: false
+    database
+      .ref()
+      .child('labels')
+      .on('value', snapshot => {
+        this.setState({
+          labels: snapshot!.val(),
+          fetchInProgress: false
+        });
       });
-    });
     if (
       localStorage.floristAuthToken === '' ||
       localStorage.floristAuthToken === undefined
@@ -123,15 +138,56 @@ class AppContextProvider extends Component<
     });
   };
 
+  private hideNavigationHandler = () => {
+    console.log('Hide Navigation!');
+    this.setState({
+      showNavigation: false,
+      togglePosition: 'absolute'
+    });
+  };
+
+  private showNavigationHandler = () => {
+    this.setState({
+      showNavigation: true,
+      togglePosition: 'fixed'
+    });
+  };
+
+  private enableMobileModeHandler = () => {
+    this.setState({
+      mobileMode: true
+    });
+  };
+
+  private disableMobileModeHandler = () => {
+    this.setState({
+      mobileMode: false
+    });
+  };
+
+  private toggleNavigationHandler = () => {
+    this.setState({
+      showNavigation: !this.state.showNavigation,
+      togglePosition:
+        this.state.togglePosition === 'absolute' ? 'fixed' : 'absolute'
+    });
+  };
+
   public render() {
-    return (
-      this.state.fetchInProgress === true ? <Spinner /> :
+    return this.state.fetchInProgress === true ? (
+      <Spinner />
+    ) : (
       <AppContext.Provider
         value={{
           state: this.state,
           setUserCredentials: this.setUserCredentialsHandler,
           logout: this.logoutHandler,
-          setLang: this.setLangHandler
+          setLang: this.setLangHandler,
+          hideNavigation: this.hideNavigationHandler,
+          showNavigation: this.showNavigationHandler,
+          enableMobileMode: this.enableMobileModeHandler,
+          disableMobileMode: this.disableMobileModeHandler,
+          toggleNavigation: this.toggleNavigationHandler
         }}
       >
         {this.props.children}

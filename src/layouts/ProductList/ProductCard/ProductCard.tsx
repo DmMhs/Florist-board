@@ -78,7 +78,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
       id,
       images,
       title,
-      title_uk,
+      title_ua,
       price,
       currency,
       available,
@@ -138,7 +138,7 @@ class ProductCard extends Component<CartItem, ProductCardState> {
               <div className="image">
                 <Slider images={images} auto={false} showControls={true} />
               </div>
-              <div className="title">{lang === 'en' ? title : title_uk}</div>
+              <div className="title">{lang === 'en' ? title : title_ua}</div>
               {available === true ? (
                 <div className="price">
                   {price}

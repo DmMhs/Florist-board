@@ -40,12 +40,11 @@
 
           &.signup-link:hover,
           &.signup-link:active,
-          &.signup-link:active,
           &.signin-link:hover,
           &.signin-link:active,
-          &.signin-link:active,
+          &.admin:hover,
+          &.admin:active,
           &.log-out:hover,
-          &.log-out:active,
           &.log-out:active {
             background-color: tomato;
             color: white;
@@ -82,7 +81,12 @@
     .log-out {
       color: #333333;
     }
-
+    .admin-wrapper {
+      .admin {
+        border-bottom-left-radius: 0%;
+        border-bottom-right-radius: 0%;
+      }
+    }
     a {
       background-color: #eee;
       border-radius: 0;
@@ -279,8 +283,15 @@
         color: darkred;
       }
       .signin-link,
-      .signup-link {
+      .signup-link,
+      .admin {
         width: 100%;
+      }
+      .admin-wrapper {
+        .admin {
+          border-bottom-left-radius: 0%;
+          border-bottom-right-radius: 0%;
+        }
       }
     }
     .langLink {

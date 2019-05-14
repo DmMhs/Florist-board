@@ -14,12 +14,12 @@ interface AddProductProps {
 interface AddProductState {
   available: boolean;
   title: string;
-  title_uk: string;
+  title_ua: string;
   images: File[];
   price: number;
   currency: string;
   description: string;
-  description_uk: string;
+  description_ua: string;
   productId?: string;
   imagesFolderName?: string;
 }
@@ -50,12 +50,12 @@ class AddProduct extends Component<
     this.state = {
       available: true,
       title: '',
-      title_uk: '',
+      title_ua: '',
       images: [],
       price: 0,
       currency: 'usd',
       description: '',
-      description_uk: ''
+      description_ua: ''
     };
     this.editAvailableRef = React.createRef();
   }
@@ -68,20 +68,20 @@ class AddProduct extends Component<
           const {
             available,
             title,
-            title_uk,
+            title_ua,
             price,
             currency,
             description,
-            description_uk
+            description_ua
           } = snapshot!.val();
           this.setState({
             available,
             title,
-            title_uk,
+            title_ua,
             price,
             currency,
             description,
-            description_uk,
+            description_ua,
             imagesFolderName: title.toLowerCase()
           });
         });
@@ -96,11 +96,11 @@ class AddProduct extends Component<
     });
   };
 
-  private descriptionUkChangedHandler = (
+  private descriptionUAChangedHandler = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     this.setState({
-      description_uk: event.target.value
+      description_ua: event.target.value
     });
   };
 
@@ -139,17 +139,18 @@ class AddProduct extends Component<
     });
   };
 
-  private titleUkInputChangedHandler = (
+  private titleuaInputChangedHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     this.setState({
-      title_uk: event.target.value
+      title_ua: event.target.value
     });
   };
 
   private availableChangedHandler = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
+    console.log(event.target.value === 'true');
     this.setState({
       available: event.target.value === 'true'
     });
@@ -164,11 +165,11 @@ class AddProduct extends Component<
       available,
       images,
       title,
-      title_uk,
+      title_ua,
       price,
       currency,
       description,
-      description_uk
+      description_ua
     } = this.state;
 
     const formattedFolderName = title.toLowerCase();
@@ -180,11 +181,11 @@ class AddProduct extends Component<
 
     const newProduct = {
       title,
-      title_uk,
+      title_ua,
       price,
       available,
       description,
-      description_uk,
+      description_ua,
       currency,
       images
     };
@@ -276,12 +277,12 @@ class AddProduct extends Component<
     this.setState({
       available: true,
       title: '',
-      title_uk: '',
+      title_ua: '',
       images: [],
       price: 0,
       currency: 'usd',
       description: '',
-      description_uk: ''
+      description_ua: ''
     });
   };
 
@@ -296,15 +297,13 @@ class AddProduct extends Component<
     const editModeEnabled = this.props.editModeEnabled;
     let editProductForm: JSX.Element;
 
-    console.log(this.state.images);
-
     if (editModeEnabled === true) {
       const editAvailable = this.state.available;
-      const editTitleUA = this.state.title_uk;
+      const editTitleUA = this.state.title_ua;
       const editTitleEN = this.state.title;
       const editPrice = this.state.price;
       const editDescriptionEN = this.state.description;
-      const editDescriptionUA = this.state.description_uk;
+      const editDescriptionUA = this.state.description_ua;
       const editCurrency = this.state.currency;
       const editImages = this.state.images;
 
@@ -316,6 +315,7 @@ class AddProduct extends Component<
             <select
               onChange={this.availableChangedHandler}
               ref={this.editAvailableRef}
+              value={this.state.available.toString()}
             >
               <option value="true">{labelsRoot.available.option1}</option>
               <option value="false">{labelsRoot.available.option2}</option>
@@ -335,9 +335,9 @@ class AddProduct extends Component<
             <br />
             <input
               type="text"
-              onChange={this.titleUkInputChangedHandler}
+              onChange={this.titleuaInputChangedHandler}
               required
-              value={this.state.title_uk as string}
+              value={this.state.title_ua as string}
               placeholder={editTitleUA}
             />
           </div>
@@ -401,8 +401,8 @@ class AddProduct extends Component<
             <textarea
               required
               placeholder={editDescriptionUA}
-              onChange={this.descriptionUkChangedHandler}
-              value={this.state.description_uk as string}
+              onChange={this.descriptionUAChangedHandler}
+              value={this.state.description_ua as string}
             />
           </div>
           <button type="submit">{submitBtnLabel}</button>
@@ -433,9 +433,9 @@ class AddProduct extends Component<
           <br />
           <input
             type="text"
-            onChange={this.titleUkInputChangedHandler}
+            onChange={this.titleuaInputChangedHandler}
             required
-            value={this.state.title_uk as string}
+            value={this.state.title_ua as string}
           />
         </div>
         <div className="form-control product-images">
@@ -494,8 +494,8 @@ class AddProduct extends Component<
           <textarea
             required
             placeholder="Add product description"
-            onChange={this.descriptionUkChangedHandler}
-            value={this.state.description_uk as string}
+            onChange={this.descriptionUAChangedHandler}
+            value={this.state.description_ua as string}
           />
         </div>
         <button type="submit">{submitBtnLabel}</button>

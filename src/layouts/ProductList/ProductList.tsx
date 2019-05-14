@@ -7,7 +7,7 @@ import ProductsFilter from './ProductsFilter/ProductsFilter';
 import ProductsSort from './ProductsSort/ProductsSort';
 import sortByName from '../../services/sortByName';
 import sortByPrice from '../../services/sortByPrice';
-import {Popup} from '../../components';
+import { Popup } from '../../components';
 import { AppContext } from '../../AppContext';
 import labels from '../../config/labels';
 
@@ -127,7 +127,7 @@ class ProductList extends Component<ProductListProps, ProductListState> {
                   <Popup
                     type="success"
                     message={`Продукт "${
-                      productData.title_uk
+                      productData.title_ua
                     }" було додано у кошик`}
                     key={productData.id}
                   />
@@ -275,7 +275,7 @@ class ProductList extends Component<ProductListProps, ProductListState> {
       return (
         <ProductCard
           title={p.title}
-          title_uk={p.title_uk}
+          title_ua={p.title_ua}
           images={p.images}
           price={p.price}
           currency={p.currency}

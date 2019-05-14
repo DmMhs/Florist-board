@@ -41,12 +41,12 @@ class FormContent extends Component<FormContentProps, FormContentState> {
   public render() {
     const { labels } = this.state;
     const { lang } = this.props;
-    
+
     const context = this.context;
     const contextLang = context.state.lang;
     const contextLabels = context.state.labels;
-    const {change, current} = contextLabels[contextLang].pages.admin;
-    console.log(current);
+    const { change, current } = contextLabels[contextLang].pages.admin;
+
     return (
       <div className="FormContent">
         <div className="form-control">
@@ -60,7 +60,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               lang as string
             )}
           />
-          <p className="current">{current} {labels[lang].brand}</p>
+          <p className="current">
+            {current} {labels[lang].brand}
+          </p>
         </div>
 
         <div className="form-control">
@@ -249,8 +251,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
             )}
           />
           <p className="current">
-            {current}{' '}
-            {labels[lang].pages.admin.addProductForm.available.title}
+            {current} {labels[lang].pages.admin.addProductForm.available.title}
           </p>
           <p>addProductForm/available/option1: </p>
           <input
@@ -348,8 +349,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
             )}
           />
           <p className="current">
-            {current}{' '}
-            {labels[lang].pages.admin.addProductForm.description_ua}
+            {current} {labels[lang].pages.admin.addProductForm.description_ua}
           </p>
           <p>addGalleryImageForm/info/restriction: </p>
           <input
@@ -925,7 +925,9 @@ class FormContent extends Component<FormContentProps, FormContentState> {
               lang as string
             )}
           />
-          <p className="current">{current} {labels[lang].footer}</p>
+          <p className="current">
+            {current} {labels[lang].footer}
+          </p>
         </div>
       </div>
     );
