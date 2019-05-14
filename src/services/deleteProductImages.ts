@@ -1,9 +1,6 @@
 import { storageRef, productsRef } from '../firebase';
 
-export const deleteProductImagesByIdAndFolderName = (
-  id: string,
-  folderName: string
-) => {
+export const deleteProductImages = (id: string, folderName: string) => {
   return productsRef
     .child(id)
     .once('value')

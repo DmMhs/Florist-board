@@ -6,6 +6,7 @@ import { Spinner } from '../../components';
 import Modal from './Modal/Modal';
 import { AppContext } from '../../AppContext';
 import './Gallery.less';
+import { deleteGalleryImage } from '../../services/deleteGalleryImage';
 
 interface GalleryState {
   images: string[];
@@ -73,17 +74,20 @@ class Gallery extends Component<RouteComponentProps<{}>, GalleryState> {
 
   public render() {
     const context = this.context;
-    const adminIcons =
-      context.state.userRole === 'admin' ? (
-        <div className="adminIcons">
-          <i className="far fa-trash-alt" />
-        </div>
-      ) : null;
+
     const imagesList = this.state.images.map(
       (imageUrl: string, index: number) => {
+        const imageName = imageUrl.split('%2F')[1].split('?')[0];
         return (
           <div className="img-wrapper" key={index}>
-            {adminIcons}
+            {context.state.userRole === 'admin' ? (
+              <div
+                className="adminIcons"
+                onClick={deleteGalleryImage.bind(this, imageName, imageUrl)}
+              >
+                <i className="far fa-trash-alt" />
+              </div>
+            ) : null}
             <img
               src={imageUrl}
               alt={`gallery-img-${index}`}
