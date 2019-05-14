@@ -6,7 +6,7 @@ import { storageRef, productsRef } from '../../../firebase';
 import { Product } from '../../../models/Product';
 import { withRouter, RouteComponentProps } from 'react-router';
 import { CartItem } from '../../../models/CartItem';
-import { deleteProductImagesByIdAndFolderName } from '../../../services/deleteProductImagesByIdAndFolderName';
+import { deleteProductImages } from '../../../services/deleteProductImages';
 
 interface AddProductProps {
   editModeEnabled?: boolean;
@@ -43,7 +43,6 @@ class AddProduct extends Component<
       return {};
     }
   }
-
   private editAvailableRef: React.RefObject<HTMLSelectElement>;
 
   constructor(props: RouteComponentProps<{}> & AddProductProps) {
@@ -192,7 +191,7 @@ class AddProduct extends Component<
 
     if (this.props.editModeEnabled === true) {
       productKey = this.state.productId as string;
-      await deleteProductImagesByIdAndFolderName(
+      await deleteProductImages(
         this.state.productId as string,
         this.state.imagesFolderName as string
       );
@@ -349,18 +348,21 @@ class AddProduct extends Component<
               <input
                 type="file"
                 onChange={this.imgInputChangedHandler.bind(this, 0)}
+                required
               />
             </div>
             <div className="input-wrapper">
               <input
                 type="file"
                 onChange={this.imgInputChangedHandler.bind(this, 1)}
+                required
               />
             </div>
             <div className="input-wrapper">
               <input
                 type="file"
                 onChange={this.imgInputChangedHandler.bind(this, 2)}
+                required
               />
             </div>
           </div>
@@ -443,18 +445,21 @@ class AddProduct extends Component<
             <input
               type="file"
               onChange={this.imgInputChangedHandler.bind(this, 0)}
+              required
             />
           </div>
           <div className="input-wrapper">
             <input
               type="file"
               onChange={this.imgInputChangedHandler.bind(this, 1)}
+              required
             />
           </div>
           <div className="input-wrapper">
             <input
               type="file"
               onChange={this.imgInputChangedHandler.bind(this, 2)}
+              required
             />
           </div>
         </div>
