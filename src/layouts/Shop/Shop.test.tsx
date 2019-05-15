@@ -6,6 +6,7 @@ import { Product } from '../../models/Product';
 import { productsRef } from '../../firebase';
 import { BrowserRouter } from 'react-router-dom';
 import AppContextProvider from '../../AppContext';
+import labels from '../../config/labels';
 
 describe('Shop works as expected', () => {
   it('product images do fetch', async () => {
@@ -19,9 +20,14 @@ describe('Shop works as expected', () => {
 
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      lang: 'en'
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
-
+    wrapper.update();
     const instance = wrapper.find('Shop').instance();
     await productsRef.once('value').then(snapshot => {
       instance.setState({

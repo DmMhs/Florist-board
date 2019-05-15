@@ -64,83 +64,73 @@ exports[`Gallery works as expected matches a snapshot 1`] = `
             }
           }
         >
-          <Gallery>
-            <div
-              className="Gallery"
+          <WithStyles(CircularIndeterminate)>
+            <CircularIndeterminate
+              classes={
+                Object {
+                  "progress": "CircularIndeterminate-progress-1",
+                }
+              }
             >
-              <h2>
-                Our Gallery
-              </h2>
-              <hr />
-              <WithStyles(CircularIndeterminate)>
-                <CircularIndeterminate
-                  classes={
-                    Object {
-                      "progress": "CircularIndeterminate-progress-1",
-                    }
-                  }
+              <div
+                className="Spinner"
+              >
+                <WithStyles(CircularProgress)
+                  className="CircularIndeterminate-progress-1"
                 >
-                  <div
-                    className="Spinner"
+                  <CircularProgress
+                    className="CircularIndeterminate-progress-1"
+                    classes={
+                      Object {
+                        "circle": "MuiCircularProgress-circle-8",
+                        "circleDisableShrink": "MuiCircularProgress-circleDisableShrink-11",
+                        "circleIndeterminate": "MuiCircularProgress-circleIndeterminate-10",
+                        "circleStatic": "MuiCircularProgress-circleStatic-9",
+                        "colorPrimary": "MuiCircularProgress-colorPrimary-5",
+                        "colorSecondary": "MuiCircularProgress-colorSecondary-6",
+                        "indeterminate": "MuiCircularProgress-indeterminate-4",
+                        "root": "MuiCircularProgress-root-2",
+                        "static": "MuiCircularProgress-static-3",
+                        "svg": "MuiCircularProgress-svg-7",
+                      }
+                    }
+                    color="primary"
+                    disableShrink={false}
+                    size={40}
+                    thickness={3.6}
+                    value={0}
+                    variant="indeterminate"
                   >
-                    <WithStyles(CircularProgress)
-                      className="CircularIndeterminate-progress-1"
-                    >
-                      <CircularProgress
-                        className="CircularIndeterminate-progress-1"
-                        classes={
-                          Object {
-                            "circle": "MuiCircularProgress-circle-8",
-                            "circleDisableShrink": "MuiCircularProgress-circleDisableShrink-11",
-                            "circleIndeterminate": "MuiCircularProgress-circleIndeterminate-10",
-                            "circleStatic": "MuiCircularProgress-circleStatic-9",
-                            "colorPrimary": "MuiCircularProgress-colorPrimary-5",
-                            "colorSecondary": "MuiCircularProgress-colorSecondary-6",
-                            "indeterminate": "MuiCircularProgress-indeterminate-4",
-                            "root": "MuiCircularProgress-root-2",
-                            "static": "MuiCircularProgress-static-3",
-                            "svg": "MuiCircularProgress-svg-7",
-                          }
+                    <div
+                      className="MuiCircularProgress-root-2 MuiCircularProgress-colorPrimary-5 MuiCircularProgress-indeterminate-4 CircularIndeterminate-progress-1"
+                      role="progressbar"
+                      style={
+                        Object {
+                          "height": 40,
+                          "width": 40,
                         }
-                        color="primary"
-                        disableShrink={false}
-                        size={40}
-                        thickness={3.6}
-                        value={0}
-                        variant="indeterminate"
+                      }
+                    >
+                      <svg
+                        className="MuiCircularProgress-svg-7"
+                        viewBox="22 22 44 44"
                       >
-                        <div
-                          className="MuiCircularProgress-root-2 MuiCircularProgress-colorPrimary-5 MuiCircularProgress-indeterminate-4 CircularIndeterminate-progress-1"
-                          role="progressbar"
-                          style={
-                            Object {
-                              "height": 40,
-                              "width": 40,
-                            }
-                          }
-                        >
-                          <svg
-                            className="MuiCircularProgress-svg-7"
-                            viewBox="22 22 44 44"
-                          >
-                            <circle
-                              className="MuiCircularProgress-circle-8 MuiCircularProgress-circleIndeterminate-10"
-                              cx={44}
-                              cy={44}
-                              fill="none"
-                              r={20.2}
-                              strokeWidth={3.6}
-                              style={Object {}}
-                            />
-                          </svg>
-                        </div>
-                      </CircularProgress>
-                    </WithStyles(CircularProgress)>
-                  </div>
-                </CircularIndeterminate>
-              </WithStyles(CircularIndeterminate)>
-            </div>
-          </Gallery>
+                        <circle
+                          className="MuiCircularProgress-circle-8 MuiCircularProgress-circleIndeterminate-10"
+                          cx={44}
+                          cy={44}
+                          fill="none"
+                          r={20.2}
+                          strokeWidth={3.6}
+                          style={Object {}}
+                        />
+                      </svg>
+                    </div>
+                  </CircularProgress>
+                </WithStyles(CircularProgress)>
+              </div>
+            </CircularIndeterminate>
+          </WithStyles(CircularIndeterminate)>
         </AppContextProvider>
       </Route>
     </withRouter(AppContextProvider)>

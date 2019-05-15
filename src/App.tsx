@@ -14,12 +14,9 @@ import Footer from './layouts/Footer/Footer';
 import PageNotFound from './layouts/PageNotFound/PageNotFound';
 import Admin from './layouts/Admin/Admin';
 import './App.less';
-import { isContext } from 'vm';
 
 interface AppProps {}
 interface AppState {
-  showNavigation: boolean;
-  togglePosition: string;
   products: any;
 }
 
@@ -30,8 +27,6 @@ class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      showNavigation: window.innerWidth > 768,
-      togglePosition: 'absolute',
       products: []
     };
     this.toggleRef = React.createRef();
@@ -59,17 +54,9 @@ class App extends Component<AppProps, AppState> {
         this.toggleRef.current!.classList.remove('active');
       }
       if (window.innerWidth <= 768) {
-        this.setState({
-          showNavigation: false,
-          togglePosition: 'absolute'
-        });
         context.hideNavigation();
         context.enableMobileMode();
       } else {
-        this.setState({
-          showNavigation: true,
-          togglePosition: 'absolute'
-        });
         context.showNavigation();
         context.disableMobileMode();
       }

@@ -5,6 +5,7 @@ import ProductList from './ProductList';
 import { CartItem } from '../../models/CartItem';
 import AppContextProvider from '../../AppContext';
 import { BrowserRouter } from 'react-router-dom';
+import labels from '../../config/labels';
 
 describe('ProductList works as expected', () => {
   it('matches a snapshot', () => {
@@ -73,8 +74,14 @@ describe('ProductList works as expected', () => {
     );
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      lang: 'en'
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
+    wrapper.update();
     const instance = wrapper.find('ProductList').instance();
     instance.state = {
       showCart: false,
@@ -93,6 +100,16 @@ describe('ProductList works as expected', () => {
         </AppContextProvider>
       </BrowserRouter>
     );
+    const context = wrapper.find('AppContextProvider').instance();
+    context.setState({
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
+    });
+    wrapper.update();
     const instance = wrapper.find('ProductList').instance();
     instance.state = {
       showCart: false,
@@ -110,6 +127,16 @@ describe('ProductList works as expected', () => {
         </AppContextProvider>
       </BrowserRouter>
     );
+    const context = wrapper.find('AppContextProvider').instance();
+    context.setState({
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
+    });
+    wrapper.update();
     const instance = wrapper.find('ProductList').instance();
     instance.state = {
       showFilters: true
@@ -126,16 +153,17 @@ describe('ProductList works as expected', () => {
         </AppContextProvider>
       </BrowserRouter>
     );
-    const instance = wrapper.find('ProductList').instance();
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      userLogin: 'testLogin',
-      userId: 'testId',
-      userToken: 'testToken',
-      authenticationMethod: undefined,
       lang: 'en',
-      userAuthenticated: false
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
+    wrapper.update();
+    const instance = wrapper.find('ProductList').instance();
     instance.setState({
       showFilters: true,
       checkForPrice: false
@@ -161,13 +189,14 @@ describe('ProductList works as expected', () => {
     );
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      userLogin: 'testLogin',
-      userId: 'testId',
-      userToken: 'testToken',
-      authenticationMethod: undefined,
       lang: 'en',
-      userAuthenticated: false
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
+    wrapper.update();
     const instance = wrapper.find('ProductList').instance();
     instance.state = {
       sortBy: 'name'
@@ -186,13 +215,14 @@ describe('ProductList works as expected', () => {
     );
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      userLogin: 'testLogin',
-      userId: 'testId',
-      userToken: 'testToken',
-      authenticationMethod: undefined,
       lang: 'en',
-      userAuthenticated: false
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
+    wrapper.update();
     const instance = wrapper.find('ProductList').instance();
     instance.state = {
       sortBy: 'name',
@@ -212,13 +242,14 @@ describe('ProductList works as expected', () => {
     );
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      userLogin: 'testLogin',
-      userId: 'testId',
-      userToken: 'testToken',
-      authenticationMethod: undefined,
       lang: 'en',
-      userAuthenticated: false
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
+    wrapper.update();
     const instance = wrapper.find('ProductList').instance();
     instance.state = {
       checkForAvailable: false
@@ -237,13 +268,14 @@ describe('ProductList works as expected', () => {
     );
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      userLogin: 'testLogin',
-      userId: 'testId',
-      userToken: 'testToken',
-      authenticationMethod: undefined,
       lang: 'en',
-      userAuthenticated: false
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
+    wrapper.update();
     const instance = wrapper.find('ProductList').instance();
     instance.state = {
       showCart: true
@@ -262,13 +294,14 @@ describe('ProductList works as expected', () => {
     );
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      userLogin: 'testLogin',
-      userId: 'testId',
-      userToken: 'testToken',
-      authenticationMethod: undefined,
       lang: 'en',
-      userAuthenticated: false
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
+    wrapper.update();
     const instance = wrapper.find('ProductList').instance();
     instance.setState({
       showFilters: false
@@ -290,13 +323,14 @@ describe('ProductList works as expected', () => {
     );
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      userLogin: 'testLogin',
-      userId: 'testId',
-      userToken: 'testToken',
-      authenticationMethod: undefined,
       lang: 'en',
-      userAuthenticated: false
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
+    wrapper.update();
     const instance = wrapper.find('ProductList').instance();
     instance.setState({
       showCart: false,
@@ -325,13 +359,14 @@ describe('ProductList works as expected', () => {
     );
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      userLogin: 'testLogin',
-      userId: 'testId',
-      userToken: 'testToken',
-      authenticationMethod: undefined,
       lang: 'en',
-      userAuthenticated: false
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
+    wrapper.update();
     const instance = wrapper.find('ProductList').instance();
     expect(
       instance.orderByOptionsRef.current!.classList.contains('show')
@@ -355,14 +390,14 @@ describe('ProductList works as expected', () => {
 
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      userLogin: 'testLogin',
-      userId: 'testId',
-      userToken: 'testToken',
-      authenticationMethod: undefined,
       lang: 'en',
-      userAuthenticated: false
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
-
+    wrapper.update();
     const instance = wrapper.find('ProductList').instance();
     instance.setState({
       mobileFiltersMode: false

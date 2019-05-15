@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import ProductDetails from './ProductDetails';
 import { productsRef } from '../../../firebase';
 import AppContextProvider from '../../../AppContext';
+import labels from '../../../config/labels';
 
 describe('ProductDetails works as expected', () => {
   it('renders without crashing', () => {
@@ -24,8 +25,14 @@ describe('ProductDetails works as expected', () => {
     );
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      lang: 'en'
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
+    wrapper.update();
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -46,8 +53,14 @@ describe('ProductDetails works as expected', () => {
     );
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      lang: 'en'
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
+    wrapper.update();
     expect(wrapper.find('.ProductDetails').exists()).toBeTruthy();
   });
 
@@ -68,14 +81,19 @@ describe('ProductDetails works as expected', () => {
     );
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      lang: 'en'
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
+    wrapper.update();
     const instance = wrapper.find('ProductDetails').instance();
     instance.state = {
       productData: {},
       fetchInProgress: false
     };
-    console.log(wrapper.props);
     await productsRef
       .child(instance.props.match.params.id)
       .once('value')

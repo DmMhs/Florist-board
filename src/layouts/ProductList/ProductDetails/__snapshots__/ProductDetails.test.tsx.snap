@@ -83,7 +83,7 @@ exports[`ProductDetails works as expected renders without crashing 1`] = `
                 <CircularIndeterminate
                   classes={
                     Object {
-                      "progress": "CircularIndeterminate-progress-1",
+                      "progress": "CircularIndeterminate-progress-12",
                     }
                   }
                 >
@@ -91,22 +91,22 @@ exports[`ProductDetails works as expected renders without crashing 1`] = `
                     className="Spinner"
                   >
                     <WithStyles(CircularProgress)
-                      className="CircularIndeterminate-progress-1"
+                      className="CircularIndeterminate-progress-12"
                     >
                       <CircularProgress
-                        className="CircularIndeterminate-progress-1"
+                        className="CircularIndeterminate-progress-12"
                         classes={
                           Object {
-                            "circle": "MuiCircularProgress-circle-8",
-                            "circleDisableShrink": "MuiCircularProgress-circleDisableShrink-11",
-                            "circleIndeterminate": "MuiCircularProgress-circleIndeterminate-10",
-                            "circleStatic": "MuiCircularProgress-circleStatic-9",
-                            "colorPrimary": "MuiCircularProgress-colorPrimary-5",
-                            "colorSecondary": "MuiCircularProgress-colorSecondary-6",
-                            "indeterminate": "MuiCircularProgress-indeterminate-4",
-                            "root": "MuiCircularProgress-root-2",
-                            "static": "MuiCircularProgress-static-3",
-                            "svg": "MuiCircularProgress-svg-7",
+                            "circle": "MuiCircularProgress-circle-19",
+                            "circleDisableShrink": "MuiCircularProgress-circleDisableShrink-22",
+                            "circleIndeterminate": "MuiCircularProgress-circleIndeterminate-21",
+                            "circleStatic": "MuiCircularProgress-circleStatic-20",
+                            "colorPrimary": "MuiCircularProgress-colorPrimary-16",
+                            "colorSecondary": "MuiCircularProgress-colorSecondary-17",
+                            "indeterminate": "MuiCircularProgress-indeterminate-15",
+                            "root": "MuiCircularProgress-root-13",
+                            "static": "MuiCircularProgress-static-14",
+                            "svg": "MuiCircularProgress-svg-18",
                           }
                         }
                         color="primary"
@@ -117,7 +117,7 @@ exports[`ProductDetails works as expected renders without crashing 1`] = `
                         variant="indeterminate"
                       >
                         <div
-                          className="MuiCircularProgress-root-2 MuiCircularProgress-colorPrimary-5 MuiCircularProgress-indeterminate-4 CircularIndeterminate-progress-1"
+                          className="MuiCircularProgress-root-13 MuiCircularProgress-colorPrimary-16 MuiCircularProgress-indeterminate-15 CircularIndeterminate-progress-12"
                           role="progressbar"
                           style={
                             Object {
@@ -127,11 +127,11 @@ exports[`ProductDetails works as expected renders without crashing 1`] = `
                           }
                         >
                           <svg
-                            className="MuiCircularProgress-svg-7"
+                            className="MuiCircularProgress-svg-18"
                             viewBox="22 22 44 44"
                           >
                             <circle
-                              className="MuiCircularProgress-circle-8 MuiCircularProgress-circleIndeterminate-10"
+                              className="MuiCircularProgress-circle-19 MuiCircularProgress-circleIndeterminate-21"
                               cx={44}
                               cy={44}
                               fill="none"

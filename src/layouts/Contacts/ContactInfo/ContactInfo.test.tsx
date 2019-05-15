@@ -4,6 +4,7 @@ import { shallow, mount } from 'enzyme';
 import ContactInfo from './ContactInfo';
 import { BrowserRouter } from 'react-router-dom';
 import AppContextProvider from '../../../AppContext';
+import labels from '../../../config/labels';
 
 describe('ContactsInfo works as expected', () => {
   it('ContactInfo component matches a snapshot', () => {
@@ -16,8 +17,14 @@ describe('ContactsInfo works as expected', () => {
     );
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      lang: 'en'
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
+    wrapper.update();
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -31,8 +38,14 @@ describe('ContactsInfo works as expected', () => {
     );
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      lang: 'en'
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
+    wrapper.update();
     expect(wrapper.find('.address-icon').exists()).toBeTruthy();
     expect(wrapper.find('.phone-icon').exists()).toBeTruthy();
     expect(wrapper.find('.facebook-icon').exists()).toBeFalsy();

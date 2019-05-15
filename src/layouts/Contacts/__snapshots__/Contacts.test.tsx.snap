@@ -1,7 +1,311 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Contacts component works as expected matches a snapshot 1`] = `
-<ContextConsumer>
-  <Component />
-</ContextConsumer>
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <withRouter(AppContextProvider)>
+      <Route>
+        <AppContextProvider
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+        >
+          <Contacts>
+            <div
+              className="Contacts"
+            >
+              <div
+                className="contacts-wrapper"
+              >
+                <h2>
+                  Where to find us?
+                </h2>
+                <GoogleMap
+                  url="https://maps.google.com/maps?q=Lviv%2C%20Rynok%20Square&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                >
+                  <div>
+                    <WithStyles(CircularIndeterminate)>
+                      <CircularIndeterminate
+                        classes={
+                          Object {
+                            "progress": "CircularIndeterminate-progress-1",
+                          }
+                        }
+                      >
+                        <div
+                          className="Spinner"
+                        >
+                          <WithStyles(CircularProgress)
+                            className="CircularIndeterminate-progress-1"
+                          >
+                            <CircularProgress
+                              className="CircularIndeterminate-progress-1"
+                              classes={
+                                Object {
+                                  "circle": "MuiCircularProgress-circle-8",
+                                  "circleDisableShrink": "MuiCircularProgress-circleDisableShrink-11",
+                                  "circleIndeterminate": "MuiCircularProgress-circleIndeterminate-10",
+                                  "circleStatic": "MuiCircularProgress-circleStatic-9",
+                                  "colorPrimary": "MuiCircularProgress-colorPrimary-5",
+                                  "colorSecondary": "MuiCircularProgress-colorSecondary-6",
+                                  "indeterminate": "MuiCircularProgress-indeterminate-4",
+                                  "root": "MuiCircularProgress-root-2",
+                                  "static": "MuiCircularProgress-static-3",
+                                  "svg": "MuiCircularProgress-svg-7",
+                                }
+                              }
+                              color="primary"
+                              disableShrink={false}
+                              size={40}
+                              thickness={3.6}
+                              value={0}
+                              variant="indeterminate"
+                            >
+                              <div
+                                className="MuiCircularProgress-root-2 MuiCircularProgress-colorPrimary-5 MuiCircularProgress-indeterminate-4 CircularIndeterminate-progress-1"
+                                role="progressbar"
+                                style={
+                                  Object {
+                                    "height": 40,
+                                    "width": 40,
+                                  }
+                                }
+                              >
+                                <svg
+                                  className="MuiCircularProgress-svg-7"
+                                  viewBox="22 22 44 44"
+                                >
+                                  <circle
+                                    className="MuiCircularProgress-circle-8 MuiCircularProgress-circleIndeterminate-10"
+                                    cx={44}
+                                    cy={44}
+                                    fill="none"
+                                    r={20.2}
+                                    strokeWidth={3.6}
+                                    style={Object {}}
+                                  />
+                                </svg>
+                              </div>
+                            </CircularProgress>
+                          </WithStyles(CircularProgress)>
+                        </div>
+                      </CircularIndeterminate>
+                    </WithStyles(CircularIndeterminate)>
+                    <div
+                      className="mapouter Map"
+                      style={
+                        Object {
+                          "height": "450px",
+                          "position": "relative",
+                          "textAlign": "right",
+                          "width": "724px",
+                        }
+                      }
+                    >
+                      <div
+                        className="gmap_canvas"
+                        style={
+                          Object {
+                            "background": "none!important",
+                            "height": "450px",
+                            "overflow": "hidden",
+                            "width": "724px",
+                          }
+                        }
+                      >
+                        <iframe
+                          frameBorder="0"
+                          height="450"
+                          id="gmap_canvas"
+                          marginHeight={0}
+                          marginWidth={0}
+                          onLoad={[Function]}
+                          scrolling="no"
+                          src="https://maps.google.com/maps?q=Lviv%2C%20Rynok%20Square&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                          width="724px"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </GoogleMap>
+                <hr />
+                <contactInfo
+                  address=""
+                  email=""
+                  facebook=""
+                  instagram=""
+                  phone=""
+                  telegram=""
+                >
+                  <div
+                    className="ContactsInfo"
+                  >
+                    <h3>
+                      Feel free to get in touch with us!
+                    </h3>
+                    <hr />
+                    <div
+                      className="contact-option"
+                    >
+                      <div
+                        className="icon-wrapper"
+                      >
+                        <img
+                          alt="address"
+                          className="address-icon"
+                          src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Fcontact-page%2Faddress.png?alt=media&token=2fb28441-7270-4ebe-93eb-54bf0c7f1dfa"
+                        />
+                      </div>
+                       
+                    </div>
+                    <div
+                      className="contact-option"
+                    >
+                      <div
+                        className="icon-wrapper"
+                      >
+                        <img
+                          alt="phone"
+                          className="phone-icon"
+                          src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Fcontact-page%2Fmobile-phone.png?alt=media&token=a184bbb9-5b5b-47a9-bb33-d61740e95b9c"
+                        />
+                      </div>
+                       
+                    </div>
+                    <div
+                      className="contact-option"
+                    >
+                      <div
+                        className="icon-wrapper"
+                      >
+                        <img
+                          alt="email"
+                          className="email-icon"
+                          src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Fcontact-page%2Femail.png?alt=media&token=0e246b98-8137-4068-9594-d9441b571a06"
+                        />
+                      </div>
+                       
+                    </div>
+                    <div
+                      className="socials"
+                    >
+                       
+                      <hr />
+                      <div
+                        className="contact-option"
+                      >
+                        <div
+                          className="icon-wrapper"
+                        >
+                          <a
+                            href=""
+                          >
+                            <img
+                              alt="facebook"
+                              className="facebook-icon"
+                              src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Fcontact-page%2Ffacebook.png?alt=media&token=5fdb89e0-3382-43af-af56-379ed4a5db2f"
+                            />
+                          </a>
+                        </div>
+                      </div>
+                      <div
+                        className="contact-option"
+                      >
+                        <div
+                          className="icon-wrapper"
+                        >
+                          <a
+                            href=""
+                          >
+                            <img
+                              alt="instagram"
+                              className="instagram-icon"
+                              src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Fcontact-page%2Finstagram.png?alt=media&token=58c1731f-94f2-4d23-82e8-1e2d753413b7"
+                            />
+                          </a>
+                        </div>
+                      </div>
+                      <div
+                        className="contact-option"
+                      >
+                        <div
+                          className="icon-wrapper"
+                        >
+                          <a
+                            href=""
+                          >
+                            <img
+                              alt="telegram"
+                              className="telegram-icon"
+                              src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Fcontact-page%2Ftelegram.png?alt=media&token=95badfef-90f7-49b8-858e-a92a03657f4e"
+                            />
+                          </a>
+                        </div>
+                         
+                      </div>
+                    </div>
+                  </div>
+                </contactInfo>
+              </div>
+            </div>
+          </Contacts>
+        </AppContextProvider>
+      </Route>
+    </withRouter(AppContextProvider)>
+  </Router>
+</BrowserRouter>
 `;

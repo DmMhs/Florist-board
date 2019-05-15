@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import Gallery from './Gallery';
 import AppContextProvider from '../../AppContext';
+import labels from '../../config/labels';
 
 describe('Gallery works as expected', () => {
   it('matches a snapshot', () => {
@@ -31,14 +32,24 @@ describe('Gallery works as expected', () => {
     );
 
     const context = wrapper.find('AppContextProvider').instance();
-    const instance = wrapper.find('Gallery').instance();
-
     context.setState({
-      lang: 'en'
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
-
+    wrapper.update();
+    const instance = wrapper.find('Gallery').instance();
     instance.setState({
-      images: ['img-1', 'img-2', 'img-3', 'img-4', 'img-5'],
+      images: [
+        '%2Fimg-1.jpg',
+        '%2Fimg-2.jpg',
+        '%2Fimg-3.jpg',
+        '%2Fimg-4.jpg',
+        '%2Fimg-5.jpg'
+      ],
       showModal: false,
       modalIndex: 0
     });

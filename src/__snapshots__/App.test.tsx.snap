@@ -1,0 +1,588 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App works as expected matches a snapshot 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <withRouter(AppContextProvider)>
+      <Route>
+        <AppContextProvider
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+        >
+          <App>
+            <div
+              className="App"
+            >
+              <ForwardRef
+                click={[Function]}
+                style={
+                  Object {
+                    "position": "absolute",
+                  }
+                }
+              >
+                <i
+                  className="fas fa-ellipsis-h Toggle"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "position": "absolute",
+                    }
+                  }
+                />
+              </ForwardRef>
+              <header>
+                <div
+                  className="Header"
+                >
+                  <withRouter(Navigation)>
+                    <Route>
+                      <Navigation
+                        history={
+                          Object {
+                            "action": "POP",
+                            "block": [Function],
+                            "createHref": [Function],
+                            "go": [Function],
+                            "goBack": [Function],
+                            "goForward": [Function],
+                            "length": 1,
+                            "listen": [Function],
+                            "location": Object {
+                              "hash": "",
+                              "pathname": "/",
+                              "search": "",
+                              "state": undefined,
+                            },
+                            "push": [Function],
+                            "replace": [Function],
+                          }
+                        }
+                        location={
+                          Object {
+                            "hash": "",
+                            "pathname": "/",
+                            "search": "",
+                            "state": undefined,
+                          }
+                        }
+                        match={
+                          Object {
+                            "isExact": true,
+                            "params": Object {},
+                            "path": "/",
+                            "url": "/",
+                          }
+                        }
+                      >
+                        <div
+                          className="Navigation"
+                        >
+                          <ul>
+                            <li
+                              onClick={[Function]}
+                            >
+                              <NavLink
+                                exact={true}
+                                to="/"
+                              >
+                                <Route
+                                  exact={true}
+                                  path="\\\\/"
+                                >
+                                  <Link
+                                    aria-current="page"
+                                    className="active"
+                                    style={Object {}}
+                                    to="/"
+                                  >
+                                    <a
+                                      aria-current="page"
+                                      className="active"
+                                      href="/"
+                                      onClick={[Function]}
+                                      style={Object {}}
+                                    >
+                                      HOME
+                                       
+                                      <i
+                                        className="fas fa-home"
+                                      />
+                                    </a>
+                                  </Link>
+                                </Route>
+                              </NavLink>
+                            </li>
+                            <li
+                              onClick={[Function]}
+                            >
+                              <NavLink
+                                to="/shop"
+                              >
+                                <Route
+                                  path="\\\\/shop"
+                                >
+                                  <Link
+                                    aria-current={null}
+                                    to="/shop"
+                                  >
+                                    <a
+                                      aria-current={null}
+                                      href="/shop"
+                                      onClick={[Function]}
+                                    >
+                                      SHOP
+                                       
+                                      <i
+                                        className="fas fa-leaf"
+                                      />
+                                    </a>
+                                  </Link>
+                                </Route>
+                              </NavLink>
+                            </li>
+                            <li
+                              onClick={[Function]}
+                            >
+                              <NavLink
+                                to="/gallery"
+                              >
+                                <Route
+                                  path="\\\\/gallery"
+                                >
+                                  <Link
+                                    aria-current={null}
+                                    to="/gallery"
+                                  >
+                                    <a
+                                      aria-current={null}
+                                      href="/gallery"
+                                      onClick={[Function]}
+                                    >
+                                      GALLERY
+                                       
+                                      <i
+                                        className="far fa-image"
+                                      />
+                                    </a>
+                                  </Link>
+                                </Route>
+                              </NavLink>
+                            </li>
+                            <li
+                              onClick={[Function]}
+                            >
+                              <NavLink
+                                to="/contacts"
+                              >
+                                <Route
+                                  path="\\\\/contacts"
+                                >
+                                  <Link
+                                    aria-current={null}
+                                    to="/contacts"
+                                  >
+                                    <a
+                                      aria-current={null}
+                                      href="/contacts"
+                                      onClick={[Function]}
+                                    >
+                                      CONTACTS
+                                       
+                                      <i
+                                        className="fas fa-map-marker-alt"
+                                      />
+                                    </a>
+                                  </Link>
+                                </Route>
+                              </NavLink>
+                            </li>
+                            <li
+                              className="accountLink"
+                            >
+                              <a
+                                className="dropbtn"
+                                onClick={[Function]}
+                              >
+                                MY ACCOUNT
+                                 
+                                <i
+                                  className="fas fa-user-circle"
+                                />
+                                 
+                                <i
+                                  className="fas fa-caret-down"
+                                />
+                              </a>
+                              <div
+                                className="dropdown-content"
+                              >
+                                <div>
+                                  <NavLink
+                                    className="signup-link"
+                                    onClick={[Function]}
+                                    to="/auth/signup"
+                                  >
+                                    <Route
+                                      path="\\\\/auth\\\\/signup"
+                                    >
+                                      <Link
+                                        aria-current={null}
+                                        className="signup-link"
+                                        onClick={[Function]}
+                                        to="/auth/signup"
+                                      >
+                                        <a
+                                          aria-current={null}
+                                          className="signup-link"
+                                          href="/auth/signup"
+                                          onClick={[Function]}
+                                        >
+                                          SIGN UP
+                                           
+                                          <i
+                                            className="fas fa-user-plus"
+                                          />
+                                        </a>
+                                      </Link>
+                                    </Route>
+                                  </NavLink>
+                                  <NavLink
+                                    className="signin-link"
+                                    onClick={[Function]}
+                                    to="/auth/signin"
+                                  >
+                                    <Route
+                                      path="\\\\/auth\\\\/signin"
+                                    >
+                                      <Link
+                                        aria-current={null}
+                                        className="signin-link"
+                                        onClick={[Function]}
+                                        to="/auth/signin"
+                                      >
+                                        <a
+                                          aria-current={null}
+                                          className="signin-link"
+                                          href="/auth/signin"
+                                          onClick={[Function]}
+                                        >
+                                          SIGN IN
+                                           
+                                          <i
+                                            className="fas fa-sign-in-alt"
+                                          />
+                                        </a>
+                                      </Link>
+                                    </Route>
+                                  </NavLink>
+                                </div>
+                              </div>
+                            </li>
+                            <li
+                              className="langLink"
+                            >
+                              <a
+                                className="lang-btn"
+                                onClick={[Function]}
+                              >
+                                <span>
+                                  LANG
+                                </span>
+                                <img
+                                  src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Funited-kingdom.png?alt=media&token=791aa1e1-7dc6-467f-a716-3eb8dce0b313"
+                                />
+                                 
+                                <i
+                                  className="fas fa-caret-down"
+                                />
+                              </a>
+                              <div
+                                className="lang-options"
+                              >
+                                <a
+                                  onClick={[Function]}
+                                >
+                                  <span>
+                                    МОВА
+                                  </span>
+                                  <img
+                                    src="https://firebasestorage.googleapis.com/v0/b/florist-cb933.appspot.com/o/icons%2Flang%2Fukraine.png?alt=media&token=9305aa3b-0e62-411e-b6ae-7dbbcaa72e74"
+                                  />
+                                </a>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </Navigation>
+                    </Route>
+                  </withRouter(Navigation)>
+                </div>
+              </header>
+              <Switch>
+                <Route
+                  component={[Function]}
+                  computedMatch={
+                    Object {
+                      "isExact": true,
+                      "params": Object {},
+                      "path": "/",
+                      "url": "/",
+                    }
+                  }
+                  exact={true}
+                  location={
+                    Object {
+                      "hash": "",
+                      "pathname": "/",
+                      "search": "",
+                      "state": undefined,
+                    }
+                  }
+                  path="/"
+                >
+                  <Home
+                    history={
+                      Object {
+                        "action": "POP",
+                        "block": [Function],
+                        "createHref": [Function],
+                        "go": [Function],
+                        "goBack": [Function],
+                        "goForward": [Function],
+                        "length": 1,
+                        "listen": [Function],
+                        "location": Object {
+                          "hash": "",
+                          "pathname": "/",
+                          "search": "",
+                          "state": undefined,
+                        },
+                        "push": [Function],
+                        "replace": [Function],
+                      }
+                    }
+                    location={
+                      Object {
+                        "hash": "",
+                        "pathname": "/",
+                        "search": "",
+                        "state": undefined,
+                      }
+                    }
+                    match={
+                      Object {
+                        "isExact": true,
+                        "params": Object {},
+                        "path": "/",
+                        "url": "/",
+                      }
+                    }
+                  >
+                    <div
+                      className="Home"
+                    >
+                      <WithStyles(CircularIndeterminate)>
+                        <CircularIndeterminate
+                          classes={
+                            Object {
+                              "progress": "CircularIndeterminate-progress-1",
+                            }
+                          }
+                        >
+                          <div
+                            className="Spinner"
+                          >
+                            <WithStyles(CircularProgress)
+                              className="CircularIndeterminate-progress-1"
+                            >
+                              <CircularProgress
+                                className="CircularIndeterminate-progress-1"
+                                classes={
+                                  Object {
+                                    "circle": "MuiCircularProgress-circle-8",
+                                    "circleDisableShrink": "MuiCircularProgress-circleDisableShrink-11",
+                                    "circleIndeterminate": "MuiCircularProgress-circleIndeterminate-10",
+                                    "circleStatic": "MuiCircularProgress-circleStatic-9",
+                                    "colorPrimary": "MuiCircularProgress-colorPrimary-5",
+                                    "colorSecondary": "MuiCircularProgress-colorSecondary-6",
+                                    "indeterminate": "MuiCircularProgress-indeterminate-4",
+                                    "root": "MuiCircularProgress-root-2",
+                                    "static": "MuiCircularProgress-static-3",
+                                    "svg": "MuiCircularProgress-svg-7",
+                                  }
+                                }
+                                color="primary"
+                                disableShrink={false}
+                                size={40}
+                                thickness={3.6}
+                                value={0}
+                                variant="indeterminate"
+                              >
+                                <div
+                                  className="MuiCircularProgress-root-2 MuiCircularProgress-colorPrimary-5 MuiCircularProgress-indeterminate-4 CircularIndeterminate-progress-1"
+                                  role="progressbar"
+                                  style={
+                                    Object {
+                                      "height": 40,
+                                      "width": 40,
+                                    }
+                                  }
+                                >
+                                  <svg
+                                    className="MuiCircularProgress-svg-7"
+                                    viewBox="22 22 44 44"
+                                  >
+                                    <circle
+                                      className="MuiCircularProgress-circle-8 MuiCircularProgress-circleIndeterminate-10"
+                                      cx={44}
+                                      cy={44}
+                                      fill="none"
+                                      r={20.2}
+                                      strokeWidth={3.6}
+                                      style={Object {}}
+                                    />
+                                  </svg>
+                                </div>
+                              </CircularProgress>
+                            </WithStyles(CircularProgress)>
+                          </div>
+                        </CircularIndeterminate>
+                      </WithStyles(CircularIndeterminate)>
+                      <div
+                        className="slider-wrapper"
+                      >
+                        <Slider
+                          auto={true}
+                          images={Array []}
+                          showControls={true}
+                        >
+                          <div
+                            className="Slider"
+                          >
+                            <div
+                              className="slides-wrapper"
+                              style={
+                                Object {
+                                  "transform": "translateX(0px)",
+                                  "transition": "transform ease-out 1s",
+                                }
+                              }
+                            />
+                            <LeftArrow
+                              goToPrevSlide={[Function]}
+                              show={true}
+                            >
+                              <div
+                                className="left-arrow"
+                                onClick={[Function]}
+                                style={
+                                  Object {
+                                    "display": "flex",
+                                  }
+                                }
+                              >
+                                <i
+                                  aria-hidden="true"
+                                  className="fas fa-chevron-left"
+                                />
+                              </div>
+                            </LeftArrow>
+                            <RightArrow
+                              goToNextSlide={[Function]}
+                              show={true}
+                            >
+                              <div
+                                className="right-arrow"
+                                onClick={[Function]}
+                                style={
+                                  Object {
+                                    "display": "flex",
+                                  }
+                                }
+                              >
+                                <i
+                                  aria-hidden="true"
+                                  className="fas fa-chevron-right"
+                                />
+                              </div>
+                            </RightArrow>
+                          </div>
+                        </Slider>
+                      </div>
+                    </div>
+                  </Home>
+                </Route>
+              </Switch>
+              <footer>
+                <div
+                  className="Footer"
+                >
+                  <span>
+                    FLORIST.UA © All Rights Reserved
+                  </span>
+                </div>
+              </footer>
+            </div>
+          </App>
+        </AppContextProvider>
+      </Route>
+    </withRouter(AppContextProvider)>
+  </Router>
+</BrowserRouter>
+`;
