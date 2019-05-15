@@ -3,6 +3,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { database } from './firebase';
 import { Labels } from './models/Labels';
 import Spinner from './components/Spinner/Spinner';
+import axios from 'axios';
 
 export interface AppContextState {
   userLogin: string | null | undefined;
@@ -61,6 +62,12 @@ class AppContextProvider extends Component<
   }
   public componentDidMount() {
     // database.ref().child('labels').set(labels);
+    // axios.post(
+    //   'https://us-central1-florist-cb933.cloudfunctions.net/getBrowserLanguage'
+    // );
+    this.setState({
+      lang: window.navigator.language === 'uk' ? 'ua' : 'en'
+    });
     database
       .ref()
       .child('labels')
@@ -173,12 +180,6 @@ class AppContextProvider extends Component<
   };
 
   public render() {
-    console.log(
-      'SHOW: ' +
-        this.state.showNavigation +
-        ' Mobile mode: ' +
-        this.state.mobileMode
-    );
     return this.state.fetchInProgress === true ? (
       <Spinner />
     ) : (
