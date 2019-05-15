@@ -139,7 +139,6 @@ class AppContextProvider extends Component<
   };
 
   private hideNavigationHandler = () => {
-    console.log('Hide Navigation!');
     this.setState({
       showNavigation: false,
       togglePosition: 'absolute'
@@ -174,6 +173,12 @@ class AppContextProvider extends Component<
   };
 
   public render() {
+    console.log(
+      'SHOW: ' +
+        this.state.showNavigation +
+        ' Mobile mode: ' +
+        this.state.mobileMode
+    );
     return this.state.fetchInProgress === true ? (
       <Spinner />
     ) : (
