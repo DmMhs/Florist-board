@@ -14,6 +14,7 @@ import Footer from './layouts/Footer/Footer';
 import PageNotFound from './layouts/PageNotFound/PageNotFound';
 import Admin from './layouts/Admin/Admin';
 import './App.less';
+import { isContext } from 'vm';
 
 interface AppProps {}
 interface AppState {
@@ -83,10 +84,23 @@ class App extends Component<AppProps, AppState> {
   public toggleClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     const context = this.context;
     context.toggleNavigation();
-    (event.target as HTMLDivElement).classList.toggle('active');
   };
 
   public render() {
+    const context = this.context;
+    if (this.toggleRef.current !== null) {
+      const toggleClassList = this.toggleRef.current!.classList;
+      if (
+        toggleClassList.contains('active') === false &&
+        context.state.showNavigation === true &&
+        context.state.mobileMode === true
+      ) {
+        toggleClassList.add('active');
+      } else {
+        toggleClassList.remove('active');
+      }
+    }
+
     return (
       <AppContext.Consumer>
         {value => (
