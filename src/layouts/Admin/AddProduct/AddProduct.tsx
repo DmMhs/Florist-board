@@ -1,11 +1,9 @@
-import React, { Component, Children } from 'react';
+import React, { Component } from 'react';
 
 import './AddProduct.less';
 import { AppContext } from '../../../AppContext';
 import { storageRef, productsRef } from '../../../firebase';
-import { Product } from '../../../models/Product';
 import { withRouter, RouteComponentProps } from 'react-router';
-import { CartItem } from '../../../models/CartItem';
 import { deleteProductImages } from '../../../services/deleteProductImages';
 
 interface AddProductProps {
@@ -139,7 +137,7 @@ class AddProduct extends Component<
     });
   };
 
-  private titleuaInputChangedHandler = (
+  private titleUAInputChangedHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     this.setState({
@@ -150,7 +148,6 @@ class AddProduct extends Component<
   private availableChangedHandler = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    console.log(event.target.value === 'true');
     this.setState({
       available: event.target.value === 'true'
     });
@@ -298,14 +295,12 @@ class AddProduct extends Component<
     let editProductForm: JSX.Element;
 
     if (editModeEnabled === true) {
-      const editAvailable = this.state.available;
       const editTitleUA = this.state.title_ua;
       const editTitleEN = this.state.title;
       const editPrice = this.state.price;
       const editDescriptionEN = this.state.description;
       const editDescriptionUA = this.state.description_ua;
       const editCurrency = this.state.currency;
-      const editImages = this.state.images;
 
       editProductForm = (
         <form onSubmit={this.formSubmitHandler} className="AddProduct form">
@@ -316,6 +311,7 @@ class AddProduct extends Component<
               onChange={this.availableChangedHandler}
               ref={this.editAvailableRef}
               value={this.state.available.toString()}
+              className="availableSelect"
             >
               <option value="true">{labelsRoot.available.option1}</option>
               <option value="false">{labelsRoot.available.option2}</option>
@@ -330,15 +326,17 @@ class AddProduct extends Component<
               required
               value={this.state.title as string}
               placeholder={editTitleEN}
+              className="titleInput"
             />
             <label>{labelsRoot.title_ua}</label>
             <br />
             <input
               type="text"
-              onChange={this.titleuaInputChangedHandler}
+              onChange={this.titleUAInputChangedHandler}
               required
               value={this.state.title_ua as string}
               placeholder={editTitleUA}
+              className="titleUAInput"
             />
           </div>
           <div className="form-control product-images">
@@ -349,6 +347,7 @@ class AddProduct extends Component<
                 type="file"
                 onChange={this.imgInputChangedHandler.bind(this, 0)}
                 required
+                className="fileInput"
               />
             </div>
             <div className="input-wrapper">
@@ -356,6 +355,7 @@ class AddProduct extends Component<
                 type="file"
                 onChange={this.imgInputChangedHandler.bind(this, 1)}
                 required
+                className="fileInput"
               />
             </div>
             <div className="input-wrapper">
@@ -363,6 +363,7 @@ class AddProduct extends Component<
                 type="file"
                 onChange={this.imgInputChangedHandler.bind(this, 2)}
                 required
+                className="fileInput"
               />
             </div>
           </div>
@@ -376,10 +377,12 @@ class AddProduct extends Component<
                 onChange={this.priceInputChangedHandler}
                 value={this.state.price as number}
                 placeholder={editPrice.toString()}
+                className="priceInput"
               />
               <select
                 onChange={this.currencyChangedHandler}
                 value={editCurrency}
+                className="currencySelect"
               >
                 <option value="usd">USD</option>
                 <option value="eur">EUR</option>
@@ -395,6 +398,7 @@ class AddProduct extends Component<
               placeholder={editDescriptionEN}
               onChange={this.descriptionChangedHandler}
               value={this.state.description as string}
+              className="descriptionText"
             />
             <label>{labelsRoot.description_ua}</label>
             <br />
@@ -403,6 +407,7 @@ class AddProduct extends Component<
               placeholder={editDescriptionUA}
               onChange={this.descriptionUAChangedHandler}
               value={this.state.description_ua as string}
+              className="descriptionUAText"
             />
           </div>
           <button type="submit">{submitBtnLabel}</button>
@@ -415,7 +420,10 @@ class AddProduct extends Component<
         <div className="form-control">
           <label>{labelsRoot.available.title}</label>
           <br />
-          <select onChange={this.availableChangedHandler}>
+          <select
+            onChange={this.availableChangedHandler}
+            className="availableSelect"
+          >
             <option value="true">{labelsRoot.available.option1}</option>
             <option value="false">{labelsRoot.available.option2}</option>
           </select>
@@ -428,14 +436,16 @@ class AddProduct extends Component<
             onChange={this.titleInputChangedHandler}
             required
             value={this.state.title as string}
+            className="titleInput"
           />
           <label>{labelsRoot.title_ua}</label>
           <br />
           <input
             type="text"
-            onChange={this.titleuaInputChangedHandler}
+            onChange={this.titleUAInputChangedHandler}
             required
             value={this.state.title_ua as string}
+            className="titleUAInput"
           />
         </div>
         <div className="form-control product-images">
@@ -446,6 +456,7 @@ class AddProduct extends Component<
               type="file"
               onChange={this.imgInputChangedHandler.bind(this, 0)}
               required
+              className="fileInput"
             />
           </div>
           <div className="input-wrapper">
@@ -453,6 +464,7 @@ class AddProduct extends Component<
               type="file"
               onChange={this.imgInputChangedHandler.bind(this, 1)}
               required
+              className="fileInput"
             />
           </div>
           <div className="input-wrapper">
@@ -460,6 +472,7 @@ class AddProduct extends Component<
               type="file"
               onChange={this.imgInputChangedHandler.bind(this, 2)}
               required
+              className="fileInput"
             />
           </div>
         </div>
@@ -472,8 +485,12 @@ class AddProduct extends Component<
               required
               onChange={this.priceInputChangedHandler}
               value={this.state.price as number}
+              className="priceInput"
             />
-            <select onChange={this.currencyChangedHandler}>
+            <select
+              onChange={this.currencyChangedHandler}
+              className="currencySelect"
+            >
               <option value="usd">USD</option>
               <option value="eur">EUR</option>
               <option value="uah">UAH</option>
@@ -488,6 +505,7 @@ class AddProduct extends Component<
             placeholder="Add product description"
             onChange={this.descriptionChangedHandler}
             value={this.state.description as string}
+            className="descriptionText"
           />
           <label>{labelsRoot.description_ua}</label>
           <br />
@@ -496,6 +514,7 @@ class AddProduct extends Component<
             placeholder="Add product description"
             onChange={this.descriptionUAChangedHandler}
             value={this.state.description_ua as string}
+            className="descriptionUAText"
           />
         </div>
         <button type="submit">{submitBtnLabel}</button>

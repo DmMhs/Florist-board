@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddGalleryImage works as expected AddGalleryImage component matches a snapshot 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <withRouter(AppContextProvider)>
+      <Route>
+        <AppContextProvider
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+        >
+          <AddGalleryImage>
+            <form
+              className="AddProduct form"
+              onSubmit={[Function]}
+            >
+              <div
+                className="form-control product-images"
+              >
+                <p
+                  className="gallery-info"
+                  style={
+                    Object {
+                      "color": "green",
+                    }
+                  }
+                >
+                  Expression "(Number of images)/4" should has no remainder for the best gallery displaying
+                </p>
+                <p
+                  className="gallery-info"
+                >
+                  Number of images in gallery: 
+                   
+                  0
+                </p>
+                <hr />
+                <label>
+                  Add image to the galery:
+                </label>
+                <br />
+                <div
+                  className="input-wrapper"
+                >
+                  <input
+                    onChange={[Function]}
+                    type="file"
+                  />
+                </div>
+              </div>
+              <button
+                type="submit"
+              >
+                SUBMIT
+              </button>
+            </form>
+          </AddGalleryImage>
+        </AppContextProvider>
+      </Route>
+    </withRouter(AppContextProvider)>
+  </Router>
+</BrowserRouter>
+`;

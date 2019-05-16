@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChangeURLs works as expected ChangeURLs component matches a snapshot 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <withRouter(AppContextProvider)>
+      <Route>
+        <AppContextProvider
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+        >
+          <ChangeURLs>
+            <form
+              className="URLsForm form"
+              onSubmit={[Function]}
+            >
+              <WithStyles(CircularIndeterminate)>
+                <CircularIndeterminate
+                  classes={
+                    Object {
+                      "progress": "CircularIndeterminate-progress-1",
+                    }
+                  }
+                >
+                  <div
+                    className="Spinner"
+                  >
+                    <WithStyles(CircularProgress)
+                      className="CircularIndeterminate-progress-1"
+                    >
+                      <CircularProgress
+                        className="CircularIndeterminate-progress-1"
+                        classes={
+                          Object {
+                            "circle": "MuiCircularProgress-circle-8",
+                            "circleDisableShrink": "MuiCircularProgress-circleDisableShrink-11",
+                            "circleIndeterminate": "MuiCircularProgress-circleIndeterminate-10",
+                            "circleStatic": "MuiCircularProgress-circleStatic-9",
+                            "colorPrimary": "MuiCircularProgress-colorPrimary-5",
+                            "colorSecondary": "MuiCircularProgress-colorSecondary-6",
+                            "indeterminate": "MuiCircularProgress-indeterminate-4",
+                            "root": "MuiCircularProgress-root-2",
+                            "static": "MuiCircularProgress-static-3",
+                            "svg": "MuiCircularProgress-svg-7",
+                          }
+                        }
+                        color="primary"
+                        disableShrink={false}
+                        size={40}
+                        thickness={3.6}
+                        value={0}
+                        variant="indeterminate"
+                      >
+                        <div
+                          className="MuiCircularProgress-root-2 MuiCircularProgress-colorPrimary-5 MuiCircularProgress-indeterminate-4 CircularIndeterminate-progress-1"
+                          role="progressbar"
+                          style={
+                            Object {
+                              "height": 40,
+                              "width": 40,
+                            }
+                          }
+                        >
+                          <svg
+                            className="MuiCircularProgress-svg-7"
+                            viewBox="22 22 44 44"
+                          >
+                            <circle
+                              className="MuiCircularProgress-circle-8 MuiCircularProgress-circleIndeterminate-10"
+                              cx={44}
+                              cy={44}
+                              fill="none"
+                              r={20.2}
+                              strokeWidth={3.6}
+                              style={Object {}}
+                            />
+                          </svg>
+                        </div>
+                      </CircularProgress>
+                    </WithStyles(CircularProgress)>
+                  </div>
+                </CircularIndeterminate>
+              </WithStyles(CircularIndeterminate)>
+            </form>
+          </ChangeURLs>
+        </AppContextProvider>
+      </Route>
+    </withRouter(AppContextProvider)>
+  </Router>
+</BrowserRouter>
+`;

@@ -65,7 +65,9 @@ const productsSort = (props: ProductsSortProps) => {
         <button onClick={orderByClicked} className="dropbtn">
           {sortBy === 'name'
             ? labels[lang as string].pages.shop.sort.btn.byName.toUpperCase()
-            : labels[lang as string].pages.shop.sort.btn.byPrice.toUpperCase()}{' '}
+            : labels[
+                lang as string
+              ].pages.shop.sort.btn.byPrice.toUpperCase()}{' '}
           <i className="fas fa-caret-down" />
         </button>
         <div ref={orderByOptionsRef} className="dropdown-content">

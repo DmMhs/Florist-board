@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
 
 import './Admin.less';
 import { AppContext } from '../../AppContext';
@@ -114,7 +113,10 @@ class Admin extends Component<
                 <li
                   className={this.state.mode === 'add-product' ? 'active' : ''}
                 >
-                  <a onClick={this.switchModeTo.bind(this, 'add-product')}>
+                  <a
+                    onClick={this.switchModeTo.bind(this, 'add-product')}
+                    className="addProduct"
+                  >
                     {labelsRoot.navigation.addProduct}
                   </a>
                 </li>
@@ -128,6 +130,7 @@ class Admin extends Component<
                       this,
                       'configurate-gallery'
                     )}
+                    className="configurateGallery"
                   >
                     {labelsRoot.navigation.galleryImages}
                   </a>
@@ -139,6 +142,7 @@ class Admin extends Component<
                 >
                   <a
                     onClick={this.switchModeTo.bind(this, 'configurate-labels')}
+                    className="configurateLabels"
                   >
                     {labelsRoot.navigation.labels}
                   </a>
@@ -148,7 +152,10 @@ class Admin extends Component<
                     this.state.mode === 'configurate-urls' ? 'active' : ''
                   }
                 >
-                  <a onClick={this.switchModeTo.bind(this, 'configurate-urls')}>
+                  <a
+                    onClick={this.switchModeTo.bind(this, 'configurate-urls')}
+                    className="configurateURLs"
+                  >
                     {labelsRoot.navigation.urls}
                   </a>
                 </li>

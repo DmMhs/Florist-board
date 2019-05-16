@@ -1,0 +1,1375 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormContent works as expected FormContent component matches a snapshot 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <withRouter(AppContextProvider)>
+      <Route>
+        <AppContextProvider
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+        >
+          <FormContent
+            changeOption={[Function]}
+            labels={
+              Object {
+                "en": Object {
+                  "brand": "FLORIST.UA",
+                  "footer": "FLORIST.UA © All Rights Reserved",
+                  "navigation": Object {
+                    "account": Object {
+                      "main": "MY ACCOUNT",
+                      "menu": Object {
+                        "logOut": "LOG OUT",
+                        "signIn": "SIGN IN",
+                        "signUp": "SIGN UP",
+                      },
+                    },
+                    "cart": "CART",
+                    "contacts": "CONTACTS",
+                    "gallery": "GALLERY",
+                    "home": "HOME",
+                    "lang": "LANG",
+                    "shop": "SHOP",
+                  },
+                  "pages": Object {
+                    "admin": Object {
+                      "addGalleryImageForm": Object {
+                        "add": "Add image to the galery:",
+                        "info": Object {
+                          "restriction": "Expression \\"(Number of images)/4\\" should has no remainder for the best gallery displaying",
+                          "totalImagesNumber": "Number of images in gallery: ",
+                        },
+                      },
+                      "addProductForm": Object {
+                        "available": Object {
+                          "option1": "yes",
+                          "option2": "no",
+                          "title": "Product available: ",
+                        },
+                        "description": "Product description (EN): ",
+                        "description_ua": "Product description (UA): ",
+                        "images": "Product images: ",
+                        "price": "Product price: ",
+                        "title": "Product title (EN): ",
+                        "title_ua": "Product title (UA): ",
+                      },
+                      "change": "Change ",
+                      "changeLabelsForm": Object {
+                        "main": "Labels Configuration",
+                      },
+                      "current": "Current value: ",
+                      "navigation": Object {
+                        "addProduct": "ADD PRODUCT",
+                        "contacts": "CONTACTS",
+                        "galleryImages": "GALLERY IMAGES",
+                        "labels": "LABELS",
+                        "urls": "URLs",
+                      },
+                      "submitBtn": "SUBMIT",
+                      "title": "Admin Control Panel",
+                    },
+                    "auth": Object {
+                      "alternative": "OR",
+                      "btn": "SUBMIT",
+                      "email": "Email:",
+                      "isAuth": Object {
+                        "main": "You are authenticated",
+                        "sub": "You need to log out if you want to reathenticate!",
+                      },
+                      "password": "Password:",
+                      "signin": Object {
+                        "account": "Have no account ?",
+                        "btn": "SIGN UP",
+                        "facebook": "Sign In with a Facebook:",
+                        "google": "Sign In with a Google:",
+                      },
+                      "signup": Object {
+                        "account": "Already have an account ?",
+                        "btn": "SIGN IN",
+                        "facebook": "Sign Up with a Facebook:",
+                        "google": "Sign Up with a Google:",
+                      },
+                    },
+                    "contacts": Object {
+                      "info": "Feel free to get in touch with us!",
+                      "map": "Where to find us?",
+                    },
+                    "gallery": Object {
+                      "main": "Our Gallery",
+                    },
+                    "pageNotFound": "Page not found",
+                    "productDetails": Object {
+                      "description": "Description",
+                      "facebookShare": "SHARE",
+                      "goShopping": "GO SHOPPING",
+                      "notAvailable": "not available",
+                      "only": "only",
+                    },
+                    "shop": Object {
+                      "cart": Object {
+                        "amount": "AMOUNT",
+                        "btn": "LET'S FIX IT",
+                        "empty": "cart is empty",
+                        "orderBtn": "ORDER",
+                        "price": "PRICE",
+                        "title": "PRODUCT",
+                        "total": "Total Sum:",
+                      },
+                      "filter": Object {
+                        "available": "IN STOCK",
+                        "main": "Filters",
+                        "price": "PRICE RANGE",
+                        "priceInputs": Object {
+                          "from": "from",
+                          "to": "to",
+                        },
+                      },
+                      "notAvailable": "not available :(",
+                      "sort": Object {
+                        "btn": Object {
+                          "byName": "NAME",
+                          "byPrice": "PRICE",
+                        },
+                        "main": "sort by",
+                      },
+                    },
+                  },
+                },
+                "ua": Object {
+                  "brand": "FLORIST.UA",
+                  "footer": "FLORIST.UA © Всі Права Захищено",
+                  "navigation": Object {
+                    "account": Object {
+                      "main": "МІЙ АККАУНТ",
+                      "menu": Object {
+                        "logOut": "ВИЙТИ",
+                        "signIn": "УВІЙТИ",
+                        "signUp": "РЕЄСТРАЦІЯ",
+                      },
+                    },
+                    "cart": "КОРЗИНА",
+                    "contacts": "КОНТАКТИ",
+                    "gallery": "ГАЛЕРЕЯ",
+                    "home": "ГОЛОВНА",
+                    "lang": "МОВА",
+                    "shop": "МАГАЗИН",
+                  },
+                  "pages": Object {
+                    "admin": Object {
+                      "addGalleryImageForm": Object {
+                        "add": "Добавити картинку в галерею:",
+                        "info": Object {
+                          "restriction": "Кількість картинок повинна бути кратною чотирьом для найкращого відображення галереї",
+                          "totalImagesNumber": "Кількість картинок в галереї: ",
+                        },
+                      },
+                      "addProductForm": Object {
+                        "available": Object {
+                          "option1": "так",
+                          "option2": "ні",
+                          "title": "Продукт в наявності: ",
+                        },
+                        "description": "Опис продукту (EN): ",
+                        "description_ua": "Опис продукту (UA): ",
+                        "images": "Картинки продукту: ",
+                        "price": "Вартість продукту: ",
+                        "title": "Назва продукту (EN): ",
+                        "title_ua": "Назва продукту (UA): ",
+                      },
+                      "change": "Змінити ",
+                      "changeLabelsForm": Object {
+                        "main": "Налаштування лейблів",
+                      },
+                      "current": "Поточне значення: ",
+                      "navigation": Object {
+                        "addProduct": "ДОДАТИ ПРОДУКТ",
+                        "contacts": "КОНТАКТИ",
+                        "galleryImages": "ГАЛЕРЕЯ",
+                        "labels": "ЛЕЙБЛИ",
+                        "urls": "ПОСИЛАННЯ",
+                      },
+                      "submitBtn": "ПІДТВЕРДИТИ",
+                      "title": "Адмін Панель",
+                    },
+                    "auth": Object {
+                      "alternative": "АБО",
+                      "btn": "ПІДТВЕРДИТИ",
+                      "email": "Е-почта:",
+                      "isAuth": Object {
+                        "main": "Ви вже авторизовані",
+                        "sub": "Для повторної авторизації вийдіть зі свого аккаунту!",
+                      },
+                      "password": "Пароль:",
+                      "signin": Object {
+                        "account": "Ще не зареєстровані?",
+                        "btn": "РЕЄСТРАЦІЯ",
+                        "facebook": "Увійти з Facebook:",
+                        "google": "Увійти з Google:",
+                      },
+                      "signup": Object {
+                        "account": "Вже маєте аккаунт?",
+                        "btn": "УВІЙТИ",
+                        "facebook": "Увійти з Facebook:",
+                        "google": "Увійти з Google:",
+                      },
+                    },
+                    "contacts": Object {
+                      "info": "Зв'яжіться з нами - ми вам допоможемо!",
+                      "map": "Де нас можна знайти?",
+                    },
+                    "gallery": Object {
+                      "main": "Наша Галерея",
+                    },
+                    "pageNotFound": "Сторінку не знайдено",
+                    "productDetails": Object {
+                      "description": "Опис",
+                      "facebookShare": "ПОДІЛИТИСЬ",
+                      "goShopping": "В МАГАЗИН",
+                      "notAvailable": "немає в наявності",
+                      "only": "тільки",
+                    },
+                    "shop": Object {
+                      "cart": Object {
+                        "amount": "КІЛЬКІСТЬ",
+                        "btn": "ВИПРАВИМО ЦЕ",
+                        "empty": "кошик порожній",
+                        "orderBtn": "ЗАМОВИТИ",
+                        "price": "ЦІНА",
+                        "title": "ПРОДУКТ",
+                        "total": "Загальна сума:",
+                      },
+                      "filter": Object {
+                        "available": "В НАЯВНОСТІ",
+                        "main": "Фільтри",
+                        "price": "ЦІНОВИЙ ДІАПАЗОН",
+                        "priceInputs": Object {
+                          "from": "від",
+                          "to": "до",
+                        },
+                      },
+                      "notAvailable": "немає :(",
+                      "sort": Object {
+                        "btn": Object {
+                          "byName": "IМ'ЯМ",
+                          "byPrice": "ЦІНОЮ",
+                        },
+                        "main": "сортувати за",
+                      },
+                    },
+                  },
+                },
+              }
+            }
+            lang="en"
+          >
+            <div
+              className="FormContent"
+            >
+              <div
+                className="form-control"
+              >
+                <label>
+                  Change 
+                   brand: 
+                </label>
+                <br />
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  FLORIST.UA
+                </p>
+              </div>
+              <div
+                className="form-control"
+              >
+                <label>
+                  Change 
+                   navigation... 
+                </label>
+                <br />
+                <p>
+                  home:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  HOME
+                </p>
+                <p>
+                  shop:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  SHOP
+                </p>
+                <p>
+                  gallery:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  GALLERY
+                </p>
+                <p>
+                  contacts page:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  CONTACTS
+                </p>
+                <p>
+                  cart:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  CART
+                </p>
+                <p>
+                  account/main:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  MY ACCOUNT
+                </p>
+                <p>
+                  account/menu/signIn:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  SIGN IN
+                </p>
+                <p>
+                  account/menu/signUp:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  SIGN UP
+                </p>
+                <p>
+                  account/menu/logOut:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  LOG OUT
+                </p>
+                <p>
+                  lang:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  LANG
+                </p>
+              </div>
+              <div
+                className="form-control"
+              >
+                <label>
+                  Change 
+                   pages/admin... 
+                </label>
+                <br />
+                <p>
+                  title: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Admin Control Panel
+                </p>
+                <p>
+                  navigation/addProduct: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  ADD PRODUCT
+                </p>
+                <p>
+                  navigation/galleryImages: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  GALLERY IMAGES
+                </p>
+                <p>
+                  navigation/labels: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  LABELS
+                </p>
+                <p>
+                  addProductForm/available/title: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Product available: 
+                </p>
+                <p>
+                  addProductForm/available/option1: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  yes
+                </p>
+                <p>
+                  addProductForm/available/option2: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  no
+                </p>
+                <p>
+                  addProductForm/title: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Product title (EN): 
+                </p>
+                <p>
+                  addProductForm/title_ua: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Product title (UA): 
+                </p>
+                <p>
+                  addProductForm/images: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Product images: 
+                </p>
+                <p>
+                  addProductForm/price: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Product price: 
+                </p>
+                <p>
+                  addProductForm/description: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Product description (EN): 
+                </p>
+                <p>
+                  addProductForm/description_ua: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Product description (UA): 
+                </p>
+                <p>
+                  addGalleryImageForm/info/restriction: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Expression "(Number of images)/4" should has no remainder for the best gallery displaying
+                </p>
+                <p>
+                  addGalleryImageForm/info/totalImagesNumber: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Number of images in gallery: 
+                </p>
+                <p>
+                  addGalleryImageForm/add: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Add image to the galery:
+                </p>
+                <p>
+                  changeLabelsForm/change: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Change 
+                </p>
+                <p>
+                  changeLabelsForm/current: 
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Current value: 
+                </p>
+              </div>
+              <div
+                className="form-control"
+              >
+                <label>
+                  Change 
+                   pages/shop... 
+                </label>
+                <br />
+                <p>
+                  notAvailable:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  not available :(
+                </p>
+                <p>
+                  sort/main:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  sort by
+                </p>
+                <p>
+                  sort/btn/byName:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  NAME
+                </p>
+                <p>
+                  sort/btn/byPrice:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  PRICE
+                </p>
+                <p>
+                  filter/main:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Filters
+                </p>
+                <p>
+                  filter/available:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  IN STOCK
+                </p>
+                <p>
+                  filter/price:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  PRICE RANGE
+                </p>
+                <p>
+                  filter/priceInputs/from:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  from
+                </p>
+                <p>
+                  filter/priceInputs/to:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  to
+                </p>
+                <p>
+                  cart/empty:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  cart is empty
+                </p>
+                <p>
+                  cart/btn:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  LET'S FIX IT
+                </p>
+                <p>
+                  cart/title:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  PRODUCT
+                </p>
+                <p>
+                  cart/amount:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  AMOUNT
+                </p>
+                <p>
+                  cart/price:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  PRICE
+                </p>
+                <p>
+                  cart/total:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Total Sum:
+                </p>
+                <p>
+                  cart/orderBtn:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  ORDER
+                </p>
+              </div>
+              <div
+                className="form-control"
+              >
+                <label>
+                  Change 
+                   pages/gallery/main: 
+                </label>
+                <br />
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Our Gallery
+                </p>
+              </div>
+              <div
+                className="form-control"
+              >
+                <label>
+                  Change 
+                   pages/contacts... 
+                </label>
+                <br />
+                <p>
+                  map:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Where to find us?
+                </p>
+                <p>
+                  info:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Feel free to get in touch with us!
+                </p>
+              </div>
+              <div
+                className="form-control"
+              >
+                <label>
+                  Change 
+                   pages/auth... 
+                </label>
+                <br />
+                <p>
+                  email:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Email:
+                </p>
+                <p>
+                  password:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Password:
+                </p>
+                <p>
+                  btn:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  SUBMIT
+                </p>
+                <p>
+                  alternative:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  OR
+                </p>
+                <p>
+                  isAuth/main:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  You are authenticated
+                </p>
+                <p>
+                  isAuth/sub:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  You need to log out if you want to reathenticate!
+                </p>
+                <p>
+                  signup/google:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Sign Up with a Google:
+                </p>
+                <p>
+                  signup/facebook:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Sign Up with a Facebook:
+                </p>
+                <p>
+                  signup/account:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Already have an account ?
+                </p>
+                <p>
+                  signup/btn:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  SIGN IN
+                </p>
+                <p>
+                  signin/google:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Sign In with a Google:
+                </p>
+                <p>
+                  signin/facebook:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Sign In with a Facebook:
+                </p>
+                <p>
+                  signin/account:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Have no account ?
+                </p>
+                <p>
+                  signin/btn:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  SIGN UP
+                </p>
+              </div>
+              <div
+                className="form-control"
+              >
+                <label>
+                  Change 
+                   pages/pageNotFound: 
+                </label>
+                <br />
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Page not found
+                </p>
+              </div>
+              <div
+                className="form-control"
+              >
+                <label>
+                  Change 
+                   pages/productDetails... 
+                </label>
+                <br />
+                <p>
+                  description:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  Description
+                </p>
+                <p>
+                  only:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  only
+                </p>
+                <p>
+                  notAvailable:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  not available
+                </p>
+                <p>
+                  facebookShare:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  SHARE
+                </p>
+                <p>
+                  goShopping:
+                </p>
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  GO SHOPPING
+                </p>
+              </div>
+              <div
+                className="form-control"
+              >
+                <label>
+                  Change 
+                   footer: 
+                </label>
+                <br />
+                <input
+                  onChange={[Function]}
+                  type="text"
+                />
+                <p
+                  className="current"
+                >
+                  Current value: 
+                   
+                  FLORIST.UA © All Rights Reserved
+                </p>
+              </div>
+            </div>
+          </FormContent>
+        </AppContextProvider>
+      </Route>
+    </withRouter(AppContextProvider)>
+  </Router>
+</BrowserRouter>
+`;
