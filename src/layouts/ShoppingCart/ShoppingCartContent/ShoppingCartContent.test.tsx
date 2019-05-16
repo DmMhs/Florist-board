@@ -4,6 +4,7 @@ import { shallow, mount } from 'enzyme';
 import ShoppingCartContent from './ShoppingCartContent';
 import { BrowserRouter } from 'react-router-dom';
 import AppContextProvider from '../../../AppContext';
+import labels from '../../../config/labels';
 
 describe('ShoppingCartContent works as expected', () => {
   it('matches a snapshot', () => {
@@ -21,8 +22,11 @@ describe('ShoppingCartContent works as expected', () => {
     );
     const context = wrapper.find('AppContextProvider').instance();
     context.setState({
-      lang: 'en'
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false
     });
+    wrapper.update();
     expect(wrapper).toMatchSnapshot();
   });
 });

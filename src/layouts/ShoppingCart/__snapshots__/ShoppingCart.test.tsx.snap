@@ -64,54 +64,73 @@ exports[`ShoppingCart works as expected ShoppingCartItem matches a snapshot 1`] 
             }
           }
         >
-          <ShoppingCart
-            cartItems={Array []}
-            closeCart={[Function]}
-            remove={[Function]}
-            showCart={true}
-          >
-            <div
-              className="ShoppingCart"
-              style={
+          <WithStyles(CircularIndeterminate)>
+            <CircularIndeterminate
+              classes={
                 Object {
-                  "display": "flex",
+                  "progress": "CircularIndeterminate-progress-1",
                 }
               }
             >
               <div
-                className="cart-content"
+                className="Spinner"
               >
-                <i
-                  className="fas fa-times close-cart"
-                  onClick={[Function]}
-                />
-                <ShoppingCartContent
-                  cartItemsList={Array []}
-                  fixEmptyCart={[Function]}
-                  totalPrice={0}
+                <WithStyles(CircularProgress)
+                  className="CircularIndeterminate-progress-1"
                 >
-                  <div>
-                    <h4>
-                      cart is empty
-                    </h4>
-                    <button
-                      className="fix"
-                      onClick={[Function]}
-                      type="button"
+                  <CircularProgress
+                    className="CircularIndeterminate-progress-1"
+                    classes={
+                      Object {
+                        "circle": "MuiCircularProgress-circle-8",
+                        "circleDisableShrink": "MuiCircularProgress-circleDisableShrink-11",
+                        "circleIndeterminate": "MuiCircularProgress-circleIndeterminate-10",
+                        "circleStatic": "MuiCircularProgress-circleStatic-9",
+                        "colorPrimary": "MuiCircularProgress-colorPrimary-5",
+                        "colorSecondary": "MuiCircularProgress-colorSecondary-6",
+                        "indeterminate": "MuiCircularProgress-indeterminate-4",
+                        "root": "MuiCircularProgress-root-2",
+                        "static": "MuiCircularProgress-static-3",
+                        "svg": "MuiCircularProgress-svg-7",
+                      }
+                    }
+                    color="primary"
+                    disableShrink={false}
+                    size={40}
+                    thickness={3.6}
+                    value={0}
+                    variant="indeterminate"
+                  >
+                    <div
+                      className="MuiCircularProgress-root-2 MuiCircularProgress-colorPrimary-5 MuiCircularProgress-indeterminate-4 CircularIndeterminate-progress-1"
+                      role="progressbar"
+                      style={
+                        Object {
+                          "height": 40,
+                          "width": 40,
+                        }
+                      }
                     >
-                      <span>
-                        LET'S FIX IT
-                      </span>
-                       
-                      <i
-                        className="far fa-smile-wink"
-                      />
-                    </button>
-                  </div>
-                </ShoppingCartContent>
+                      <svg
+                        className="MuiCircularProgress-svg-7"
+                        viewBox="22 22 44 44"
+                      >
+                        <circle
+                          className="MuiCircularProgress-circle-8 MuiCircularProgress-circleIndeterminate-10"
+                          cx={44}
+                          cy={44}
+                          fill="none"
+                          r={20.2}
+                          strokeWidth={3.6}
+                          style={Object {}}
+                        />
+                      </svg>
+                    </div>
+                  </CircularProgress>
+                </WithStyles(CircularProgress)>
               </div>
-            </div>
-          </ShoppingCart>
+            </CircularIndeterminate>
+          </WithStyles(CircularIndeterminate)>
         </AppContextProvider>
       </Route>
     </withRouter(AppContextProvider)>

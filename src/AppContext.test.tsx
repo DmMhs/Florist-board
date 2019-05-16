@@ -3,6 +3,7 @@ import { shallow, mount } from 'enzyme';
 
 import AppContextProvider from './AppContext';
 import { BrowserRouter } from 'react-router-dom';
+import labels from './config/labels';
 
 describe('AppContext works as expected', () => {
   it('AppContext matches a snapshot', () => {
@@ -37,16 +38,35 @@ describe('AppContext works as expected', () => {
       userToken: '',
       userAuthenticated: false,
       authenticationMethod: undefined,
-      lang: 'en'
+      userRole: '',
+      lang: 'en',
+      labels: {},
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
-    instance.setUserCredentialsHandler('testLogin', 'testId', 'testToken');
+    wrapper.update();
+    instance.setUserCredentialsHandler(
+      'testLogin',
+      'testId',
+      'testToken',
+      '',
+      ''
+    );
     expect(instance.state).toEqual({
       userLogin: 'testLogin',
       userId: 'testId',
       userToken: 'testToken',
       userAuthenticated: true,
-      authenticationMethod: undefined,
-      lang: 'en'
+      authenticationMethod: '',
+      userRole: '',
+      lang: 'en',
+      labels: {},
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
     instance.logoutHandler();
     expect(instance.state).toEqual({
@@ -55,7 +75,13 @@ describe('AppContext works as expected', () => {
       userToken: '',
       userAuthenticated: false,
       authenticationMethod: undefined,
-      lang: 'en'
+      userRole: '',
+      lang: 'en',
+      labels: {},
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
     });
   });
 

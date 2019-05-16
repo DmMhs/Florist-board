@@ -1,19 +1,89 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PageNotFound works as expected PageNotFound component matches a snapshot 1`] = `
-<div
-  className="PageNotFound"
->
-  <h2>
-    <span
-      className="message"
-    >
-      Сторінку не знайдено
-    </span>
-     
-    <i
-      className="far fa-grimace"
-    />
-  </h2>
-</div>
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <withRouter(AppContextProvider)>
+      <Route>
+        <AppContextProvider
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+        >
+          <pageNotFound>
+            <div
+              className="PageNotFound"
+            >
+              <h2>
+                <span
+                  className="message"
+                >
+                  Page not found
+                </span>
+                 
+                <i
+                  className="far fa-grimace"
+                />
+              </h2>
+            </div>
+          </pageNotFound>
+        </AppContextProvider>
+      </Route>
+    </withRouter(AppContextProvider)>
+  </Router>
+</BrowserRouter>
 `;
