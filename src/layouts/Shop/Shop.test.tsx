@@ -1,7 +1,8 @@
 import React from 'react';
-import Shop from './Shop';
+
 import { mount } from 'enzyme';
 
+import Shop from './Shop';
 import { Product } from '../../models/Product';
 import { productsRef } from '../../firebase';
 import { BrowserRouter } from 'react-router-dom';

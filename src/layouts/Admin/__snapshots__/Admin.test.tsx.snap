@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Admin works as expected Admin component matches a snapshot 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <withRouter(AppContextProvider)>
+      <Route>
+        <AppContextProvider
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+        >
+          <withRouter(Admin)>
+            <Route>
+              <Admin
+                history={
+                  Object {
+                    "action": "POP",
+                    "block": [Function],
+                    "createHref": [Function],
+                    "go": [Function],
+                    "goBack": [Function],
+                    "goForward": [Function],
+                    "length": 1,
+                    "listen": [Function],
+                    "location": Object {
+                      "hash": "",
+                      "pathname": "/",
+                      "search": "",
+                      "state": undefined,
+                    },
+                    "push": [Function],
+                    "replace": [Function],
+                  }
+                }
+                location={
+                  Object {
+                    "hash": "",
+                    "pathname": "/",
+                    "search": "",
+                    "state": undefined,
+                  }
+                }
+                match={
+                  Object {
+                    "isExact": true,
+                    "params": Object {},
+                    "path": "/",
+                    "url": "/",
+                  }
+                }
+              >
+                <div
+                  className="Admin"
+                >
+                  <h1>
+                    Admin Control Panel
+                  </h1>
+                  <hr />
+                  <ul
+                    className="admin-actions"
+                  >
+                    <li
+                      className=""
+                    >
+                      <a
+                        className="addProduct"
+                        onClick={[Function]}
+                      >
+                        ADD PRODUCT
+                      </a>
+                    </li>
+                    <li
+                      className=""
+                    >
+                      <a
+                        className="configurateGallery"
+                        onClick={[Function]}
+                      >
+                        GALLERY IMAGES
+                      </a>
+                    </li>
+                    <li
+                      className=""
+                    >
+                      <a
+                        className="configurateLabels"
+                        onClick={[Function]}
+                      >
+                        LABELS
+                      </a>
+                    </li>
+                    <li
+                      className=""
+                    >
+                      <a
+                        className="configurateURLs"
+                        onClick={[Function]}
+                      >
+                        URLs
+                      </a>
+                    </li>
+                    <li
+                      className=""
+                    >
+                      <a
+                        onClick={[Function]}
+                      >
+                        CONTACTS
+                      </a>
+                    </li>
+                  </ul>
+                  <div
+                    className="form-wrapper"
+                  >
+                    <h3>
+                      Hm...
+                    </h3>
+                  </div>
+                </div>
+              </Admin>
+            </Route>
+          </withRouter(Admin)>
+        </AppContextProvider>
+      </Route>
+    </withRouter(AppContextProvider)>
+  </Router>
+</BrowserRouter>
+`;

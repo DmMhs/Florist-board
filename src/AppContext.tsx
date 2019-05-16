@@ -3,7 +3,6 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { database } from './firebase';
 import { Labels } from './models/Labels';
 import Spinner from './components/Spinner/Spinner';
-import axios from 'axios';
 
 export interface AppContextState {
   userLogin: string | null | undefined;
@@ -68,6 +67,7 @@ class AppContextProvider extends Component<
     this.setState({
       lang: window.navigator.language === 'uk' ? 'ua' : 'en'
     });
+
     database
       .ref()
       .child('labels')
