@@ -158,6 +158,7 @@ exports[`Admin works as expected Admin component matches a snapshot 1`] = `
                       className=""
                     >
                       <a
+                        className="configurateContacts"
                         onClick={[Function]}
                       >
                         CONTACTS

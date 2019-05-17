@@ -27,4 +27,33 @@ describe('ChangeContacts works as expected', () => {
     wrapper.update();
     expect(wrapper).toMatchSnapshot();
   });
+  it('FormContent displays when fetch is over', () => {
+    const wrapper = mount(
+      <BrowserRouter>
+        <AppContextProvider>
+          <ChangeContacts />
+        </AppContextProvider>
+      </BrowserRouter>
+    );
+    const context = wrapper.find('AppContextProvider').instance();
+    context.setState({
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
+    });
+    wrapper.update();
+    const instance = wrapper.find('ChangeContacts').instance();
+    instance.setState({
+      fetchInProgress: true
+    });
+    expect(wrapper.find('.FormContent').exists()).toBeFalsy();
+    instance.setState({
+      fetchInProgress: false
+    });
+    wrapper.update();
+    expect(wrapper.find('.FormContent').exists()).toBeTruthy();
+  });
 });

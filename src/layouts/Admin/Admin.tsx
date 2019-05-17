@@ -169,6 +169,7 @@ class Admin extends Component<
                       this,
                       'configurate-contacts'
                     )}
+                    className="configurateContacts"
                   >
                     {labelsRoot.navigation.contacts}
                   </a>

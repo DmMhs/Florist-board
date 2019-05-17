@@ -36,11 +36,11 @@ describe('Admin works as expected', () => {
   });
   it('mode switching changes the state', () => {
     const match = { params: { mode: 'add-product' } };
-    const historyMock = { push: jest.fn() };
+    const historyMock = { replace: jest.fn() };
     const wrapper = mount(
       <BrowserRouter>
         <AppContextProvider>
-          <Admin.WrappedComponent match={match} history={historyMock}/>
+          <Admin.WrappedComponent match={match} history={historyMock} />
         </AppContextProvider>
       </BrowserRouter>
     );
@@ -60,17 +60,7 @@ describe('Admin works as expected', () => {
       togglePosition: 'absolute'
     });
     wrapper.update();
-    const instance = wrapper.find('Admin').instance();
-    console.log(instance.state);
     wrapper.find('.configurateGallery').simulate('click');
-    console.log(instance.state);
-    expect(historyMock.push.mock.calls[0]).toEqual([ '/admin/configurate-gallery', {} ]);
-    // expect(instance.state.mode).toEqual('configurate-gallery');
-    // wrapper.find('.configurateURLs').simulate('click');
-    // expect(instance.state.mode).toEqual('configurate-urls');
-    // wrapper.find('.configurateContacts').simulate('click');
-    // expect(instance.state.mode).toEqual('configurate-contacts');
-    // wrapper.find('.configurateLabels').simulate('click');
-    // expect(instance.state.mode).toEqual('configurate-labels');
+    expect(historyMock.replace.mock.calls[0]).toEqual(['configurate-gallery']);
   });
 });
