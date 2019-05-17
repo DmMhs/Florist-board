@@ -95,4 +95,60 @@ describe('AppContext works as expected', () => {
     const instance = wrapper.find('AppContextProvider').instance();
     expect(instance.state.userAuthenticated).toBeTruthy();
   });
+  it('showNavigationHandler and hideNavigationHandler change the state', () => {
+    const wrapper = mount(
+      <BrowserRouter>
+        <AppContextProvider.WrappedComponent />
+      </BrowserRouter>
+    );
+    const context = wrapper.find('AppContextProvider').instance();
+    context.setState({
+      userLogin: 'testLogin',
+      userId: 'testId',
+      userToken: 'testToken',
+      userAuthenticated: false,
+      authenticationMethod: undefined,
+      userRole: 'user',
+      lang: 'en',
+      labels: {},
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
+    });
+    wrapper.update();
+    context.showNavigationHandler();
+    expect(context.state.showNavigation).toBeTruthy();
+    expect(context.state.togglePosition).toEqual('fixed');
+    context.hideNavigationHandler();
+    expect(context.state.showNavigation).toBeFalsy();
+    expect(context.state.togglePosition).toEqual('absolute');
+  });
+  it('enableMobileModeHandler and disableMobileModeHandler change the state', () => {
+    const wrapper = mount(
+      <BrowserRouter>
+        <AppContextProvider.WrappedComponent />
+      </BrowserRouter>
+    );
+    const context = wrapper.find('AppContextProvider').instance();
+    context.setState({
+      userLogin: 'testLogin',
+      userId: 'testId',
+      userToken: 'testToken',
+      userAuthenticated: false,
+      authenticationMethod: undefined,
+      userRole: 'user',
+      lang: 'en',
+      labels: {},
+      fetchInProgress: false,
+      mobileMode: false,
+      showNavigation: false,
+      togglePosition: 'absolute'
+    });
+    wrapper.update();
+    context.enableMobileModeHandler();
+    expect(context.state.mobileMode).toBeTruthy();
+    context.disableMobileModeHandler();
+    expect(context.state.mobileMode).toBeFalsy();
+  });
 });

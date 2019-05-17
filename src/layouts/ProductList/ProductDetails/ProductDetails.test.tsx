@@ -105,4 +105,40 @@ describe('ProductDetails works as expected', () => {
       });
     expect(instance.state.productData.images.length).toBeGreaterThan(0);
   });
+  it('Details are displayed when fetch is over', () => {
+    const wrapper = mount(
+      <BrowserRouter>
+        <AppContextProvider>
+          <ProductDetails
+            match={{
+              params: { id: 'any' },
+              isExact: true,
+              path: '',
+              url: ''
+            }}
+          />
+        </AppContextProvider>
+      </BrowserRouter>
+    );
+    const context = wrapper.find('AppContextProvider').instance();
+    context.setState({
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
+    });
+    wrapper.update();
+    const instance = wrapper.find('ProductDetails').instance();
+    instance.setState({
+      fetchInProgress: true
+    });
+    expect(wrapper.find('.product-info-wrapper').exists()).toBeFalsy();
+    instance.setState({
+      fetchInProgress: false
+    });
+    wrapper.update();
+    expect(wrapper.find('.product-info-wrapper').exists()).toBeTruthy();
+  });
 });

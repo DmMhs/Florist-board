@@ -37,6 +37,7 @@ interface AdminState {
     | 'configurate-labels'
     | 'configurate-urls'
     | 'configurate-contacts';
+  form: JSX.Element | null;
 }
 
 class Admin extends Component<
@@ -55,8 +56,13 @@ class Admin extends Component<
   constructor(props: RouteComponentProps<MatchParams> & RCProps<{}>) {
     super(props);
     this.state = {
-      mode: 'add-product'
+      mode: 'add-product',
+      form: <AddProduct />
     };
+  }
+
+  componentDidMount() {
+    const mode = this.props.match.params.mode;
   }
 
   private switchModeTo = (
@@ -70,38 +76,54 @@ class Admin extends Component<
   ) => {
     (this.props as RouteComponentProps<MatchParams> &
       RCProps<{}>).history.replace(`${mode}`);
+
+    const currentMode = this.state.mode;
+
+    switch (currentMode) {
+      case 'add-product':
+        this.setState({
+          form: <AddProduct />
+        });
+        break;
+      case 'edit-product':
+        this.setState({
+          form: <AddProduct editModeEnabled={true} />
+        });
+        break;
+      case 'configurate-gallery':
+        this.setState({
+          form: <AddGalleryImage />
+        });
+        break;
+      case 'configurate-labels':
+        this.setState({
+          form: <ChangeLabels />
+        });
+        break;
+      case 'configurate-urls':
+        this.setState({
+          form: <ChangeURLs />
+        });
+        break;
+      case 'configurate-contacts':
+        this.setState({
+          form: <ChangeContacts />
+        });
+        break;
+      default:
+        this.setState({
+          form: null
+        });
+    }
   };
 
   public render() {
-    const { mode } = this.state;
     const context = this.context;
     const lang = context.state.lang;
     const labels = context.state.labels;
     const labelsRoot = labels[lang].pages.admin;
+    console.log(this.state);
 
-    let form: JSX.Element;
-    switch (mode) {
-      case 'add-product':
-        form = <AddProduct />;
-        break;
-      case 'edit-product':
-        form = <AddProduct editModeEnabled={true} />;
-        break;
-      case 'configurate-gallery':
-        form = <AddGalleryImage />;
-        break;
-      case 'configurate-labels':
-        form = <ChangeLabels />;
-        break;
-      case 'configurate-urls':
-        form = <ChangeURLs />;
-        break;
-      case 'configurate-contacts':
-        form = <ChangeContacts />;
-        break;
-      default:
-        form = <h3>Hm...</h3>;
-    }
     return (
       <AppContext.Consumer>
         {value =>
@@ -169,12 +191,13 @@ class Admin extends Component<
                       this,
                       'configurate-contacts'
                     )}
+                    className="configurateContacts"
                   >
                     {labelsRoot.navigation.contacts}
                   </a>
                 </li>
               </ul>
-              <div className="form-wrapper">{form}</div>
+              <div className="form-wrapper">{this.state.form}</div>
             </div>
           ) : (
             <Redirect to="/" />

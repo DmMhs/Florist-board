@@ -295,13 +295,6 @@ class AddProduct extends Component<
     let editProductForm: JSX.Element;
 
     if (editModeEnabled === true) {
-      const editTitleUA = this.state.title_ua;
-      const editTitleEN = this.state.title;
-      const editPrice = this.state.price;
-      const editDescriptionEN = this.state.description;
-      const editDescriptionUA = this.state.description_ua;
-      const editCurrency = this.state.currency;
-
       editProductForm = (
         <form onSubmit={this.formSubmitHandler} className="AddProduct form">
           <div className="form-control">
@@ -325,7 +318,7 @@ class AddProduct extends Component<
               onChange={this.titleInputChangedHandler}
               required
               value={this.state.title as string}
-              placeholder={editTitleEN}
+              placeholder={this.state.title}
               className="titleInput"
             />
             <label>{labelsRoot.title_ua}</label>
@@ -335,7 +328,7 @@ class AddProduct extends Component<
               onChange={this.titleUAInputChangedHandler}
               required
               value={this.state.title_ua as string}
-              placeholder={editTitleUA}
+              placeholder={this.state.title_ua}
               className="titleUAInput"
             />
           </div>
@@ -376,12 +369,12 @@ class AddProduct extends Component<
                 required
                 onChange={this.priceInputChangedHandler}
                 value={this.state.price as number}
-                placeholder={editPrice.toString()}
+                placeholder={this.state.price.toString()}
                 className="priceInput"
               />
               <select
                 onChange={this.currencyChangedHandler}
-                value={editCurrency}
+                value={this.state.currency}
                 className="currencySelect"
               >
                 <option value="usd">USD</option>
@@ -395,7 +388,7 @@ class AddProduct extends Component<
             <br />
             <textarea
               required
-              placeholder={editDescriptionEN}
+              placeholder={this.state.description}
               onChange={this.descriptionChangedHandler}
               value={this.state.description as string}
               className="descriptionText"
@@ -404,7 +397,7 @@ class AddProduct extends Component<
             <br />
             <textarea
               required
-              placeholder={editDescriptionUA}
+              placeholder={this.state.description_ua}
               onChange={this.descriptionUAChangedHandler}
               value={this.state.description_ua as string}
               className="descriptionUAText"
