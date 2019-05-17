@@ -72,16 +72,17 @@ class AddGalleryImage extends Component<
     const labels = context.state.labels;
     const lang = context.state.lang;
 
-    const labelsRoot =
-      labels[lang].pages.admin.addGalleryImageForm;
-    const submitBtnLabel =
-      labels[lang].pages.admin.submitBtn;
+    const labelsRoot = labels[lang].pages.admin.addGalleryImageForm;
+    const submitBtnLabel = labels[lang].pages.admin.submitBtn;
     const color = this.state.totalImagesNumber % 4 === 0 ? 'green' : 'darkred';
     return (
       <AppContext.Consumer>
         {value =>
           value && (
-            <form onSubmit={this.formSubmitHandler} className="AddProduct form">
+            <form
+              onSubmit={this.formSubmitHandler}
+              className="AddGalleryImage form"
+            >
               <div className="form-control product-images">
                 <p style={{ color }} className="gallery-info">
                   {labelsRoot.info.restriction}

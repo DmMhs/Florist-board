@@ -168,9 +168,211 @@ exports[`Admin works as expected Admin component matches a snapshot 1`] = `
                   <div
                     className="form-wrapper"
                   >
-                    <h3>
-                      Hm...
-                    </h3>
+                    <withRouter(AddProduct)>
+                      <Route>
+                        <AddProduct
+                          history={
+                            Object {
+                              "action": "POP",
+                              "block": [Function],
+                              "createHref": [Function],
+                              "go": [Function],
+                              "goBack": [Function],
+                              "goForward": [Function],
+                              "length": 1,
+                              "listen": [Function],
+                              "location": Object {
+                                "hash": "",
+                                "pathname": "/",
+                                "search": "",
+                                "state": undefined,
+                              },
+                              "push": [Function],
+                              "replace": [Function],
+                            }
+                          }
+                          location={
+                            Object {
+                              "hash": "",
+                              "pathname": "/",
+                              "search": "",
+                              "state": undefined,
+                            }
+                          }
+                          match={
+                            Object {
+                              "isExact": true,
+                              "params": Object {},
+                              "path": "/",
+                              "url": "/",
+                            }
+                          }
+                        >
+                          <form
+                            className="AddProduct form"
+                            onSubmit={[Function]}
+                          >
+                            <div
+                              className="form-control"
+                            >
+                              <label>
+                                Product available: 
+                              </label>
+                              <br />
+                              <select
+                                className="availableSelect"
+                                onChange={[Function]}
+                              >
+                                <option
+                                  value="true"
+                                >
+                                  yes
+                                </option>
+                                <option
+                                  value="false"
+                                >
+                                  no
+                                </option>
+                              </select>
+                            </div>
+                            <div
+                              className="form-control"
+                            >
+                              <label>
+                                Product title (EN): 
+                              </label>
+                              <br />
+                              <input
+                                className="titleInput"
+                                onChange={[Function]}
+                                required={true}
+                                type="text"
+                                value=""
+                              />
+                              <label>
+                                Product title (UA): 
+                              </label>
+                              <br />
+                              <input
+                                className="titleUAInput"
+                                onChange={[Function]}
+                                required={true}
+                                type="text"
+                                value=""
+                              />
+                            </div>
+                            <div
+                              className="form-control product-images"
+                            >
+                              <label>
+                                Product images: 
+                              </label>
+                              <br />
+                              <div
+                                className="input-wrapper"
+                              >
+                                <input
+                                  className="fileInput"
+                                  onChange={[Function]}
+                                  required={true}
+                                  type="file"
+                                />
+                              </div>
+                              <div
+                                className="input-wrapper"
+                              >
+                                <input
+                                  className="fileInput"
+                                  onChange={[Function]}
+                                  required={true}
+                                  type="file"
+                                />
+                              </div>
+                              <div
+                                className="input-wrapper"
+                              >
+                                <input
+                                  className="fileInput"
+                                  onChange={[Function]}
+                                  required={true}
+                                  type="file"
+                                />
+                              </div>
+                            </div>
+                            <div
+                              className="form-control"
+                            >
+                              <label>
+                                Product price: 
+                              </label>
+                              <br />
+                              <div
+                                className="price"
+                              >
+                                <input
+                                  className="priceInput"
+                                  onChange={[Function]}
+                                  required={true}
+                                  type="number"
+                                  value={0}
+                                />
+                                <select
+                                  className="currencySelect"
+                                  onChange={[Function]}
+                                >
+                                  <option
+                                    value="usd"
+                                  >
+                                    USD
+                                  </option>
+                                  <option
+                                    value="eur"
+                                  >
+                                    EUR
+                                  </option>
+                                  <option
+                                    value="uah"
+                                  >
+                                    UAH
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                            <div
+                              className="form-control"
+                            >
+                              <label>
+                                Product description (EN): 
+                              </label>
+                              <br />
+                              <textarea
+                                className="descriptionText"
+                                onChange={[Function]}
+                                placeholder="Add product description"
+                                required={true}
+                                value=""
+                              />
+                              <label>
+                                Product description (UA): 
+                              </label>
+                              <br />
+                              <textarea
+                                className="descriptionUAText"
+                                onChange={[Function]}
+                                placeholder="Add product description"
+                                required={true}
+                                value=""
+                              />
+                            </div>
+                            <button
+                              type="submit"
+                            >
+                              SUBMIT
+                            </button>
+                          </form>
+                        </AddProduct>
+                      </Route>
+                    </withRouter(AddProduct)>
                   </div>
                 </div>
               </Admin>
