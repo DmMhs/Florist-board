@@ -48,8 +48,33 @@ class Admin extends Component<
     props: RouteComponentProps<MatchParams> & RCProps<{}>,
     state: AdminState
   ) {
+    const currentMode = props.match.params.mode;
+    let form: JSX.Element | null;
+    switch (currentMode) {
+      case 'add-product':
+          form = <AddProduct />;
+        break;
+      case 'edit-product':
+          form = <AddProduct editModeEnabled={true} />
+        break;
+      case 'configurate-gallery':
+          form = <AddGalleryImage />;
+        break;
+      case 'configurate-labels':
+          form = <ChangeLabels />
+        break;
+      case 'configurate-urls':
+          form = <ChangeURLs />;
+        break;
+      case 'configurate-contacts':
+          form = <ChangeContacts />;
+        break;
+      default:
+          form = null;
+    }
     return {
-      mode: props.match.params.mode
+      mode: currentMode,
+      form
     };
   }
 
@@ -59,10 +84,6 @@ class Admin extends Component<
       mode: 'add-product',
       form: <AddProduct />
     };
-  }
-
-  componentDidMount() {
-    const mode = this.props.match.params.mode;
   }
 
   private switchModeTo = (
@@ -76,45 +97,6 @@ class Admin extends Component<
   ) => {
     (this.props as RouteComponentProps<MatchParams> &
       RCProps<{}>).history.replace(`${mode}`);
-
-    const currentMode = this.state.mode;
-
-    switch (currentMode) {
-      case 'add-product':
-        this.setState({
-          form: <AddProduct />
-        });
-        break;
-      case 'edit-product':
-        this.setState({
-          form: <AddProduct editModeEnabled={true} />
-        });
-        break;
-      case 'configurate-gallery':
-        this.setState({
-          form: <AddGalleryImage />
-        });
-        break;
-      case 'configurate-labels':
-        this.setState({
-          form: <ChangeLabels />
-        });
-        break;
-      case 'configurate-urls':
-        this.setState({
-          form: <ChangeURLs />
-        });
-        break;
-      case 'configurate-contacts':
-        this.setState({
-          form: <ChangeContacts />
-        });
-        break;
-      default:
-        this.setState({
-          form: null
-        });
-    }
   };
 
   public render() {
@@ -122,7 +104,6 @@ class Admin extends Component<
     const lang = context.state.lang;
     const labels = context.state.labels;
     const labelsRoot = labels[lang].pages.admin;
-    console.log(this.state);
 
     return (
       <AppContext.Consumer>

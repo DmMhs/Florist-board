@@ -296,7 +296,7 @@ class AddProduct extends Component<
 
     if (editModeEnabled === true) {
       editProductForm = (
-        <form onSubmit={this.formSubmitHandler} className="AddProduct form">
+        <form onSubmit={this.formSubmitHandler} className="EditProduct form">
           <div className="form-control">
             <label>{labelsRoot.available.title}</label>
             <br />
