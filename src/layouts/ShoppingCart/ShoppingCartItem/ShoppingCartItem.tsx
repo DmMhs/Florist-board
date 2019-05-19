@@ -21,7 +21,6 @@ const ShoppingCartItem = (
     currency
   } = props;
   const context = useContext(AppContext);
-  const productTitle = context.state.lang === 'ua' ? title_ua : title;
   return (
     <li className="cart-item">
       <div
@@ -31,7 +30,9 @@ const ShoppingCartItem = (
         }}
       />
       <span className="product-name">
-        {productTitle}
+        <div className="name">
+          {context.state.lang === 'ua' ? title_ua : title}
+        </div>
         <NavLink to={`/product-details/${id}`}>
           <i className="fas fa-info-circle info" />
         </NavLink>

@@ -15,7 +15,11 @@ exports[`ShoppingCartItem works as expected Home page matches a snapshot 1`] = `
   <span
     className="product-name"
   >
-    Sunflower
+    <div
+      className="name"
+    >
+      Sunflower
+    </div>
     <NavLink
       to="/product-details/qwerty"
     >
