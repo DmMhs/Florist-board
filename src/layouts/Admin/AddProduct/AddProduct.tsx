@@ -20,6 +20,8 @@ interface AddProductState {
   description_ua: string;
   productId?: string;
   imagesFolderName?: string;
+  editProductForm?: JSX.Element | null;
+  addProductForm?: JSX.Element | null;
 }
 
 class AddProduct extends Component<
@@ -53,7 +55,9 @@ class AddProduct extends Component<
       price: 0,
       currency: 'usd',
       description: '',
-      description_ua: ''
+      description_ua: '',
+      editProductForm: null,
+      addProductForm: null
     };
     this.editAvailableRef = React.createRef();
   }
@@ -292,11 +296,12 @@ class AddProduct extends Component<
     const submitBtnLabel = labels[lang].pages.admin.submitBtn;
 
     const editModeEnabled = this.props.editModeEnabled;
-    let editProductForm: JSX.Element;
+    let editProductForm: JSX.Element | null;
+    let addProductForm: JSX.Element | null;
 
     if (editModeEnabled === true) {
       editProductForm = (
-        <form onSubmit={this.formSubmitHandler} className="AddProduct form">
+        <form onSubmit={this.formSubmitHandler} className="EditProduct form">
           <div className="form-control">
             <label>{labelsRoot.available.title}</label>
             <br />
@@ -408,7 +413,7 @@ class AddProduct extends Component<
       );
     }
 
-    const addProductForm = (
+    addProductForm = (
       <form onSubmit={this.formSubmitHandler} className="AddProduct form">
         <div className="form-control">
           <label>{labelsRoot.available.title}</label>
