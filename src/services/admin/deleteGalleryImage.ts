@@ -1,4 +1,4 @@
-import { galleryImagesRef, storageRef } from '../firebase';
+import { galleryImagesRef, storageRef } from '../../firebase';
 
 const getKeyByValue = (object: { [key: string]: string }, value: string) => {
   return Object.keys(object).find(key => object[key] === value);

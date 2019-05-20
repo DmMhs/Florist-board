@@ -1,4 +1,4 @@
-import { productsRef } from '../firebase';
+import { productsRef } from '../../firebase';
 import { deleteProductImages } from './deleteProductImages';
 
 export const deleteProduct = async (id: string, name: string) => {

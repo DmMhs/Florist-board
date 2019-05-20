@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { database } from '../../../firebase';
 import { AppContext } from '../../../AppContext';
 import { Spinner } from '../../../components';
-import { createObjectPath } from '../../../services/createObjectPath';
+import { createObjectPath } from '../../../services/admin/createObjectPath';
 import './ChangeURLs.less';
 
 interface ChangeURLsProps {}
@@ -41,6 +41,10 @@ class ChangeURLs extends Component<ChangeURLsProps, ChangeURLsState> {
   }
 
   public componentDidMount() {
+    this.fetchURLsHandler();
+  }
+
+  private fetchURLsHandler = () => {
     database
       .ref()
       .child('urls')
@@ -51,7 +55,7 @@ class ChangeURLs extends Component<ChangeURLsProps, ChangeURLsState> {
           fetchInProgress: false
         });
       });
-  }
+  };
 
   private formSubmitHandler = () => {
     database

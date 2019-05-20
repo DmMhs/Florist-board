@@ -5,9 +5,9 @@ import { AppContext } from '../../../AppContext';
 import { database } from '../../../firebase';
 import { Labels } from '../../../models/Labels';
 import { urls } from '../../../config/urls';
-import {Spinner} from '../../../components';
+import { Spinner } from '../../../components';
 import FormContent from './FormContent/FormContent';
-import { createObjectPath } from '../../../services/createObjectPath';
+import { createObjectPath } from '../../../services/admin/createObjectPath';
 
 interface ChangeLabelsProps {}
 interface ChangeLabelsState {
@@ -31,17 +31,23 @@ class ChangeLabels extends Component<ChangeLabelsProps, ChangeLabelsState> {
     this.setState({
       fetchInProgress: true
     });
-    database.ref().child('labels').on('value', snapshot => {
-      this.setState({
-        newLabels: snapshot!.val(),
-        fetchedLabels: snapshot!.val(),
-        fetchInProgress: false
+    database
+      .ref()
+      .child('labels')
+      .on('value', snapshot => {
+        this.setState({
+          newLabels: snapshot!.val(),
+          fetchedLabels: snapshot!.val(),
+          fetchInProgress: false
+        });
       });
-    });
   };
 
   private formSubmitHandler = () => {
-    database.ref().child('labels').update(this.state.newLabels);
+    database
+      .ref()
+      .child('labels')
+      .update(this.state.newLabels);
   };
 
   private changeOptionHandler = (
@@ -51,7 +57,6 @@ class ChangeLabels extends Component<ChangeLabelsProps, ChangeLabelsState> {
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>
   ) => {
-
     const updatedLabels = { ...this.state.newLabels };
     createObjectPath(updatedLabels[lang], option, event.target.value as string);
     this.setState({
@@ -111,7 +116,9 @@ class ChangeLabels extends Component<ChangeLabelsProps, ChangeLabelsState> {
                   <hr />
                   {formContentEN}
                   <h3>
-                  {value.state.lang === 'en' ? 'Labels Configuration' : 'Налаштування лейблів'}{' '}
+                    {value.state.lang === 'en'
+                      ? 'Labels Configuration'
+                      : 'Налаштування лейблів'}{' '}
                     <img src={urls.ua_flag} className="flag-image" />
                   </h3>
                   <hr />
