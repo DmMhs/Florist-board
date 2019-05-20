@@ -10,8 +10,8 @@ import {
 import { Popup } from '../../components';
 import { AppContext } from '../../AppContext';
 import { userRole } from '../../services/auth/userRole';
-import './Auth.less';
 import { getIdToken } from '../../services/auth/getIdToken';
+import './Auth.less';
 
 interface MatchParams {
   mode: string;

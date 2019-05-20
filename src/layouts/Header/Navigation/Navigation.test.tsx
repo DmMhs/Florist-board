@@ -136,4 +136,26 @@ describe('Navigation works as expected', () => {
     instance.langOptionClickedHandler('ua');
     expect(context.state.lang).toEqual('ua');
   });
+  it('navigationItemClickedHandler changes the context', () => {
+    const wrapper = mount(
+      <BrowserRouter>
+        <AppContextProvider.WrappedComponent>
+          <Navigation.WrappedComponent />
+        </AppContextProvider.WrappedComponent>
+      </BrowserRouter>
+    );
+    const context = wrapper.find('AppContextProvider').instance();
+    context.setState({
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: true,
+      togglePosition: 'absolute'
+    });
+    wrapper.update();
+    const instance = wrapper.find('Navigation').instance();
+    instance.navigationItemClickedHandler();
+    expect(context.state.showNavigation).toBeFalsy();
+  });
 });

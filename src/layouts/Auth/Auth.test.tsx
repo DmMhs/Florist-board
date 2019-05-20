@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 import firebase from 'firebase';
 
 import Auth from './Auth';
-import AppContextProvider, { AppContext } from '../../AppContext';
+import AppContextProvider from '../../AppContext';
 import { BrowserRouter } from 'react-router-dom';
 import { config } from '../../firebase';
 import labels from '../../config/labels';

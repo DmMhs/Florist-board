@@ -8,6 +8,7 @@ import { urls } from '../../../config/urls';
 import { Spinner } from '../../../components';
 import FormContent from './FormContent/FormContent';
 import { createObjectPath } from '../../../services/admin/createObjectPath';
+import { updateLabels } from '../../../services/admin/updateLabels';
 
 interface ChangeLabelsProps {}
 interface ChangeLabelsState {
@@ -44,10 +45,7 @@ class ChangeLabels extends Component<ChangeLabelsProps, ChangeLabelsState> {
   };
 
   private formSubmitHandler = () => {
-    database
-      .ref()
-      .child('labels')
-      .update(this.state.newLabels);
+    updateLabels(this.state.newLabels);
   };
 
   private changeOptionHandler = (

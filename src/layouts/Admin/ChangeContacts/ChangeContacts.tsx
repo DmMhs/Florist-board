@@ -5,6 +5,7 @@ import { AppContext } from '../../../AppContext';
 import { Spinner } from '../../../components';
 import { createObjectPath } from '../../../services/admin/createObjectPath';
 import './ChangeContacts.less';
+import { updateContacts } from '../../../services/admin/updateContacts';
 
 interface ChangeContactsProps {}
 interface ChangeContactsState {
@@ -69,10 +70,7 @@ class ChangeContacts extends Component<
   };
 
   private formSubmitHandler = () => {
-    database
-      .ref()
-      .child('contacts')
-      .update(this.state.newContacts);
+    updateContacts(this.state.newContacts);
   };
 
   private changeOptionHandler = (
