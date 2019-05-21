@@ -65,9 +65,10 @@ class ProductCard extends Component<CartItem, ProductCardState> {
       newLikedByList.splice(index, 1);
       updateLikes(this.props.id, newLikedByList);
     } else {
-      await productsRef.child(this.props.id).update({
-        likedBy: [...this.state.isLikedBy, this.context.state.userId]
-      });
+      updateLikes(this.props.id, [
+        ...this.state.isLikedBy,
+        this.context.state.userId
+      ]);
     }
   };
 
@@ -82,7 +83,6 @@ class ProductCard extends Component<CartItem, ProductCardState> {
       available,
       inCart
     } = this.props;
-
     const context = this.context;
     const labels = context.state.labels;
     const lang = context.state.lang;

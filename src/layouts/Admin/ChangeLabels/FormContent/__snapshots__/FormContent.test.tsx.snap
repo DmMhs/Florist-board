@@ -330,6 +330,7 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
                 </label>
                 <br />
                 <input
+                  className="brand-input"
                   onChange={[Function]}
                   type="text"
                 />

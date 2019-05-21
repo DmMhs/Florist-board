@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import ChangeContacts from './ChangeContacts';
 import AppContextProvider from '../../../AppContext';
 import labels from '../../../config/labels';
-import { updateContacts } from '../../../services/admin/updateContacts';
+import * as updateContactsFunction from '../../../services/admin/updateContacts';
 
 describe('ChangeContacts works as expected', () => {
   it('ChangeContacts component matches a snapshot', () => {
@@ -57,8 +57,7 @@ describe('ChangeContacts works as expected', () => {
     wrapper.update();
     expect(wrapper.find('.FormContent').exists()).toBeTruthy();
   });
-  it('updateContacts changes the state', () => {
-    jest.mock('../../../services/admin/updateContacts');
+  it('updateContacts changes the state', async () => {
     const wrapper = mount(
       <BrowserRouter>
         <AppContextProvider>
@@ -83,12 +82,12 @@ describe('ChangeContacts works as expected', () => {
     });
     wrapper.update();
     const instance = wrapper.find('ChangeContacts').instance();
+    const spyUpdateContacts = jest.spyOn(
+      updateContactsFunction,
+      'updateContacts'
+    );
     instance.formSubmitHandler();
-    instance.forceUpdate();
-    const asyncCheck = setImmediate(() => {
-      wrapper.update();
-      expect(updateContacts).toHaveBeenCalled();
-    });
-    global.clearImmediate(asyncCheck);
+    wrapper.update();
+    expect(spyUpdateContacts).toHaveBeenCalled();
   });
 });

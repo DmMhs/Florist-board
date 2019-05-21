@@ -4,21 +4,24 @@ import { database } from '../../../firebase';
 import { AppContext } from '../../../AppContext';
 import { Spinner } from '../../../components';
 import { createObjectPath } from '../../../services/admin/createObjectPath';
+import { updateURLs } from '../../../services/admin/updateURLs';
 import './ChangeURLs.less';
+
+export interface URLs {
+  en_flag: string;
+  ua_flag: string;
+  google_map_address: string;
+  socials: {
+    instagram: string;
+    telegram: string;
+    facebook: string;
+  };
+}
 
 interface ChangeURLsProps {}
 interface ChangeURLsState {
-  newURLs: {};
-  currentURLs: {
-    en_flag: string;
-    ua_flag: string;
-    google_map_address: string;
-    socials: {
-      instagram: string;
-      telegram: string;
-      facebook: string;
-    };
-  };
+  newURLs: URLs | {};
+  currentURLs: URLs;
   fetchInProgress: boolean;
 }
 class ChangeURLs extends Component<ChangeURLsProps, ChangeURLsState> {
@@ -58,10 +61,7 @@ class ChangeURLs extends Component<ChangeURLsProps, ChangeURLsState> {
   };
 
   private formSubmitHandler = () => {
-    database
-      .ref()
-      .child('urls')
-      .update(this.state.newURLs);
+    updateURLs(this.state.newURLs as URLs);
   };
 
   private changeOptionHandler = (

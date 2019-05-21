@@ -5,9 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AddProduct from './AddProduct';
 import AppContextProvider from '../../../AppContext';
 import labels from '../../../config/labels';
-import { doesNotReject } from 'assert';
-import { deleteProductImagesFromDB } from '../../../services/admin/deleteProductImagesFromDB';
-import { setProductData } from '../../../services/admin/setProductData';
+import * as deleteProductImagesFunction from '../../../services/admin/deleteProductImages';
 
 describe('AddProduct works as expected', () => {
   it('AddProduct component matches a snapshot', () => {
@@ -278,8 +276,7 @@ describe('AddProduct works as expected', () => {
     });
     global.clearImmediate(asyncCheck);
   });
-  it('editModeEnabled changes the state', () => {
-    jest.mock('../../../services/admin/deleteProductImagesFromDB');
+  it('editModeEnabled and submit envokes deleteProductImages function', () => {
     const wrapper = mount(
       <BrowserRouter>
         <AppContextProvider>
@@ -304,12 +301,13 @@ describe('AddProduct works as expected', () => {
     });
     wrapper.update();
     const instance = wrapper.find('AddProduct').instance();
+    const spyDeleteImages = jest.spyOn(
+      deleteProductImagesFunction,
+      'deleteProductImages'
+    );
     instance.forceUpdate();
     wrapper.find('.form').simulate('submit');
-    const asyncCheck = setImmediate(() => {
-      wrapper.update();
-      expect(deleteProductImagesFromDB).toHaveBeenCalledTimes(0);
-    });
-    global.clearImmediate(asyncCheck);
+    wrapper.update();
+    expect(spyDeleteImages).toHaveBeenCalled();
   });
 });

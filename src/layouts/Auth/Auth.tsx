@@ -12,6 +12,7 @@ import { AppContext } from '../../AppContext';
 import { userRole } from '../../services/auth/userRole';
 import { getIdToken } from '../../services/auth/getIdToken';
 import './Auth.less';
+import { createUserWithEmailAndPassword } from '../../services/auth/createUserWithEmailAndPassword';
 
 interface MatchParams {
   mode: string;
@@ -62,6 +63,12 @@ class Auth extends Component<
     };
   }
 
+  private redirectHandler = (path: string) => {
+    (this.props as RouteComponentProps<MatchParams> & RCProps<{}>).history.push(
+      path
+    );
+  };
+
   private emailInputChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -82,8 +89,8 @@ class Auth extends Component<
     });
   };
 
-  private formSubmitHandler = (
-    event: React.MouseEvent<HTMLFormElement, MouseEvent>
+  private formSubmitHandler = async (
+    event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
     const value = this.context;
@@ -101,16 +108,8 @@ class Auth extends Component<
       this.setState({
         formData: initialFormData
       });
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(authData.email, authData.password)
-        .then(response => {
-          (this.props as RouteComponentProps<MatchParams> &
-            RCProps<{}>).history.push('/auth/signin');
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      await createUserWithEmailAndPassword(authData.email, authData.password);
+      this.redirectHandler('/auth/signin');
     } else {
       this.setState({
         formData: initialFormData
@@ -125,8 +124,7 @@ class Auth extends Component<
             response.user!.uid,
             idToken
           );
-          (this.props as RouteComponentProps<MatchParams> &
-            RCProps<{}>).history.push('/');
+          this.redirectHandler('/');
         })
         .catch(error => console.log(error));
     }
@@ -161,8 +159,7 @@ class Auth extends Component<
           role
         );
 
-        (this.props as RouteComponentProps<MatchParams> &
-          RCProps<{}>).history.push('/');
+        this.redirectHandler('/');
       })
       .catch(error => console.log(error));
   };
@@ -194,8 +191,7 @@ class Auth extends Component<
           role
         );
 
-        (this.props as RouteComponentProps<MatchParams> &
-          RCProps<{}>).history.push('/');
+        this.redirectHandler('/');
       })
       .catch(error => console.log(error));
   };
