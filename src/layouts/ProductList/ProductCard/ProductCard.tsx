@@ -6,7 +6,8 @@ import { CartItem } from '../../../models/CartItem';
 import { AppContext } from '../../../AppContext';
 import { productsRef } from '../../../firebase';
 import './ProductCard.less';
-import { deleteProduct } from '../../../services/deleteProduct';
+import { deleteProduct } from '../../../services/admin/deleteProduct';
+import { updateLikes } from '../../../services/shop/updateLikes';
 
 declare global {
   interface Window {
@@ -62,14 +63,12 @@ class ProductCard extends Component<CartItem, ProductCardState> {
         return val === this.context.state.userId;
       });
       newLikedByList.splice(index, 1);
-      productsRef
-        .child(this.props.id)
-        .child('likedBy')
-        .set(newLikedByList);
+      updateLikes(this.props.id, newLikedByList);
     } else {
-      await productsRef.child(this.props.id).update({
-        likedBy: [...this.state.isLikedBy, this.context.state.userId]
-      });
+      updateLikes(this.props.id, [
+        ...this.state.isLikedBy,
+        this.context.state.userId
+      ]);
     }
   };
 
@@ -84,7 +83,6 @@ class ProductCard extends Component<CartItem, ProductCardState> {
       available,
       inCart
     } = this.props;
-
     const context = this.context;
     const labels = context.state.labels;
     const lang = context.state.lang;

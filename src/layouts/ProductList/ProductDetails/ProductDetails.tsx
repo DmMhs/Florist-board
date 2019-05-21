@@ -6,7 +6,7 @@ import { Product } from '../../../models/Product';
 import { productsRef } from '../../../firebase';
 import { AppContext } from '../../../AppContext';
 import { BASE_URL } from '../../../config/main';
-import { shareOverrideOGMeta } from '../../../services/share';
+import { shareOverrideOGMeta } from '../../../services/shop/share';
 
 import './ProductDetails.less';
 

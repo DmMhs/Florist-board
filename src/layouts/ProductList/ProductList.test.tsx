@@ -411,4 +411,28 @@ describe('ProductList works as expected', () => {
     window.dispatchEvent(new Event('resize'));
     expect(instance.state.mobileFiltersMode).toBeFalsy();
   });
+  it('small screen size activates mobileFilterMode', () => {
+    global.innerWidth = 700;
+
+    const wrapper = mount(
+      <BrowserRouter>
+        <AppContextProvider>
+          <ProductList products={[]} />
+        </AppContextProvider>
+      </BrowserRouter>
+    );
+
+    const context = wrapper.find('AppContextProvider').instance();
+    context.setState({
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
+    });
+    wrapper.update();
+    const instance = wrapper.find('ProductList').instance();
+    expect(instance.state.mobileFiltersMode).toBeTruthy();
+  });
 });

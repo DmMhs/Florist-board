@@ -6,7 +6,7 @@ import { Spinner } from '../../components';
 import Modal from './Modal/Modal';
 import { AppContext } from '../../AppContext';
 import './Gallery.less';
-import { deleteGalleryImage } from '../../services/deleteGalleryImage';
+import { deleteGalleryImage } from '../../services/admin/deleteGalleryImage';
 
 interface GalleryState {
   images: string[];

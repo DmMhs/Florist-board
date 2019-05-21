@@ -6,10 +6,13 @@ import {
   RouteComponentProps as RCProps,
   NavLink
 } from 'react-router-dom';
+
 import { Popup } from '../../components';
 import { AppContext } from '../../AppContext';
-import { userRole } from '../../services/userRole';
+import { userRole } from '../../services/auth/userRole';
+import { getIdToken } from '../../services/auth/getIdToken';
 import './Auth.less';
+import { createUserWithEmailAndPassword } from '../../services/auth/createUserWithEmailAndPassword';
 
 interface MatchParams {
   mode: string;
@@ -60,6 +63,12 @@ class Auth extends Component<
     };
   }
 
+  private redirectHandler = (path: string) => {
+    (this.props as RouteComponentProps<MatchParams> & RCProps<{}>).history.push(
+      path
+    );
+  };
+
   private emailInputChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -80,20 +89,8 @@ class Auth extends Component<
     });
   };
 
-  private getIdToken = () => {
-    return firebase
-      .auth()
-      .currentUser!.getIdToken(true)
-      .then(idToken => {
-        return idToken;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  private formSubmitHandler = (
-    event: React.MouseEvent<HTMLFormElement, MouseEvent>
+  private formSubmitHandler = async (
+    event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
     const value = this.context;
@@ -111,16 +108,8 @@ class Auth extends Component<
       this.setState({
         formData: initialFormData
       });
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(authData.email, authData.password)
-        .then(response => {
-          (this.props as RouteComponentProps<MatchParams> &
-            RCProps<{}>).history.push('/auth/signin');
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      await createUserWithEmailAndPassword(authData.email, authData.password);
+      this.redirectHandler('/auth/signin');
     } else {
       this.setState({
         formData: initialFormData
@@ -129,14 +118,13 @@ class Auth extends Component<
         .auth()
         .signInWithEmailAndPassword(authData.email, authData.password)
         .then(async response => {
-          const idToken = await this.getIdToken();
+          const idToken = await getIdToken();
           value.setUserCredentials(
             response.user!.email,
             response.user!.uid,
             idToken
           );
-          (this.props as RouteComponentProps<MatchParams> &
-            RCProps<{}>).history.push('/');
+          this.redirectHandler('/');
         })
         .catch(error => console.log(error));
     }
@@ -160,7 +148,7 @@ class Auth extends Component<
           )
           .catch(err => console.log(err));
 
-        const idToken = await this.getIdToken();
+        const idToken = await getIdToken();
         const role = await userRole();
 
         value.setUserCredentials(
@@ -171,8 +159,7 @@ class Auth extends Component<
           role
         );
 
-        (this.props as RouteComponentProps<MatchParams> &
-          RCProps<{}>).history.push('/');
+        this.redirectHandler('/');
       })
       .catch(error => console.log(error));
   };
@@ -193,7 +180,7 @@ class Auth extends Component<
           }
         );
 
-        const idToken = await this.getIdToken();
+        const idToken = await getIdToken();
         const role = await userRole();
 
         value.setUserCredentials(
@@ -204,8 +191,7 @@ class Auth extends Component<
           role
         );
 
-        (this.props as RouteComponentProps<MatchParams> &
-          RCProps<{}>).history.push('/');
+        this.redirectHandler('/');
       })
       .catch(error => console.log(error));
   };
@@ -242,9 +228,7 @@ class Auth extends Component<
                 {value.state.userAuthenticated === false ? (
                   <div>
                     <div className="form-field">
-                      <label>
-                        {labels[lang].pages.auth.email}
-                      </label>
+                      <label>{labels[lang].pages.auth.email}</label>
                       <input
                         type="email"
                         className="email-input"
@@ -254,9 +238,7 @@ class Auth extends Component<
                       />
                     </div>
                     <div className="form-field">
-                      <label>
-                        {labels[lang].pages.auth.password}
-                      </label>
+                      <label>{labels[lang].pages.auth.password}</label>
                       <input
                         type="password"
                         className="password-input"
@@ -279,19 +261,12 @@ class Auth extends Component<
                       {password === '' || email === '' ? infoPopup : null}
                     </div>
                     <hr />
-                    <h3>
-                      {
-                        labels[lang].pages.auth
-                          .alternative
-                      }
-                    </h3>
+                    <h3>{labels[lang].pages.auth.alternative}</h3>
                     <div className="form-field">
                       <p>
                         {mode === 'signup'
-                          ? labels[lang].pages.auth.signup
-                              .google
-                          : labels[lang].pages.auth.signin
-                              .google}
+                          ? labels[lang].pages.auth.signup.google
+                          : labels[lang].pages.auth.signin.google}
                       </p>{' '}
                       <br />
                       <a
@@ -308,10 +283,8 @@ class Auth extends Component<
                     <div className="form-field">
                       <p>
                         {mode === 'signup'
-                          ? labels[lang].pages.auth.signup
-                              .facebook
-                          : labels[lang].pages.auth.signin
-                              .facebook}
+                          ? labels[lang].pages.auth.signup.facebook
+                          : labels[lang].pages.auth.signin.facebook}
                       </p>
                       <br />
                       <a
@@ -329,10 +302,8 @@ class Auth extends Component<
                     <div className="form-field">
                       <p>
                         {mode === 'signup'
-                          ? labels[lang].pages.auth.signup
-                              .account
-                          : labels[lang].pages.auth.signin
-                              .account}
+                          ? labels[lang].pages.auth.signup.account
+                          : labels[lang].pages.auth.signin.account}
                       </p>
                       <button type="button" className="switch-btn">
                         <NavLink
@@ -341,10 +312,8 @@ class Auth extends Component<
                           }`}
                         >
                           {mode === 'signup'
-                            ? labels[lang].pages.auth
-                                .signup.btn
-                            : labels[lang].pages.auth
-                                .signin.btn}
+                            ? labels[lang].pages.auth.signup.btn
+                            : labels[lang].pages.auth.signin.btn}
                         </NavLink>
                       </button>
                     </div>

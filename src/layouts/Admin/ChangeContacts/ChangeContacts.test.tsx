@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import ChangeContacts from './ChangeContacts';
 import AppContextProvider from '../../../AppContext';
 import labels from '../../../config/labels';
+import * as updateContactsFunction from '../../../services/admin/updateContacts';
 
 describe('ChangeContacts works as expected', () => {
   it('ChangeContacts component matches a snapshot', () => {
@@ -55,5 +56,38 @@ describe('ChangeContacts works as expected', () => {
     });
     wrapper.update();
     expect(wrapper.find('.FormContent').exists()).toBeTruthy();
+  });
+  it('updateContacts changes the state', async () => {
+    const wrapper = mount(
+      <BrowserRouter>
+        <AppContextProvider>
+          <ChangeContacts />
+        </AppContextProvider>
+      </BrowserRouter>
+    );
+    const context = wrapper.find('AppContextProvider').instance();
+    context.setState({
+      userLogin: 'testLogin',
+      userId: 'testId',
+      userToken: 'testToken',
+      userRole: 'admin',
+      userAuthenticated: true,
+      authenticationMethod: undefined,
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
+    });
+    wrapper.update();
+    const instance = wrapper.find('ChangeContacts').instance();
+    const spyUpdateContacts = jest.spyOn(
+      updateContactsFunction,
+      'updateContacts'
+    );
+    instance.formSubmitHandler();
+    wrapper.update();
+    expect(spyUpdateContacts).toHaveBeenCalled();
   });
 });

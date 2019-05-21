@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AddProduct from './AddProduct';
 import AppContextProvider from '../../../AppContext';
 import labels from '../../../config/labels';
-import { doesNotReject } from 'assert';
+import * as deleteProductImagesFunction from '../../../services/admin/deleteProductImages';
 
 describe('AddProduct works as expected', () => {
   it('AddProduct component matches a snapshot', () => {
@@ -275,5 +275,39 @@ describe('AddProduct works as expected', () => {
       });
     });
     global.clearImmediate(asyncCheck);
+  });
+  it('editModeEnabled and submit envokes deleteProductImages function', () => {
+    const wrapper = mount(
+      <BrowserRouter>
+        <AppContextProvider>
+          <AddProduct editModeEnabled={true} />
+        </AppContextProvider>
+      </BrowserRouter>
+    );
+    const context = wrapper.find('AppContextProvider').instance();
+    context.setState({
+      userLogin: 'testLogin',
+      userId: 'testId',
+      userToken: 'testToken',
+      userRole: 'admin',
+      userAuthenticated: true,
+      authenticationMethod: undefined,
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
+    });
+    wrapper.update();
+    const instance = wrapper.find('AddProduct').instance();
+    const spyDeleteImages = jest.spyOn(
+      deleteProductImagesFunction,
+      'deleteProductImages'
+    );
+    instance.forceUpdate();
+    wrapper.find('.form').simulate('submit');
+    wrapper.update();
+    expect(spyDeleteImages).toHaveBeenCalled();
   });
 });

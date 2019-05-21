@@ -1,4 +1,4 @@
-import { storageRef, productsRef } from '../firebase';
+import { storageRef, productsRef } from '../../firebase';
 
 export const deleteProductImages = (id: string, folderName: string) => {
   return productsRef

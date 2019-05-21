@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
-import './AddGalleryImage.less';
 import { AppContext } from '../../../AppContext';
 import { storageRef, galleryImagesRef } from '../../../firebase';
+import { uploadGalleryImage } from '../../../services/admin/uploadGalleryImage';
+import './AddGalleryImage.less';
 
 interface AddGalleryImageProps {}
 
@@ -52,13 +53,7 @@ class AddGalleryImage extends Component<
     images.map(async (image: File) => {
       const file = (image as any)[0];
       const formattedFileName = (image as any)[0].name;
-      await storageRef
-        .child('gallery-images')
-        .child(formattedFileName)
-        .put(file)
-        .catch(err => {
-          console.log(err);
-        });
+      await uploadGalleryImage(file, formattedFileName);
       const imageURL = await storageRef
         .child('gallery-images')
         .child(formattedFileName)

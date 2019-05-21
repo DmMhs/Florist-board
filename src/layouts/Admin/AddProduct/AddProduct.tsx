@@ -4,7 +4,10 @@ import './AddProduct.less';
 import { AppContext } from '../../../AppContext';
 import { storageRef, productsRef } from '../../../firebase';
 import { withRouter, RouteComponentProps } from 'react-router';
-import { deleteProductImages } from '../../../services/deleteProductImages';
+import { deleteProductImages } from '../../../services/admin/deleteProductImages';
+import { deleteProductImagesFromDB } from '../../../services/admin/deleteProductImagesFromDB';
+import { setProductData } from '../../../services/admin/setProductData';
+import { updateProductImagesURLs } from '../../../services/admin/updateProductImagesURLs';
 
 interface AddProductProps {
   editModeEnabled?: boolean;
@@ -61,8 +64,7 @@ class AddProduct extends Component<
     };
     this.editAvailableRef = React.createRef();
   }
-
-  public componentDidMount() {
+  public componentDidMount = async () => {
     if (this.props.editModeEnabled === true) {
       productsRef
         .child(this.state.productId as string)
@@ -88,7 +90,7 @@ class AddProduct extends Component<
           });
         });
     }
-  }
+  };
 
   private descriptionChangedHandler = (
     event: React.ChangeEvent<HTMLTextAreaElement>
@@ -197,16 +199,9 @@ class AddProduct extends Component<
         this.state.productId as string,
         this.state.imagesFolderName as string
       );
-      await productsRef
-        .child(this.state.productId as string)
-        .child('images')
-        .remove()
-        .catch(err => console.log(err));
+      await deleteProductImagesFromDB(this.state.productId as string);
 
-      await productsRef
-        .child(this.state.productId as string)
-        .set({ ...newProduct })
-        .catch(err => console.log(err));
+      await setProductData(this.state.productId as string, newProduct);
 
       await Promise.all(
         images.map(async (image: File) => {
@@ -231,14 +226,7 @@ class AddProduct extends Component<
         })
       );
 
-      productsRef
-        .child(productKey)
-        .update({
-          images: imageURLs
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      await updateProductImagesURLs(productKey, imageURLs);
     } else {
       await productsRef
         .push(newProduct)
@@ -266,14 +254,7 @@ class AddProduct extends Component<
         })
       );
 
-      productsRef
-        .child(productKey)
-        .update({
-          images: imageURLs
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      await updateProductImagesURLs(productKey, imageURLs);
     }
     this.setState({
       available: true,

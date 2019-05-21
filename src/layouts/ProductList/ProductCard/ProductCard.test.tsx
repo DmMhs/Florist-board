@@ -5,6 +5,7 @@ import { MemoryRouter, BrowserRouter } from 'react-router-dom';
 import AppContextProvider from '../../../AppContext';
 import ProductCard from './ProductCard';
 import labels from '../../../config/labels';
+import * as updateLikesFunction from '../../../services/shop/updateLikes';
 
 describe('ProductCard works as expected', () => {
   it('renders without crashing', () => {
@@ -118,10 +119,7 @@ describe('ProductCard works as expected', () => {
     });
     wrapper.update();
     const instance = wrapper.find('ProductCard').instance();
-    instance.setState({
-      isLikedBy: [],
-      isLiked: true
-    });
+    instance.forceUpdate();
     instance.likeClickedHandler();
     expect(
       instance.likeButtonRef!.current.classList.contains('active')

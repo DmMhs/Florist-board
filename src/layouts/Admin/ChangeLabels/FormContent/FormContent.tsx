@@ -54,6 +54,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
           <br />
           <input
             type="text"
+            className="brand-input"
             onChange={this.props.changeOption!.bind(
               this.props,
               'brand',
