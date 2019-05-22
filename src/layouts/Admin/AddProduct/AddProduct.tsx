@@ -8,6 +8,7 @@ import { deleteProductImages } from '../../../services/admin/deleteProductImages
 import { deleteProductImagesFromDB } from '../../../services/admin/deleteProductImagesFromDB';
 import { setProductData } from '../../../services/admin/setProductData';
 import { updateProductImagesURLs } from '../../../services/admin/updateProductImagesURLs';
+import { uploadProductImagesAndReturnURLs } from '../../../services/admin/uploadProductImagesAndReturnURLs';
 
 interface AddProductProps {
   editModeEnabled?: boolean;
@@ -203,28 +204,10 @@ class AddProduct extends Component<
 
       await setProductData(this.state.productId as string, newProduct);
 
-      await Promise.all(
-        images.map(async (image: File) => {
-          const file = (image as any)[0];
-          const formattedFileName = (image as any)[0].name.split('.')[0];
-          await storageRef
-            .child('products-images')
-            .child(newProduct.title.toLowerCase())
-            .child(formattedFileName)
-            .put(file)
-            .catch(err => {
-              console.log(err);
-            });
-
-          const imageURL = await storageRef
-            .child('products-images')
-            .child(newProduct.title.toLowerCase())
-            .child(formattedFileName)
-            .getDownloadURL()
-            .catch(err => console.log(err));
-          imageURLs.push(imageURL);
-        })
-      );
+      const arr = await uploadProductImagesAndReturnURLs(images, newProduct);
+      arr.forEach(imageURL => {
+        imageURLs.push(imageURL);
+      });
 
       await updateProductImagesURLs(productKey, imageURLs);
     } else {
@@ -236,24 +219,10 @@ class AddProduct extends Component<
         .catch(err => {
           console.log(err);
         });
-
-      await Promise.all(
-        images.map(async (image: File) => {
-          const file = (image as any)[0];
-          const formattedFileName = (image as any)[0].name.split('.')[0];
-          await imagesRef
-            .child(formattedFileName)
-            .put(file)
-            .catch(err => {
-              console.log(err);
-            });
-          const imageURL = await imagesRef
-            .child(formattedFileName)
-            .getDownloadURL();
-          imageURLs.push(imageURL);
-        })
-      );
-
+      const arr = await uploadProductImagesAndReturnURLs(images, newProduct);
+      arr.forEach(imageURL => {
+        imageURLs.push(imageURL);
+      });
       await updateProductImagesURLs(productKey, imageURLs);
     }
     this.setState({

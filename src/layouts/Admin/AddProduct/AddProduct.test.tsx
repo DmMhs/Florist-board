@@ -303,24 +303,22 @@ describe('AddProduct works as expected', () => {
     });
     wrapper.update();
     const instance = wrapper.find('AddProduct').instance();
-
+    instance.setState({
+      productId: 'testId'
+    });
+    instance.forceUpdate();
     const p = Promise.resolve();
-
     const spyDeleteImages = jest
       .spyOn(deleteProductImagesFunction, 'deleteProductImages')
       .mockImplementation((id: string, folderName: string) => p);
     const spyDeleteImagesFromDB = jest
       .spyOn(deleteProductImagesFromDBFunction, 'deleteProductImagesFromDB')
       .mockImplementation((id: string) => p);
-    // const spyUpdateImageURL = jest
-    //   .spyOn(updateProductImagesURLsFunction, 'updateProductImagesURLs')
-    //   .mockImplementation(() => p);
     instance.forceUpdate();
     wrapper.find('.form').simulate('submit');
     wrapper.update();
     await p;
     expect(spyDeleteImages).toHaveBeenCalled();
     expect(spyDeleteImagesFromDB).toHaveBeenCalled();
-    // expect(spyUpdateImageURL).toHaveBeenCalled();
   });
 });

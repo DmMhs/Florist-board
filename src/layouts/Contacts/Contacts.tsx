@@ -19,12 +19,12 @@ interface ContactsState {
     postCode: string;
     phone: string;
     email: string;
-  }
+  };
   social_urls: {
     facebook: string;
     instagram: string;
     telegram: string;
-  }
+  };
   google_map_url: string;
   fetchInProgress: boolean;
 }
@@ -38,7 +38,7 @@ class Contacts extends Component<ContactsProps, ContactsState> {
           address: ''
         },
         ua: {
-          address: '',
+          address: ''
         },
         postCode: '',
         phone: '',
@@ -51,27 +51,32 @@ class Contacts extends Component<ContactsProps, ContactsState> {
       },
       google_map_url: '',
       fetchInProgress: true
-    }
+    };
   }
-  
+
   public componentDidMount() {
-    database.ref().child('contacts').on('value', snapshot => {
-      this.setState({
-        contacts: snapshot!.val()
-      });
-      database.ref().child('urls').on('value', snapshot2 => {
+    database
+      .ref()
+      .child('contacts')
+      .on('value', snapshot => {
         this.setState({
-            google_map_url: snapshot2!.val().google_map_address,
-            social_urls: {
-              facebook: snapshot2!.val().socials.facebook,
-              instagram: snapshot2!.val().socials.instagram,
-              telegram: snapshot2!.val().socials.telegram
-            },
-            fetchInProgress: false
-        })
+          contacts: snapshot!.val()
+        });
+        database
+          .ref()
+          .child('urls')
+          .on('value', snapshot2 => {
+            this.setState({
+              google_map_url: snapshot2!.val().google_map_address,
+              social_urls: {
+                facebook: snapshot2!.val().socials.facebook,
+                instagram: snapshot2!.val().socials.instagram,
+                telegram: snapshot2!.val().socials.telegram
+              },
+              fetchInProgress: false
+            });
+          });
       });
-    });
-    
   }
 
   public render() {
@@ -81,7 +86,6 @@ class Contacts extends Component<ContactsProps, ContactsState> {
     const contacts = this.state.contacts;
     const social = this.state.social_urls;
     return (
-      
       <AppContext.Consumer>
         {value => (
           <div className="Contacts">
@@ -90,7 +94,7 @@ class Contacts extends Component<ContactsProps, ContactsState> {
               <GoogleMap url={urls.google_map_address} />
               <hr />
               <ContactInfo
-                address={(contacts as {[key: string]: any})[lang].address}
+                address={(contacts as { [key: string]: any })[lang].address}
                 phone={contacts.phone}
                 email={contacts.email}
                 instagram={social.instagram}
