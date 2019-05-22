@@ -112,6 +112,7 @@ class ChangeContacts extends Component<
           <input
             type="text"
             onChange={this.changeOptionHandler!.bind(this.props, 'ua.address')}
+            className="address-input"
           />
           <p className="current">
             {current}

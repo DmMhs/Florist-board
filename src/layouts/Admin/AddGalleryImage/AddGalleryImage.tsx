@@ -4,6 +4,7 @@ import { AppContext } from '../../../AppContext';
 import { storageRef, galleryImagesRef } from '../../../firebase';
 import { uploadGalleryImage } from '../../../services/admin/uploadGalleryImage';
 import './AddGalleryImage.less';
+import { getGalleryImageDownloadURL } from '../../../services/admin/getGalleryImageDownloadURL';
 
 interface AddGalleryImageProps {}
 
@@ -54,11 +55,13 @@ class AddGalleryImage extends Component<
       const file = (image as any)[0];
       const formattedFileName = (image as any)[0].name;
       await uploadGalleryImage(file, formattedFileName);
-      const imageURL = await storageRef
-        .child('gallery-images')
-        .child(formattedFileName)
-        .getDownloadURL();
-      galleryImagesRef.push(imageURL);
+      getGalleryImageDownloadURL(formattedFileName)
+        .then(res => {
+          return res;
+        })
+        .then(imgURL => {
+          galleryImagesRef.push(imgURL);
+        });
     });
   };
 

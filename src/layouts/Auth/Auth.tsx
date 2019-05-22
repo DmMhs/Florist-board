@@ -13,6 +13,7 @@ import { userRole } from '../../services/auth/userRole';
 import { getIdToken } from '../../services/auth/getIdToken';
 import './Auth.less';
 import { createUserWithEmailAndPassword } from '../../services/auth/createUserWithEmailAndPassword';
+import { signInWithEmailAndPassword } from '../../services/auth/signInWithEmailAndPassword';
 
 interface MatchParams {
   mode: string;
@@ -114,9 +115,7 @@ class Auth extends Component<
       this.setState({
         formData: initialFormData
       });
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(authData.email, authData.password)
+      await signInWithEmailAndPassword(authData.email, authData.password)
         .then(async response => {
           const idToken = await getIdToken();
           value.setUserCredentials(
@@ -124,9 +123,10 @@ class Auth extends Component<
             response.user!.uid,
             idToken
           );
-          this.redirectHandler('/');
         })
-        .catch(error => console.log(error));
+        .catch(err => console.log(err));
+
+      this.redirectHandler('/');
     }
   };
 

@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { config } from '../../firebase';
 import labels from '../../config/labels';
 import * as createUserWithEmailAndPasswordFunction from '../../services/auth/createUserWithEmailAndPassword';
+import * as signInWithEmailAndPasswordFunction from '../../services/auth/signInWithEmailAndPassword';
 
 describe('Auth works as expected', () => {
   it('Auth component matches a snapshot', () => {
@@ -186,7 +187,7 @@ describe('Auth works as expected', () => {
       return context.getIdToken();
     }).toThrow();
   });
-  it('Email with password signing up envokes handlers', () => {
+  it('Email with password signing up envokes handlers', async () => {
     const match = { params: { mode: 'signup' } };
     const wrapper = mount(
       <BrowserRouter>
@@ -215,12 +216,66 @@ describe('Auth works as expected', () => {
       },
       mode: 'signup'
     });
-    const spyOnCreateUser = jest.spyOn(
-      createUserWithEmailAndPasswordFunction,
-      'createUserWithEmailAndPassword'
-    );
+
+    const p = Promise.resolve();
+
+    const spyCreateUser = jest
+      .spyOn(
+        createUserWithEmailAndPasswordFunction,
+        'createUserWithEmailAndPassword'
+      )
+      .mockImplementation((email: string, password: string) => p);
+    const spyRedirect = jest
+      .spyOn(instance, 'redirectHandler')
+      .mockImplementation(() => p);
     instance.forceUpdate();
     wrapper.find('form').simulate('submit');
-    expect(spyOnCreateUser).toHaveBeenCalled();
+    await p;
+    expect(spyCreateUser).toHaveBeenCalled();
+    expect(spyRedirect).toHaveBeenCalled();
+  });
+  it('signing in with email and password envokes helper functions', async () => {
+    const match = { params: { mode: 'signin' } };
+    const wrapper = mount(
+      <BrowserRouter>
+        <AppContextProvider>
+          <Auth.WrappedComponent match={match} />
+        </AppContextProvider>
+      </BrowserRouter>
+    );
+    const context = wrapper.find('AppContextProvider').instance();
+    context.setState({
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute',
+      userAuthenticated: false
+    });
+    wrapper.update();
+    const instance = wrapper.find('Auth').instance();
+    instance.forceUpdate();
+    instance.setState({
+      formData: {
+        email: 'new_account@mail.com',
+        password: 'new_account'
+      },
+      mode: 'signin'
+    });
+    instance.forceUpdate();
+    const p = Promise.resolve();
+
+    const spySignIn = jest
+      .spyOn(signInWithEmailAndPasswordFunction, 'signInWithEmailAndPassword')
+      .mockImplementation(() => p);
+    // const spyRedirect = jest
+    //   .spyOn(instance, 'redirectHandler')
+    //   .mockImplementation(() => p);
+    instance.forceUpdate();
+    wrapper.find('form').simulate('submit');
+    await p;
+    expect(spySignIn).toHaveBeenCalled();
+    // expect(spyRedirect).toHaveBeenCalled();
   });
 });
