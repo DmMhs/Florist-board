@@ -6,6 +6,8 @@ import AddProduct from './AddProduct';
 import AppContextProvider from '../../../AppContext';
 import labels from '../../../config/labels';
 import * as deleteProductImagesFunction from '../../../services/admin/deleteProductImages';
+import * as deleteProductImagesFromDBFunction from '../../../services/admin/deleteProductImagesFromDB';
+import * as updateProductImagesURLsFunction from '../../../services/admin/updateProductImagesURLs';
 
 describe('AddProduct works as expected', () => {
   it('AddProduct component matches a snapshot', () => {
@@ -276,7 +278,7 @@ describe('AddProduct works as expected', () => {
     });
     global.clearImmediate(asyncCheck);
   });
-  it('editModeEnabled and submit envokes deleteProductImages function', () => {
+  it('editModeEnabled and submit envokes helper functions', async () => {
     const wrapper = mount(
       <BrowserRouter>
         <AppContextProvider>
@@ -301,13 +303,22 @@ describe('AddProduct works as expected', () => {
     });
     wrapper.update();
     const instance = wrapper.find('AddProduct').instance();
-    const spyDeleteImages = jest.spyOn(
-      deleteProductImagesFunction,
-      'deleteProductImages'
-    );
+    instance.setState({
+      productId: 'testId'
+    });
+    instance.forceUpdate();
+    const p = Promise.resolve();
+    const spyDeleteImages = jest
+      .spyOn(deleteProductImagesFunction, 'deleteProductImages')
+      .mockImplementation((id: string, folderName: string) => p);
+    const spyDeleteImagesFromDB = jest
+      .spyOn(deleteProductImagesFromDBFunction, 'deleteProductImagesFromDB')
+      .mockImplementation((id: string) => p);
     instance.forceUpdate();
     wrapper.find('.form').simulate('submit');
     wrapper.update();
+    await p;
     expect(spyDeleteImages).toHaveBeenCalled();
+    expect(spyDeleteImagesFromDB).toHaveBeenCalled();
   });
 });
