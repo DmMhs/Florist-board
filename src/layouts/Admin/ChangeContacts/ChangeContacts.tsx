@@ -96,7 +96,7 @@ class ChangeContacts extends Component<
     const formContent = (
       <div className="FormContent">
         <div className="form-control">
-          <label>{change} contacts...</label>
+          <label className="accent">{change} contacts...</label>
           <p>adress (EN):</p>
           <br />
           <input

@@ -87,7 +87,7 @@ class ChangeURLs extends Component<ChangeURLsProps, ChangeURLsState> {
     const formContent = (
       <div className="FormContent">
         <div className="form-control">
-          <label>{change} URLs...</label>
+          <label className="accent">{change} URLs...</label>
           <p>en_flag:</p>
           <br />
           <input

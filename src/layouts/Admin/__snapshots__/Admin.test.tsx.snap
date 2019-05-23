@@ -164,6 +164,16 @@ exports[`Admin works as expected Admin component matches a snapshot 1`] = `
                         CONTACTS
                       </a>
                     </li>
+                    <li
+                      className=""
+                    >
+                      <a
+                        className="configurateBanner"
+                        onClick={[Function]}
+                      >
+                        BANNER IMAGES
+                      </a>
+                    </li>
                   </ul>
                   <div
                     className="form-wrapper"

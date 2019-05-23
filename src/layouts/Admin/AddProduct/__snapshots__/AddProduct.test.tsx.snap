@@ -111,7 +111,9 @@ exports[`AddProduct works as expected AddProduct component matches a snapshot 1`
                   <div
                     className="form-control"
                   >
-                    <label>
+                    <label
+                      className="accent"
+                    >
                       Product available: 
                     </label>
                     <br />
@@ -134,7 +136,9 @@ exports[`AddProduct works as expected AddProduct component matches a snapshot 1`
                   <div
                     className="form-control"
                   >
-                    <label>
+                    <label
+                      className="accent"
+                    >
                       Product title (EN): 
                     </label>
                     <br />
@@ -145,7 +149,9 @@ exports[`AddProduct works as expected AddProduct component matches a snapshot 1`
                       type="text"
                       value=""
                     />
-                    <label>
+                    <label
+                      className="accent"
+                    >
                       Product title (UA): 
                     </label>
                     <br />
@@ -160,7 +166,9 @@ exports[`AddProduct works as expected AddProduct component matches a snapshot 1`
                   <div
                     className="form-control product-images"
                   >
-                    <label>
+                    <label
+                      className="accent"
+                    >
                       Product images: 
                     </label>
                     <br />
@@ -198,7 +206,9 @@ exports[`AddProduct works as expected AddProduct component matches a snapshot 1`
                   <div
                     className="form-control"
                   >
-                    <label>
+                    <label
+                      className="accent"
+                    >
                       Product price: 
                     </label>
                     <br />
@@ -237,7 +247,9 @@ exports[`AddProduct works as expected AddProduct component matches a snapshot 1`
                   <div
                     className="form-control"
                   >
-                    <label>
+                    <label
+                      className="accent"
+                    >
                       Product description (EN): 
                     </label>
                     <br />
@@ -248,7 +260,9 @@ exports[`AddProduct works as expected AddProduct component matches a snapshot 1`
                       required={true}
                       value=""
                     />
-                    <label>
+                    <label
+                      className="accent"
+                    >
                       Product description (UA): 
                     </label>
                     <br />

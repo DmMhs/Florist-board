@@ -1,8 +1,27 @@
 .Slide {
+  position: relative;
   display: inline-block;
   height: 100%;
   width: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  .adminIcons {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    margin: 0 auto;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    z-index: 1;
+    i {
+      margin: 5px 7px;
+      color: #333333;
+      font-size: 1.2rem;
+      cursor: pointer;
+      &:hover {
+        color: #696868;
+      }
+    }
+  }
 }

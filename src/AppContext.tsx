@@ -3,6 +3,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { database } from './firebase';
 import { Labels } from './models/Labels';
 import Spinner from './components/Spinner/Spinner';
+import './AppContext.less';
 
 export interface AppContextState {
   userLogin: string | null | undefined;
@@ -181,7 +182,9 @@ class AppContextProvider extends Component<
 
   public render() {
     return this.state.fetchInProgress === true ? (
-      <Spinner />
+      <div className="EmptyContext spinner-wrapper">
+        <Spinner />
+      </div>
     ) : (
       <AppContext.Provider
         value={{

@@ -9,6 +9,7 @@ import { Spinner } from '../../../components';
 import FormContent from './FormContent/FormContent';
 import { createObjectPath } from '../../../services/admin/createObjectPath';
 import { updateLabels } from '../../../services/admin/updateLabels';
+import labels from '../../../config/labels';
 
 interface ChangeLabelsProps {}
 interface ChangeLabelsState {
@@ -28,7 +29,10 @@ class ChangeLabels extends Component<ChangeLabelsProps, ChangeLabelsState> {
   }
 
   public componentDidMount = () => {
-    // database.ref().child('labels').set(labels);
+    // database
+    //   .ref()
+    //   .child('labels')
+    //   .set(labels);
     this.setState({
       fetchInProgress: true
     });

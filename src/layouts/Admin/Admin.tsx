@@ -12,6 +12,7 @@ import AddGalleryImage from './AddGalleryImage/AddGalleryImage';
 import ChangeLabels from './ChangeLabels/ChangeLabels';
 import ChangeContacts from './ChangeContacts/ChangeContacts';
 import ChangeURLs from './ChangeURLs/ChangeURLs';
+import AddBannerImage from './AddBannerImage/AddBannerImage';
 interface MatchParams {
   mode: string;
 }
@@ -36,7 +37,8 @@ interface AdminState {
     | 'configurate-gallery'
     | 'configurate-labels'
     | 'configurate-urls'
-    | 'configurate-contacts';
+    | 'configurate-contacts'
+    | 'configurate-banner';
   form: JSX.Element | null;
 }
 
@@ -52,25 +54,28 @@ class Admin extends Component<
     let form: JSX.Element | null;
     switch (currentMode) {
       case 'add-product':
-          form = <AddProduct />;
+        form = <AddProduct />;
         break;
       case 'edit-product':
-          form = <AddProduct editModeEnabled={true} />
+        form = <AddProduct editModeEnabled={true} />;
         break;
       case 'configurate-gallery':
-          form = <AddGalleryImage />;
+        form = <AddGalleryImage />;
         break;
       case 'configurate-labels':
-          form = <ChangeLabels />
+        form = <ChangeLabels />;
         break;
       case 'configurate-urls':
-          form = <ChangeURLs />;
+        form = <ChangeURLs />;
         break;
       case 'configurate-contacts':
-          form = <ChangeContacts />;
+        form = <ChangeContacts />;
+        break;
+      case 'configurate-banner':
+        form = <AddBannerImage />;
         break;
       default:
-          form = null;
+        form = null;
     }
     return {
       mode: currentMode,
@@ -94,6 +99,7 @@ class Admin extends Component<
       | 'configurate-labels'
       | 'configurate-urls'
       | 'configurate-contacts'
+      | 'configurate-banner'
   ) => {
     (this.props as RouteComponentProps<MatchParams> &
       RCProps<{}>).history.replace(`${mode}`);
@@ -175,6 +181,18 @@ class Admin extends Component<
                     className="configurateContacts"
                   >
                     {labelsRoot.navigation.contacts}
+                  </a>
+                </li>
+                <li
+                  className={
+                    this.state.mode === 'configurate-banner' ? 'active' : ''
+                  }
+                >
+                  <a
+                    onClick={this.switchModeTo.bind(this, 'configurate-banner')}
+                    className="configurateBanner"
+                  >
+                    {labelsRoot.navigation.banner}
                   </a>
                 </li>
               </ul>

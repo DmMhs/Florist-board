@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 import { AppContext } from '../../../AppContext';
-import { storageRef, galleryImagesRef } from '../../../firebase';
-import { uploadGalleryImage } from '../../../services/admin/uploadGalleryImage';
-import './AddGalleryImage.less';
-import { getGalleryImageDownloadURL } from '../../../services/admin/getGalleryImageDownloadURL';
+import { storageRef, homeImagesRef } from '../../../firebase';
+import './AddBannerImage.less';
+import { uploadBannerImage } from '../../../services/admin/uploadBannerImage';
+import { getBannerImageDownloadURL } from '../../../services/admin/getBannerImageDownloadURL';
 
 interface AddGalleryImageProps {}
 
@@ -13,7 +13,7 @@ interface AddGalleryImageState {
   totalImagesNumber: number;
 }
 
-class AddGalleryImage extends Component<
+class AddBannerImage extends Component<
   AddGalleryImageProps,
   AddGalleryImageState
 > {
@@ -26,7 +26,7 @@ class AddGalleryImage extends Component<
   }
 
   public componentDidMount() {
-    galleryImagesRef.on('value', snapshot => {
+    homeImagesRef.on('value', snapshot => {
       this.setState({
         totalImagesNumber: Object.keys(snapshot!.val()).length
       });
@@ -50,17 +50,16 @@ class AddGalleryImage extends Component<
     this.setState({
       images: []
     });
-
     images.map(async (image: File) => {
       const file = (image as any)[0];
       const formattedFileName = (image as any)[0].name;
-      await uploadGalleryImage(file, formattedFileName);
-      getGalleryImageDownloadURL(formattedFileName)
+      await uploadBannerImage(file, formattedFileName);
+      getBannerImageDownloadURL(formattedFileName)
         .then(res => {
           return res;
         })
         .then(imgURL => {
-          galleryImagesRef.push(imgURL);
+          homeImagesRef.push(imgURL);
         });
     });
   };
@@ -70,9 +69,8 @@ class AddGalleryImage extends Component<
     const labels = context.state.labels;
     const lang = context.state.lang;
 
-    const labelsRoot = labels[lang].pages.admin.addGalleryImageForm;
+    const labelsRoot = labels[lang].pages.admin.addBannerImageForm;
     const submitBtnLabel = labels[lang].pages.admin.submitBtn;
-    const color = this.state.totalImagesNumber % 4 === 0 ? 'green' : 'darkred';
 
     return (
       <AppContext.Consumer>
@@ -83,9 +81,6 @@ class AddGalleryImage extends Component<
               className="AddGalleryImage form"
             >
               <div className="form-control product-images">
-                <p style={{ color }} className="gallery-info">
-                  {labelsRoot.info.restriction}
-                </p>
                 <p className="gallery-info">
                   {labelsRoot.info.totalImagesNumber}{' '}
                   {this.state.totalImagesNumber}
@@ -109,6 +104,6 @@ class AddGalleryImage extends Component<
   }
 }
 
-AddGalleryImage.contextType = AppContext;
+AddBannerImage.contextType = AppContext;
 
-export default AddGalleryImage;
+export default AddBannerImage;

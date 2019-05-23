@@ -1,8 +1,8 @@
 import { storageRef } from '../../firebase';
 
-export const uploadGalleryImage = (file: any, fileName: string) => {
+export const uploadBannerImage = (file: any, fileName: string) => {
   return storageRef
-    .child('gallery-images')
+    .child('banner')
     .child(fileName)
     .put(file)
     .catch(err => console.log(err));

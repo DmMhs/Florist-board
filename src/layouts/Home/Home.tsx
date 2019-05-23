@@ -43,7 +43,12 @@ class Home extends Component<HomeProps, HomeState> {
       <div className="Home">
         {bannerImages.length <= 0 ? <Spinner /> : null}
         <div className="slider-wrapper">
-          <Slider images={bannerImages} auto={true} showControls={true} />
+          <Slider
+            images={bannerImages}
+            auto={true}
+            showControls={true}
+            bannerModeEnabled={true}
+          />
         </div>
       </div>
     );

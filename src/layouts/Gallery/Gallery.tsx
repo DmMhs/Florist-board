@@ -5,8 +5,8 @@ import { galleryImagesRef } from '../../firebase';
 import { Spinner } from '../../components';
 import Modal from './Modal/Modal';
 import { AppContext } from '../../AppContext';
-import './Gallery.less';
 import { deleteGalleryImage } from '../../services/admin/deleteGalleryImage';
+import './Gallery.less';
 
 interface GalleryState {
   images: string[];
@@ -88,6 +88,7 @@ class Gallery extends Component<RouteComponentProps<{}>, GalleryState> {
                 <i className="far fa-trash-alt" />
               </div>
             ) : null}
+
             <img
               src={imageUrl}
               alt={`gallery-img-${index}`}

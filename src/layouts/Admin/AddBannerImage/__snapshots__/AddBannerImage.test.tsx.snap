@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AddGalleryImage works as expected AddGalleryImage component matches a snapshot 1`] = `
+exports[`AddBannerImage works as expected AddBannerImage component matches a snapshot 1`] = `
 <BrowserRouter>
   <Router
     history={
@@ -64,7 +64,7 @@ exports[`AddGalleryImage works as expected AddGalleryImage component matches a s
             }
           }
         >
-          <AddGalleryImage>
+          <AddBannerImage>
             <form
               className="AddGalleryImage form"
               onSubmit={[Function]}
@@ -74,18 +74,8 @@ exports[`AddGalleryImage works as expected AddGalleryImage component matches a s
               >
                 <p
                   className="gallery-info"
-                  style={
-                    Object {
-                      "color": "green",
-                    }
-                  }
                 >
-                  Expression "(Number of images)/4" should has no remainder for the best gallery displaying
-                </p>
-                <p
-                  className="gallery-info"
-                >
-                  Number of images in gallery: 
+                  Number of banner images: 
                    
                   0
                 </p>
@@ -93,7 +83,7 @@ exports[`AddGalleryImage works as expected AddGalleryImage component matches a s
                 <label
                   className="accent"
                 >
-                  Add image to the galery:
+                  Add new banner image:
                 </label>
                 <br />
                 <div
@@ -111,7 +101,7 @@ exports[`AddGalleryImage works as expected AddGalleryImage component matches a s
                 SUBMIT
               </button>
             </form>
-          </AddGalleryImage>
+          </AddBannerImage>
         </AppContextProvider>
       </Route>
     </withRouter(AppContextProvider)>

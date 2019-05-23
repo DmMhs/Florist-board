@@ -15,6 +15,7 @@ interface SliderProps {
   images: string[];
   auto: boolean;
   showControls: boolean;
+  bannerModeEnabled?: boolean;
 }
 
 let interval: number;
@@ -96,7 +97,13 @@ class Slider extends Component<SliderProps, SliderState> {
   public render() {
     const { images } = this.props;
     const slides = images.map((i: string, index: number) => {
-      return <Slide key={index} imgSrc={i} />;
+      return (
+        <Slide
+          key={index}
+          imgSrc={i}
+          forBanner={this.props.bannerModeEnabled === true ? true : false}
+        />
+      );
     });
 
     return (

@@ -89,6 +89,12 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
                   },
                   "pages": Object {
                     "admin": Object {
+                      "addBannerImageForm": Object {
+                        "add": "Add new banner image:",
+                        "info": Object {
+                          "totalImagesNumber": "Number of banner images: ",
+                        },
+                      },
                       "addGalleryImageForm": Object {
                         "add": "Add image to the galery:",
                         "info": Object {
@@ -116,6 +122,7 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
                       "current": "Current value: ",
                       "navigation": Object {
                         "addProduct": "ADD PRODUCT",
+                        "banner": "BANNER IMAGES",
                         "contacts": "CONTACTS",
                         "galleryImages": "GALLERY IMAGES",
                         "labels": "LABELS",
@@ -212,6 +219,12 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
                   },
                   "pages": Object {
                     "admin": Object {
+                      "addBannerImageForm": Object {
+                        "add": "Добавити нову картинку:",
+                        "info": Object {
+                          "totalImagesNumber": "Кількість картинок в банері: ",
+                        },
+                      },
                       "addGalleryImageForm": Object {
                         "add": "Добавити картинку в галерею:",
                         "info": Object {
@@ -239,6 +252,7 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
                       "current": "Поточне значення: ",
                       "navigation": Object {
                         "addProduct": "ДОДАТИ ПРОДУКТ",
+                        "banner": "БАНЕР",
                         "contacts": "КОНТАКТИ",
                         "galleryImages": "ГАЛЕРЕЯ",
                         "labels": "ЛЕЙБЛИ",
@@ -324,7 +338,9 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
               <div
                 className="form-control"
               >
-                <label>
+                <label
+                  className="accent"
+                >
                   Change 
                    brand: 
                 </label>
@@ -345,7 +361,9 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
               <div
                 className="form-control"
               >
-                <label>
+                <label
+                  className="accent"
+                >
                   Change 
                    navigation... 
                 </label>
@@ -494,7 +512,9 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
               <div
                 className="form-control"
               >
-                <label>
+                <label
+                  className="accent"
+                >
                   Change 
                    pages/admin... 
                 </label>
@@ -755,7 +775,9 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
               <div
                 className="form-control"
               >
-                <label>
+                <label
+                  className="accent"
+                >
                   Change 
                    pages/shop... 
                 </label>
@@ -988,7 +1010,9 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
               <div
                 className="form-control"
               >
-                <label>
+                <label
+                  className="accent"
+                >
                   Change 
                    pages/gallery/main: 
                 </label>
@@ -1008,7 +1032,9 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
               <div
                 className="form-control"
               >
-                <label>
+                <label
+                  className="accent"
+                >
                   Change 
                    pages/contacts... 
                 </label>
@@ -1045,7 +1071,9 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
               <div
                 className="form-control"
               >
-                <label>
+                <label
+                  className="accent"
+                >
                   Change 
                    pages/auth... 
                 </label>
@@ -1250,7 +1278,9 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
               <div
                 className="form-control"
               >
-                <label>
+                <label
+                  className="accent"
+                >
                   Change 
                    pages/pageNotFound: 
                 </label>
@@ -1270,7 +1300,9 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
               <div
                 className="form-control"
               >
-                <label>
+                <label
+                  className="accent"
+                >
                   Change 
                    pages/productDetails... 
                 </label>
@@ -1349,7 +1381,9 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
               <div
                 className="form-control"
               >
-                <label>
+                <label
+                  className="accent"
+                >
                   Change 
                    footer: 
                 </label>

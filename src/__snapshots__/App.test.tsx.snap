@@ -509,6 +509,7 @@ exports[`App works as expected matches a snapshot 1`] = `
                       >
                         <Slider
                           auto={true}
+                          bannerModeEnabled={true}
                           images={Array []}
                           showControls={true}
                         >
