@@ -1,7 +1,7 @@
 import React, { Component, RefObject } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
-import Header from './layouts/Header/Header';
+import Header from './components/Header/Header';
 import Shop from './layouts/Shop/Shop';
 import Gallery from './layouts/Gallery/Gallery';
 import Contacts from './layouts/Contacts/Contacts';
@@ -9,8 +9,8 @@ import Home from './layouts/Home/Home';
 import Toggle from './components/Toggle/Toggle';
 import ProductDetails from './layouts/ProductList/ProductDetails/ProductDetails';
 import Auth from './layouts/Auth/Auth';
-import AppContextProvider, { AppContext } from './AppContext';
-import Footer from './layouts/Footer/Footer';
+import { AppContext } from './AppContext';
+import Footer from './components/Footer/Footer';
 import PageNotFound from './layouts/PageNotFound/PageNotFound';
 import Admin from './layouts/Admin/Admin';
 import './App.less';
@@ -48,7 +48,9 @@ class App extends Component<AppProps, AppState> {
     if (localStorage.floristUserRole === undefined) {
       localStorage.setItem('floristUserRole', '');
     }
+
     const context = this.context;
+
     resizeListener = () => {
       if (this.toggleRef.current!.classList.contains('active')) {
         this.toggleRef.current!.classList.remove('active');
@@ -61,6 +63,7 @@ class App extends Component<AppProps, AppState> {
         context.disableMobileMode();
       }
     };
+
     window.addEventListener('resize', resizeListener);
   }
 

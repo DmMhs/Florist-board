@@ -1,9 +1,9 @@
 import React, { Component, RefObject } from 'react';
 
 import Slide from './Slide/Slide';
-import './Slider.less';
 import LeftArrow from './LeftArrow/LeftArrow';
 import RightArrow from './RightArrow/RightArrow';
+import './Slider.less';
 
 interface SliderState {
   currentIndex: number;
