@@ -58,7 +58,7 @@ describe('AddGalleryImage works as expected', () => {
       totalImagesNumber: 0
     });
   });
-  it('total images number is not 0', async () => {
+  it('submit event envokes helper functions', async () => {
     const wrapper = mount(
       <BrowserRouter>
         <AppContextProvider>
