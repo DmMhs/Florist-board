@@ -1,11 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 
-import Header from './layouts/Header/Header';
+import Header from './components/Header/Header';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import AppContextProvider, { AppContext } from './AppContext';
+import AppContextProvider from './AppContext';
 import labels from './config/labels';
 
 describe('App works as expected', () => {
