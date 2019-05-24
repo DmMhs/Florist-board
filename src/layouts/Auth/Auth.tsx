@@ -262,7 +262,7 @@ class Auth extends Component<
                     </div>
                     <hr />
                     <h3>{labels[lang].pages.auth.alternative}</h3>
-                    <div className="form-field">
+                    <div className="form-field google-auth-field">
                       <p>
                         {mode === 'signup'
                           ? labels[lang].pages.auth.signup.google
@@ -280,7 +280,7 @@ class Auth extends Component<
                         />
                       </a>
                     </div>
-                    <div className="form-field">
+                    <div className="form-field facebook-auth-field">
                       <p>
                         {mode === 'signup'
                           ? labels[lang].pages.auth.signup.facebook

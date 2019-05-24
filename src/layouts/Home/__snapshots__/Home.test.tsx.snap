@@ -10,6 +10,7 @@ exports[`Home works as expected Home component matches a snapshot 1`] = `
   >
     <Slider
       auto={true}
+      bannerModeEnabled={true}
       images={Array []}
       showControls={true}
     />

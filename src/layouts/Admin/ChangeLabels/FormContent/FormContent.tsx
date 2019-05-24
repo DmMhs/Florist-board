@@ -50,7 +50,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
     return (
       <div className="FormContent">
         <div className="form-control">
-          <label>{change} brand: </label>
+          <label className="accent">{change} brand: </label>
           <br />
           <input
             type="text"
@@ -67,7 +67,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
         </div>
 
         <div className="form-control">
-          <label>{change} navigation... </label>
+          <label className="accent">{change} navigation... </label>
           <br />
           <p>home:</p>
           <input
@@ -192,7 +192,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
         </div>
 
         <div className="form-control">
-          <label>{change} pages/admin... </label>
+          <label className="accent">{change} pages/admin... </label>
           <br />
           <p>title: </p>
           <input
@@ -420,7 +420,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
         </div>
 
         <div className="form-control">
-          <label>{change} pages/shop... </label>
+          <label className="accent">{change} pages/shop... </label>
           <br />
           <p>notAvailable:</p>
           <input
@@ -617,7 +617,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
         </div>
 
         <div className="form-control">
-          <label>{change} pages/gallery/main: </label>
+          <label className="accent">{change} pages/gallery/main: </label>
           <br />
           <input
             type="text"
@@ -633,7 +633,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
         </div>
 
         <div className="form-control">
-          <label>{change} pages/contacts... </label>
+          <label className="accent">{change} pages/contacts... </label>
           <br />
           <p>map:</p>
           <input
@@ -662,7 +662,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
         </div>
 
         <div className="form-control">
-          <label>{change} pages/auth... </label>
+          <label className="accent">{change} pages/auth... </label>
           <br />
           <p>email:</p>
           <input
@@ -835,7 +835,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
         </div>
 
         <div className="form-control">
-          <label>{change} pages/pageNotFound: </label>
+          <label className="accent">{change} pages/pageNotFound: </label>
           <br />
           <input
             type="text"
@@ -851,7 +851,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
         </div>
 
         <div className="form-control">
-          <label>{change} pages/productDetails... </label>
+          <label className="accent">{change} pages/productDetails... </label>
           <br />
           <p>description:</p>
           <input
@@ -916,7 +916,7 @@ class FormContent extends Component<FormContentProps, FormContentState> {
         </div>
 
         <div className="form-control">
-          <label>{change} footer: </label>
+          <label className="accent">{change} footer: </label>
           <br />
           <input
             type="text"

@@ -1,9 +1,9 @@
 import React, { Component, RefObject } from 'react';
 
 import Slide from './Slide/Slide';
-import './Slider.less';
 import LeftArrow from './LeftArrow/LeftArrow';
 import RightArrow from './RightArrow/RightArrow';
+import './Slider.less';
 
 interface SliderState {
   currentIndex: number;
@@ -15,6 +15,7 @@ interface SliderProps {
   images: string[];
   auto: boolean;
   showControls: boolean;
+  bannerModeEnabled?: boolean;
 }
 
 let interval: number;
@@ -96,7 +97,13 @@ class Slider extends Component<SliderProps, SliderState> {
   public render() {
     const { images } = this.props;
     const slides = images.map((i: string, index: number) => {
-      return <Slide key={index} imgSrc={i} />;
+      return (
+        <Slide
+          key={index}
+          imgSrc={i}
+          forBanner={this.props.bannerModeEnabled === true ? true : false}
+        />
+      );
     });
 
     return (

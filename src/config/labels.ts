@@ -25,7 +25,8 @@ const labels: any = {
           galleryImages: 'GALLERY IMAGES',
           labels: 'LABELS',
           urls: 'URLs',
-          contacts: 'CONTACTS'
+          contacts: 'CONTACTS',
+          banner: 'BANNER IMAGES'
         },
         addProductForm: {
           available: {
@@ -48,8 +49,14 @@ const labels: any = {
           },
           add: 'Add image to the galery:'
         },
+        addBannerImageForm: {
+          info: {
+            totalImagesNumber: 'Number of banner images: '
+          },
+          add: 'Add new banner image:'
+        },
         changeLabelsForm: {
-          main: 'Labels Configuration',
+          main: 'Labels Configuration'
         },
         change: 'Change ',
         current: 'Current value: ',
@@ -149,7 +156,8 @@ const labels: any = {
           galleryImages: 'ГАЛЕРЕЯ',
           labels: 'ЛЕЙБЛИ',
           urls: 'ПОСИЛАННЯ',
-          contacts: 'КОНТАКТИ'
+          contacts: 'КОНТАКТИ',
+          banner: 'БАНЕР'
         },
         addProductForm: {
           available: {
@@ -172,8 +180,14 @@ const labels: any = {
           },
           add: 'Добавити картинку в галерею:'
         },
+        addBannerImageForm: {
+          info: {
+            totalImagesNumber: 'Кількість картинок в банері: '
+          },
+          add: 'Добавити нову картинку:'
+        },
         changeLabelsForm: {
-          main: 'Налаштування лейблів',
+          main: 'Налаштування лейблів'
         },
         change: 'Змінити ',
         current: 'Поточне значення: ',

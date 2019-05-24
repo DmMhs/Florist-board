@@ -253,7 +253,7 @@ class AddProduct extends Component<
       editProductForm = (
         <form onSubmit={this.formSubmitHandler} className="EditProduct form">
           <div className="form-control">
-            <label>{labelsRoot.available.title}</label>
+            <label className="accent">{labelsRoot.available.title}</label>
             <br />
             <select
               onChange={this.availableChangedHandler}
@@ -266,7 +266,7 @@ class AddProduct extends Component<
             </select>
           </div>
           <div className="form-control">
-            <label>{labelsRoot.title}</label>
+            <label className="accent">{labelsRoot.title}</label>
             <br />
             <input
               type="text"
@@ -276,7 +276,7 @@ class AddProduct extends Component<
               placeholder={this.state.title}
               className="titleInput"
             />
-            <label>{labelsRoot.title_ua}</label>
+            <label className="accent">{labelsRoot.title_ua}</label>
             <br />
             <input
               type="text"
@@ -288,7 +288,7 @@ class AddProduct extends Component<
             />
           </div>
           <div className="form-control product-images">
-            <label>{labelsRoot.images}</label>
+            <label className="accent">{labelsRoot.images}</label>
             <br />
             <div className="input-wrapper">
               <input
@@ -316,7 +316,7 @@ class AddProduct extends Component<
             </div>
           </div>
           <div className="form-control">
-            <label>{labelsRoot.price}</label>
+            <label className="accent">{labelsRoot.price}</label>
             <br />
             <div className="price">
               <input
@@ -339,7 +339,7 @@ class AddProduct extends Component<
             </div>
           </div>
           <div className="form-control">
-            <label>{labelsRoot.description}</label>
+            <label className="accent">{labelsRoot.description}</label>
             <br />
             <textarea
               required
@@ -348,7 +348,7 @@ class AddProduct extends Component<
               value={this.state.description as string}
               className="descriptionText"
             />
-            <label>{labelsRoot.description_ua}</label>
+            <label className="accent">{labelsRoot.description_ua}</label>
             <br />
             <textarea
               required
@@ -366,7 +366,7 @@ class AddProduct extends Component<
     addProductForm = (
       <form onSubmit={this.formSubmitHandler} className="AddProduct form">
         <div className="form-control">
-          <label>{labelsRoot.available.title}</label>
+          <label className="accent">{labelsRoot.available.title}</label>
           <br />
           <select
             onChange={this.availableChangedHandler}
@@ -377,7 +377,7 @@ class AddProduct extends Component<
           </select>
         </div>
         <div className="form-control">
-          <label>{labelsRoot.title}</label>
+          <label className="accent">{labelsRoot.title}</label>
           <br />
           <input
             type="text"
@@ -386,7 +386,7 @@ class AddProduct extends Component<
             value={this.state.title as string}
             className="titleInput"
           />
-          <label>{labelsRoot.title_ua}</label>
+          <label className="accent">{labelsRoot.title_ua}</label>
           <br />
           <input
             type="text"
@@ -397,7 +397,7 @@ class AddProduct extends Component<
           />
         </div>
         <div className="form-control product-images">
-          <label>{labelsRoot.images}</label>
+          <label className="accent">{labelsRoot.images}</label>
           <br />
           <div className="input-wrapper">
             <input
@@ -425,7 +425,7 @@ class AddProduct extends Component<
           </div>
         </div>
         <div className="form-control">
-          <label>{labelsRoot.price}</label>
+          <label className="accent">{labelsRoot.price}</label>
           <br />
           <div className="price">
             <input
@@ -446,7 +446,7 @@ class AddProduct extends Component<
           </div>
         </div>
         <div className="form-control">
-          <label>{labelsRoot.description}</label>
+          <label className="accent">{labelsRoot.description}</label>
           <br />
           <textarea
             required
@@ -455,7 +455,7 @@ class AddProduct extends Component<
             value={this.state.description as string}
             className="descriptionText"
           />
-          <label>{labelsRoot.description_ua}</label>
+          <label className="accent">{labelsRoot.description_ua}</label>
           <br />
           <textarea
             required
