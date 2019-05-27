@@ -2,18 +2,18 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { BrowserRouter } from 'react-router-dom';
 
-import AddBannerImage from './AddBannerImage';
+import ChangeBanner from './ChangeBanner';
 import AppContextProvider from '../../../AppContext';
 import labels from '../../../config/labels';
 import * as getBannerImageDownloadURLFunction from '../../../services/admin/getBannerImageDownloadURL';
 import * as uploadBannerImageFunction from '../../../services/admin/uploadBannerImage';
 
-describe('AddBannerImage works as expected', () => {
-  it('AddBannerImage component matches a snapshot', () => {
+describe('ChangeBanner works as expected', () => {
+  it('ChangeBanner component matches a snapshot', () => {
     const wrapper = mount(
       <BrowserRouter>
         <AppContextProvider>
-          <AddBannerImage />
+          <ChangeBanner />
         </AppContextProvider>
       </BrowserRouter>
     );
@@ -33,7 +33,7 @@ describe('AddBannerImage works as expected', () => {
     const wrapper = mount(
       <BrowserRouter>
         <AppContextProvider>
-          <AddBannerImage />
+          <ChangeBanner />
         </AppContextProvider>
       </BrowserRouter>
     );
@@ -47,7 +47,7 @@ describe('AddBannerImage works as expected', () => {
       togglePosition: 'absolute'
     });
     wrapper.update();
-    const instance = wrapper.find('AddBannerImage').instance();
+    const instance = wrapper.find('ChangeBanner').instance();
     instance.setState({
       images: ['one']
     });

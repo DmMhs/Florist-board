@@ -4,6 +4,7 @@ import { database } from './firebase';
 import { Labels } from './models/Labels';
 import Spinner from './components/Spinner/Spinner';
 import './AppContext.less';
+import labels from './config/labels';
 
 export interface AppContextState {
   userLogin: string | null | undefined;
@@ -61,7 +62,10 @@ class AppContextProvider extends Component<
     };
   }
   public componentDidMount() {
-    // database.ref().child('labels').set(labels);
+    // database
+    //   .ref()
+    //   .child('labels')
+    //   .set(labels);
     // axios.post(
     //   'https://us-central1-florist-cb933.cloudfunctions.net/getBrowserLanguage'
     // );
