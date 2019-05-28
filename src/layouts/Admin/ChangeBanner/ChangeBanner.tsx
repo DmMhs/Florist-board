@@ -52,15 +52,11 @@ class AddBannerImage extends Component<
     });
   };
 
-  private formSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  private bannerImageAddedHandler = (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
-    const {
-      images,
-      desktopBannerWrapperHeight,
-      desktopBannerWrapperWidth,
-      bannerWidthUnits,
-      bannerHeightUnits
-    } = this.state;
+    const { images } = this.state;
     const {} = this.state;
     this.setState({
       images: []
@@ -77,6 +73,17 @@ class AddBannerImage extends Component<
           homeImagesRef.push(imgURL);
         });
     });
+  };
+
+  private bannerChangedHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const {
+      desktopBannerWrapperHeight,
+      desktopBannerWrapperWidth,
+      bannerWidthUnits,
+      bannerHeightUnits
+    } = this.state;
+    const {} = this.state;
     const width =
       desktopBannerWrapperWidth === ''
         ? '0px'
@@ -135,64 +142,76 @@ class AddBannerImage extends Component<
       <AppContext.Consumer>
         {value =>
           value && (
-            <form
-              onSubmit={this.formSubmitHandler}
-              className="AddGalleryImage form"
-            >
-              <div className="form-control product-images">
-                <p className="gallery-info">
-                  {labelsRoot.info.totalImagesNumber}{' '}
-                  {this.state.totalImagesNumber}
-                </p>
-                <hr />
-                <label className="accent">{labelsRoot.add}</label>
-                <br />
-                <div className="input-wrapper">
-                  <input
-                    type="file"
-                    onChange={this.imgInputChangedHandler.bind(this, 0)}
-                  />
+            <div>
+              <form
+                onSubmit={this.bannerImageAddedHandler}
+                className="AddGalleryImage form"
+              >
+                <div className="form-control product-images">
+                  <p className="gallery-info">
+                    {labelsRoot.info.totalImagesNumber}{' '}
+                    {this.state.totalImagesNumber}
+                  </p>
+                  <hr />
+                  <label className="accent">{labelsRoot.add}</label>
+                  <br />
+                  <div className="input-wrapper">
+                    <input
+                      type="file"
+                      onChange={this.imgInputChangedHandler.bind(this, 0)}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="form-control">
-                <label className="accent">
-                  {labelsRoot.change.desktopWrapperWidth}
-                </label>
-                <br />
-                <input type="number" onChange={this.widthInputChangedHandler} />
-                <select
-                  onChange={this.widthSelectChangedHandler}
-                  defaultValue={this.state.bannerWidthUnits}
-                >
-                  <option value="px">px</option>
-                  <option value="%">%</option>
-                  <option value="rem">rem</option>
-                  <option value="em">em</option>
-                  <option value="vw">vw</option>
-                </select>
-              </div>
-              <div className="form-control">
-                <label className="accent">
-                  {labelsRoot.change.desktopWrapperHeight}
-                </label>
-                <br />
-                <input
-                  type="number"
-                  onChange={this.heightInputChangedHandler}
-                />
-                <select
-                  onChange={this.heightSelectChangedHandler}
-                  defaultValue={this.state.bannerHeightUnits}
-                >
-                  <option value="px">px</option>
-                  <option value="%">%</option>
-                  <option value="rem">rem</option>
-                  <option value="em">em</option>
-                  <option value="vw">vh</option>
-                </select>
-              </div>
-              <button type="submit">{submitBtnLabel}</button>
-            </form>
+                <button type="submit">{submitBtnLabel}</button>
+              </form>
+
+              <form
+                className="ChangeDesktopBanner form"
+                onSubmit={this.bannerChangedHandler}
+              >
+                <div className="form-control">
+                  <label className="accent">
+                    {labelsRoot.change.desktopWrapperWidth}
+                  </label>
+                  <br />
+                  <input
+                    type="number"
+                    onChange={this.widthInputChangedHandler}
+                  />
+                  <select
+                    onChange={this.widthSelectChangedHandler}
+                    defaultValue={this.state.bannerWidthUnits}
+                  >
+                    <option value="px">px</option>
+                    <option value="%">%</option>
+                    <option value="rem">rem</option>
+                    <option value="em">em</option>
+                    <option value="vw">vw</option>
+                  </select>
+                </div>
+                <div className="form-control">
+                  <label className="accent">
+                    {labelsRoot.change.desktopWrapperHeight}
+                  </label>
+                  <br />
+                  <input
+                    type="number"
+                    onChange={this.heightInputChangedHandler}
+                  />
+                  <select
+                    onChange={this.heightSelectChangedHandler}
+                    defaultValue={this.state.bannerHeightUnits}
+                  >
+                    <option value="px">px</option>
+                    <option value="%">%</option>
+                    <option value="rem">rem</option>
+                    <option value="em">em</option>
+                    <option value="vw">vh</option>
+                  </select>
+                </div>
+                <button type="submit">{submitBtnLabel}</button>
+              </form>
+            </div>
           )
         }
       </AppContext.Consumer>

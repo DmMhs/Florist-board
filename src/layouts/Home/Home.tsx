@@ -4,6 +4,7 @@ import { homeImagesRef, database } from '../../firebase';
 import Spinner from '../../components/Spinner/Spinner';
 import Slider from '../../components/Slider/Slider';
 import './Home.less';
+import { AppContext } from '../../AppContext';
 
 interface HomeProps {}
 
@@ -13,6 +14,8 @@ interface HomeState {
   sliderWrapperWidth: string;
   sliderWrapperHeight: string;
 }
+
+let resizeListener: EventListener;
 
 class Home extends Component<HomeProps, HomeState> {
   constructor(props: HomeProps) {
@@ -45,6 +48,18 @@ class Home extends Component<HomeProps, HomeState> {
         });
       });
     });
+    resizeListener = () => {
+      this.setState({
+        sliderWrapperHeight: '',
+        sliderWrapperWidth: ''
+      });
+    };
+
+    window.addEventListener('resize', resizeListener);
+  }
+
+  public componentWillUnmount() {
+    window.removeEventListener('resize', resizeListener);
   }
 
   public render() {
@@ -53,13 +68,19 @@ class Home extends Component<HomeProps, HomeState> {
       sliderWrapperWidth,
       sliderWrapperHeight
     } = this.state;
+    const context = this.context;
+    const mobileModeEnabled = context.state.mobileMode;
+    const bannerStyle =
+      mobileModeEnabled === true
+        ? {}
+        : {
+            width: sliderWrapperWidth,
+            height: sliderWrapperHeight
+          };
     return (
       <div className="Home">
         {bannerImages.length <= 0 ? <Spinner /> : null}
-        <div
-          className="slider-wrapper"
-          style={{ width: sliderWrapperWidth, height: sliderWrapperHeight }}
-        >
+        <div className="slider-wrapper" style={bannerStyle}>
           <Slider
             images={bannerImages}
             auto={true}
@@ -71,5 +92,5 @@ class Home extends Component<HomeProps, HomeState> {
     );
   }
 }
-
+Home.contextType = AppContext;
 export default Home;
