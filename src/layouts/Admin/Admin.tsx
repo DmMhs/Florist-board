@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import './Admin.less';
 import { AppContext } from '../../AppContext';
 import {
   RouteComponentProps as RCProps,
@@ -12,7 +11,10 @@ import AddGalleryImage from './AddGalleryImage/AddGalleryImage';
 import ChangeLabels from './ChangeLabels/ChangeLabels';
 import ChangeContacts from './ChangeContacts/ChangeContacts';
 import ChangeURLs from './ChangeURLs/ChangeURLs';
-import AddBannerImage from './AddBannerImage/AddBannerImage';
+import ChangeBanner from './ChangeBanner/ChangeBanner';
+
+import './Admin.less';
+
 interface MatchParams {
   mode: string;
 }
@@ -72,7 +74,7 @@ class Admin extends Component<
         form = <ChangeContacts />;
         break;
       case 'configurate-banner':
-        form = <AddBannerImage />;
+        form = <ChangeBanner />;
         break;
       default:
         form = null;

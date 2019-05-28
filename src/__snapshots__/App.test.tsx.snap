@@ -506,6 +506,12 @@ exports[`App works as expected matches a snapshot 1`] = `
                       </WithStyles(CircularIndeterminate)>
                       <div
                         className="slider-wrapper"
+                        style={
+                          Object {
+                            "height": "",
+                            "width": "",
+                          }
+                        }
                       >
                         <Slider
                           auto={true}

@@ -89,12 +89,6 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
                   },
                   "pages": Object {
                     "admin": Object {
-                      "addBannerImageForm": Object {
-                        "add": "Add new banner image:",
-                        "info": Object {
-                          "totalImagesNumber": "Number of banner images: ",
-                        },
-                      },
                       "addGalleryImageForm": Object {
                         "add": "Add image to the galery:",
                         "info": Object {
@@ -116,6 +110,16 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
                         "title_ua": "Product title (UA): ",
                       },
                       "change": "Change ",
+                      "changeBannerForm": Object {
+                        "add": "Add new banner image:",
+                        "change": Object {
+                          "desktopWrapperHeight": "Change height of banner wrapper on desktop devices:",
+                          "desktopWrapperWidth": "Change width of banner wrapper on desktop devices:",
+                        },
+                        "info": Object {
+                          "totalImagesNumber": "Number of banner images: ",
+                        },
+                      },
                       "changeLabelsForm": Object {
                         "main": "Labels Configuration",
                       },
@@ -219,12 +223,6 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
                   },
                   "pages": Object {
                     "admin": Object {
-                      "addBannerImageForm": Object {
-                        "add": "Добавити нову картинку:",
-                        "info": Object {
-                          "totalImagesNumber": "Кількість картинок в банері: ",
-                        },
-                      },
                       "addGalleryImageForm": Object {
                         "add": "Добавити картинку в галерею:",
                         "info": Object {
@@ -246,6 +244,16 @@ exports[`FormContent works as expected FormContent component matches a snapshot 
                         "title_ua": "Назва продукту (UA): ",
                       },
                       "change": "Змінити ",
+                      "changeBannerForm": Object {
+                        "add": "Добавити нову картинку:",
+                        "change": Object {
+                          "desktopWrapperHeight": "Змінити висоту банера на десктопних пристроях: ",
+                          "desktopWrapperWidth": "Змінити ширину банера на десктопних пристроях: ",
+                        },
+                        "info": Object {
+                          "totalImagesNumber": "Кількість картинок в банері: ",
+                        },
+                      },
                       "changeLabelsForm": Object {
                         "main": "Налаштування лейблів",
                       },

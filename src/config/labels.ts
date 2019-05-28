@@ -49,9 +49,15 @@ const labels: any = {
           },
           add: 'Add image to the galery:'
         },
-        addBannerImageForm: {
+        changeBannerForm: {
           info: {
             totalImagesNumber: 'Number of banner images: '
+          },
+          change: {
+            desktopWrapperWidth:
+              'Change width of banner wrapper on desktop devices:',
+            desktopWrapperHeight:
+              'Change height of banner wrapper on desktop devices:'
           },
           add: 'Add new banner image:'
         },
@@ -180,9 +186,15 @@ const labels: any = {
           },
           add: 'Добавити картинку в галерею:'
         },
-        addBannerImageForm: {
+        changeBannerForm: {
           info: {
             totalImagesNumber: 'Кількість картинок в банері: '
+          },
+          change: {
+            desktopWrapperWidth:
+              'Змінити ширину банера на десктопних пристроях: ',
+            desktopWrapperHeight:
+              'Змінити висоту банера на десктопних пристроях: '
           },
           add: 'Добавити нову картинку:'
         },
