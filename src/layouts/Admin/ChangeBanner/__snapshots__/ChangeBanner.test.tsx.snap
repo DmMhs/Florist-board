@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChangeBanner works as expected ChangeBanner component matches a snapshot 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <withRouter(AppContextProvider)>
+      <Route>
+        <AppContextProvider
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+        >
+          <ChangeBanner>
+            <div>
+              <form
+                className="AddGalleryImage form"
+                onSubmit={[Function]}
+              >
+                <div
+                  className="form-control product-images"
+                >
+                  <p
+                    className="gallery-info"
+                  >
+                    Number of banner images: 
+                     
+                    0
+                  </p>
+                  <hr />
+                  <label
+                    className="accent"
+                  >
+                    Add new banner image:
+                  </label>
+                  <br />
+                  <div
+                    className="input-wrapper"
+                  >
+                    <input
+                      onChange={[Function]}
+                      type="file"
+                    />
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                >
+                  SUBMIT
+                </button>
+              </form>
+              <form
+                className="ChangeDesktopBanner form"
+                onSubmit={[Function]}
+              >
+                <div
+                  className="form-control"
+                >
+                  <label
+                    className="accent"
+                  >
+                    Change width of banner wrapper on desktop devices:
+                  </label>
+                  <br />
+                  <input
+                    className="widthInput"
+                    onChange={[Function]}
+                    type="number"
+                  />
+                  <select
+                    className="widthSelect"
+                    defaultValue="%"
+                    onChange={[Function]}
+                  >
+                    <option
+                      value="px"
+                    >
+                      px
+                    </option>
+                    <option
+                      value="%"
+                    >
+                      %
+                    </option>
+                    <option
+                      value="rem"
+                    >
+                      rem
+                    </option>
+                    <option
+                      value="em"
+                    >
+                      em
+                    </option>
+                    <option
+                      value="vw"
+                    >
+                      vw
+                    </option>
+                  </select>
+                </div>
+                <div
+                  className="form-control"
+                >
+                  <label
+                    className="accent"
+                  >
+                    Change height of banner wrapper on desktop devices:
+                  </label>
+                  <br />
+                  <input
+                    className="heightInput"
+                    onChange={[Function]}
+                    type="number"
+                  />
+                  <select
+                    className="heightSelect"
+                    defaultValue="px"
+                    onChange={[Function]}
+                  >
+                    <option
+                      value="px"
+                    >
+                      px
+                    </option>
+                    <option
+                      value="%"
+                    >
+                      %
+                    </option>
+                    <option
+                      value="rem"
+                    >
+                      rem
+                    </option>
+                    <option
+                      value="em"
+                    >
+                      em
+                    </option>
+                    <option
+                      value="vw"
+                    >
+                      vh
+                    </option>
+                  </select>
+                </div>
+                <button
+                  type="submit"
+                >
+                  SUBMIT
+                </button>
+              </form>
+            </div>
+          </ChangeBanner>
+        </AppContextProvider>
+      </Route>
+    </withRouter(AppContextProvider)>
+  </Router>
+</BrowserRouter>
+`;

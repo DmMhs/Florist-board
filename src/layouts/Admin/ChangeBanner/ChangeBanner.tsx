@@ -5,10 +5,11 @@ import { storageRef, homeImagesRef, database } from '../../../firebase';
 import './ChangeBanner.less';
 import { uploadBannerImage } from '../../../services/admin/uploadBannerImage';
 import { getBannerImageDownloadURL } from '../../../services/admin/getBannerImageDownloadURL';
+import { setDesktopBannerParams } from '../../../services/admin/setDesktopBannerParams';
 
-interface AddBannerImageProps {}
+interface ChangeBannerProps {}
 
-interface AddBannerImageState {
+interface ChangeBannerState {
   images: File[];
   totalImagesNumber: number;
   desktopBannerWrapperWidth: string;
@@ -17,11 +18,8 @@ interface AddBannerImageState {
   bannerHeightUnits: string;
 }
 
-class AddBannerImage extends Component<
-  AddBannerImageProps,
-  AddBannerImageState
-> {
-  constructor(props: AddBannerImageProps) {
+class ChangeBanner extends Component<ChangeBannerProps, ChangeBannerState> {
+  constructor(props: ChangeBannerProps) {
     super(props);
     this.state = {
       images: [],
@@ -92,10 +90,7 @@ class AddBannerImage extends Component<
       desktopBannerWrapperHeight === ''
         ? '0px'
         : desktopBannerWrapperHeight + bannerHeightUnits;
-    database.ref('banner-params').set({
-      desktopBannerWrapperHeight: height,
-      desktopBannerWrapperWidth: width
-    });
+    setDesktopBannerParams(width, height);
   };
 
   private widthInputChangedHandler = (
@@ -177,10 +172,12 @@ class AddBannerImage extends Component<
                   <input
                     type="number"
                     onChange={this.widthInputChangedHandler}
+                    className="widthInput"
                   />
                   <select
                     onChange={this.widthSelectChangedHandler}
                     defaultValue={this.state.bannerWidthUnits}
+                    className="widthSelect"
                   >
                     <option value="px">px</option>
                     <option value="%">%</option>
@@ -197,10 +194,12 @@ class AddBannerImage extends Component<
                   <input
                     type="number"
                     onChange={this.heightInputChangedHandler}
+                    className="heightInput"
                   />
                   <select
                     onChange={this.heightSelectChangedHandler}
                     defaultValue={this.state.bannerHeightUnits}
+                    className="heightSelect"
                   >
                     <option value="px">px</option>
                     <option value="%">%</option>
@@ -219,6 +218,6 @@ class AddBannerImage extends Component<
   }
 }
 
-AddBannerImage.contextType = AppContext;
+ChangeBanner.contextType = AppContext;
 
-export default AddBannerImage;
+export default ChangeBanner;
