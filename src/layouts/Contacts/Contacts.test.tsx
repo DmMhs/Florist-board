@@ -5,6 +5,8 @@ import Contacts from './Contacts';
 import { BrowserRouter } from 'react-router-dom';
 import AppContextProvider from '../../AppContext';
 import labels from '../../config/labels';
+import * as getContactsFunction from '../../services/admin/getContacts';
+import * as getURLsFunction from '../../services/admin/getURLs';
 
 describe('Contacts component works as expected', () => {
   it('matches a snapshot', () => {
@@ -47,5 +49,32 @@ describe('Contacts component works as expected', () => {
     });
     wrapper.update();
     expect(wrapper.find('.Contacts').exists()).toBeTruthy();
+  });
+  it('function was called', async () => {
+    const p = Promise.resolve();
+    const spyGetContacts = jest
+      .spyOn(getContactsFunction, 'getContacts')
+      .mockImplementation(() => p);
+
+    const wrapper = mount(
+      <BrowserRouter>
+        <AppContextProvider>
+          <Contacts />
+        </AppContextProvider>
+      </BrowserRouter>
+    );
+    const context = wrapper.find('AppContextProvider').instance();
+    context.setState({
+      lang: 'en',
+      labels: labels,
+      fetchInProgress: false,
+      mobileMode: true,
+      showNavigation: false,
+      togglePosition: 'absolute'
+    });
+    wrapper.update();
+    await p;
+
+    expect(spyGetContacts).toHaveBeenCalled();
   });
 });

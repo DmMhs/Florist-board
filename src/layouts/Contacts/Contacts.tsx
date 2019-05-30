@@ -4,8 +4,9 @@ import GoogleMap from './Map/GoogleMap';
 import ContactInfo from './ContactInfo/ContactInfo';
 import { AppContext } from '../../AppContext';
 import { urls } from '../../config/urls';
-import { database } from '../../firebase';
 import './Contacts.less';
+import { getURLs } from '../../services/admin/getURLs';
+import { getContacts } from '../../services/admin/getContacts';
 
 interface ContactsProps {}
 interface ContactsState {
@@ -54,30 +55,23 @@ class Contacts extends Component<ContactsProps, ContactsState> {
     };
   }
 
-  public componentDidMount() {
-    database
-      .ref()
-      .child('contacts')
-      .on('value', snapshot => {
-        this.setState({
-          contacts: snapshot!.val()
-        });
-        database
-          .ref()
-          .child('urls')
-          .on('value', snapshot2 => {
-            this.setState({
-              google_map_url: snapshot2!.val().google_map_address,
-              social_urls: {
-                facebook: snapshot2!.val().socials.facebook,
-                instagram: snapshot2!.val().socials.instagram,
-                telegram: snapshot2!.val().socials.telegram
-              },
-              fetchInProgress: false
-            });
-          });
-      });
-  }
+  public componentDidMount = async () => {
+    const contacts = await getContacts();
+
+    this.setState({
+      contacts: contacts
+    });
+    const data = await getURLs();
+    this.setState({
+      google_map_url: data.google_map_address,
+      social_urls: {
+        facebook: data.socials.facebook,
+        instagram: data.socials.instagram,
+        telegram: data.socials.telegram
+      },
+      fetchInProgress: false
+    });
+  };
 
   public render() {
     const context = this.context;
