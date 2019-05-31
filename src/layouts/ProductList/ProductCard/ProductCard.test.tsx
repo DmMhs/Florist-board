@@ -13,6 +13,7 @@ describe('ProductCard works as expected', () => {
       <MemoryRouter>
         <ProductCard
           title="some"
+          title_ua="тест"
           images={['test', 'product']}
           price={10.5}
           currency="usd"
@@ -32,6 +33,7 @@ describe('ProductCard works as expected', () => {
         <AppContextProvider>
           <ProductCard
             title="some"
+            title_ua="тест"
             images={['test', 'product']}
             price={10.5}
             currency="usd"
@@ -60,12 +62,13 @@ describe('ProductCard works as expected', () => {
         <AppContextProvider>
           <ProductCard
             title="some"
+            title_ua="тест"
             images={['test', 'product']}
             price={10.5}
             currency="usd"
             available={true}
             key={0}
-            id={'asfasf'}
+            id="asfasf"
             inCart={false}
             addToCart={() => {}}
           />
@@ -91,11 +94,13 @@ describe('ProductCard works as expected', () => {
         <AppContextProvider>
           <ProductCard
             title="some"
+            title_ua="тест"
             images={['test', 'product']}
             price={10.5}
             currency="usd"
             available={true}
             key={0}
+            id="asdasdasd"
             inCart={false}
             addToCart={() => {}}
           />

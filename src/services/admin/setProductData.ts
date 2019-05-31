@@ -3,7 +3,7 @@ import { productsRef } from '../../firebase';
 interface productData {
   title: string;
   title_ua: string;
-  images: File[];
+  images: FileList[];
   price: number;
   currency: string;
   available: boolean;

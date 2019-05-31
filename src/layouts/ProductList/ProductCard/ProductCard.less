@@ -37,19 +37,6 @@
       color: rgb(0, 183, 255);
     }
   }
-  .like {
-    position: absolute;
-    top: calc(1.4rem + 10px);
-    font-size: 1.4rem;
-    right: 5px;
-    color: rgb(230, 173, 173);
-    z-index: 2;
-    cursor: pointer;
-    &:hover,
-    &.active {
-      color: rgb(235, 70, 70);
-    }
-  }
   .image {
     width: 165px;
     height: 165px;
@@ -79,7 +66,7 @@
   }
   .action-panel {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     background-color: whitesmoke;
@@ -90,11 +77,26 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      width: 100%;
       height: 2rem;
       padding: 5px;
+      margin-right: 10px;
+      .disabled {
+        pointer-events: none;
+        color: #33333363;
+      }
     }
 
+    .like {
+      margin-left: 10px;
+      font-size: 1.4rem;
+      color: rgb(230, 173, 173);
+      z-index: 2;
+      cursor: pointer;
+      &:hover,
+      &.active {
+        color: rgb(235, 70, 70);
+      }
+    }
     i {
       cursor: pointer;
       font-size: 1.5rem;
@@ -102,10 +104,6 @@
       &.fa-cart-arrow-down:hover,
       &.active {
         color: rgb(98, 182, 103);
-      }
-      &.fa-heart:hover,
-      &.fa-heart.active-action {
-        color: tomato;
       }
     }
   }

@@ -10,7 +10,7 @@ import { setDesktopBannerParams } from '../../../services/admin/setDesktopBanner
 interface ChangeBannerProps {}
 
 interface ChangeBannerState {
-  images: File[];
+  images: FileList[];
   totalImagesNumber: number;
   desktopBannerWrapperWidth: string;
   desktopBannerWrapperHeight: string;
@@ -43,8 +43,8 @@ class ChangeBanner extends Component<ChangeBannerProps, ChangeBannerState> {
     position: number,
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const updatedImages: File[] = [...this.state.images];
-    updatedImages[position] = event.target.files as any;
+    const updatedImages: FileList[] = [...this.state.images];
+    updatedImages[position] = event.target.files as FileList;
     this.setState({
       images: updatedImages
     });
@@ -59,9 +59,9 @@ class ChangeBanner extends Component<ChangeBannerProps, ChangeBannerState> {
     this.setState({
       images: []
     });
-    images.map(async (image: File) => {
-      const file = (image as any)[0];
-      const formattedFileName = (image as any)[0].name;
+    images.map(async (image: FileList) => {
+      const file = image[0];
+      const formattedFileName = image[0].name;
       await uploadBannerImage(file, formattedFileName);
       getBannerImageDownloadURL(formattedFileName)
         .then(res => {

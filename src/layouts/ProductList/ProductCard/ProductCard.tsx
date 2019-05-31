@@ -126,13 +126,6 @@ class ProductCard extends Component<CartItem, ProductCardState> {
               <NavLink to={`/product-details/${id}`}>
                 <i className="fas fa-info-circle info" />
               </NavLink>
-              {value.state.userAuthenticated === true ? (
-                <i
-                  className="fas fa-heart like"
-                  onClick={this.likeClickedHandler}
-                  ref={this.likeButtonRef}
-                />
-              ) : null}
               <div className="image">
                 <Slider images={images} auto={false} showControls={true} />
               </div>
@@ -148,7 +141,20 @@ class ProductCard extends Component<CartItem, ProductCardState> {
                 </div>
               )}
               <div className="action-panel">
-                {available ? actionIcon : null}{' '}
+                {available ? (
+                  actionIcon
+                ) : (
+                  <div className="action">
+                    <i className="fas fa-cart-arrow-down disabled" />
+                  </div>
+                )}
+                {value.state.userAuthenticated === true ? (
+                  <i
+                    className="fas fa-heart like"
+                    onClick={this.likeClickedHandler}
+                    ref={this.likeButtonRef}
+                  />
+                ) : null}
               </div>
             </div>
           )

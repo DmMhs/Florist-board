@@ -9,7 +9,7 @@ import { getGalleryImageDownloadURL } from '../../../services/admin/getGalleryIm
 interface AddGalleryImageProps {}
 
 interface AddGalleryImageState {
-  images: File[];
+  images: FileList[];
   totalImagesNumber: number;
 }
 
@@ -37,8 +37,8 @@ class AddGalleryImage extends Component<
     position: number,
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const updatedImages: File[] = [...this.state.images];
-    updatedImages[position] = event.target.files as any;
+    const updatedImages: FileList[] = [...this.state.images];
+    updatedImages[position] = event.target.files as FileList;
     this.setState({
       images: updatedImages
     });
@@ -51,9 +51,9 @@ class AddGalleryImage extends Component<
       images: []
     });
 
-    images.map(async (image: File) => {
-      const file = (image as any)[0];
-      const formattedFileName = (image as any)[0].name;
+    images.map(async (image: FileList) => {
+      const file = image[0];
+      const formattedFileName = image[0].name;
       await uploadGalleryImage(file, formattedFileName);
       getGalleryImageDownloadURL(formattedFileName)
         .then(res => {

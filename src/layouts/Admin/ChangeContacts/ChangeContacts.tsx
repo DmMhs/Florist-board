@@ -4,8 +4,8 @@ import { database } from '../../../firebase';
 import { AppContext } from '../../../AppContext';
 import { Spinner } from '../../../components';
 import { createObjectPath } from '../../../services/admin/createObjectPath';
-import './ChangeContacts.less';
 import { updateContacts } from '../../../services/admin/updateContacts';
+import './ChangeContacts.less';
 
 interface ChangeContactsProps {}
 interface ChangeContactsState {

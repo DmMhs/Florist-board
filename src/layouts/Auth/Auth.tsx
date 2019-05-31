@@ -11,9 +11,9 @@ import { Popup } from '../../components';
 import { AppContext } from '../../AppContext';
 import { userRole } from '../../services/auth/userRole';
 import { getIdToken } from '../../services/auth/getIdToken';
-import './Auth.less';
 import { createUserWithEmailAndPassword } from '../../services/auth/createUserWithEmailAndPassword';
 import { signInWithEmailAndPassword } from '../../services/auth/signInWithEmailAndPassword';
+import './Auth.less';
 
 interface MatchParams {
   mode: string;

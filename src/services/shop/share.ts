@@ -9,6 +9,7 @@ export const shareOverrideOGMeta = (
     action_type: 'og.likes',
     action_properties: JSON.stringify({
       object: {
+        'og:url': overrideLink,
         'og:title': overrideTitle.toUpperCase(),
         'og:description': overrideDescription,
         'og:image': overrideImage
@@ -17,7 +18,7 @@ export const shareOverrideOGMeta = (
     href: overrideLink
   };
 
-  FB.ui(params, (response: any) => {
+  FB.ui(params, response => {
     console.log(response);
   });
 };

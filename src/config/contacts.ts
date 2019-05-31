@@ -1,4 +1,16 @@
-export const contacts: {[key: string]: any} = {
+export interface Contacts {
+  en: {
+    address: string;
+  };
+  ua: {
+    address: string;
+  };
+  postCode: string;
+  phone: string;
+  email: string;
+}
+
+export const contacts: Contacts = {
   en: {
     address: 'Rynok Square, Lviv, UA'
   },

@@ -17,7 +17,7 @@ interface AddProductState {
   available: boolean;
   title: string;
   title_ua: string;
-  images: File[];
+  images: FileList[];
   price: number;
   currency: string;
   description: string;
@@ -129,8 +129,8 @@ class AddProduct extends Component<
     position: number,
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const updatedImages: File[] = [...this.state.images];
-    updatedImages[position] = event.target.files as any;
+    const updatedImages: FileList[] = [...this.state.images];
+    updatedImages[position] = event.target.files as FileList;
     this.setState({
       images: updatedImages
     });
