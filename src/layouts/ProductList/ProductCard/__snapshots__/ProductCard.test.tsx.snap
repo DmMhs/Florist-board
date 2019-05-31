@@ -15,5 +15,6 @@ exports[`ProductCard works as expected renders without crashing 1`] = `
   key="0"
   price={10.5}
   title="some"
+  title_ua="тест"
 />
 `;

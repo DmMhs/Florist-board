@@ -9,17 +9,17 @@ export interface productData {
   description: string;
   description_ua: string;
   currency: string;
-  images: File[];
+  images: FileList[];
 }
 
 export const uploadProductImagesAndReturnURLs = (
-  images: File[],
+  images: FileList[],
   productData: productData
 ) => {
   return Promise.all(
-    images.map(async (image: File) => {
-      const file = (image as any)[0];
-      const formattedFileName = (image as any)[0].name.split('.')[0];
+    images.map(async (image: FileList) => {
+      const file = (image as FileList)[0];
+      const formattedFileName = (image as FileList)[0].name.split('.')[0];
       await storageRef
         .child('products-images')
         .child(productData.title.toLowerCase())

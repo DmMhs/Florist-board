@@ -7,7 +7,6 @@ import AppContextProvider from '../../../AppContext';
 import labels from '../../../config/labels';
 import * as deleteProductImagesFunction from '../../../services/admin/deleteProductImages';
 import * as deleteProductImagesFromDBFunction from '../../../services/admin/deleteProductImagesFromDB';
-import * as updateProductImagesURLsFunction from '../../../services/admin/updateProductImagesURLs';
 
 describe('AddProduct works as expected', () => {
   it('AddProduct component matches a snapshot', () => {
@@ -314,7 +313,6 @@ describe('AddProduct works as expected', () => {
     const spyDeleteImagesFromDB = jest
       .spyOn(deleteProductImagesFromDBFunction, 'deleteProductImagesFromDB')
       .mockImplementation((id: string) => p);
-    instance.forceUpdate();
     wrapper.find('.form').simulate('submit');
     wrapper.update();
     await p;

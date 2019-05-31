@@ -16,9 +16,7 @@ import Admin from './layouts/Admin/Admin';
 import './App.less';
 
 interface AppProps {}
-interface AppState {
-  products: any;
-}
+interface AppState {}
 
 let resizeListener: EventListener;
 
@@ -26,9 +24,7 @@ class App extends Component<AppProps, AppState> {
   private toggleRef: RefObject<HTMLDivElement>;
   constructor(props: AppProps) {
     super(props);
-    this.state = {
-      products: []
-    };
+    this.state = {};
     this.toggleRef = React.createRef();
   }
 
