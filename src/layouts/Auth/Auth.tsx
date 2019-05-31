@@ -22,10 +22,10 @@ interface MatchParams {
 interface Props extends RouteComponentProps<MatchParams> {}
 
 interface RouteComponentProps<P> {
-  match: match<P>;
+  match: Match<P>;
 }
 
-interface match<P> {
+interface Match<P> {
   params: P;
   isExact: boolean;
   path: string;
