@@ -7,14 +7,12 @@ Florist is a simple SPA which implements an online flower shop with usage of Rea
 * Check if you have Node.js installed on your machine (https://nodejs.org/en/).
 * Run "npm install" to install all project dependencies. 
 * Run "npm start" to run a development server
-* Run "npm run storybook" to open a storybook
 
 ## Tech stack
 Technologies:
 * React
 * Typescript
 * Firebase
-* Storybook
 
 ## (!) IMPORTANT
 App is preconfigured for working on a localhost. Being hosted it will not be able to share product details on facebook. You still will be able to login with my facebook app, but for making share functionality to work you will need to register your own facebook app (you can find out more here: https://developers.facebook.com/).
