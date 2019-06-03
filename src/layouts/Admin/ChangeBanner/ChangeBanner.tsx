@@ -169,44 +169,48 @@ class ChangeBanner extends Component<ChangeBannerProps, ChangeBannerState> {
                     {labelsRoot.change.desktopWrapperWidth}
                   </label>
                   <br />
-                  <input
-                    type="number"
-                    onChange={this.widthInputChangedHandler}
-                    className="widthInput"
-                  />
-                  <select
-                    onChange={this.widthSelectChangedHandler}
-                    defaultValue={this.state.bannerWidthUnits}
-                    className="widthSelect"
-                  >
-                    <option value="px">px</option>
-                    <option value="%">%</option>
-                    <option value="rem">rem</option>
-                    <option value="em">em</option>
-                    <option value="vw">vw</option>
-                  </select>
+                  <div className="wrapper">
+                    <input
+                      type="number"
+                      onChange={this.widthInputChangedHandler}
+                      className="widthInput"
+                    />
+                    <select
+                      onChange={this.widthSelectChangedHandler}
+                      defaultValue={this.state.bannerWidthUnits}
+                      className="widthSelect"
+                    >
+                      <option value="px">px</option>
+                      <option value="%">%</option>
+                      <option value="rem">rem</option>
+                      <option value="em">em</option>
+                      <option value="vw">vw</option>
+                    </select>
+                  </div>
                 </div>
                 <div className="form-control">
                   <label className="accent">
                     {labelsRoot.change.desktopWrapperHeight}
                   </label>
                   <br />
-                  <input
-                    type="number"
-                    onChange={this.heightInputChangedHandler}
-                    className="heightInput"
-                  />
-                  <select
-                    onChange={this.heightSelectChangedHandler}
-                    defaultValue={this.state.bannerHeightUnits}
-                    className="heightSelect"
-                  >
-                    <option value="px">px</option>
-                    <option value="%">%</option>
-                    <option value="rem">rem</option>
-                    <option value="em">em</option>
-                    <option value="vw">vh</option>
-                  </select>
+                  <div className="wrapper">
+                    <input
+                      type="number"
+                      onChange={this.heightInputChangedHandler}
+                      className="heightInput"
+                    />
+                    <select
+                      onChange={this.heightSelectChangedHandler}
+                      defaultValue={this.state.bannerHeightUnits}
+                      className="heightSelect"
+                    >
+                      <option value="px">px</option>
+                      <option value="%">%</option>
+                      <option value="rem">rem</option>
+                      <option value="em">em</option>
+                      <option value="vw">vh</option>
+                    </select>
+                  </div>
                 </div>
                 <button type="submit">{submitBtnLabel}</button>
               </form>

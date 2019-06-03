@@ -1,8 +1,33 @@
 .AddGalleryImage,
 .ChangeDesktopBanner {
   .form-control {
-    select {
-      margin-left: 8px;
+    .wrapper {
+      display: flex;
+      width: 100%;
+      input {
+        width: 100%;
+      }
+      select {
+        margin-left: 8px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .AddGalleryImage,
+  .ChangeDesktopBanner {
+    .form-control {
+      .wrapper {
+        width: 100%;
+        display: flex;
+        input {
+          width: 75%;
+        }
+        select {
+          width: 25%;
+          margin-left: 5px;
+        }
+      }
     }
   }
 }
