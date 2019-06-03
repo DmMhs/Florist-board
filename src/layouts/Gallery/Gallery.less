@@ -15,15 +15,18 @@
     width: 80%;
     margin: 0 auto;
     flex-wrap: wrap;
-    box-sizing: border-box;
     margin-bottom: 1rem;
+    box-sizing: border-box;
     .column {
+      box-sizing: border-box;
       -ms-flex: 25%; /* IE10 */
       flex: 25%;
       max-width: 25%;
       .img-wrapper {
         position: relative;
+        width: 100%;
         min-height: 100px;
+        height: fit-content;
         .adminIcons {
           position: absolute;
           top: 1rem;
