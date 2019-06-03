@@ -50,11 +50,25 @@
 @media screen and (max-width: 768px) {
   .Modal {
     .modal-content {
-      width: 300px;
-      height: calc(100% - 1rem);
+      width: 570px;
+      height: calc(100% - 0.5rem);
       .slide-wrapper {
         .image {
-          max-width: 290px;
+          max-width: 400px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .Modal {
+    .modal-content {
+      width: calc(100% - 1rem);
+      height: calc(100% - 2rem);
+      .slide-wrapper {
+        .image {
+          max-width: calc(100% - 2rem);
         }
       }
     }

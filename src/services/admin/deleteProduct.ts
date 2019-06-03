@@ -5,6 +5,7 @@ export const deleteProduct = async (id: string, name: string) => {
   const confirm = window.confirm('Are you sure?');
   if (confirm) {
     await deleteProductImages(id, name);
+    location.reload();
     return productsRef
       .child(id)
       .remove()
