@@ -22,10 +22,10 @@ interface MatchParams {
 interface Props extends RouteComponentProps<MatchParams> {}
 
 interface RouteComponentProps<P> {
-  match: match<P>;
+  match: Match<P>;
 }
 
-interface match<P> {
+interface Match<P> {
   params: P;
   isExact: boolean;
   path: string;
@@ -225,6 +225,11 @@ class Auth extends Component<
                     | undefined
                 }
               >
+                <h2>
+                  {mode === 'signup'
+                    ? labels[lang].navigation.account.menu.signUp
+                    : labels[lang].navigation.account.menu.signIn}
+                </h2>
                 {value.state.userAuthenticated === false ? (
                   <div>
                     <div className="form-field">
