@@ -115,42 +115,46 @@ exports[`ChangeBanner works as expected ChangeBanner component matches a snapsho
                     Change width of banner wrapper on desktop devices:
                   </label>
                   <br />
-                  <input
-                    className="widthInput"
-                    onChange={[Function]}
-                    type="number"
-                  />
-                  <select
-                    className="widthSelect"
-                    defaultValue="%"
-                    onChange={[Function]}
+                  <div
+                    className="wrapper"
                   >
-                    <option
-                      value="px"
+                    <input
+                      className="widthInput"
+                      onChange={[Function]}
+                      type="number"
+                    />
+                    <select
+                      className="widthSelect"
+                      defaultValue="%"
+                      onChange={[Function]}
                     >
-                      px
-                    </option>
-                    <option
-                      value="%"
-                    >
-                      %
-                    </option>
-                    <option
-                      value="rem"
-                    >
-                      rem
-                    </option>
-                    <option
-                      value="em"
-                    >
-                      em
-                    </option>
-                    <option
-                      value="vw"
-                    >
-                      vw
-                    </option>
-                  </select>
+                      <option
+                        value="px"
+                      >
+                        px
+                      </option>
+                      <option
+                        value="%"
+                      >
+                        %
+                      </option>
+                      <option
+                        value="rem"
+                      >
+                        rem
+                      </option>
+                      <option
+                        value="em"
+                      >
+                        em
+                      </option>
+                      <option
+                        value="vw"
+                      >
+                        vw
+                      </option>
+                    </select>
+                  </div>
                 </div>
                 <div
                   className="form-control"
@@ -161,42 +165,46 @@ exports[`ChangeBanner works as expected ChangeBanner component matches a snapsho
                     Change height of banner wrapper on desktop devices:
                   </label>
                   <br />
-                  <input
-                    className="heightInput"
-                    onChange={[Function]}
-                    type="number"
-                  />
-                  <select
-                    className="heightSelect"
-                    defaultValue="px"
-                    onChange={[Function]}
+                  <div
+                    className="wrapper"
                   >
-                    <option
-                      value="px"
+                    <input
+                      className="heightInput"
+                      onChange={[Function]}
+                      type="number"
+                    />
+                    <select
+                      className="heightSelect"
+                      defaultValue="px"
+                      onChange={[Function]}
                     >
-                      px
-                    </option>
-                    <option
-                      value="%"
-                    >
-                      %
-                    </option>
-                    <option
-                      value="rem"
-                    >
-                      rem
-                    </option>
-                    <option
-                      value="em"
-                    >
-                      em
-                    </option>
-                    <option
-                      value="vw"
-                    >
-                      vh
-                    </option>
-                  </select>
+                      <option
+                        value="px"
+                      >
+                        px
+                      </option>
+                      <option
+                        value="%"
+                      >
+                        %
+                      </option>
+                      <option
+                        value="rem"
+                      >
+                        rem
+                      </option>
+                      <option
+                        value="em"
+                      >
+                        em
+                      </option>
+                      <option
+                        value="vw"
+                      >
+                        vh
+                      </option>
+                    </select>
+                  </div>
                 </div>
                 <button
                   type="submit"
